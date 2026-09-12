@@ -1,36 +1,41 @@
-# Objetivos y Métricas de Éxito
+# Objetivos y Métricas de Éxito (QA & Performance)
 
-Este documento fija los estándares cualitativos y cuantitativos que el agente Antigravity debe monitorear y respetar durante todo el ciclo de desarrollo.
-
----
-
-## 1. Objetivos Estratégicos (Cualitativos)
-
-1. **Impacto Visual Floral:** El diseño debe comunicar frescura, color y elegancia artesanal desde los primeros 3 segundos de navegación.
-2. **Navegación Intuitiva y Sin Fricción:** Estructura limpia donde cualquier usuario pueda encontrar un servicio, ver fotos reales de arreglos y contactar a la florería en menos de 2 clics.
-3. **Claridad en la Suscripción Floral:** Explicar el modelo recurrente de forma tan sencilla y atractiva que los visitantes comprendan de inmediato el beneficio de recibir flores periódicas.
-4. **Identidad Valdiviana:** Incorporar sutiles guiños a la identidad de la ciudad (ríos, lluvia, naturaleza verde profunda contrastada con tonos florales vivos).
+Este documento fija los estándares cualitativos y cuantitativos que el agente Antigravity debe monitorear. Las métricas
+no son sugerencias, son requisitos obligatorios (Definition of Done) para cada iteración.
 
 ---
 
-## 2. Métricas Técnicas y Rendimiento (Cuantitativos)
+## 1. Criterios de Calidad Estética (Cualitativos)
 
-| Métrica | Meta / Umbral | Herramienta de Medición |
-| :--- | :--- | :--- |
-| **Lighthouse: Performance** | $\ge 95$ en escritorio / $\ge 90$ en móvil | Google Lighthouse / PageSpeed Insights |
-| **Lighthouse: Accessibility (a11y)** | $100$ | Google Lighthouse / axe DevTools |
-| **Lighthouse: Best Practices** | $100$ | Google Lighthouse |
-| **Lighthouse: SEO** | $100$ (Metadatos Open Graph, Twitter Cards, semántica) | Google Lighthouse |
-| **Tiempo de Carga Inicial (FCP)** | $\le 1.2\text{ s}$ en conexión 4G | Chrome DevTools |
-| **Peso total de la página (excl. fotos)** | $\le 150\text{ KB}$ (HTML + CSS purgado + JS minificado) | Network Tab |
-| **Errores en Consola** | $0$ errores y $0$ warnings | Consola del navegador |
+1. **Fidelidad Visual (Anti-Regresión):** El resultado renderizado (HTML + CSS local) debe ser visualmente idéntico o
+   superior al diseño y estructura del template HTML original. Perder estilos o estructura se considera un fallo
+   crítico.
+2. **Impacto Botánico:** El diseño debe transmitir la frescura húmeda del sur de Chile utilizando estrictamente la
+   paleta y tipografías (Noto Serif / Montserrat) declaradas en el `DESIGN.md`.
+3. **Consistencia de Interfaz:** Los componentes transversales (Navegación, Pie de página) deben comportarse de forma
+   idéntica en todas las vistas (MPA).
 
 ---
 
-## 3. Criterios de Aceptación Globales (DoD - Definition of Done)
+## 2. Métricas Técnicas y Estrategias de Implementación (Cuantitativos)
 
-Para dar por terminada cualquier página o componente:
-1. **Consistencia de Navegación:** El encabezado (`header`) con el menú de navegación y el pie de página (`footer`) deben ser consistentes en las 5 páginas, marcando claramente la página activa (`aria-current="page"` y clase visual distintiva).
-2. **Compatibilidad Multi-Dispositivo:** Visualización impecable comprobada en viewports móviles (360px, 390px), tablets (768px, 820px) y pantallas de escritorio (1280px, 1920px).
-3. **Optimización de Medios:** Todas las imágenes deben utilizar formatos modernos (WebP/AVIF), contar con dimensiones explícitas (`width`, `height`) para prevenir Cumulative Layout Shift (CLS) y atributos `loading="lazy"` en imágenes bajo el primer pliegue.
-4. **Respaldo de Compatibilidad de Hosting:** Las rutas deben funcionar tanto en subdirectorios de GitHub Pages (ej. `https://usuario.github.io/la-jardinera/`) como en el dominio raíz de Netlify (ej. `https://lajardinera.cl/` o `https://lajardinera.netlify.app/`).
+| Métrica                  | Umbral             | Herramienta      | Estrategia de Código Obligatoria (Cómo lograrlo)                                                                                                                         |
+|:-------------------------|:-------------------|:-----------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Performance**          | $\ge 95$           | Lighthouse       | Precarga de fuentes (`<link rel="preload">` + `display=swap`). Imagen del Hero como `eager`, el resto de imágenes bajo el pliegue con `loading="lazy"`.                  |
+| **Accesibilidad (a11y)** | $100$              | Lighthouse / axe | Todo botón debe tener `aria-label`. Contrastes verificados (On-Primary vs Primary). Modales con bloqueo de scroll y atrapamiento de foco.                                |
+| **Best Practices**       | $100$              | Lighthouse       | Consola limpia (Cero errores de JS, cero warnings de Tailwind). Uso de extensiones correctas en módulos importados (`.js`).                                              |
+| **Tiempo (FCP)**         | $\le 1.2\text{ s}$ | Network Tab      | Las imágenes estáticas pesadas deben ser convertidas a formato `.webp` u optimizadas, referenciadas siempre localmente.                                                  |
+| **Estabilidad (CLS)**    | $0$                | Lighthouse       | Toda etiqueta `<img>` sin excepción debe contar con las clases de Tailwind de aspecto (ej. `aspect-[4/5]`) o estar en un contenedor estricto que evite saltos de diseño. |
+
+---
+
+## 3. Criterios de Aceptación Globales (Definition of Done)
+
+Para dar por terminada cualquier iteración o componente, Antigravity debe asegurar:
+
+1. **Cero JS en línea:** El HTML no contiene scripts en línea ni eventos en atributos (`onclick`).
+2. **Compilación Exitosa:** El CSS generado incluye las clases esperadas tras ejecutar el build.
+3. **Responsividad Comprobada:** Los componentes escalan y reaccionan de manera predecible en pantallas móviles (menú
+   hamburguesa) y desktop (navegación extendida).
+4. **Rutas Inquebrantables:** Las referencias a assets (imágenes, CSS, JS) funcionan universalmente usando rutas
+   relativas seguras (`./` o `./src/...`).

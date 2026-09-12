@@ -1,22 +1,43 @@
-# Iteración 01: Configuración del Entorno Tailwind y Build
+# Iteración 01: Setup Arquitectónico, Compilación Local y Fidelidad de Tokens
 
-**Objetivo:** Eliminar el archivo CSS precompilado y configurar el entorno de desarrollo local con Node.js, PNPM y Tailwind CSS v3.
+**⚠️ DIRECTIVA DE INICIO (Chain of Thought):**
+El objetivo primordial de esta iteración NO es solo instalar Tailwind, sino **migrar el entorno sin perder ni una sola
+clase del diseño original**. Debes analizar los estilos en línea actuales (`<style>`) y el objeto de configuración del
+CDN (`<script id="tailwind-config">`) para trasladarlos fielmente al entorno local antes de compilar.
 
-## Tareas
-1. Inicializar el proyecto con `pnpm init` y configurar los scripts `dev` y `build` en el `package.json`.
-2. Instalar `tailwindcss` como dependencia de desarrollo.
-3. Generar y configurar `tailwind.config.js` incorporando las fuentes (Fraunces, Montserrat) y la paleta de colores "jardinera".
-4. Crear el archivo de entrada `src/css/input.css` con las directivas de Tailwind.
-5. Modificar el `<head>` del `index.html` para enlazar el archivo CSS resultante (`dist/css/output.css`) en lugar del antiguo `./static/css/tailwind.css`[cite: 1].
+## 1. Objetivo de la Iteración
 
-## Criterios de Aceptación
+Eliminar la dependencia del CDN de Tailwind CSS (`<script src="https://cdn.tailwindcss.com">`) y configurar un entorno
+de compilación local robusto basado en Node.js y PNPM, garantizando que el 100% de los tokens de diseño (colores,
+fuentes, espaciados) sean absorbidos por el nuevo `tailwind.config.js`.
 
-*   **Escenario 1: Compilación exitosa**
-    *   **Dado** que el desarrollador ejecuta `pnpm build`
-    *   **Cuando** el proceso finaliza
-    *   **Entonces** se debe generar un archivo minificado en `dist/css/output.css` sin errores en consola.
+## 2. Tareas Técnicas (Ejecución Estricta)
 
-*   **Escenario 2: Limpieza de dependencias**
-    *   **Dado** el archivo `index.html`
-    *   **Cuando** se inspecciona el `<head>`
-    *   **Entonces** no debe existir el enlace al archivo CSS antiguo ni CSS en línea.
+1. **Inicialización de Entorno:** Ejecutar `pnpm init`. Configurar en `package.json` los scripts:
+    * `"dev": "tailwindcss -i ./src/css/input.css -o ./dist/css/output.css --watch"`
+    * `"build": "tailwindcss -i ./src/css/input.css -o ./dist/css/output.css --minify"`
+2. **Instalación de Dependencias:** Instalar `tailwindcss` (v3) como dependencia de desarrollo vía `pnpm`.
+3. **Mapeo de Tokens (CRÍTICO):** Generar `tailwind.config.js`.
+    * **Prohibido:** Inventar paletas genéricas.
+    * **Obligatorio:** Traspasar exactamente la configuración del objeto `tailwind.config` presente en el `<script>` del
+      `index.html` original (incluyendo la paleta extensa de colores, `fontFamily`, `spacing`, y `darkMode: "class"`).
+4. **Preservación de Capa Base:** Crear `src/css/input.css`.
+    * Añadir `@tailwind base; @tailwind components; @tailwind utilities;`.
+    * Migrar a este archivo todo el CSS contenido en la etiqueta `<style>@layer base {...}</style>` del `index.html`
+      (reseteo de márgenes y ocultamiento de scrollbar).
+5. **Limpieza y Vinculación del DOM:**
+    * Eliminar del `<head>` el CDN de Tailwind y las etiquetas `<script>`/`<style>` originales.
+    * Vincular el nuevo archivo local: `<link rel="stylesheet" href="./dist/css/output.css" />`.
+
+## 3. Criterios de Aceptación (Definition of Done)
+
+* **Escenario 1: Compilación sin Regresión Visual (Pixel Perfect)**
+    * **Dado** la ejecución del comando `pnpm build`
+    * **Cuando** se visualiza el `index.html` en el navegador
+    * **Entonces** el archivo `output.css` debe contener todas las clases semánticas utilizadas (ej.
+      `bg-surface-container-low`), y el sitio no debe haber perdido ningún color, fuente o espaciado respecto al
+      original.
+* **Escenario 2: Limpieza Absoluta del Head**
+    * **Dado** el archivo `index.html`
+    * **Cuando** se inspecciona su código fuente
+    * **Entonces** no deben existir scripts de configuración de Tailwind ni CSS en línea.
