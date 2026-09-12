@@ -35,7 +35,7 @@ jobs:
       - name: 3. Instalar PNPM
         uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: 11.24.0
 
       - name: 4. Instalar dependencias
         run: pnpm install
