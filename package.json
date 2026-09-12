@@ -1,0 +1,27 @@
+{
+    "name":  "la-jardinera",
+    "version":  "1.0.0",
+    "description":  "",
+    "main":  "index.js",
+    "scripts":  {
+                    "test":  "echo \"Error: no test specified\" \u0026\u0026 exit 1",
+                    "dev":  "tailwindcss -i ./src/css/input.css -o ./dist/css/output.css --watch",
+                    "build":  "tailwindcss -i ./src/css/input.css -o ./dist/css/output.css --minify"
+                },
+    "keywords":  [
+
+                 ],
+    "author":  "",
+    "license":  "ISC",
+    "devEngines":  {
+                       "packageManager":  {
+                                              "name":  "pnpm",
+                                              "version":  "11.24.0",
+                                              "onFail":  "download"
+                                          }
+                   },
+    "packageManager":  "pnpm@11.24.0",
+    "devDependencies":  {
+                            "tailwindcss":  "^3.4.19"
+                        }
+}
