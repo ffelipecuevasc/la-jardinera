@@ -30,7 +30,7 @@ jobs:
       - name: 2. Instalar Node.js (LTS)
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22.13'
 
       - name: 3. Instalar PNPM
         uses: pnpm/action-setup@v4
