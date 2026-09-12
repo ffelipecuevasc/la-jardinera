@@ -602,9 +602,10 @@
                     </div>
                 </div>
                 <!-- Testimonials Grid -->
-                <div id="testimonials-track" class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth gap-space-4 hide-scrollbar pb-4">
-</div>
-<!-- Carousel / Pagination Controls Minimal -->
+                <div id="testimonials-track"
+                     class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth gap-space-4 hide-scrollbar pb-4">
+                </div>
+                <!-- Carousel / Pagination Controls Minimal -->
                 <div class="flex items-center justify-center gap-space-3 mt-space-6">
                     <button id="carousel-prev" aria-label="Anterior"
                             class="w-10 h-10 rounded-full bg-surface hover:bg-surface-container text-on-surface flex items-center justify-center shadow-sm transition-all"
@@ -647,14 +648,14 @@
                         </p>
                     </div>
                     <div class="flex flex-col sm:flex-row gap-space-2 w-full md:w-auto">
-                        <button data-modal-target="contact-modal" type="button" class="inline-flex items-center justify-center px-space-4 py-3.5 rounded-lg bg-surface text-on-surface hover:bg-surface-container font-label-lg text-label-lg uppercase tracking-wider transition-all shadow-md"
-                           href="#">
+                        <button data-modal-target="contact-modal" type="button"
+                                class="inline-flex items-center justify-center px-space-4 py-3.5 rounded-lg bg-surface text-on-surface hover:bg-surface-container font-label-lg text-label-lg uppercase tracking-wider transition-all shadow-md">
                             <span>Agendar Cita</span>
                             <svg class="text-[18px] ml-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
                                  width="24" height="24" viewBox="0 0 24 24">
                                 <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/>
                             </svg>
-                        </a>
+                        </button>
                         <a class="inline-flex items-center justify-center px-space-4 py-3.5 rounded-lg bg-surface-container-lowest/20 backdrop-blur-md text-neutral-50 hover:bg-surface-container-lowest/30 font-label-lg text-label-lg uppercase tracking-wider transition-all"
                            href="#">
                             <span>Contactar WhatsApp</span>
@@ -668,29 +669,44 @@
             </div>
         </section>
     </div>
-<!-- Generic Modal -->
-<div id="contact-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4" aria-hidden="true" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-    <!-- Overlay -->
-    <div class="modal-overlay absolute inset-0 bg-dark-background/60 backdrop-blur-sm transition-opacity"></div>
-    
-    <!-- Modal Panel -->
-    <div class="relative bg-surface rounded-2xl shadow-xl w-full max-w-md p-space-6 transform transition-all flex flex-col gap-space-4" tabindex="-1">
-        <div class="flex items-center justify-between">
-            <h2 id="modal-title" class="font-headline-md text-headline-md text-on-surface">Agendar Cita</h2>
-            <button class="modal-close w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-primary transition-all" aria-label="Cerrar modal" type="button">
-                <svg class="text-[20px]" fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-            </button>
+    <!-- Generic Modal -->
+    <div id="contact-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4" aria-hidden="true"
+         aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <!-- Overlay -->
+        <div class="modal-overlay absolute inset-0 bg-dark-background/60 backdrop-blur-sm transition-opacity"></div>
+
+        <!-- Modal Panel -->
+        <div class="relative bg-surface rounded-2xl shadow-xl w-full max-w-md p-space-6 transform transition-all flex flex-col gap-space-4"
+             tabindex="-1">
+            <div class="flex items-center justify-between">
+                <h2 id="modal-title" class="font-headline-md text-headline-md text-on-surface">Agendar Cita</h2>
+                <button class="modal-close w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-primary transition-all"
+                        aria-label="Cerrar modal" type="button">
+                    <svg class="text-[20px]" fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="24"
+                         height="24" viewBox="0 0 24 24">
+                        <path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+            </div>
+            <p class="font-body-sm text-body-sm text-on-surface-variant font-light">
+                Déjanos tus datos de contacto y nuestra directora creativa se comunicará contigo a la brevedad para
+                coordinar una asesoría botánica florar personalizada.
+            </p>
+            <form class="flex flex-col gap-space-3 mt-space-2">
+                <input type="text" placeholder="Nombre completo"
+                       class="w-full bg-surface-container-low px-4 py-3 rounded-lg border border-outline-variant focus:outline-none focus:border-primary font-body-sm text-on-surface"
+                       aria-label="Nombre">
+                <input type="email" placeholder="Correo electrónico"
+                       class="w-full bg-surface-container-low px-4 py-3 rounded-lg border border-outline-variant focus:outline-none focus:border-primary font-body-sm text-on-surface"
+                       aria-label="Correo">
+                <button type="button"
+                        class="mt-space-2 w-full py-3.5 rounded-lg bg-primary text-on-primary font-label-lg text-label-lg uppercase tracking-wider hover:opacity-90 transition-all shadow-md">
+                    Solicitar Asesoría
+                </button>
+            </form>
         </div>
-        <p class="font-body-sm text-body-sm text-on-surface-variant font-light">
-            Déjanos tus datos de contacto y nuestra directora creativa se comunicará contigo a la brevedad para coordinar una asesoría botánica florar personalizada.
-        </p>
-        <form class="flex flex-col gap-space-3 mt-space-2">
-            <input type="text" placeholder="Nombre completo" class="w-full bg-surface-container-low px-4 py-3 rounded-lg border border-outline-variant focus:outline-none focus:border-primary font-body-sm text-on-surface" aria-label="Nombre">
-            <input type="email" placeholder="Correo electrónico" class="w-full bg-surface-container-low px-4 py-3 rounded-lg border border-outline-variant focus:outline-none focus:border-primary font-body-sm text-on-surface" aria-label="Correo">
-            <button type="button" class="mt-space-2 w-full py-3.5 rounded-lg bg-primary text-on-primary font-label-lg text-label-lg uppercase tracking-wider hover:opacity-90 transition-all shadow-md">Solicitar Asesoría</button>
-        </form>
     </div>
-</div>`n</main>
+</main>
 <footer class="w-full bg-surface-container-low mt-space-8">
     <div class="max-w-[80rem] mx-auto px-margin-mobile lg:px-margin-desktop py-space-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-6">
