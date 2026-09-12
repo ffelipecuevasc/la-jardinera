@@ -1,1 +1,1 @@
-﻿Épica 01 - Iteración 04: Rendimiento WebP y CLS - Completada.
+﻿Épica 01 - Iteración 06: Contenido Legacy y UTF-8 Fix - Completada.
