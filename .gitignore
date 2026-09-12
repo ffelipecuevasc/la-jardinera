@@ -1,0 +1,26 @@
+# Dependencias de Node.js (¡Lo más importante!)
+node_modules/
+
+# Archivos de log (errores locales que no necesitan subirse)
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Archivos del Sistema Operativo (Basura visual de Windows y Mac)
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Archivos de configuración de Editores de Código (VS Code, IntelliJ, etc.)
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

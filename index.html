@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&amp;family=Noto+Serif:ital,wght@0,400;0,600;1,400;1,600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "warning": "#E7B857", "dark-on-surface-variant": "#BFC5BE", "surface-container-highest": "#e1e3de", "outline": "#717971", "dark-neutral-100": "#8A918B", "outline-variant": "#c0c9bf", "dark-background": "#1F2421", "on-secondary-container": "#7b4d51", "tertiary-fixed-dim": "#ffb2be", "tertiary": "#8d4a57", "primary-container": "#8cc79a", "on-tertiary-fixed-variant": "#703340", "on-error": "#ffffff", "on-error-container": "#93000a", "dark-neutral-50": "#BFC5BE", "surface-container": "#edefe9", "neutral-100": "#F1EEE8", "background": "#F8F7F3", "on-secondary-fixed-variant": "#653b3f", "surface-container-low": "#F1EEE8", "on-tertiary-fixed": "#3a0816", "on-background": "#191c19", "on-primary-fixed-variant": "#17512e", "on-primary": "#1F2421", "on-tertiary": "#ffffff", "surface-container-high": "#e7e9e3", "primary-fixed-dim": "#99d4a6", "surface-dim": "#d8dbd5", "secondary-light": "#F8D4D8", "dark-on-background": "#F3F3F0", "on-surface-variant": "#414941", "primary-fixed": "#b4f1c1", "on-surface": "#191c19", "on-secondary": "#ffffff", "neutral-300": "#D9DDD8", "on-tertiary-container": "#743643", "neutral-50": "#F8F7F3", "secondary-container": "#ffc2c6", "neutral-500": "#676A70", "surface-tint": "#316944", "dark-surface-container-low": "#2B302D", "secondary-fixed": "#ffdadb", "error": "#D96A6A", "primary": "#316944", "surface-variant": "#e1e3de", "surface-container-lowest": "#ffffff", "surface-bright": "#f8faf4", "inverse-surface": "#2e312e", "on-secondary-fixed": "#321115", "dark-surface-variant": "#5A615D", "secondary-hover": "#E89DA5", "tertiary-fixed": "#ffd9de", "inverse-primary": "#99d4a6", "dark-neutral-300": "#5A615D", "error-container": "#ffdad6", "neutral-900": "#35363A", "on-primary-fixed": "#00210d", "secondary": "#805256", "surface": "#f8faf4", "on-primary-container": "#1a5431", "secondary-fixed-dim": "#f3b7bb", "tertiary-container": "#f6a3b1", "inverse-on-surface": "eff1ec", "info": "#73A8D8", "success": "#6FBF73" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-1": "0.5rem", "space-10": "5rem", "space-8": "4rem", "gutter": "1.5rem", "margin-mobile": "1.25rem", "container-max": "80rem", "space-6": "3rem", "section-gap": "7.5rem", "space-5": "2.5rem", "space-unit": "0.5rem", "space-2": "1rem", "margin-desktop": "2.5rem", "space-3": "1.5rem", "space-4": "2rem" }, "fontFamily": { "label-md": ["Montserrat"], "headline-lg": ["Noto Serif"], "display-hero-mobile": ["Noto Serif"], "body-xs": ["Montserrat"], "body-sm": ["Montserrat"], "label-lg": ["Montserrat"], "headline-sm": ["Noto Serif"], "display-hero": ["Noto Serif"], "headline-md": ["Noto Serif"], "body-md": ["Montserrat"], "label-sm": ["Montserrat"], "headline-xl-mobile": ["Noto Serif"], "body-lg": ["Montserrat"], "headline-xl": ["Noto Serif"] }, "fontSize": { "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "600" }], "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "400" }], "display-hero-mobile": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "400" }], "body-xs": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.06em", "fontWeight": "600" }], "headline-sm": ["18px", { "lineHeight": "26px", "fontWeight": "400" }], "display-hero": ["64px", { "lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "400" }], "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "400" }], "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "500" }], "headline-xl-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "400" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }], "headline-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.015em", "fontWeight": "400" }] } } } }</script></head><body class="bg-background font-body-md text-body-md text-on-surface transition-colors duration-300"><header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(53,54,58,0.06)]"><div class="h-20 max-w-[80rem] mx-auto px-margin-mobile lg:px-margin-desktop flex items-center justify-between"><div class="flex items-center"><a class="font-headline-md text-headline-md italic tracking-tight text-on-surface hover:text-primary transition-colors" data-path="inicio" href="#">La Jardinera</a></div><nav class="hidden lg:flex items-center gap-space-4" data-active-classes="text-primary font-semibold"><a aria-current="page" class="uppercase tracking-wider transition-colors py-space-1 text-primary font-semibold" data-path="inicio" href="#">Inicio</a><a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors py-space-1" data-path="servicios" href="#">Servicios</a><a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors py-space-1" data-path="suscripcion-floral" href="#">Suscripción Floral</a><a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors py-space-1" data-path="galeria" href="#">Galería</a><a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors py-space-1" data-path="contacto" href="#">Contacto</a></nav><div class="flex items-center gap-space-3"><a aria-label="Instagram" class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-all" href="#"><span class="material-symbols-outlined text-[18px]">photo_camera</span></a><a aria-label="WhatsApp" class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-all" href="#"><span class="material-symbols-outlined text-[18px]">chat</span></a><button aria-label="Alternar modo oscuro" class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-all" onclick="document.documentElement.classList.toggle('dark')" type="button"><span class="material-symbols-outlined text-[18px] dark:hidden">dark_mode</span><span class="material-symbols-outlined text-[18px] hidden dark:inline">light_mode</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-background min-h-screen"><div class="flex flex-col w-full">
+<!-- 1. HERO SECTION -->
+<section class="relative w-full -mt-20 overflow-hidden bg-dark-background text-dark-on-background min-h-[92vh] flex flex-col justify-between">
+<!-- Hero Botanical Background with Scrim -->
+<div class="absolute inset-0 w-full h-full bg-cover bg-center opacity-45 transform scale-105 transition-transform duration-1000 ease-out" data-alt="Close-up fine art photography of lush wild botanical flowers, garden roses, ranunculus, delicate olive foliage, damp dark green stems with morning dewdrops on deep charcoal surface, moody soft cinematic directional morning lighting, editorial luxury florist look, color palette of deep moss green, dusty blush pink, ivory and charcoal." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDTovVTrsk-bUOpeh8NN5Lw8YVkwdZhREjHkjPe0dNT5C-KV6KHyO3t3NE1MCwYIOO9wS4I60zVEzeESc9fdntGGzsT8tv_M-mufnnyj2-Mr9hDwWsA_4GG93kMfSgFPL655warXTgWNR3cqeyY-AWErfItXJeZVHl_YU8_7SgQSYAerIuthBTiGcf9XjkFQreDti0pLod2Nrosj1EoZRyO61OkeWPXqYvR2CUaVA4R2l96IvahGdLCAQ')">
+</div>
+<!-- Ambient Gradient Scrims -->
+<div class="absolute inset-0 bg-gradient-to-t from-dark-background via-dark-background/60 to-transparent"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-dark-background/80 via-transparent to-dark-background/40"></div>
+<!-- Empty Spacer for Header clearance -->
+<div class="h-24 lg:h-32 relative z-10"></div>
+<!-- Hero Content -->
+<div class="relative z-10 max-w-[80rem] mx-auto w-full px-margin-mobile lg:px-margin-desktop py-space-6 flex flex-col items-start justify-center">
+<!-- Monogram Tag -->
+<div class="inline-flex items-center gap-space-2 px-3 py-1 rounded-full bg-surface-container-lowest/10 backdrop-blur-md mb-space-3">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-fixed-dim animate-pulse"></span>
+<span class="font-label-md text-label-md uppercase tracking-widest text-primary-fixed">Atelier Botánico Independiente</span>
+</div>
+<!-- Headline -->
+<h1 class="font-display-hero text-headline-xl lg:text-display-hero text-neutral-50 max-w-4xl tracking-tight leading-none mb-space-4">
+        El Arte de la <span class="italic font-normal text-secondary-container">Botánica Silvestre</span> &amp; Viva
+      </h1>
+<!-- Editorial Paragraph -->
+<p class="font-body-lg text-body-lg text-dark-on-surface-variant max-w-2xl font-light leading-relaxed mb-space-6">
+        Arreglos florales de autor concebidos desde la sensibilidad botánica, el respeto consciente por las estaciones y el cultivo de la belleza efímera.
+      </p>
+<!-- CTAs & Micro-details -->
+<div class="flex flex-wrap items-center gap-space-3">
+<a class="inline-flex items-center justify-center px-space-4 py-3 rounded-lg bg-primary text-on-primary font-label-lg text-label-lg uppercase tracking-wider hover:opacity-90 transition-all shadow-md" href="#servicios">
+<span>Explorar Colección</span>
+<span class="material-symbols-outlined text-[18px] ml-2">arrow_forward</span>
+</a>
+<a class="inline-flex items-center justify-center px-space-4 py-3 rounded-lg bg-surface-container-lowest/10 backdrop-blur-md text-neutral-50 font-label-lg text-label-lg uppercase tracking-wider hover:bg-surface-container-lowest/20 transition-all" href="#suscripcion">
+<span>Suscripción Floral</span>
+</a>
+</div>
+</div>
+<!-- Hero Meta Footer -->
+<div class="relative z-10 w-full bg-dark-background/80 backdrop-blur-sm py-space-3">
+<div class="max-w-[80rem] mx-auto px-margin-mobile lg:px-margin-desktop flex flex-col sm:flex-row items-center justify-between gap-space-2">
+<div class="flex items-center gap-space-2 text-dark-neutral-100 font-label-sm text-label-sm tracking-widest uppercase">
+<span class="material-symbols-outlined text-primary text-[18px]">explore</span>
+<span>Santiago de Chile · 33° 26' S / Edición de Temporada</span>
+</div>
+<a aria-label="Desplazarse a servicios" class="flex items-center gap-2 text-dark-neutral-100 hover:text-neutral-50 font-label-sm text-label-sm uppercase tracking-widest transition-colors" href="#servicios">
+<span>Descubrir Más</span>
+<span class="material-symbols-outlined text-[16px] animate-bounce">arrow_downward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- OPERATIONAL BENEFITS BAR (Upper Glance) -->
+<section class="w-full bg-surface-container-low shadow-sm">
+<div class="max-w-[80rem] mx-auto px-margin-mobile lg:px-margin-desktop py-space-3">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-4 items-center">
+<!-- Benefit 1 -->
+<div class="flex items-center gap-space-3 p-space-1">
+<div class="w-12 h-12 rounded-full bg-surface flex items-center justify-center text-primary shadow-sm flex-shrink-0">
+<span class="material-symbols-outlined text-[24px]">local_shipping</span>
+</div>
+<div>
+<h4 class="font-label-md text-label-md uppercase tracking-wider text-on-surface font-semibold">Despacho Climatizado en el Día</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Entregas cuidadas en Santiago oriente y centro con hidratación garantizada.</p>
+</div>
+</div>
+<!-- Benefit 2 -->
+<div class="flex items-center gap-space-3 p-space-1">
+<div class="w-12 h-12 rounded-full bg-surface flex items-center justify-center text-primary shadow-sm flex-shrink-0">
+<span class="material-symbols-outlined text-[24px]">verified_user</span>
+</div>
+<div>
+<h4 class="font-label-md text-label-md uppercase tracking-wider text-on-surface font-semibold">Pagos Seguros &amp; Facturación Inmediata</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Tarjetas de crédito, WebPay y transferencia directa con comprobante automático.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 2. SERVICIOS DESTACADOS -->
+<section class="w-full py-space-8 lg:py-space-10" id="servicios">
+<div class="max-w-[80rem] mx-auto px-margin-mobile lg:px-margin-desktop">
+<!-- Section Header -->
+<div class="flex flex-col items-center text-center max-w-2xl mx-auto mb-space-6">
+<div class="flex items-center justify-center gap-2 mb-2">
+<span class="w-8 h-[1px] bg-primary/40"></span>
+<span class="font-headline-sm text-headline-sm italic text-secondary">✦</span>
+<span class="w-8 h-[1px] bg-primary/40"></span>
+</div>
+<p class="font-label-md text-label-md uppercase tracking-widest text-primary mb-1">Portafolio Botánico</p>
+<h2 class="font-headline-xl text-headline-lg lg:text-headline-xl text-on-surface">Composiciones &amp; Servicios</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-space-2">
+          Cada diseño responde a una búsqueda formal: equilibrio asimétrico, texturas terrosas y flores que conservan su gesto natural en el espacio.
+        </p>
+</div>
+<!-- Services Grid (4 Cards) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-4">
+<!-- Card 1 -->
+<div class="group flex flex-col bg-surface rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+<div class="relative w-full aspect-[4/5] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="Handcrafted floral arrangement in an artisanal stoneware vase, featuring rare ranunculus, garden roses and soft wild textures on a clean neutral plaster table, Kinfolk minimalist styling, soft natural daylight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuATj7KXqBJCmcy-UzVSJoXe3xW1eAO0g3lex-m8Q1a6zn9zW4LHNUx4xMH6vmF-355LFcR_dRLtIjPRgAtzffpm57AuZkp2OGy0Wxa-52o5xyovgad_IJSCp4i_JiJH-LYEkZyG1tPbz3zWQlfL3jjEmAGM_G8ucIJnYz58dAoOHEDr9EwmMh7aTW0-DzDsNVdgHyQcwsw69QVzjTLicm3Fc9tQ3LIn2kl8QGRc2k09wtKFtVuVSZO4mg"/>
+<span class="absolute top-space-2 right-space-2 px-2.5 py-1 rounded-full bg-surface/90 backdrop-blur-sm font-label-sm text-label-sm uppercase tracking-wider text-on-surface">01</span>
+</div>
+<div class="flex flex-col p-space-3 flex-grow justify-between">
+<div>
+<div class="flex items-center gap-2 text-primary mb-1">
+<span class="material-symbols-outlined text-[20px]">filter_vintage</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider">De Autor</span>
+</div>
+<h3 class="font-headline-md text-headline-sm lg:text-headline-md text-on-surface mb-2">Arreglos de Autor</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Creaciones exclusivas en jarrones de cerámica artesanal de gres para ocasiones y presentes únicos.
+              </p>
+</div>
+<div class="mt-space-3 pt-space-2 flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-semibold">Desde $48.000 CLP</span>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary group-hover:translate-x-1 transition-all text-[20px]">east</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group flex flex-col bg-surface rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+<div class="relative w-full aspect-[4/5] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="Intimate wedding and event table floral design with organic sculptural table runner, candles, linen napkins and wild branches in warm terracotta ambiance, editorial luxury lifestyle." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDj6fSxyZHYeX5cL7IAHdOTmyTyTbjpuKx7mYHXF-6iadFWtayq2oc3IsHU8WDvQ_1ARVhhLICrY6rAgYreW8A8lp0bdyuodTXSSKsPbUi-ngPJg4YUfP4T2Au3vfXwOrrrZ7tv7GAWaYmHTwHebAR64DjOJRdUSw5loIlv3TNwXqkD52hjhYbYd0qfSRDV-UoWaumRsOxwEMIoiR-tjB4S7Wx-FgAdLI_36vhmfFQ5fYEyPD-Xg5rriQ"/>
+<span class="absolute top-space-2 right-space-2 px-2.5 py-1 rounded-full bg-surface/90 backdrop-blur-sm font-label-sm text-label-sm uppercase tracking-wider text-on-surface">02</span>
+</div>
+<div class="flex flex-col p-space-3 flex-grow justify-between">
+<div>
+<div class="flex items-center gap-2 text-primary mb-1">
+<span class="material-symbols-outlined text-[20px]">celebration</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider">Espacios</span>
+</div>
+<h3 class="font-headline-md text-headline-sm lg:text-headline-md text-on-surface mb-2">Ambientación de Eventos</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Escenografía floral arquitectónica para celebraciones privadas, lanzamientos y cenas íntimas.
+              </p>
+</div>
+<div class="mt-space-3 pt-space-2 flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-semibold">Cotización a medida</span>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary group-hover:translate-x-1 transition-all text-[20px]">east</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group flex flex-col bg-surface rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+<div class="relative w-full aspect-[4/5] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="Fresh weekly cut flower bundle wrapped in sustainable recycled brown craft paper tied with natural twine, arranged by an artisanal florist counter, soft morning sunbeams." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqFK2qT2oVqjYrrlUaDullKz8lanJCl9cYTwNg_TYFsQ2FF_J3IzR6jJ869BstSd0umVQHKkdH67BQBAAU9Cm-RjYSrnbcvUQEjzAzc9EVA4nQkaB_KVrfUPFc_mrAq7sJHwsM5KOjnuk5qlw82sHGlqWgBjLYIO0y1SqVSdmC1gLSvWjzxOM5lBPkJlXCf_Wuj7SJjV6IgH_pxx616iZgEc79iXQrBLsjbtsezKNQC2lvqmlUwRLyHQ"/>
+<span class="absolute top-space-2 right-space-2 px-2.5 py-1 rounded-full bg-surface/90 backdrop-blur-sm font-label-sm text-label-sm uppercase tracking-wider text-on-surface">03</span>
+</div>
+<div class="flex flex-col p-space-3 flex-grow justify-between">
+<div>
+<div class="flex items-center gap-2 text-primary mb-1">
+<span class="material-symbols-outlined text-[20px]">autorenew</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider">Hogar</span>
+</div>
+<h3 class="font-headline-md text-headline-sm lg:text-headline-md text-on-surface mb-2">Suscripción Residencial</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Tallos frescos y arreglos curados con entrega semanal o quincenal directamente en su puerta.
+              </p>
+</div>
+<div class="mt-space-3 pt-space-2 flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-semibold">Semanal / Quincenal</span>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary group-hover:translate-x-1 transition-all text-[20px]">east</span>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group flex flex-col bg-surface rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+<div class="relative w-full aspect-[4/5] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="Modern serene interior design with tall potted botanical indoor plants, Monstera, Ficus, ceramic pots on warm herringbone wooden floor, bright architectural sanctuary." src="https://lh3.googleusercontent.com/aida-public/AB6AXuChFC6gBqWdn8UjdqjI_G4RmoiUBhnxS-IVg1Gf0qLidG5FgwHJyq4f_Wbmq1U-wH7XlZ4tB-FhM2DMyjDEse25QNiOTgpVh7V-JfDaorUHJ6hLqLy0kUXnGlAk96HbjBB2mn9Z2d1YwsLnerz-yrhZyy5XPAXnXSa6w1doDQXOwqIbrclDIUpuABYWMFrCMDtB6ZMJh4ziLwN44h3b_Ror0Y13WA8ljcmElU2qZBcpKNn6Fe43JWik0Q"/>
+<span class="absolute top-space-2 right-space-2 px-2.5 py-1 rounded-full bg-surface/90 backdrop-blur-sm font-label-sm text-label-sm uppercase tracking-wider text-on-surface">04</span>
+</div>
+<div class="flex flex-col p-space-3 flex-grow justify-between">
+<div>
+<div class="flex items-center gap-2 text-primary mb-1">
+<span class="material-symbols-outlined text-[20px]">potted_plant</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider">Curaduría</span>
+</div>
+<h3 class="font-headline-md text-headline-sm lg:text-headline-md text-on-surface mb-2">Paisajismo de Interior</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Selección y cuidado de plantas exóticas aclimatadas para transformar oficinas y residencias en refugios vivos.
+              </p>
+</div>
+<div class="mt-space-3 pt-space-2 flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-semibold">Diagnóstico in-situ</span>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary group-hover:translate-x-1 transition-all text-[20px]">east</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. SECCIÓN DESTACADA: SUSCRIPCIÓN FLORAL (Asymmetric Split Layout) -->
+<section class="w-full bg-surface-container-low py-space-8 lg:py-space-10" id="suscripcion">
+<div class="max-w-[80rem] mx-auto px-margin-mobile lg:px-margin-desktop">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-6 items-center">
+<!-- Left: Imagery storytelling (7 cols) -->
+<div class="lg:col-span-6 relative">
+<div class="relative z-10 w-full aspect-[4/5] rounded-xl overflow-hidden shadow-xl bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Florist artist hands delicately preparing freshly cut stems of peonies, garden roses, and eucalyptus with vintage floral shears on a rustic wooden studio worktable, wrapped in recyclable kraft paper." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUwJ1onjVgaAYia4AzVliDdjdD_PCJ4gjXtFMHAdnNWCGwa8gAby0JWjqbub4Q8Qil0FzKJ-fxZwDAgXhytbP8SbFr2k2aVLmwZUirxugwZmJQDnSPIHb2jEL7n5yPclNFd3oQrUwT8DejM3kmedejPDyiVeGTNT5-TR6PbYkFESU8KotkYUdt5DlCFr15nGyVAgRm5UNWhZMVuxwUsNYpvLi_i7oghlVrvb6UfwmZmKW3-FNmbYfuEg"/>
+</div>
+<!-- Overlapping Accent Pill / Badge -->
+<div class="absolute -bottom-4 -right-4 md:bottom-6 md:-right-6 z-20 bg-surface p-space-3 rounded-xl shadow-lg max-w-xs hidden sm:flex items-center gap-space-2">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">eco</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface font-semibold">Corte Matutino</p>
+<p class="font-body-xs text-body-xs text-on-surface-variant">Cosecha directa en viveros agroecológicos locales.</p>
+</div>
+</div>
+</div>
+<!-- Right: Storytelling & Plan Selection (6 cols) -->
+<div class="lg:col-span-6 flex flex-col items-start lg:pl-space-4">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-container/20 text-on-primary-container font-label-sm text-label-sm uppercase tracking-widest mb-space-2">
+<span>Membresía Consciente</span>
+</div>
+<h2 class="font-headline-xl text-headline-lg lg:text-headline-xl text-on-surface tracking-tight mb-space-3">
+            Flores frescas en su mesa, <span class="italic text-primary">cada semana</span>.
+          </h2>
+<p class="font-body-md text-body-md text-on-surface-variant font-light leading-relaxed mb-space-4">
+            Transformamos la rutina doméstica en un rito de contemplación. Cada entrega está conformada por una selección impredecible y poética de especies silvestres que respetan el calendario botánico, entregadas con alimento nutritivo mineral y notas del florista sobre su cuidado.
+          </p>
+<!-- Interactive Frequency Selector (Vanilla JS driven) -->
+<div class="w-full bg-surface p-space-3 rounded-xl shadow-sm mb-space-4">
+<div class="flex items-center justify-between mb-space-2">
+<label class="font-label-md text-label-md uppercase tracking-wider text-on-surface font-semibold">Frecuencia de Envío</label>
+<span class="font-label-sm text-label-sm text-primary font-medium" id="frequency-detail">4 entregas por mes</span>
+</div>
+<div class="grid grid-cols-3 gap-space-2" id="frequency-buttons">
+<button class="freq-btn py-2.5 px-3 rounded-lg text-center font-label-md text-label-md uppercase transition-all bg-primary text-on-primary shadow-sm" onclick="selectFrequency(this, 'Semanal', '4 entregas por mes', '$89.000 / mes')" type="button">
+                Semanal
+              </button>
+<button class="freq-btn py-2.5 px-3 rounded-lg text-center font-label-md text-label-md uppercase transition-all bg-surface-container text-on-surface hover:bg-surface-container-high" onclick="selectFrequency(this, 'Quincenal', '2 entregas por mes', '$49.000 / mes')" type="button">
+                Quincenal
+              </button>
+<button class="freq-btn py-2.5 px-3 rounded-lg text-center font-label-md text-label-md uppercase transition-all bg-surface-container text-on-surface hover:bg-surface-container-high" onclick="selectFrequency(this, 'Mensual', '1 entrega exclusiva por mes', '$28.000 / mes')" type="button">
+                Mensual
+              </button>
+</div>
+<div class="mt-space-3 pt-space-2 flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Valor Estimado:</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold" id="frequency-price">$89.000 / mes</span>
+</div>
+</div>
+<!-- Feature Bullets -->
+<div class="grid grid-cols-2 gap-space-2 mb-space-4 w-full">
+<div class="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span>Pausa o cancela libremente</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span>Incluye florero en tu 1° pedido</span>
+</div>
+</div>
+<!-- CTA Button -->
+<button class="w-full sm:w-auto inline-flex items-center justify-center px-space-6 py-3.5 rounded-lg bg-secondary text-on-secondary font-label-lg text-label-lg uppercase tracking-wider hover:opacity-90 transition-all shadow-md" type="button">
+<span>Explorar Planes de Membresía</span>
+<span class="material-symbols-outlined text-[20px] ml-2">spa</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. GALERÍA EDITORIAL (Kinfolk Style Grid) -->
+<section class="w-full py-space-8 lg:py-space-10" id="galeria">
+<div class="max-w-[80rem] mx-auto px-margin-mobile lg:px-margin-desktop">
+<!-- Editorial Title -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-space-6">
+<div>
+<span class="font-label-md text-label-md uppercase tracking-widest text-primary mb-1 block">Registro Visual</span>
+<h2 class="font-headline-xl text-headline-lg lg:text-headline-xl text-on-surface tracking-tight">Curaduría Visual / Colección 2024</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md mt-2 md:mt-0">
+          Fragmentos de luz, texturas orgánicas y composiciones que dialogan con el silencio arquitectónico.
+        </p>
+</div>
+<!-- Asymmetric Editorial Mosaic (4 items) -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-4">
+<!-- Category A: Tallos de Estación (7 cols) -->
+<div class="md:col-span-7 group relative aspect-[16/11] rounded-xl overflow-hidden bg-surface-container shadow-sm">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="Editorial close up still life of seasonal stems, delicate buttercup ranunculus, botanical white parrot tulips and olive branches in warm morning shadow." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAft7lkxsLkPDvq9Hg6gF1ZAMJ4hk_D6HQz8abuVuWgxKNfI5IHgH3X31DJDcRstUgXJLuaPzR3XvHDChc7RsErNUyR8h1SC74tS_Dl0y0LH_I_u3BxnEwrQGpOVM1hj627_x4Nrq0nkQ4T_H5Az8cB552cqeVq8hizBV06S8zyatNHVf7A6eN6XEzVmPh1YJ3cFaJI0eJMzz2dtgccALczO8AO1C2t5emCNBJSMZCv5zbw45GkHSfgwQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-dark-background/80 via-dark-background/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-space-4 w-full flex items-end justify-between">
+<div>
+<span class="inline-block px-2.5 py-0.5 rounded-full bg-surface-container-lowest/20 backdrop-blur-md text-neutral-50 font-label-sm text-label-sm uppercase tracking-wider mb-1">Categoría A</span>
+<h3 class="font-headline-md text-headline-md text-neutral-50">Tallos de Estación</h3>
+<p class="font-body-sm text-body-sm text-dark-neutral-100 hidden sm:block">Ranúnculos, tulipanes holandeses y ramas de olivo silvestre.</p>
+</div>
+<a class="w-10 h-10 rounded-full bg-surface text-on-surface flex items-center justify-center hover:bg-primary hover:text-on-primary transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">north_east</span>
+</a>
+</div>
+</div>
+<!-- Category B: Centros Escultóricos (5 cols) -->
+<div class="md:col-span-5 group relative aspect-[4/5] rounded-xl overflow-hidden bg-surface-container shadow-sm">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="Sculptural floral centerpiece on raw textured gres pottery vase, asymmetrical botanical branches, moody shadows on beige linen table, art museum gallery feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoLbnxoyzH4or4VhnVN0G8v8_MudOrlzEZ0Eow1YTiIqqf07jDm2VPQeYDoKaHNFJPUM7NlxWBloPWD741lyzzboESKrapfId3FjfShkoTBg6m4U5nXqSErL6e41WQorN_OsnEyU2l4bmQKqcDRPeyRAHafSzRHeEaIQn2GO2fJViD7L2YYFbXCWYEHxcYSQF0HIiuh1iKkgM9J-pAC545ZNInQ5BP6g6W0j1fH-I8jfYl2STkLTd5Fw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-dark-background/80 via-dark-background/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-space-4 w-full flex items-end justify-between">
+<div>
+<span class="inline-block px-2.5 py-0.5 rounded-full bg-surface-container-lowest/20 backdrop-blur-md text-neutral-50 font-label-sm text-label-sm uppercase tracking-wider mb-1">Categoría B</span>
+<h3 class="font-headline-md text-headline-md text-neutral-50">Centros Escultóricos</h3>
+<p class="font-body-sm text-body-sm text-dark-neutral-100 hidden sm:block">Composiciones silvestres en cerámica gres horneada a leña.</p>
+</div>
+<a class="w-10 h-10 rounded-full bg-surface text-on-surface flex items-center justify-center hover:bg-primary hover:text-on-primary transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">north_east</span>
+</a>
+</div>
+</div>
+<!-- Category C: Bodas Botánicas (5 cols) -->
+<div class="md:col-span-5 group relative aspect-[4/5] rounded-xl overflow-hidden bg-surface-container shadow-sm">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="Unstructured organic wild bridal bouquet with trailing ribbons, garden roses, sweet peas, delicate ferns, soft romantic daylight in Chilean countryside estate." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIC_cF4GWU1596VFD579zHm83FknuoyCHFCmrTtwtRMNgeXZdGdOQfIvFC-K4swrspc_Zx9AFWKK-jULba4X8fo5-ggbVJKjvjbWmsZMfkHVUcGokCBQsxwyeEYN0ZAd8br1BIzw0ow1E3xfxgXhvYLuFLw7hB5DIk6qPeVzuK3W0kZnpoJkj3KSt2RwsiQQXEZRu4qerJxHDAYo6ZfG_bnKKwXeYPQgY-3ndH8WjIK51kGyuTFgA0og"/>
+<div class="absolute inset-0 bg-gradient-to-t from-dark-background/80 via-dark-background/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-space-4 w-full flex items-end justify-between">
+<div>
+<span class="inline-block px-2.5 py-0.5 rounded-full bg-surface-container-lowest/20 backdrop-blur-md text-neutral-50 font-label-sm text-label-sm uppercase tracking-wider mb-1">Categoría C</span>
+<h3 class="font-headline-md text-headline-md text-neutral-50">Bodas Botánicas</h3>
+<p class="font-body-sm text-body-sm text-dark-neutral-100 hidden sm:block">Ramos de novia orgánicos y gestos escenográficos desestructurados.</p>
+</div>
+<a class="w-10 h-10 rounded-full bg-surface text-on-surface flex items-center justify-center hover:bg-primary hover:text-on-primary transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">north_east</span>
+</a>
+</div>
+</div>
+<!-- Category D: Instalaciones Aéreas (7 cols) -->
+<div class="md:col-span-7 group relative aspect-[16/11] rounded-xl overflow-hidden bg-surface-container shadow-sm">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="Massive suspended aerial floral cloud installation floating from modern industrial ceiling, dried and fresh botanical foliage, hydrangeas, gypsophila and eucalyptus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD98pe76Qrli4pS4ksAZCOSSNYx1jOQsl9yU_dtpi_FnAFTOMAr2bm4D9-AEJwdtDxU-KV83ipicSD92LLpBH4-y16dVnD0Vq9kOLrp2h46AxspYFFw_2D1lepknb2NECOgZGmsuRAD5QouS00TKC4mLVdNXWp3RV40qFML6k0zssAVUkSUVqzKNaeeuxY9lIxO4KviqJF552Y4gDcAW9rN8q2zAxLkQpoHj7LnzerLGaqdbQP5x0eGXw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-dark-background/80 via-dark-background/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-space-4 w-full flex items-end justify-between">
+<div>
+<span class="inline-block px-2.5 py-0.5 rounded-full bg-surface-container-lowest/20 backdrop-blur-md text-neutral-50 font-label-sm text-label-sm uppercase tracking-wider mb-1">Categoría D</span>
+<h3 class="font-headline-md text-headline-md text-neutral-50">Instalaciones Aéreas</h3>
+<p class="font-body-sm text-body-sm text-dark-neutral-100 hidden sm:block">Nubes florales y follaje suspendido para eventos de alta arquitectura.</p>
+</div>
+<a class="w-10 h-10 rounded-full bg-surface text-on-surface flex items-center justify-center hover:bg-primary hover:text-on-primary transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">north_east</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Gallery Action Footnote -->
+<div class="mt-space-6 flex justify-center">
+<a class="inline-flex items-center gap-space-2 px-space-5 py-3 rounded-lg bg-surface text-on-surface hover:bg-surface-container shadow-sm font-label-lg text-label-lg uppercase tracking-wider transition-all" href="#">
+<span>Ver Colección Completa en Instagram</span>
+<span class="material-symbols-outlined text-[18px]">photo_camera</span>
+</a>
+</div>
+</div>
+</section>
+<!-- 5. RESEÑAS & PRUEBA SOCIAL -->
+<section class="w-full bg-surface-container-low py-space-8 lg:py-space-10 overflow-hidden">
+<div class="max-w-[80rem] mx-auto px-margin-mobile lg:px-margin-desktop">
+<!-- Top Score Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between pb-space-6 gap-space-4">
+<div>
+<span class="font-label-md text-label-md uppercase tracking-widest text-primary mb-1 block">Testimonios Reales</span>
+<h2 class="font-headline-xl text-headline-lg lg:text-headline-xl text-on-surface tracking-tight">Experiencias Botánicas</h2>
+</div>
+<!-- Rating Stat Badge -->
+<div class="flex items-center gap-space-3 bg-surface p-space-3 rounded-xl shadow-sm">
+<span class="font-display-hero-mobile text-headline-xl text-primary font-normal leading-none">4.9</span>
+<div class="flex flex-col">
+<div class="flex items-center text-warning">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star_half</span>
+</div>
+<span class="font-body-xs text-body-xs text-on-surface-variant font-medium">+380 clientes satisfechos en Chile</span>
+</div>
+</div>
+</div>
+<!-- Testimonials Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-4">
+<!-- Review 1 -->
+<div class="flex flex-col justify-between bg-surface p-space-4 rounded-xl shadow-sm">
+<div>
+<div class="flex items-center justify-between mb-space-3">
+<div class="flex text-warning">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<span class="inline-flex items-center gap-1 text-[11px] font-semibold text-primary uppercase tracking-wider bg-primary-container/20 px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+                Cliente Verificado
+              </span>
+</div>
+<p class="font-headline-sm text-headline-sm italic text-on-surface mb-space-3 leading-snug">
+              “El arreglo semanal para nuestro estudio arquitectónico transformó por completo la atmósfera. La selección de flores silvestres es insuperable.”
+            </p>
+</div>
+<div class="pt-space-3">
+<h4 class="font-label-md text-label-md text-on-surface font-semibold">Valentina M.</h4>
+<p class="font-body-xs text-body-xs text-on-surface-variant">Directora en Estudio V, Providencia</p>
+</div>
+</div>
+<!-- Review 2 -->
+<div class="flex flex-col justify-between bg-surface p-space-4 rounded-xl shadow-sm">
+<div>
+<div class="flex items-center justify-between mb-space-3">
+<div class="flex text-warning">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<span class="inline-flex items-center gap-1 text-[11px] font-semibold text-primary uppercase tracking-wider bg-primary-container/20 px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+                Cliente Verificado
+              </span>
+</div>
+<p class="font-headline-sm text-headline-sm italic text-on-surface mb-space-3 leading-snug">
+              “Hicieron de nuestra boda un jardín secreto inolvidable. La paleta de colores y el movimiento natural de los arreglos fue puramente mágica.”
+            </p>
+</div>
+<div class="pt-space-3">
+<h4 class="font-label-md text-label-md text-on-surface font-semibold">Andrés &amp; Camila</h4>
+<p class="font-body-xs text-body-xs text-on-surface-variant">Boda en Pirque · Noviembre 2023</p>
+</div>
+</div>
+<!-- Review 3 -->
+<div class="flex flex-col justify-between bg-surface p-space-4 rounded-xl shadow-sm">
+<div>
+<div class="flex items-center justify-between mb-space-3">
+<div class="flex text-warning">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<span class="inline-flex items-center gap-1 text-[11px] font-semibold text-secondary uppercase tracking-wider bg-secondary-container/30 px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[14px]">spa</span>
+                Suscriptora Mensual
+              </span>
+</div>
+<p class="font-headline-sm text-headline-sm italic text-on-surface mb-space-3 leading-snug">
+              “Puntuales, elegantes y el empaque sin plásticos con papel mineral es un detalle que valoro profundamente. Cada ramo dura intacto más de 12 días.”
+            </p>
+</div>
+<div class="pt-space-3">
+<h4 class="font-label-md text-label-md text-on-surface font-semibold">Sofía R.</h4>
+<p class="font-body-xs text-body-xs text-on-surface-variant">Suscriptora Residencial desde 2022</p>
+</div>
+</div>
+</div>
+<!-- Carousel / Pagination Controls Minimal -->
+<div class="flex items-center justify-center gap-space-3 mt-space-6">
+<button aria-label="Anterior" class="w-10 h-10 rounded-full bg-surface hover:bg-surface-container text-on-surface flex items-center justify-center shadow-sm transition-all" type="button">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<div class="flex gap-1.5">
+<span class="w-6 h-1.5 rounded-full bg-primary"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-surface-variant"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-surface-variant"></span>
+</div>
+<button aria-label="Siguiente" class="w-10 h-10 rounded-full bg-surface hover:bg-surface-container text-on-surface flex items-center justify-center shadow-sm transition-all" type="button">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+<!-- 6. NEWSLETTER & ATELIER CONSULTATION (Closing Editorial Note) -->
+<section class="w-full py-space-8 lg:py-space-10">
+<div class="max-w-[80rem] mx-auto px-margin-mobile lg:px-margin-desktop">
+<div class="bg-primary text-on-primary rounded-xl p-space-6 lg:p-space-8 flex flex-col md:flex-row items-center justify-between gap-space-6 shadow-xl">
+<div class="max-w-xl">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-lowest/15 backdrop-blur-sm text-neutral-50 font-label-sm text-label-sm uppercase tracking-widest mb-space-2">
+<span>Atelier &amp; Consultas Privadas</span>
+</div>
+<h2 class="font-headline-xl text-headline-lg lg:text-headline-xl text-neutral-50 leading-tight mb-2">
+            ¿Planeando un acontecimiento especial?
+          </h2>
+<p class="font-body-md text-body-md text-neutral-100 font-light leading-relaxed">
+            Visite nuestro taller en Roma Norte o solicite una videollamada de asesoría botánica con nuestra directora creativa.
+          </p>
+</div>
+<div class="flex flex-col sm:flex-row gap-space-2 w-full md:w-auto">
+<a class="inline-flex items-center justify-center px-space-4 py-3.5 rounded-lg bg-surface text-on-surface hover:bg-surface-container font-label-lg text-label-lg uppercase tracking-wider transition-all shadow-md" href="#">
+<span>Agendar Cita</span>
+<span class="material-symbols-outlined text-[18px] ml-2">calendar_month</span>
+</a>
+<a class="inline-flex items-center justify-center px-space-4 py-3.5 rounded-lg bg-surface-container-lowest/20 backdrop-blur-md text-neutral-50 hover:bg-surface-container-lowest/30 font-label-lg text-label-lg uppercase tracking-wider transition-all" href="#">
+<span>Contactar WhatsApp</span>
+<span class="material-symbols-outlined text-[18px] ml-2">chat</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+</div>
+<script>
+  function selectFrequency(button, name, detail, price) {
+    // Reset all buttons in the container
+    const container = document.getElementById('frequency-buttons');
+    const buttons = container.querySelectorAll('.freq-btn');
+    buttons.forEach(btn => {
+      btn.className = 'freq-btn py-2.5 px-3 rounded-lg text-center font-label-md text-label-md uppercase transition-all bg-surface-container text-on-surface hover:bg-surface-container-high';
+    });
+
+    // Highlight active button
+    button.className = 'freq-btn py-2.5 px-3 rounded-lg text-center font-label-md text-label-md uppercase transition-all bg-primary text-on-primary shadow-sm';
+
+    // Update details
+    const detailEl = document.getElementById('frequency-detail');
+    const priceEl = document.getElementById('frequency-price');
+    if (detailEl) detailEl.innerText = detail;
+    if (priceEl) priceEl.innerText = price;
+  }
+</script></main><footer class="w-full bg-surface-container-low mt-space-8"><div class="max-w-[80rem] mx-auto px-margin-mobile lg:px-margin-desktop py-space-8"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-6"><div class="flex flex-col gap-space-2"><a class="font-headline-md text-headline-md italic tracking-tight text-on-surface" data-path="inicio" href="#">La Jardinera</a><p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">Arte floral de autor, botánica consciente y composiciones silvestres que despiertan emociones vivas y atesoran momentos memorables.</p><span class="font-body-xs text-body-xs text-on-surface-variant pt-space-2">© 2024 La Jardinera Florería. Todos los derechos reservados.</span></div><div class="flex flex-col gap-space-2"><h3 class="font-label-md text-label-md uppercase tracking-wider text-on-surface font-semibold">Navegación</h3><nav class="flex flex-col gap-space-1" data-active-classes="text-primary font-semibold"><a aria-current="page" class="transition-colors text-primary font-semibold" data-path="inicio" href="#">Inicio</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="servicios" href="#">Servicios</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="suscripcion-floral" href="#">Suscripción Floral</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="galeria" href="#">Galería</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="contacto" href="#">Contacto</a></nav></div><div class="flex flex-col gap-space-2"><h3 class="font-label-md text-label-md uppercase tracking-wider text-on-surface font-semibold">Atelier Botánico</h3><div class="flex flex-col gap-space-1 font-body-sm text-body-sm text-on-surface-variant"><div class="flex items-center gap-space-1"><span class="material-symbols-outlined text-[16px] text-primary">call</span><span>+52 (55) 8432 9100</span></div><div class="flex items-center gap-space-1"><span class="material-symbols-outlined text-[16px] text-primary">mail</span><span>atelier@lajardinera.mx</span></div><div class="flex items-start gap-space-1"><span class="material-symbols-outlined text-[16px] text-primary mt-1">location_on</span><span>Calle de los Lirios 244, Roma Norte, CDMX</span></div></div><div class="flex items-center gap-space-2 pt-space-1"><a aria-label="Instagram" class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-primary transition-all" href="#"><span class="material-symbols-outlined text-[16px]">photo_camera</span></a><a aria-label="WhatsApp" class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-primary transition-all" href="#"><span class="material-symbols-outlined text-[16px]">chat</span></a><a aria-label="Pinterest" class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-primary transition-all" href="#"><span class="material-symbols-outlined text-[16px]">spa</span></a></div></div><div class="flex flex-col gap-space-2"><h3 class="font-label-md text-label-md uppercase tracking-wider text-on-surface font-semibold">Medios de Pago</h3><p class="font-body-sm text-body-sm text-on-surface-variant">Aceptamos pagos seguros y transferencias para tu conveniencia:</p><div class="flex flex-col gap-space-1"><div class="flex items-center gap-space-1 text-on-surface-variant font-body-sm text-body-sm"><span class="material-symbols-outlined text-[18px] text-primary">credit_card</span><span>Visa &amp; Mastercard</span></div><div class="flex items-center gap-space-1 text-on-surface-variant font-body-sm text-body-sm"><span class="material-symbols-outlined text-[18px] text-primary">contactless</span><span>American Express</span></div><div class="flex items-center gap-space-1 text-on-surface-variant font-body-sm text-body-sm"><span class="material-symbols-outlined text-[18px] text-primary">account_balance</span><span>Transferencia SPEI</span></div></div></div></div></div></footer></body></html>
