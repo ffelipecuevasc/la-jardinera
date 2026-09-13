@@ -1,13 +1,18 @@
-﻿import { initTheme } from './modules/theme.js';
-import { initNavigation } from './modules/navigation.js';
-import { initCarousel } from './modules/carousel.js';
-import { initModal } from './modules/modal.js';
-import { initSubscription } from './modules/subscription.js';
+﻿const modules = [
+    { path: './modules/theme.js',        fn: 'initTheme'        },
+    { path: './modules/navigation.js',   fn: 'initNavigation'   },
+    { path: './modules/carousel.js',     fn: 'initCarousel'     },
+    { path: './modules/modal.js',        fn: 'initModal'        },
+    { path: './modules/subscription.js', fn: 'initSubscription' },
+];
 
 document.addEventListener('DOMContentLoaded', () => {
-    initTheme();
-    initNavigation();
-    initCarousel();
-    initModal();
-    initSubscription();
+    modules.forEach(async ({ path, fn }) => {
+        try {
+            const mod = await import(path);
+            mod[fn]?.();
+        } catch (err) {
+            console.error(`[main.js] Falló "${fn}" (${path}):`, err);
+        }
+    });
 });

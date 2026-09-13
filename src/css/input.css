@@ -3,16 +3,24 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    /* Easing de transición exponencial */
+    --expo-out: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
   html, body {
     margin: 0;
     padding: 0;
   }
+
   body {
     overscroll-behavior: none;
   }
+
   main > :first-child {
     margin-top: 0 !important;
   }
+
   main > :last-child {
     margin-bottom: 0 !important;
   }
@@ -20,4 +28,58 @@
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+/* ========================================================= */
+/* VIEW TRANSITIONS API - DARK / LIGHT MODE EFFECT           */
+/* ========================================================= */
+
+/* 1. Apagar el cross-fade nativo (VITAL para que el clip-path sea sólido) */
+::view-transition-old(root),
+::view-transition-new(root) {
+  mix-blend-mode: normal;
+  display: block;
+}
+
+/* 2. Definir curva y duración */
+::view-transition-group(root) {
+  animation-duration: 0.7s;
+  animation-timing-function: var(--expo-out);
+}
+
+/* =======================================
+   TRANSICIÓN HACIA LIGHT MODE
+   ======================================= */
+::view-transition-old(root) {
+  animation: none;
+  z-index: -1;
+}
+::view-transition-new(root) {
+  animation-name: reveal-light;
+  animation-fill-mode: both;
+}
+
+/* =======================================
+   TRANSICIÓN HACIA DARK MODE
+   (Usamos html.dark para ganar especificidad)
+   ======================================= */
+html.dark::view-transition-old(root) {
+  animation: none;
+  z-index: -1;
+}
+html.dark::view-transition-new(root) {
+  animation-name: reveal-dark;
+  animation-fill-mode: both;
+  z-index: 1;
+}
+
+/* Keyframes de las formas geométricas */
+@keyframes reveal-dark {
+  from { clip-path: polygon(50% -71%, -50% 71%, -50% 71%, 50% -71%); }
+  to   { clip-path: polygon(50% -71%, -50% 71%, 50% 171%, 171% 50%); }
+}
+
+@keyframes reveal-light {
+  from { clip-path: polygon(171% 50%, 50% 171%, 50% 171%, 171% 50%); }
+  to   { clip-path: polygon(171% 50%, 50% 171%, -50% 71%, 50% -71%); }
 }
