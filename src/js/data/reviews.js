@@ -6,7 +6,7 @@
         rating: 5
     },
     {
-        author: "Catalina Pulido Quintana",
+        author: "Catalina Pulido",
         date: "Hace 3 meses",
         text: "Me encantan las flores de la Jardinera! Siempre son distintas y únicas. Yo que vivo lejos me ayuda mucho a poder regalonear a mis amistades y familia en el sur. Lo otro genial de las chicas que tienen los mejores datos de emprendimiento ❤️",
         rating: 5
@@ -49,13 +49,13 @@
     },
     {
         author: "Claudia Montes",
-        date: "Hace 2 años",
+        date: "Hace 2 meses",
         text: "Son los ramos de flores más hermosos que existen! Uno los puede personalizar, super buena atención y jamas he tenido un problema con los repartos, no compro flores en ninguna otra parte (:",
         rating: 5
     },
     {
-        author: "Cecilia sandoval lespay",
-        date: "Hace 2 años",
+        author: "Cecilia Sandoval",
+        date: "Hace 2 meses",
         text: "Me encanta el estilo que proyectan, tienen flores hermosas, que pueden lograr el ramo perfecto, fue muy fácil armar mi ramo, porque todas las flores eran preciosas, totalmente recomendado ✨",
         rating: 5
     }
