@@ -17,10 +17,16 @@
         <!-- Logotipo - PNG & TEXTO -->
         <div class="flex items-center">
             <a class="flex items-center gap-4 group" data-path="inicio" href="#">
-                <!-- Logotipo PNG -->
+                <!-- Logotipo PNG — variante original (modo claro) -->
                 <img src="./public/logos/la-jardinera-original.png"
                      alt="Logotipo La Jardinera"
-                     class="h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                     class="h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105 block dark:hidden"
+                     width="44"
+                     height="44" />
+                <!-- Logotipo PNG — variante blanca (modo oscuro) -->
+                <img src="./public/logos/la-jardinera-blanco.png"
+                     alt="Logotipo La Jardinera"
+                     class="h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105 hidden dark:block"
                      width="44"
                      height="44" />
                 <!-- Separador Vertical Elegante -->
@@ -640,7 +646,7 @@
             <div class="max-w-[80rem] mx-auto px-margin-mobile lg:px-margin-desktop">
 
                 <!-- CONTENEDOR PRINCIPAL: isolate + Gradient + Relative + Overflow Hidden -->
-                <div class="relative isolate overflow-hidden bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-xl p-space-6 lg:p-space-8 flex flex-col md:flex-row items-center justify-between gap-space-6 shadow-xl">
+                <div class="relative isolate overflow-hidden bg-gradient-to-br from-primary to-primary-container dark:to-primary-fixed text-on-primary rounded-xl p-space-6 lg:p-space-8 flex flex-col md:flex-row items-center justify-between gap-space-6 shadow-xl">
 
                     <!-- CAPA DE TEXTURA SVG (Ruido Fractal Codificado en Base64 para 100% de compatibilidad) -->
                     <div class="absolute inset-0 opacity-20 mix-blend-overlay pointer-events-none"
@@ -649,13 +655,13 @@
 
                     <!-- BLOQUE DE TEXTOS (z-10 para quedar sobre la textura) -->
                     <div class="max-w-xl relative z-10">
-                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-lowest/15 backdrop-blur-sm text-neutral-50 font-label-sm text-label-sm uppercase tracking-widest mb-space-2">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-lowest/15 dark:bg-on-primary-fixed/10 backdrop-blur-sm text-neutral-50 dark:text-on-primary-fixed font-label-sm text-label-sm uppercase tracking-widest mb-space-2">
                             <span>Reserva con antelación</span>
                         </div>
-                        <h2 class="font-headline-xl text-headline-lg lg:text-headline-xl text-neutral-50 leading-tight mb-2">
+                        <h2 class="font-headline-xl text-headline-lg lg:text-headline-xl text-neutral-50 dark:text-on-primary-fixed leading-tight mb-2">
                             ¿Planeando un evento especial?
                         </h2>
-                        <p class="font-body-md text-body-md text-neutral-100 font-light leading-relaxed">
+                        <p class="font-body-md text-body-md text-neutral-100 dark:text-on-primary-fixed-variant font-light leading-relaxed">
                             Visítanos en Valdivia para asesorarte en tu evento, o solicita una reunión por
                             videoconferencia para que conversemos.
                         </p>
@@ -664,14 +670,14 @@
                     <!-- BLOQUE DE BOTONES (z-10 para quedar sobre la textura) -->
                     <div class="flex flex-col sm:flex-row gap-space-2 w-full md:w-auto relative z-10">
                         <button data-modal-target="contact-modal" type="button"
-                                class="inline-flex items-center justify-center px-space-4 py-3.5 rounded-lg bg-surface text-on-surface hover:bg-surface-container font-label-lg text-label-lg uppercase tracking-wider transition-all shadow-md">
+                                class="inline-flex items-center justify-center px-space-4 py-3.5 rounded-lg bg-surface dark:bg-surface-container-lowest text-on-surface dark:text-on-primary-fixed hover:bg-surface-container dark:hover:bg-primary-fixed font-label-lg text-label-lg uppercase tracking-wider transition-all shadow-md">
                             <span>Agendar Reunión</span>
                             <svg class="text-[18px] ml-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
                                  width="24" height="24" viewBox="0 0 24 24">
                                 <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/>
                             </svg>
                         </button>
-                        <a class="inline-flex items-center justify-center px-space-4 py-3.5 rounded-lg bg-surface-container-lowest/20 backdrop-blur-md text-neutral-50 hover:bg-surface-container-lowest/30 font-label-lg text-label-lg uppercase tracking-wider transition-all"
+                        <a class="inline-flex items-center justify-center px-space-4 py-3.5 rounded-lg bg-surface-container-lowest/20 dark:bg-on-primary-fixed/10 backdrop-blur-md text-neutral-50 dark:text-on-primary-fixed hover:bg-surface-container-lowest/30 dark:hover:bg-on-primary-fixed/20 font-label-lg text-label-lg uppercase tracking-wider transition-all"
                            href="https://wa.me/56997702832" target="_blank" rel="noopener noreferrer">
                             <span>Contactar WhatsApp</span>
                             <!-- Ícono de WhatsApp inyectado y alineado -->
