@@ -6,6 +6,27 @@
   :root {
     /* Easing de transición exponencial */
     --expo-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+    /* ============================================================
+       TOKENS REACTIVOS DE TEMA (Light / Dark)
+       Formato "R G B" sin comas: permite que Tailwind aplique
+       opacidad con la sintaxis bg-surface/50, text-on-surface/80, etc.
+       ============================================================ */
+    --color-background: 248 247 243;             /* #F8F7F3 */
+    --color-surface: 248 250 244;                /* #f8faf4 */
+    --color-surface-container-low: 241 238 232;  /* #F1EEE8 */
+    --color-on-surface: 25 28 25;                /* #191c19 */
+    --color-on-surface-variant: 65 73 65;        /* #414941 */
+    --color-on-background: 25 28 25;             /* #191c19 */
+  }
+
+  .dark {
+    --color-background: 31 36 33;                /* #1F2421 (dark-background) */
+    --color-surface: 43 48 45;                    /* #2B302D (dark-surface-container-low) */
+    --color-surface-container-low: 43 48 45;      /* #2B302D (dark-surface-container-low) */
+    --color-on-surface: 243 243 240;              /* #F3F3F0 (dark-on-background) */
+    --color-on-surface-variant: 191 197 190;      /* #BFC5BE (dark-on-surface-variant) */
+    --color-on-background: 243 243 240;           /* #F3F3F0 (dark-on-background) */
   }
 
   html, body {
@@ -24,10 +45,6 @@
   main > :last-child {
     margin-bottom: 0 !important;
   }
-}
-
-::-webkit-scrollbar {
-  display: none;
 }
 
 /* ========================================================= */

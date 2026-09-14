@@ -1,4 +1,14 @@
 ﻿/** @type {import('tailwindcss').Config} */
+
+function withOpacity(variableName) {
+  return ({ opacityValue }) => {
+    if (opacityValue !== undefined) {
+      return `rgb(var(${variableName}) / ${opacityValue})`;
+    }
+    return `rgb(var(${variableName}))`;
+  };
+}
+
 module.exports = {
   darkMode: "class",
   content: [
@@ -8,7 +18,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "warning": "#E7B857", "dark-on-surface-variant": "#BFC5BE", "surface-container-highest": "#e1e3de", "outline": "#717971", "dark-neutral-100": "#8A918B", "outline-variant": "#c0c9bf", "dark-background": "#1F2421", "on-secondary-container": "#7b4d51", "tertiary-fixed-dim": "#ffb2be", "tertiary": "#8d4a57", "primary-container": "#8cc79a", "on-tertiary-fixed-variant": "#703340", "on-error": "#ffffff", "on-error-container": "#93000a", "dark-neutral-50": "#BFC5BE", "surface-container": "#edefe9", "neutral-100": "#F1EEE8", "background": "#F8F7F3", "on-secondary-fixed-variant": "#653b3f", "surface-container-low": "#F1EEE8", "on-tertiary-fixed": "#3a0816", "on-background": "#191c19", "on-primary-fixed-variant": "#17512e", "on-primary": "#1F2421", "on-tertiary": "#ffffff", "surface-container-high": "#e7e9e3", "primary-fixed-dim": "#99d4a6", "surface-dim": "#d8dbd5", "secondary-light": "#F8D4D8", "dark-on-background": "#F3F3F0", "on-surface-variant": "#414941", "primary-fixed": "#b4f1c1", "on-surface": "#191c19", "on-secondary": "#ffffff", "neutral-300": "#D9DDD8", "on-tertiary-container": "#743643", "neutral-50": "#F8F7F3", "secondary-container": "#ffc2c6", "neutral-500": "#676A70", "surface-tint": "#316944", "dark-surface-container-low": "#2B302D", "secondary-fixed": "#ffdadb", "error": "#D96A6A", "primary": "#316944", "surface-variant": "#e1e3de", "surface-container-lowest": "#ffffff", "surface-bright": "#f8faf4", "inverse-surface": "#2e312e", "on-secondary-fixed": "#321115", "dark-surface-variant": "#5A615D", "secondary-hover": "#E89DA5", "tertiary-fixed": "#ffd9de", "inverse-primary": "#99d4a6", "dark-neutral-300": "#5A615D", "error-container": "#ffdad6", "neutral-900": "#35363A", "on-primary-fixed": "#00210d", "secondary": "#805256", "surface": "#f8faf4", "on-primary-container": "#1a5431", "secondary-fixed-dim": "#f3b7bb", "tertiary-container": "#f6a3b1", "inverse-on-surface": "#eff1ec", "info": "#73A8D8", "success": "#6FBF73"
+        "warning": "#E7B857", "dark-on-surface-variant": "#BFC5BE", "surface-container-highest": "#e1e3de", "outline": "#717971", "dark-neutral-100": "#8A918B", "outline-variant": "#c0c9bf", "dark-background": "#1F2421", "on-secondary-container": "#7b4d51", "tertiary-fixed-dim": "#ffb2be", "tertiary": "#8d4a57", "primary-container": "#8cc79a", "on-tertiary-fixed-variant": "#703340", "on-error": "#ffffff", "on-error-container": "#93000a", "dark-neutral-50": "#BFC5BE", "surface-container": "#edefe9", "neutral-100": "#F1EEE8", "background": withOpacity('--color-background'), "on-secondary-fixed-variant": "#653b3f", "surface-container-low": withOpacity('--color-surface-container-low'), "on-tertiary-fixed": "#3a0816", "on-background": withOpacity('--color-on-background'), "on-primary-fixed-variant": "#17512e", "on-primary": "#1F2421", "on-tertiary": "#ffffff", "surface-container-high": "#e7e9e3", "primary-fixed-dim": "#99d4a6", "surface-dim": "#d8dbd5", "secondary-light": "#F8D4D8", "dark-on-background": "#F3F3F0", "on-surface-variant": withOpacity('--color-on-surface-variant'), "primary-fixed": "#b4f1c1", "on-surface": withOpacity('--color-on-surface'), "on-secondary": "#ffffff", "neutral-300": "#D9DDD8", "on-tertiary-container": "#743643", "neutral-50": "#F8F7F3", "secondary-container": "#ffc2c6", "neutral-500": "#676A70", "surface-tint": "#316944", "dark-surface-container-low": "#2B302D", "secondary-fixed": "#ffdadb", "error": "#D96A6A", "primary": "#316944", "surface-variant": "#e1e3de", "surface-container-lowest": "#ffffff", "surface-bright": "#f8faf4", "inverse-surface": "#2e312e", "on-secondary-fixed": "#321115", "dark-surface-variant": "#5A615D", "secondary-hover": "#E89DA5", "tertiary-fixed": "#ffd9de", "inverse-primary": "#99d4a6", "dark-neutral-300": "#5A615D", "error-container": "#ffdad6", "neutral-900": "#35363A", "on-primary-fixed": "#00210d", "secondary": "#805256", "surface": withOpacity('--color-surface'), "on-primary-container": "#1a5431", "secondary-fixed-dim": "#f3b7bb", "tertiary-container": "#f6a3b1", "inverse-on-surface": "#eff1ec", "info": "#73A8D8", "success": "#6FBF73"
       },
       borderRadius: {
         "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"
