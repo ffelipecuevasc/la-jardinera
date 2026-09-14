@@ -1,12 +1,37 @@
-/**
+﻿/**
  * Módulo de Modales - La Jardinera Florería
- * Controla la interacción, accesibilidad (Focus Trap, Esc), animación SVG y renderizado dinámico.
+ * Controla la interacción, accesibilidad WCAG 2.1 (Focus Trap, Esc, inert / aria-hidden),
+ * animación SVG y renderizado dinámico con soporte total para Dark Mode.
  */
 import { servicesData } from '../data/services.js';
 
 export function initModal() {
     initGenericModals();
     initServiceModal();
+}
+
+/**
+ * Aplica o remueve inert y aria-hidden a los contenedores de fondo
+ * para aislar completamente el modal de lectores de pantalla.
+ */
+function setBackgroundAriaHidden(isHidden) {
+    const backgroundElements = document.querySelectorAll('header, main, footer');
+    backgroundElements.forEach(el => {
+        if (isHidden) {
+            el.setAttribute('aria-hidden', 'true');
+            if ('inert' in el) {
+                el.inert = true;
+            } else {
+                el.setAttribute('inert', '');
+            }
+        } else {
+            el.removeAttribute('aria-hidden');
+            if ('inert' in el) {
+                el.inert = false;
+            }
+            el.removeAttribute('inert');
+        }
+    });
 }
 
 /**
@@ -26,6 +51,9 @@ function initGenericModals() {
 
         previouslyFocusedElement = document.activeElement;
         activeModal = modal;
+
+        // Ocultar fondo a lectores de pantalla (WCAG 2.1)
+        setBackgroundAriaHidden(true);
 
         modal.classList.remove('hidden');
         modal.setAttribute('aria-hidden', 'false');
@@ -51,6 +79,9 @@ function initGenericModals() {
     const closeModal = () => {
         if (!activeModal) return;
 
+        // Restaurar visibilidad del fondo para lectores de pantalla
+        setBackgroundAriaHidden(false);
+
         activeModal.classList.add('hidden');
         activeModal.setAttribute('aria-hidden', 'true');
         document.body.classList.remove('overflow-hidden');
@@ -75,6 +106,8 @@ function initGenericModals() {
     const trapTabKey = (e) => {
         if (e.key !== 'Tab') return;
         const focusableElements = activeModal.querySelectorAll(focusableElementsString);
+        if (focusableElements.length === 0) return;
+
         const firstFocusable = focusableElements[0];
         const lastFocusable = focusableElements[focusableElements.length - 1];
 
@@ -101,7 +134,7 @@ function initGenericModals() {
 }
 
 /**
- * Manejo del Modal de Detalle de Servicios con Inyección Dinámica (MVC) y Animación SVG
+ * Manejo del Modal de Detalle de Servicios con Inyección Dinámica (MVC), Focus Trap y Animación SVG
  */
 function initServiceModal() {
     const serviceModal = document.getElementById('service-modal');
@@ -119,9 +152,10 @@ function initServiceModal() {
     const modalDescription = document.getElementById('modal-description');
     const modalGalleryContainer = document.getElementById('modal-gallery-container');
     const modalCotizarBtn = document.getElementById('modal-cotizar-btn');
-    const svgCircle = serviceModal.querySelector('#modal-svg-circle') || serviceModal.querySelector('.modal-border');
+    const modalGallerySection = document.getElementById('modal-gallery-section');
 
     let previouslyFocusedBtn = null;
+    let closeTimeout = null;
     const focusableElementsString = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex="0"]';
 
     const openModal = (serviceId, triggerBtn) => {
@@ -133,6 +167,15 @@ function initServiceModal() {
 
         previouslyFocusedBtn = triggerBtn;
 
+        // Cancela un cierre en curso. Sin esto, reabrir la modal antes de
+        // que terminen los 300ms de la animación de salida deja vivo el
+        // temporizador anterior, que vuelve a ocultar la ventana recién
+        // abierta. Es una condición de carrera real, no teórica.
+        if (closeTimeout) {
+            clearTimeout(closeTimeout);
+            closeTimeout = null;
+        }
+
         // 1. Inyección de contenido dinámico
         if (modalTitle) modalTitle.textContent = service.title;
         if (modalMainImage) {
@@ -141,20 +184,39 @@ function initServiceModal() {
         }
         if (modalDescription) modalDescription.innerHTML = service.description;
 
-        // 2. Galería dinámica con clases Anti-CLS y Lazy Loading
+        // 2. Galería dinámica: envoltorio con recorte + zoom al pasar el
+        //    cursor, el mismo lenguaje que las tarjetas de la página.
         if (modalGalleryContainer) {
             modalGalleryContainer.innerHTML = '';
-            if (Array.isArray(service.gallery) && service.gallery.length > 0) {
+            const hasGallery = Array.isArray(service.gallery) && service.gallery.length > 0;
+
+            // Ajusta las columnas al número real de fotos: una galería de dos
+            // imágenes en una rejilla de cuatro deja media fila vacía.
+            modalGalleryContainer.className =
+                `grid grid-cols-2 gap-space-2 sm:grid-cols-${Math.min(service.gallery?.length || 2, 4)}`;
+
+            if (hasGallery) {
                 service.gallery.forEach((imgSrc, index) => {
+                    const frame = document.createElement('div');
+                    frame.className = 'group/thumb relative aspect-[4/5] overflow-hidden rounded-xl bg-surface-container border border-outline-variant/20';
+
                     const img = document.createElement('img');
                     img.src = imgSrc;
-                    img.alt = `${service.title} - Fotografía ${index + 1}`;
+                    img.alt = `${service.title} — fotografía ${index + 1}`;
                     img.loading = 'lazy';
-                    img.width = 200;
-                    img.height = 200;
-                    img.className = 'w-full aspect-square object-cover rounded-lg shadow-sm hover:opacity-90 transition-opacity';
-                    modalGalleryContainer.appendChild(img);
+                    img.width = 400;
+                    img.height = 500;
+                    img.className = 'w-full h-full object-cover transition-transform duration-700 ease-out group-hover/thumb:scale-105';
+
+                    frame.appendChild(img);
+                    modalGalleryContainer.appendChild(frame);
                 });
+            }
+
+            // Si un servicio no trae galería, se oculta también el titular
+            // de la sección en vez de dejar un encabezado huérfano.
+            if (modalGallerySection) {
+                modalGallerySection.classList.toggle('hidden', !hasGallery);
             }
         }
 
@@ -163,7 +225,10 @@ function initServiceModal() {
             modalCotizarBtn.href = `./contacto.html?service=${encodeURIComponent(service.title)}`;
         }
 
-        // 4. Mostrar modal con animación de entrada
+        // 4. Bloqueo de Screen Readers en fondo (WCAG 2.1)
+        setBackgroundAriaHidden(true);
+
+        // 5. Mostrar modal con animación de entrada
         serviceModal.classList.remove('hidden');
         serviceModal.setAttribute('aria-hidden', 'false');
         document.body.classList.add('overflow-hidden');
@@ -173,45 +238,45 @@ function initServiceModal() {
             if (panel) panel.classList.remove('translate-y-full');
         });
 
-        // 5. Microinteracción SVG: Animar el anillo trazando stroke-dashoffset a 0
-        if (svgCircle) {
-            setTimeout(() => {
-                svgCircle.style.strokeDashoffset = '0';
-            }, 50);
-        }
 
-        // 6. Accesibilidad y Focus Trap
-        const focusableElements = serviceModal.querySelectorAll(focusableElementsString);
-        if (focusableElements.length > 0) {
-            // Foco inicial en el botón de cerrar o primer elemento
-            closeBtn?.focus() || focusableElements[0].focus();
-        }
+        // 7. Focus Trap: Foco inicial inmediato en el botón de cierre
+        requestAnimationFrame(() => {
+            if (closeBtn) {
+                closeBtn.focus();
+            } else {
+                const focusable = serviceModal.querySelectorAll(focusableElementsString);
+                if (focusable.length > 0) focusable[0].focus();
+            }
+        });
 
         document.addEventListener('keydown', onKeyDown);
     };
 
     const closeModal = () => {
-        // 1. Resetear animación del anillo SVG a 578
-        if (svgCircle) {
-            svgCircle.style.strokeDashoffset = '578';
-        }
-
-        // 2. Transición de salida
+        // 1. Transición de salida
         serviceModal.classList.add('opacity-0');
         if (panel) panel.classList.add('translate-y-full');
 
-        setTimeout(() => {
+        document.removeEventListener('keydown', onKeyDown);
+
+        closeTimeout = setTimeout(() => {
             serviceModal.classList.add('hidden');
             serviceModal.setAttribute('aria-hidden', 'true');
             document.body.classList.remove('overflow-hidden');
+
+            // 2. El fondo se devuelve a los lectores de pantalla DESPUÉS de
+            //    que la modal desaparece, no antes. Restaurarlo al inicio
+            //    dejaba 300ms en que el fondo era navegable con la ventana
+            //    todavía en pantalla.
+            setBackgroundAriaHidden(false);
 
             if (previouslyFocusedBtn) {
                 previouslyFocusedBtn.focus();
                 previouslyFocusedBtn = null;
             }
-        }, 300);
 
-        document.removeEventListener('keydown', onKeyDown);
+            closeTimeout = null;
+        }, 300);
     };
 
     const onKeyDown = (e) => {

@@ -329,6 +329,68 @@ cierre de esta iteración):
 
 ---
 
+## 7. Componente: Revelado del Titular del Hero (`hero-reveal`)
+
+Animación de entrada aplicada **exclusivamente** al `<h1>` del Hero en
+`index.html`. Cada palabra asciende y se revela con un desfase, una sola
+vez al cargar la página. No hay bucle.
+
+### 7.1 Por qué no es una máscara
+
+El patrón habitual para este efecto encierra cada palabra en un contenedor
+con `overflow: hidden` y la hace subir desde fuera de esa caja, como una
+cortina. Aquí se descartó por dos razones concretas:
+
+1. **Recorta los glifos.** Cualquier recorte de la caja de la palabra borra
+   lo que sobresalga de ella: colas de descendentes, acentos, el vuelo de
+   la cursiva. Es el mismo mecanismo que cortó la J de "Jardinería" durante
+   el intento anterior de aplicar un barrido de luz al titular.
+2. **Rompe la alineación.** Un `inline-block` con `overflow` distinto de
+   `visible` toma como línea base su borde inferior de margen, no la línea
+   base del texto. Eso desalinea las palabras entre sí y obliga a una
+   compensación con rellenos y márgenes negativos que es frágil.
+
+El desplazamiento con opacidad consigue el mismo efecto percibido sin
+recortar nada y sin tocar el flujo del texto.
+
+### 7.2 Regla de seguridad
+
+El estado oculto (`opacity: 0`) se declara **dentro de los keyframes**, con
+`animation-fill-mode: both`, nunca en la regla base del elemento.
+
+Si el estado oculto viviera en la regla base y la animación no llegara a
+ejecutarse, el titular principal de la página quedaría invisible de forma
+permanente. Con esta construcción, el peor escenario posible es que el
+titular aparezca sin animación.
+
+**Esta regla aplica a toda animación de entrada que se agregue al proyecto,
+no solo a esta.**
+
+### 7.3 Jerarquía tipográfica del titular
+
+El realce del H1 no depende de la animación. Se sostiene por contraste
+tipográfico, y se mantiene íntegro con movimiento reducido, en impresión y
+en alto contraste:
+
+| Elemento          | Peso | Estilo   | Color                 |
+|:------------------|:-----|:---------|:----------------------|
+| Frase             | 600  | Redonda  | `neutral-50`          |
+| "Jardinería"      | 400  | Cursiva  | `secondary-container` |
+
+**Restricción de pesos:** el `<link>` de Google Fonts carga Noto Serif en
+`0,400; 0,600; 1,400; 1,600`. Cualquier otro valor (300, 500, 700) provoca
+que el navegador sintetice el trazo, con un resultado visiblemente
+degradado en cuerpos grandes. **No usar `font-light`, `font-medium` ni
+`font-bold` en tipografía Noto Serif sin ampliar antes el `<link>`.**
+
+### 7.4 Alcance
+
+`hero-reveal` se aplica solo al `<h1>` del Hero. Es una animación de entrada
+única: su valor está en captar la atención al cargar y soltarla enseguida.
+Repetirla en los `<h2>` de sección la convertiría en un tic.
+
+---
+
 **Registro de cambios**
 
 * **Iteración Dark Mode:** actualización de arquitectura de color para soportar theming reactivo completo (Light/Dark).
