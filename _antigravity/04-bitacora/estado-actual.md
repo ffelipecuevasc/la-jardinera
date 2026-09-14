@@ -4,3 +4,4 @@
 
 Épica 02 - Iteración 01: Encofrado Base y Clonación de UI Global (servicios.html) - Completada con éxito.
 Épica 02 - Iteración 02: Grilla de Servicios, SVGs y Migración a WebP (servicios.html) - Completada con éxito.
+Épica 02 - Iteración 03: Arquitectura JS del Modal y Refactorización de Datos (services.js) - Completada con éxito.
