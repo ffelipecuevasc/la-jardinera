@@ -3,48 +3,69 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    /* Easing de transición exponencial */
-    --expo-out: cubic-bezier(0.16, 1, 0.3, 1);
+    :root {
+        /* Easing de transición exponencial */
+        --expo-out: cubic-bezier(0.16, 1, 0.3, 1);
 
-    /* ============================================================
-       TOKENS REACTIVOS DE TEMA (Light / Dark)
-       Formato "R G B" sin comas: permite que Tailwind aplique
-       opacidad con la sintaxis bg-surface/50, text-on-surface/80, etc.
-       ============================================================ */
-    --color-background: 248 247 243;             /* #F8F7F3 */
-    --color-surface: 248 250 244;                /* #f8faf4 */
-    --color-surface-container-low: 241 238 232;  /* #F1EEE8 */
-    --color-on-surface: 25 28 25;                /* #191c19 */
-    --color-on-surface-variant: 65 73 65;        /* #414941 */
-    --color-on-background: 25 28 25;             /* #191c19 */
-  }
+        /* ============================================================
+           TOKENS REACTIVOS DE TEMA (Light / Dark)
+           Formato "R G B" sin comas: permite que Tailwind aplique
+           opacidad con la sintaxis bg-surface/50, text-on-surface/80, etc.
+           ============================================================ */
 
-  .dark {
-    --color-background: 31 36 33;                /* #1F2421 (dark-background) */
-    --color-surface: 43 48 45;                    /* #2B302D (dark-surface-container-low) */
-    --color-surface-container-low: 43 48 45;      /* #2B302D (dark-surface-container-low) */
-    --color-on-surface: 243 243 240;              /* #F3F3F0 (dark-on-background) */
-    --color-on-surface-variant: 191 197 190;      /* #BFC5BE (dark-on-surface-variant) */
-    --color-on-background: 243 243 240;           /* #F3F3F0 (dark-on-background) */
-  }
+        /* Superficies */
+        --color-background: 248 247 243; /* #F8F7F3 */
+        --color-surface: 248 250 244; /* #f8faf4 */
+        --color-surface-container-low: 241 238 232; /* #F1EEE8 */
+        --color-surface-container: 237 239 233; /* #edefe9 */
+        --color-surface-container-high: 231 233 227; /* #e7e9e3 */
 
-  html, body {
-    margin: 0;
-    padding: 0;
-  }
+        /* Texto */
+        --color-on-surface: 25 28 25; /* #191c19 */
+        --color-on-surface-variant: 65 73 65; /* #414941 */
+        --color-on-background: 25 28 25; /* #191c19 */
 
-  body {
-    overscroll-behavior: none;
-  }
+        /* Marca (acento de texto/ícono — NO usar para rellenos de marca fijos,
+           para eso existe el token estático "primary-brand") */
+        --color-primary: 49 105 68; /* #316944 */
+        --color-on-primary-container: 26 84 49; /* #1a5431 */
+    }
 
-  main > :first-child {
-    margin-top: 0 !important;
-  }
+    .dark {
+        /* Superficies — rampa de elevación: background < surface <
+           surface-container-low < surface-container < surface-container-high */
+        --color-background: 31 36 33; /* #1F2421 */
+        --color-surface: 33 38 35; /* #212623 */
+        --color-surface-container-low: 43 48 45; /* #2B302D */
+        --color-surface-container: 51 58 54; /* #333A36 */
+        --color-surface-container-high: 61 69 64; /* #3D4540 */
 
-  main > :last-child {
-    margin-bottom: 0 !important;
-  }
+        /* Texto */
+        --color-on-surface: 243 243 240; /* #F3F3F0 */
+        --color-on-surface-variant: 191 197 190; /* #BFC5BE */
+        --color-on-background: 243 243 240; /* #F3F3F0 */
+
+        /* Marca — se aclaran para cumplir contraste AA sobre superficies oscuras */
+        --color-primary: 140 199 154; /* #8CC79A */
+        --color-on-primary-container: 180 241 193; /* #B4F1C1 */
+    }
+
+    html, body {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        overscroll-behavior: none;
+    }
+
+    main > :first-child {
+        margin-top: 0 !important;
+    }
+
+    main > :last-child {
+        margin-bottom: 0 !important;
+    }
 }
 
 /* ========================================================= */
@@ -54,26 +75,27 @@
 /* 1. Apagar el cross-fade nativo (VITAL para que el clip-path sea sólido) */
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  mix-blend-mode: normal;
-  display: block;
+    mix-blend-mode: normal;
+    display: block;
 }
 
 /* 2. Definir curva y duración */
 ::view-transition-group(root) {
-  animation-duration: 0.7s;
-  animation-timing-function: var(--expo-out);
+    animation-duration: 0.7s;
+    animation-timing-function: var(--expo-out);
 }
 
 /* =======================================
    TRANSICIÓN HACIA LIGHT MODE
    ======================================= */
 ::view-transition-old(root) {
-  animation: none;
-  z-index: -1;
+    animation: none;
+    z-index: -1;
 }
+
 ::view-transition-new(root) {
-  animation-name: reveal-light;
-  animation-fill-mode: both;
+    animation-name: reveal-light;
+    animation-fill-mode: both;
 }
 
 /* =======================================
@@ -81,22 +103,31 @@
    (Usamos html.dark para ganar especificidad)
    ======================================= */
 html.dark::view-transition-old(root) {
-  animation: none;
-  z-index: -1;
+    animation: none;
+    z-index: -1;
 }
+
 html.dark::view-transition-new(root) {
-  animation-name: reveal-dark;
-  animation-fill-mode: both;
-  z-index: 1;
+    animation-name: reveal-dark;
+    animation-fill-mode: both;
+    z-index: 1;
 }
 
 /* Keyframes de las formas geométricas */
 @keyframes reveal-dark {
-  from { clip-path: polygon(50% -71%, -50% 71%, -50% 71%, 50% -71%); }
-  to   { clip-path: polygon(50% -71%, -50% 71%, 50% 171%, 171% 50%); }
+    from {
+        clip-path: polygon(50% -71%, -50% 71%, -50% 71%, 50% -71%);
+    }
+    to {
+        clip-path: polygon(50% -71%, -50% 71%, 50% 171%, 171% 50%);
+    }
 }
 
 @keyframes reveal-light {
-  from { clip-path: polygon(171% 50%, 50% 171%, 50% 171%, 171% 50%); }
-  to   { clip-path: polygon(171% 50%, 50% 171%, -50% 71%, 50% -71%); }
+    from {
+        clip-path: polygon(171% 50%, 50% 171%, 50% 171%, 171% 50%);
+    }
+    to {
+        clip-path: polygon(171% 50%, 50% 171%, -50% 71%, 50% -71%);
+    }
 }
