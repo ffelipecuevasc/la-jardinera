@@ -1,6 +1,8 @@
 ﻿<!DOCTYPE html>
 <html class="light bg-background text-on-surface" lang="es">
 <head>
+    <title>La Jardinera Florería - Valdivia, Chile</title>
+    <link rel="icon" type="image/png" href="./public/logos/la-jardinera-original.png"/>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <link href="https://fonts.googleapis.com" rel="preconnect"/>
@@ -12,23 +14,30 @@
 <body class="bg-background font-body-md text-body-md text-on-surface">
 <header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(53,54,58,0.06)]">
     <div class="h-20 max-w-[80rem] mx-auto px-margin-mobile lg:px-margin-desktop flex items-center justify-between">
-        <div class="flex items-center"><a
-                class="font-headline-md text-headline-md italic tracking-tight text-on-surface hover:text-primary transition-colors"
-                data-path="inicio" href="#">La Jardinera</a></div>
-        <nav class="hidden lg:flex items-center gap-space-4" data-active-classes="text-primary font-semibold"><a
-                aria-current="page"
-                class="uppercase tracking-wider transition-colors py-space-1 text-primary font-semibold"
-                data-path="inicio" href="#">Inicio</a><a
-                class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors py-space-1"
-                data-path="servicios" href="#">Servicios</a><a
-                class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors py-space-1"
-                data-path="suscripcion-floral" href="#">Suscripción Floral</a><a
-                class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors py-space-1"
-                data-path="galeria" href="#">Galería</a><a
-                class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors py-space-1"
-                data-path="contacto" href="#">Contacto</a>
+        <!-- Logotipo - PNG & TEXTO -->
+        <div class="flex items-center">
+            <a class="flex items-center gap-3 group" data-path="inicio" href="#">
+                <!-- Logotipo PNG -->
+                <img src="./public/logos/la-jardinera-original.png"
+                     alt="Logotipo La Jardinera"
+                     class="h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                     width="44"
+                     height="44"/>
+                <!-- Texto del Logotipo -->
+                <span class="font-headline-md text-headline-md italic tracking-tight text-on-surface group-hover:text-primary transition-colors">
+                    La Jardinera
+                </span>
+            </a>
+        </div>
+        <!-- Barra de Navegación -->
+        <nav class="hidden lg:flex items-center gap-space-4" data-active-classes="text-primary font-semibold">
+            <a aria-current="page" class="uppercase tracking-wider transition-colors py-space-1 text-primary font-semibold" data-path="inicio" href="#">Inicio</a>
+            <a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors py-space-1" data-path="servicios" href="#">Servicios</a>
+            <a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors py-space-1" data-path="suscripcion-floral" href="#">Suscripción Floral</a>
+            <a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors py-space-1" data-path="galeria" href="#">Galería</a>
+            <a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors py-space-1" data-path="contacto" href="#">Contacto</a>
         </nav>
-        <!-- REEMPLAZAR DENTRO DEL HEADER (Parte derecha del grid) -->
+        <!-- Íconos de Redes Sociales -->
         <div class="flex items-center gap-space-3">
             <!-- Instagram -->
             <a aria-label="Visitar Instagram"
@@ -53,11 +62,13 @@
                     class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-all"
                     id="theme-toggle-btn" type="button">
                 <!-- Ícono de Sol (oculto en dark) -->
-                <svg class="text-[18px] dark:hidden" fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <svg class="text-[18px] dark:hidden" fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="24"
+                     height="24" viewBox="0 0 24 24">
                     <path d="M9.37 5.51A7.35 7.35 0 0 0 9.1 7.5c0 4.08 3.32 7.4 7.4 7.4.68 0 1.35-.09 1.99-.27A7.014 7.014 0 0 1 12 19c-3.86 0-7-3.14-7-7 0-2.93 1.81-5.45 4.37-6.49zM12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/>
                 </svg>
                 <!-- Ícono de Luna (oculto en light) -->
-                <svg class="text-[18px] hidden dark:inline" fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <svg class="text-[18px] hidden dark:inline" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                     width="24" height="24" viewBox="0 0 24 24">
                     <path d="M12 9c1.65 0 3 1.35 3 3s-1.35 3-3 3-3-1.35-3-3 1.35-3 3-3m0-2c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 0 0-1.41 0 .996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 0 0-1.41 0 .996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0a.996.996 0 0 0 0-1.41l-1.06-1.06zm1.06-10.96a.996.996 0 0 0 0-1.41.996.996 0 0 0-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36a.996.996 0 0 0 0-1.41.996.996 0 0 0-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>
                 </svg>
             </button>
@@ -66,7 +77,8 @@
             <button id="mobile-menu-btn"
                     class="lg:hidden w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-primary transition-all ml-2"
                     aria-label="Abrir Menú">
-                <svg class="text-[18px]" fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <svg class="text-[18px]" fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                     viewBox="0 0 24 24">
                     <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
                 </svg>
             </button>
@@ -90,11 +102,11 @@
             <div class="h-24 lg:h-32 relative z-10"></div>
             <!-- Hero Content -->
             <div class="relative z-10 max-w-[80rem] mx-auto w-full px-margin-mobile lg:px-margin-desktop py-space-6 flex flex-col items-start justify-center">
-                <!-- Monogram Tag -->
-                <div class="inline-flex items-center gap-space-2 px-3 py-1 rounded-full bg-surface-container-lowest/10 backdrop-blur-md mb-space-3">
-                    <span class="w-1.5 h-1.5 rounded-full bg-primary-fixed-dim animate-pulse"></span>
-                    <span class="font-label-md text-label-md uppercase tracking-widest text-primary-fixed">Valdivia, Chile</span>
-                </div>
+                <!-- Logotipo Oficial La Jardinera -->
+                <img src="./public/logos/la-jardinera-blanco.png"
+                     alt="Logotipo oficial La Jardinera - Florería y Jardinería Fresca"
+                     class="w-[80px] h-[100px] object-contain mb-space-3 drop-shadow-[0_2px_10px_rgba(0,0,0,0.15)]"
+                     fetchpriority="high"/>
                 <!-- Headline -->
                 <h1 class="font-display-hero text-headline-xl lg:text-display-hero text-neutral-50 max-w-4xl tracking-tight leading-none mb-space-4">
                     Florería y <span class="italic font-normal text-secondary-container">Jardinería</span>
@@ -130,7 +142,7 @@
                              width="24" height="24" viewBox="0 0 24 24">
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5.5-2.5 7.51-3.49L17.5 6.5 9.99 9.99 6.5 17.5zm5.5-6.6c.61 0 1.1.49 1.1 1.1s-.49 1.1-1.1 1.1-1.1-.49-1.1-1.1.49-1.1 1.1-1.1z"/>
                         </svg>
-                        <span>Calle Sevilla, Lote 20, Las Ánimas · <strong>Valdivia</strong>, Región de Los Ríos, Chile</span>
+                        <span><strong>Valdivia</strong>, Región de Los Ríos, Chile</span>
                     </div>
                     <a aria-label="Desplazarse a servicios"
                        class="flex items-center gap-2 text-dark-neutral-100 hover:text-neutral-50 font-label-sm text-label-sm uppercase tracking-widest transition-colors"
