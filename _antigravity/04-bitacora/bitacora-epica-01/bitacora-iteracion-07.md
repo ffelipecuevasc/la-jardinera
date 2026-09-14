@@ -5,7 +5,7 @@ De acuerdo a las normativas vigentes sobre tiempos de lanzamiento y simplificaci
 
 En respuesta, el sistema de **Social Proof** (Testimonios) fue construido bajo un paradigma de hidratación local en Cliente, con énfasis en el minimalismo y el "Premium Feel":
 
-- **Diccionario Centralizado (`src/js/data/reviews.js`)**: Las 10 valiosas reseñas reales provistas fueron mapeadas hacia un array de objetos puro exportable (`author, date, text, rating`), asegurando un aislamiento total de la data respecto a la UI.
+- **Diccionario Centralizado (`../../../src/js/data/reviews.js`)**: Las 10 valiosas reseñas reales provistas fueron mapeadas hacia un array de objetos puro exportable (`author, date, text, rating`), asegurando un aislamiento total de la data respecto a la UI.
 - **Inyección por Template Literals (`carousel.js`)**: El lienzo `div#testimonials-track` ha sido completamente vaciado en el HTML maestro. Con la ayuda de utilidades puras de Javascript renderizamos iterativamente las tarjetas en el DOM en tiempo de ejecución.
 
 ## 2. Refinamiento en Diseño UI y UIUX (UX Engineering)
@@ -14,6 +14,6 @@ En respuesta, el sistema de **Social Proof** (Testimonios) fue construido bajo u
 
 ## 3. Verificación Final de Épica (QA)
 - [x] **Construcción y Parpadeos**: Testeamos la pureza de construcción bajo el compilador de *Tailwind*. Ya que las clases del Template literal fueron rastreadas con éxito, no existen parpadeos ni deformidades, emulando la excelencia de una web estática a un 100%. 
-- [x] **Limpieza del PM**: Se canceló el *SSG* borrando los hooks `prebuild` del archivo core en `package.json`, estabilizando el entorno para servirlo as-is.
+- [x] **Limpieza del PM**: Se canceló el *SSG* borrando los hooks `prebuild` del archivo core en `../../../package.json`, estabilizando el entorno para servirlo as-is.
 
 **ESTADO FINAL**: Lujo, Estabilidad y Arquitectura Modular.
