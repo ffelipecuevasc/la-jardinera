@@ -128,7 +128,7 @@
                 </p>
                 <!-- CTAs & Micro-details -->
                 <div class="flex flex-wrap items-center gap-space-3">
-                    <a class="inline-flex items-center justify-center px-space-4 py-3 rounded-lg bg-primary text-neutral-50 font-label-lg text-label-lg uppercase tracking-wider hover:opacity-90 transition-all shadow-md"
+                    <a class="inline-flex items-center justify-center px-space-4 py-3 rounded-lg bg-primary-brand text-neutral-50 font-label-lg text-label-lg uppercase tracking-wider hover:opacity-90 transition-all shadow-md"
                        href="#servicios">
                         <span>Explorar Servicios</span>
                         <svg class="text-[18px] ml-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="24"
@@ -614,13 +614,20 @@
                 </div>
                 <!-- Carrusel de testimonios (tarjetas generadas dinámicamente por carousel.js) -->
                 <div id="testimonials-track"
-                     class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth gap-space-4 hide-scrollbar pb-2"
+                     class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth gap-space-4 hide-scrollbar carousel-fade is-at-start py-2"
                      role="list">
                 </div>
+                <!-- Indicador de progreso (decorativo: la navegación real vive en los botones) -->
+                <div id="carousel-progress"
+                     class="relative w-full max-w-[240px] h-[3px] mx-auto mt-space-4 rounded-full bg-outline-variant/30 overflow-hidden"
+                     aria-hidden="true">
+                    <span id="carousel-progress-thumb"
+                          class="carousel-progress-thumb absolute top-0 bottom-0 rounded-full bg-primary"></span>
+                </div>
                 <!-- Controles del carrusel -->
-                <div class="flex items-center justify-center gap-space-4 mt-space-6">
+                <div class="flex items-center justify-center gap-space-4 mt-space-4">
                     <button id="carousel-prev" aria-label="Reseña anterior"
-                            class="w-10 h-10 rounded-full bg-surface hover:bg-surface-container-high text-on-surface flex items-center justify-center shadow-sm border border-outline-variant/30 hover:border-primary/40 transition-all"
+                            class="w-10 h-10 rounded-full bg-surface hover:bg-surface-container-high text-on-surface flex items-center justify-center shadow-sm border border-outline-variant/30 hover:border-primary/40 transition-all disabled:opacity-40 disabled:pointer-events-none"
                             type="button">
                         <svg class="text-[20px]" fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="24"
                              height="24" viewBox="0 0 24 24">
@@ -631,7 +638,7 @@
                           class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant tabular-nums min-w-[56px] text-center"
                           aria-live="polite">01 / 10</span>
                     <button id="carousel-next" aria-label="Siguiente reseña"
-                            class="w-10 h-10 rounded-full bg-surface hover:bg-surface-container-high text-on-surface flex items-center justify-center shadow-sm border border-outline-variant/30 hover:border-primary/40 transition-all"
+                            class="w-10 h-10 rounded-full bg-surface hover:bg-surface-container-high text-on-surface flex items-center justify-center shadow-sm border border-outline-variant/30 hover:border-primary/40 transition-all disabled:opacity-40 disabled:pointer-events-none"
                             type="button">
                         <svg class="text-[20px]" fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="24"
                              height="24" viewBox="0 0 24 24">

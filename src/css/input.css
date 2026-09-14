@@ -131,3 +131,107 @@ html.dark::view-transition-new(root) {
         clip-path: polygon(171% 50%, 50% 171%, -50% 71%, 50% -71%);
     }
 }
+
+/* ========================================================= */
+/* CARRUSEL DE TESTIMONIOS                                   */
+/* Barra nativa oculta + máscaras de borde + indicador       */
+/* Ver DESIGN.md §6                                          */
+/* ========================================================= */
+
+/* Registro de propiedades personalizadas.
+   Sin este registro, el navegador trata las variables como texto
+   y no puede interpolarlas: las máscaras cambiarían de golpe.
+   Si el navegador no soporta @property, los valores se siguen
+   aplicando correctamente, solo que sin transición. */
+@property --fade-left {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 0px;
+}
+
+@property --fade-right {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 0px;
+}
+
+@layer components {
+
+    /* --- 1. Ocultamiento real de la barra de desplazamiento ---
+       Implementa la clase que el HTML ya invocaba desde la
+       Iteración 05 pero que nunca llegó a declararse. */
+    .hide-scrollbar {
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* Edge heredado */
+    }
+
+    .hide-scrollbar::-webkit-scrollbar {
+        display: none; /* Chromium / Safari */
+    }
+
+    /* --- 2. Máscaras de desvanecimiento en los bordes ---
+       Recortan la opacidad del propio contenedor en lugar de
+       pintar un degradado encima. Por eso funcionan idéntico en
+       ambos temas sin necesidad de un par de tokens claro/oscuro
+       (ver DESIGN.md §2.1, criterio c). */
+    .carousel-fade {
+        --fade-size: 1.5rem;
+        --fade-left: var(--fade-size);
+        --fade-right: var(--fade-size);
+
+        -webkit-mask-image: linear-gradient(to right,
+        transparent 0,
+        #000 var(--fade-left),
+        #000 calc(100% - var(--fade-right)),
+        transparent 100%);
+
+        mask-image: linear-gradient(to right,
+        transparent 0,
+        #000 var(--fade-left),
+        #000 calc(100% - var(--fade-right)),
+        transparent 100%);
+
+        transition: --fade-left 400ms var(--expo-out),
+        --fade-right 400ms var(--expo-out);
+    }
+
+    @media (min-width: 768px) {
+        .carousel-fade {
+            --fade-size: 4rem;
+        }
+    }
+
+    /* Estados controlados por carousel.js: el borde se repliega
+       cuando ya no queda contenido en esa dirección. */
+    .carousel-fade.is-at-start {
+        --fade-left: 0px;
+    }
+
+    .carousel-fade.is-at-end {
+        --fade-right: 0px;
+    }
+
+    /* Sin desbordamiento: ninguna máscara. */
+    .carousel-fade.is-static {
+        --fade-left: 0px;
+        --fade-right: 0px;
+    }
+
+    /* --- 3. Pulgar del indicador de progreso ---
+       Ancho y posición llegan desde carousel.js como variables. */
+    .carousel-progress-thumb {
+        width: var(--thumb-size, 20%);
+        left: var(--thumb-offset, 0%);
+    }
+}
+
+/* Respeto a la preferencia de movimiento reducido del sistema. */
+@media (prefers-reduced-motion: reduce) {
+    .scroll-smooth {
+        scroll-behavior: auto;
+    }
+
+    .carousel-fade {
+        transition: none;
+    }
+}
