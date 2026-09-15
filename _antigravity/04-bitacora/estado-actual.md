@@ -11,3 +11,4 @@
 Épica 03 - Iteración 03: Tarjetas de Precios y Módulo JavaScript (Interactividad) - Completada con éxito.
 Épica 03 - Iteración 04: Accesibilidad (a11y), Dark Mode y Pulido de Animaciones - Completada con éxito (Cierre oficial de la Épica 03).
 Épica 04 - Iteración 01: Encofrado Base y Clonación UI Global (Galería) - Completada con éxito.
+Épica 04 - Iteración 02: Layout Gráfico "Accordion", SVGs y Assets Locales - Completada con éxito.

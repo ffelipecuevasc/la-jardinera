@@ -108,7 +108,393 @@
     </div>
 </header>
 
-<main class="w-full pt-20 pb-section-gap bg-background min-h-screen flex flex-col flex-grow"></main>
+<main class="w-full pt-20 pb-section-gap bg-background min-h-screen flex flex-col flex-grow">
+    <!-- ENCABEZADO DE SECCIÓN Y GALERÍAS ACCORDION -->
+    <section class="max-w-[80rem] mx-auto py-space-8 px-margin-mobile lg:px-margin-desktop w-full flex-grow">
+        <!-- Encabezado Principal -->
+        <div class="text-center mb-12">
+            <div class="flex items-center justify-center gap-2 mb-2">
+                <span class="w-8 h-[1px] bg-primary/40"></span>
+                <span class="font-headline-sm text-headline-sm italic text-secondary">✦</span>
+                <span class="w-8 h-[1px] bg-primary/40"></span>
+            </div>
+            <h1 class="font-headline-xl text-headline-lg lg:text-headline-xl text-on-surface dark:text-dark-on-background mb-2">Galería de Servicios</h1>
+            <p class="font-body-md text-body-md text-on-surface-variant dark:text-dark-on-surface-variant max-w-xl mx-auto">Explora una muestra de nuestro trabajo para cada tipo de servicio que ofrecemos.</p>
+        </div>
+
+        <!-- SECCIONES DE GALERÍA POR CATEGORÍA -->
+        <!-- Categoría: Suscripción Floral -->
+        <div id="suscripcion-floral" class="mb-16">
+            <h2 class="font-headline-lg text-headline-md lg:text-headline-lg text-on-surface dark:text-dark-on-background mb-6 border-b border-primary/20 pb-2 font-semibold">Suscripción Floral</h2>
+            <div class="flex w-full space-x-2 md:space-x-4 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none hide-scrollbar scroll-smooth">
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="image" data-src="./public/images/galeria/sf1.webp" aria-label="Ampliar Ramo de flores frescas para Suscripción floral">
+                    <img src="./public/images/galeria/sf1.webp" alt="Ramo de flores frescas para Suscripción floral" loading="lazy" class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out" />
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="image" data-src="./public/images/galeria/sf2.webp" aria-label="Ampliar Arreglo floral de temporada para Suscripción floral">
+                    <img src="./public/images/galeria/sf2.webp" alt="Arreglo floral de temporada para Suscripción floral" loading="lazy" class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out" />
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="video" data-src="./public/images/galeria/sf3.mp4" aria-label="Ampliar Video demostrativo de Suscripción floral">
+                    <video src="./public/images/galeria/sf3.mp4" autoplay loop muted playsinline class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out"></video>
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="image" data-src="./public/images/galeria/sf5.webp" aria-label="Ampliar Flores frescas de autor para Suscripción floral">
+                    <img src="./public/images/galeria/sf5.webp" alt="Flores frescas de autor para Suscripción floral" loading="lazy" class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out" />
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="video" data-src="./public/images/galeria/sf6.mp4" aria-label="Ampliar Video de preparación de Suscripción floral">
+                    <video src="./public/images/galeria/sf6.mp4" autoplay loop muted playsinline class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out"></video>
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="image" data-src="./public/images/galeria/sf7.webp" aria-label="Ampliar Composición floral elegante para Suscripción floral">
+                    <img src="./public/images/galeria/sf7.webp" alt="Composición floral elegante para Suscripción floral" loading="lazy" class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out" />
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="video" data-src="./public/images/galeria/sfv.mp4" aria-label="Ampliar Video de entrega de Suscripción floral">
+                    <video src="./public/images/galeria/sfv.mp4" autoplay loop muted playsinline class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out"></video>
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+            </div>
+        </div>
+        <!-- Categoría: Gift Cards -->
+        <div id="gift-cards" class="mb-16">
+            <h2 class="font-headline-lg text-headline-md lg:text-headline-lg text-on-surface dark:text-dark-on-background mb-6 border-b border-primary/20 pb-2 font-semibold">Gift Cards</h2>
+            <div class="flex w-full space-x-2 md:space-x-4 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none hide-scrollbar scroll-smooth">
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="image" data-src="./public/images/galeria/gcf1.webp" aria-label="Ampliar Gift Card física y digital para obsequios florales">
+                    <img src="./public/images/galeria/gcf1.webp" alt="Gift Card física y digital para obsequios florales" loading="lazy" class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out" />
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="video" data-src="./public/images/galeria/gcf2.mp4" aria-label="Ampliar Presentación en video de Gift Cards">
+                    <video src="./public/images/galeria/gcf2.mp4" autoplay loop muted playsinline class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out"></video>
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+            </div>
+        </div>
+        <!-- Categoría: Decoración de Mesas -->
+        <div id="decoracion-mesas" class="mb-16">
+            <h2 class="font-headline-lg text-headline-md lg:text-headline-lg text-on-surface dark:text-dark-on-background mb-6 border-b border-primary/20 pb-2 font-semibold">Decoración de Mesas</h2>
+            <div class="flex w-full space-x-2 md:space-x-4 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none hide-scrollbar scroll-smooth">
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="image" data-src="./public/images/galeria/ddm1.webp" aria-label="Ampliar Centro de mesa floral con arreglos de autor">
+                    <img src="./public/images/galeria/ddm1.webp" alt="Centro de mesa floral con arreglos de autor" loading="lazy" class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out" />
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="video" data-src="./public/images/galeria/ddm2.mp4" aria-label="Ampliar Video de montaje para Decoración de Mesas">
+                    <video src="./public/images/galeria/ddm2.mp4" autoplay loop muted playsinline class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out"></video>
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="image" data-src="./public/images/galeria/ddm3.webp" aria-label="Ampliar Detalle de ambientación floral para mesa principal">
+                    <img src="./public/images/galeria/ddm3.webp" alt="Detalle de ambientación floral para mesa principal" loading="lazy" class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out" />
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="image" data-src="./public/images/galeria/ddm4.webp" aria-label="Ampliar Composición floral para mesa de comedor">
+                    <img src="./public/images/galeria/ddm4.webp" alt="Composición floral para mesa de comedor" loading="lazy" class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out" />
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="image" data-src="./public/images/galeria/ddm5.webp" aria-label="Ampliar Decoración floral integral para eventos">
+                    <img src="./public/images/galeria/ddm5.webp" alt="Decoración floral integral para eventos" loading="lazy" class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out" />
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+            </div>
+        </div>
+        <!-- Categoría: Ramos de Novia -->
+        <div id="ramos-de-novia" class="mb-16">
+            <h2 class="font-headline-lg text-headline-md lg:text-headline-lg text-on-surface dark:text-dark-on-background mb-6 border-b border-primary/20 pb-2 font-semibold">Ramos de Novia</h2>
+            <div class="flex w-full space-x-2 md:space-x-4 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none hide-scrollbar scroll-smooth">
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="image" data-src="./public/images/galeria/rdn1.webp" aria-label="Ampliar Ramo de novia en tonos pastel con follaje fino">
+                    <img src="./public/images/galeria/rdn1.webp" alt="Ramo de novia en tonos pastel con follaje fino" loading="lazy" class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out" />
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="image" data-src="./public/images/galeria/rdn2.webp" aria-label="Ampliar Ramo de novia romántico de estilo silvestre">
+                    <img src="./public/images/galeria/rdn2.webp" alt="Ramo de novia romántico de estilo silvestre" loading="lazy" class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out" />
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="image" data-src="./public/images/galeria/rdn3.webp" aria-label="Ampliar Bouquet floral de novia con rosas seleccionadas">
+                    <img src="./public/images/galeria/rdn3.webp" alt="Bouquet floral de novia con rosas seleccionadas" loading="lazy" class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out" />
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="image" data-src="./public/images/galeria/rdn4.webp" aria-label="Ampliar Ramo de novia contemporáneo de diseño exclusivo">
+                    <img src="./public/images/galeria/rdn4.webp" alt="Ramo de novia contemporáneo de diseño exclusivo" loading="lazy" class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out" />
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="image" data-src="./public/images/galeria/rdn5.webp" aria-label="Ampliar Ramo de novia con peonías y flores delicadas">
+                    <img src="./public/images/galeria/rdn5.webp" alt="Ramo de novia con peonías y flores delicadas" loading="lazy" class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out" />
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="image" data-src="./public/images/galeria/rdn6.webp" aria-label="Ampliar Detalle floral artesanal en ramo de matrimonio">
+                    <img src="./public/images/galeria/rdn6.webp" alt="Detalle floral artesanal en ramo de matrimonio" loading="lazy" class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out" />
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="video" data-src="./public/images/galeria/rdn7.mp4" aria-label="Ampliar Video de novia con ramo de flores de autor">
+                    <video src="./public/images/galeria/rdn7.mp4" autoplay loop muted playsinline class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out"></video>
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+            </div>
+        </div>
+        <!-- Categoría: Floristería -->
+        <div id="floristeria" class="mb-16">
+            <h2 class="font-headline-lg text-headline-md lg:text-headline-lg text-on-surface dark:text-dark-on-background mb-6 border-b border-primary/20 pb-2 font-semibold">Floristería</h2>
+            <div class="flex w-full space-x-2 md:space-x-4 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none hide-scrollbar scroll-smooth">
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="image" data-src="./public/images/galeria/flra1.webp" aria-label="Ampliar Arreglo floral silvestre en florero de cerámica">
+                    <img src="./public/images/galeria/flra1.webp" alt="Arreglo floral silvestre en florero de cerámica" loading="lazy" class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out" />
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="image" data-src="./public/images/galeria/flra2.webp" aria-label="Ampliar Ramo de flores variadas para regalo">
+                    <img src="./public/images/galeria/flra2.webp" alt="Ramo de flores variadas para regalo" loading="lazy" class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out" />
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="image" data-src="./public/images/galeria/flra3.webp" aria-label="Ampliar Composición de flores de temporada y verdes nobles">
+                    <img src="./public/images/galeria/flra3.webp" alt="Composición de flores de temporada y verdes nobles" loading="lazy" class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out" />
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="image" data-src="./public/images/galeria/flra4.webp" aria-label="Ampliar Flores frescas de corte diario en taller">
+                    <img src="./public/images/galeria/flra4.webp" alt="Flores frescas de corte diario en taller" loading="lazy" class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out" />
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="image" data-src="./public/images/galeria/flra5.webp" aria-label="Ampliar Diseño floral artesanal en tonos vivos">
+                    <img src="./public/images/galeria/flra5.webp" alt="Diseño floral artesanal en tonos vivos" loading="lazy" class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out" />
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="image" data-src="./public/images/galeria/flra6.webp" aria-label="Ampliar Ramo escultural con flores de autor">
+                    <img src="./public/images/galeria/flra6.webp" alt="Ramo escultural con flores de autor" loading="lazy" class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out" />
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+            </div>
+        </div>
+        <!-- Categoría: Novias MaGu -->
+        <div id="novias-magu" class="mb-16">
+            <h2 class="font-headline-lg text-headline-md lg:text-headline-lg text-on-surface dark:text-dark-on-background mb-6 border-b border-primary/20 pb-2 font-semibold">Novias MaGu</h2>
+            <div class="flex w-full space-x-2 md:space-x-4 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none hide-scrollbar scroll-smooth">
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="image" data-src="./public/images/galeria/nmg1.webp" aria-label="Ampliar Colección Novias MaGu: arreglo floral nupcial">
+                    <img src="./public/images/galeria/nmg1.webp" alt="Colección Novias MaGu: arreglo floral nupcial" loading="lazy" class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out" />
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="video" data-src="./public/images/galeria/nmg2.mp4" aria-label="Ampliar Video editorial de novia con arreglo MaGu">
+                    <video src="./public/images/galeria/nmg2.mp4" autoplay loop muted playsinline class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out"></video>
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="video" data-src="./public/images/galeria/nmg3.mp4" aria-label="Ampliar Video de sesión fotográfica Novias MaGu">
+                    <video src="./public/images/galeria/nmg3.mp4" autoplay loop muted playsinline class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out"></video>
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="video" data-src="./public/images/galeria/nmg4.mp4" aria-label="Ampliar Video de estilismo floral para Novias MaGu">
+                    <video src="./public/images/galeria/nmg4.mp4" autoplay loop muted playsinline class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out"></video>
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="video" data-src="./public/images/galeria/nmg5.mp4" aria-label="Ampliar Video detalle de ramo de novia MaGu">
+                    <video src="./public/images/galeria/nmg5.mp4" autoplay loop muted playsinline class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out"></video>
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="image" data-src="./public/images/galeria/nmg6.webp" aria-label="Ampliar Ramo de autor para novia en tonos cálidos">
+                    <img src="./public/images/galeria/nmg6.webp" alt="Ramo de autor para novia en tonos cálidos" loading="lazy" class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out" />
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+                <button type="button" class="group relative h-[300px] md:h-[400px] flex-1 hover:grow-[10] transition-all duration-700 ease-in-out cursor-pointer flex-shrink-0 w-[80vw] md:w-auto snap-center rounded-xl overflow-hidden" data-type="image" data-src="./public/images/galeria/nmg7.webp" aria-label="Ampliar Retrato de novia con ramo de flores naturales">
+                    <img src="./public/images/galeria/nmg7.webp" alt="Retrato de novia con ramo de flores naturales" loading="lazy" class="w-full h-full object-cover rounded-xl transition-transform duration-700 ease-in-out" />
+                    <!-- Overlay de Interacción Fullscreen / Zoom -->
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" aria-hidden="true">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- LIGHTBOX (Visor Multimedia a Pantalla Completa - Base para Iteración 03) -->
+<div id="lightbox" class="hidden fixed inset-0 bg-dark-background/95 backdrop-blur-xl z-[100] flex items-center justify-center p-4 cursor-pointer" aria-modal="true" role="dialog" aria-label="Visor de galería multimedia">
+    <!-- Contenedor dinámico de medios inyectados -->
+    <div id="lightbox-content" class="relative max-w-full max-h-full cursor-default flex items-center justify-center"></div>
+
+    <!-- Botón Cerrar -->
+    <button id="lightbox-close" type="button" aria-label="Cerrar visor" class="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-10 p-2 cursor-pointer">
+        <svg class="w-8 h-8 md:w-10 md:h-10" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+        </svg>
+    </button>
+
+    <!-- Botón Anterior -->
+    <button id="lightbox-prev" type="button" aria-label="Elemento anterior" class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors z-10 p-2 cursor-pointer">
+        <svg class="w-10 h-10 md:w-12 md:h-12" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+        </svg>
+    </button>
+
+    <!-- Botón Siguiente -->
+    <button id="lightbox-next" type="button" aria-label="Elemento siguiente" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors z-10 p-2 cursor-pointer">
+        <svg class="w-10 h-10 md:w-12 md:h-12" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+        </svg>
+    </button>
+</div>
+
 
 <!-- FRANJA DE BENEFICIOS OPERATIVOS (Bottom Section) -->
 <section class="w-full bg-surface-container-low py-space-6 px-margin-mobile lg:px-margin-desktop border-t border-outline-variant/20">
