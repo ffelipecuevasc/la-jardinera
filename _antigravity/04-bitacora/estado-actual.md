@@ -14,3 +14,4 @@
 Épica 04 - Iteración 02: Layout Gráfico "Accordion", SVGs y Assets Locales - Completada con éxito.
 Épica 04 - Iteración 03: Arquitectura JS (Lightbox Multimodal y Media) - Completada con éxito.
 Épica 04 - Iteración 04: Accesibilidad (a11y), Navegación por Teclado y Dark Mode - Completada con éxito. Cierre de Épica 04.
+Épica 05 - Iteración 01: Encofrado Base y Clonación UI Global (Contacto) - Completada con éxito.
