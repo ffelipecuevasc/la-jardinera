@@ -1,27 +1,83 @@
-﻿export function initSubscription() {
-    const frequencyButtons = document.querySelectorAll('.freq-btn');
-    if (!frequencyButtons.length) return;
+/**
+ * @file subscription.js
+ * @description Orquestador de interactividad para la página de Suscripción Floral:
+ * - Cross-fade rotativo en el Hero Banner.
+ * - Despliegue suave (Reveal / Accordion) de la sección de Planes con scrollIntoView.
+ */
 
-    const detailEl = document.getElementById('frequency-detail');
-    const priceEl = document.getElementById('frequency-price');
+export function initSubscription() {
+    initHeroCrossFade();
+    initPlansAccordion();
+}
 
-    frequencyButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            // Reset all buttons in the container
-            frequencyButtons.forEach(btn => {
-                btn.className = 'freq-btn py-2.5 px-3 rounded-lg text-center font-label-md text-label-md uppercase transition-all bg-surface-container text-on-surface hover:bg-surface-container-high';
-            });
+/**
+ * Gestiona el fundido suave infinito de imágenes en el Hero.
+ */
+function initHeroCrossFade() {
+    const bannerCarousel = document.getElementById('banner-carousel');
+    if (!bannerCarousel) return;
 
-            // Highlight active button
-            button.className = 'freq-btn py-2.5 px-3 rounded-lg text-center font-label-md text-label-md uppercase transition-all bg-primary text-on-primary shadow-sm';
+    const images = bannerCarousel.querySelectorAll('img');
+    if (images.length < 2) return;
 
-            // Update details
-            if (detailEl && button.dataset.detail) {
-                detailEl.innerText = button.dataset.detail;
-            }
-            if (priceEl && button.dataset.price) {
-                priceEl.innerText = button.dataset.price;
-            }
+    let currentIndex = 0;
+
+    setInterval(() => {
+        // Desvanecer imagen activa
+        images[currentIndex].classList.remove('opacity-100');
+        images[currentIndex].classList.add('opacity-0');
+
+        // Avanzar a la siguiente imagen cíclicamente
+        currentIndex = (currentIndex + 1) % images.length;
+
+        // Mostrar nueva imagen
+        images[currentIndex].classList.remove('opacity-0');
+        images[currentIndex].classList.add('opacity-100');
+    }, 4000);
+}
+
+/**
+ * Controla el despliegue animado y contracción de la sección de planes de suscripción.
+ */
+function initPlansAccordion() {
+    const showPlansBtn = document.getElementById('show-plans-btn');
+    const hidePlansBtn = document.getElementById('hide-plans-btn');
+    const plansSection = document.getElementById('planes');
+
+    if (!plansSection) return;
+
+    if (showPlansBtn) {
+        showPlansBtn.addEventListener('click', () => {
+            // Revelar sección de planes
+            plansSection.classList.remove('h-0', 'opacity-0', 'overflow-hidden');
+            plansSection.classList.add('max-h-[3000px]', 'opacity-100');
+
+            // Scroll suave hacia la cabecera de la sección
+            setTimeout(() => {
+                plansSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }, 100);
         });
-    });
+    }
+
+    if (hidePlansBtn) {
+        hidePlansBtn.addEventListener('click', () => {
+            // Volver con scroll suave a la sección de información
+            const infoSection = document.getElementById('info-suscripcion');
+            if (infoSection) {
+                infoSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+
+            // Colapsar sección tras el inicio del desplazamiento
+            setTimeout(() => {
+                plansSection.classList.remove('max-h-[3000px]', 'opacity-100');
+                plansSection.classList.add('h-0', 'opacity-0', 'overflow-hidden');
+            }, 300);
+        });
+    }
 }
