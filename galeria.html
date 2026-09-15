@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Galería - La Jardinera Florería</title>
+
+    <!-- Metaetiquetas para compartir en redes sociales (Open Graph y Twitter Cards) -->
+    <meta name="description" content="Explora nuestro portfolio de diseño floral. Una muestra de nuestro trabajo en ramos de novia, decoración, suscripciones y más."/>
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.lajardinerafloreria.cl/galeria.html">
+    <meta property="og:title" content="Galería - La Jardinera Florería">
+    <meta property="og:description" content="Explora nuestro portfolio de diseño floral. Una muestra de nuestro trabajo en ramos de novia, decoración, suscripciones y más.">
+    <meta property="og:image" content="https://www.lajardinerafloreria.cl/static/img/logo.jpg">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Galería - La Jardinera Florería">
+    <meta property="twitter:description" content="Explora nuestro portfolio de diseño floral. Una muestra de nuestro trabajo en ramos de novia, decoración, suscripciones y más.">
+    <meta property="twitter:image" content="https://www.lajardinerafloreria.cl/static/img/logo.jpg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Montserrat:ital,wght@0,300..600;1,300..600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+    <link rel="icon" type="image/png" href="./static/img/favicon.png" />
+
+    <link rel="stylesheet" href="./static/css/tailwind.css">
+    <script>
+        // Aplica el tema guardado en localStorage o el preferido por el sistema antes de que la página se renderice
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen antialiased flex flex-col font-body-md">
+
+<header class="bg-surface-container-lowest/95 dark:bg-zinc-950/95 backdrop-blur-md sticky top-0 border-b border-orange-100/20 dark:border-zinc-800 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-4 lg:px-8">
+        <div class="flex justify-between items-center h-24">
+            <a href="./index.html" class="flex flex-row items-center justify-center gap-3 group cursor-pointer">
+                <div class="w-10 h-10 bg-primary logo-mask -rotate-90 transition-all duration-500 group-hover:-translate-y-1"></div>
+                <h1 class="text-2xl lg:text-3xl font-display-lg text-primary tracking-tight transition-opacity duration-500 group-hover:opacity-80">La Jardinera</h1>
+                <div class="w-10 h-10 bg-primary logo-mask rotate-90 transition-all duration-500 group-hover:-translate-y-1"></div>
+            </a>
+            <div class="hidden md:flex gap-2 lg:gap-8 xl:gap-12 items-center text-xs uppercase tracking-normal lg:tracking-[0.2em] font-semibold">
+                <a class="text-on-surface-variant hover:text-primary border-b border-transparent hover:border-primary/40 pb-1 transition-all duration-300 whitespace-nowrap" href="./index.html">Inicio</a>
+                <a class="text-on-surface-variant hover:text-primary border-b border-transparent hover:border-primary/40 pb-1 transition-all duration-300 whitespace-nowrap" href="./servicios.html">Servicios</a>
+                <a class="text-on-surface-variant hover:text-primary border-b border-transparent hover:border-primary/40 pb-1 transition-all duration-300 whitespace-nowrap" href="./suscripcion-floral.html">Suscripción Floral</a>
+                <a class="text-primary border-b border-primary/40 pb-1 whitespace-nowrap" href="./galeria.html">Galería</a>
+                <a class="text-on-surface-variant hover:text-primary border-b border-transparent hover:border-primary/40 pb-1 transition-all duration-300 whitespace-nowrap" href="./contacto.html">Contacto</a>
+            </div>
+            <div class="flex items-center gap-2">
+                <button id="theme-toggle" aria-label="Cambiar Apariencia" class="group flex items-center p-2 rounded-full hover:bg-primary/5 transition-all duration-300 text-primary">
+                    <span class="material-symbols-outlined text-xl group-hover:scale-110 transition-transform duration-300">dark_mode</span>
+                </button>
+                <a href="https://www.instagram.com/lajardinera.floreria/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="group flex items-center gap-2 p-2 lg:px-3 lg:py-2 rounded-full border border-primary/20 hover:border-primary/40 hover:bg-primary/5 transition-all duration-300 text-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fill-none stroke-primary group-hover:scale-110 transition-transform duration-300"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </a>
+                <a href="https://wa.me/56997702832" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="group flex items-center gap-2 p-2 lg:px-3 lg:py-2 rounded-full border border-primary/20 hover:border-primary/40 hover:bg-primary/5 transition-all duration-300 text-primary">
+                    <span class="hidden lg:inline text-xs uppercase tracking-widest font-medium pt-px whitespace-nowrap">+56 9 9770 2832</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 256 258" class="fill-primary group-hover:scale-110 transition-transform duration-300"><path d="M128.534 0c34.098.017 66.102 13.29 90.167 37.383c24.066 24.092 37.312 56.12 37.299 90.174c-.028 69.579-56.076 126.318-125.36 127.446l-2.103.017h-.053c-21.005-.007-41.65-5.194-60.051-15.045l-.86-.466L0 257.233l18.083-66.055C6.93 171.852 1.061 149.922 1.07 127.455C1.098 57.178 58.279 0 128.534 0m.044 21.53c-58.437 0-105.964 47.523-105.987 105.936c-.008 19.712 5.424 38.921 15.719 55.612l.478.769l2.52 4.009l-10.703 39.093l40.097-10.517l3.869 2.294c16.007 9.499 34.32 14.599 53.017 14.764l.905.004h.044c58.392 0 105.918-47.526 105.942-105.943c.01-28.308-10.998-54.927-31.001-74.952s-46.603-31.06-74.9-31.07m-45.17 47.063c2.122 0 4.25.02 6.104.115c1.956.096 4.581-.743 7.165 5.466c.992 2.38 2.5 6.057 4.044 9.813l.331.805c2.485 6.045 4.969 12.072 5.447 13.029c.795 1.593 1.325 3.455.264 5.579c-1.06 2.127-1.593 3.454-3.184 5.316c-1.593 1.858-3.344 4.153-4.777 5.579l-.234.233l-.232.237c-1.42 1.469-2.608 3.153-.93 6.027c1.857 3.19 8.248 13.622 17.716 22.066c12.165 10.85 22.428 14.214 25.613 15.809s5.043 1.328 6.9-.8c1.859-2.124 7.961-9.298 10.085-12.487c2.123-3.188 4.246-2.655 7.166-1.593c1.387.505 5.654 2.511 10.092 4.649l1.38.666c4.443 2.15 8.776 4.288 10.29 5.046c3.185 1.595 5.309 2.392 6.104 3.719c.796 1.33.796 7.705-1.858 15.145s-15.378 14.23-21.497 15.146c-5.487.818-12.43 1.16-20.06-1.262c-4.624-1.47-10.558-3.429-18.157-6.71c-31.948-13.794-52.815-45.966-54.406-48.09l-.108-.144c-1.941-2.594-12.898-17.445-12.898-32.804c0-15.675 8.229-23.38 11.147-26.569c2.92-3.186 6.37-3.986 8.493-3.986"/></svg>
+                </a>
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-on-background">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-surface-container-lowest/95 dark:bg-zinc-950/95 backdrop-blur-md shadow-lg">
+        <div class="flex flex-col items-center gap-6 py-8 text-sm uppercase tracking-widest font-semibold">
+            <a class="text-on-surface-variant hover:text-primary transition-colors" href="./index.html">Inicio</a>
+            <a class="text-on-surface-variant hover:text-primary transition-colors" href="./servicios.html">Servicios</a>
+            <a class="text-on-surface-variant hover:text-primary transition-colors" href="./suscripcion-floral.html">Suscripción Floral</a>
+            <a class="text-primary" href="./galeria.html">Galería</a>
+            <a class="text-on-surface-variant hover:text-primary transition-colors" href="./contacto.html">Contacto</a>
+        </div>
+    </div>
+</header>
+
+<main class="flex-grow">
+    <section class="py-section-gap px-margin max-w-container-max mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="font-display-md text-display-md text-on-background mb-4">Galería de Servicios</h2>
+            <p class="font-body-md text-body-md text-on-surface-variant max-w-xl mx-auto">Explora una muestra de nuestro trabajo para cada tipo de servicio que ofrecemos.</p>
+        </div>
+
+        <div id="suscripcion-floral" class="mb-16">
+            <h3 class="font-headline-lg text-headline-lg text-on-background mb-6 border-b border-primary/20 pb-2">Suscripción Floral</h3>
+            <div class="relative gallery-carousel-container">
+                <div class="gallery-carousel flex w-full space-x-4 md:space-x-2 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none reviews-scrollbar scroll-smooth md:px-0">
+                    <button class="gallery-carousel-card group" data-type="image" data-src="./static/img/Galeria/SF1.jpg">
+                    <img src="./static/img/Galeria/SF1.jpg" alt="Imagen de galería para Suscripción floral" class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                <button class="gallery-carousel-card group" data-type="image" data-src="./static/img/Galeria/SF2.jpg">
+                    <img src="./static/img/Galeria/SF2.jpg" alt="Imagen de galería para Suscripción floral" class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                <button class="gallery-carousel-card group" data-type="video" data-src="./static/img/Galeria/SF3.mp4">
+                    <video src="./static/img/Galeria/SF3.mp4" autoplay loop muted playsinline class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out"></video>
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                <button class="gallery-carousel-card group" data-type="image" data-src="./static/img/Galeria/SF5.jpg">
+                    <img src="./static/img/Galeria/SF5.jpg" alt="Imagen de galería para Suscripción floral" class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                <button class="gallery-carousel-card group" data-type="video" data-src="./static/img/Galeria/SF6.mp4">
+                    <video src="./static/img/Galeria/SF6.mp4" autoplay loop muted playsinline class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out"></video>
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                <button class="gallery-carousel-card group" data-type="image" data-src="./static/img/Galeria/SF7.jpg">
+                    <img src="./static/img/Galeria/SF7.jpg" alt="Imagen de galería para Suscripción floral" class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                <button class="gallery-carousel-card group" data-type="video" data-src="./static/img/Galeria/SFV.mp4">
+                    <video src="./static/img/Galeria/SFV.mp4" autoplay loop muted playsinline class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out"></video>
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                </div>
+                <div class="carousel-dots md:hidden"></div>
+            </div>
+        </div>
+
+        <div id="gift-cards" class="mb-16">
+            <h3 class="font-headline-lg text-headline-lg text-on-background mb-6 border-b border-primary/20 pb-2">Gift Cards</h3>
+            <div class="relative gallery-carousel-container">
+                <div class="gallery-carousel flex w-full space-x-4 md:space-x-2 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none reviews-scrollbar scroll-smooth md:px-0">
+                    <button class="gallery-carousel-card group" data-type="image" data-src="./static/img/Galeria/GCF1.jpg">
+                    <img src="./static/img/Galeria/GCF1.jpg" alt="Imagen de galería para Gift Cards" class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                <button class="gallery-carousel-card group" data-type="video" data-src="./static/img/Galeria/GCF2.mp4">
+                    <video src="./static/img/Galeria/GCF2.mp4" autoplay loop muted playsinline class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out"></video>
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                </div>
+                <div class="carousel-dots md:hidden"></div>
+            </div>
+        </div>
+
+        <div id="decoracion-mesas" class="mb-16">
+            <h3 class="font-headline-lg text-headline-lg text-on-background mb-6 border-b border-primary/20 pb-2">Decoración de Mesas</h3>
+            <div class="relative gallery-carousel-container">
+                <div class="gallery-carousel flex w-full space-x-4 md:space-x-2 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none reviews-scrollbar scroll-smooth md:px-0">
+                    <button class="gallery-carousel-card group" data-type="image" data-src="./static/img/Galeria/DDM1.jpg">
+                    <img src="./static/img/Galeria/DDM1.jpg" alt="Imagen de galería para Decoración de Mesas" class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                <button class="gallery-carousel-card group" data-type="video" data-src="./static/img/Galeria/DDM2.mp4">
+                    <video src="./static/img/Galeria/DDM2.mp4" autoplay loop muted playsinline class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out"></video>
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                <button class="gallery-carousel-card group" data-type="image" data-src="./static/img/Galeria/DDM3.jpg">
+                    <img src="./static/img/Galeria/DDM3.jpg" alt="Imagen de galería para Decoración de Mesas" class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                <button class="gallery-carousel-card group" data-type="image" data-src="./static/img/Galeria/DDM4.jpg">
+                    <img src="./static/img/Galeria/DDM4.jpg" alt="Imagen de galería para Decoración de Mesas" class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                <button class="gallery-carousel-card group" data-type="image" data-src="./static/img/Galeria/DDM5.jpg">
+                    <img src="./static/img/Galeria/DDM5.jpg" alt="Imagen de galería para Decoración de Mesas" class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                </div>
+                <div class="carousel-dots md:hidden"></div>
+            </div>
+        </div>
+
+        <div id="ramos-de-novia" class="mb-16">
+            <h3 class="font-headline-lg text-headline-lg text-on-background mb-6 border-b border-primary/20 pb-2">Ramos de Novia</h3>
+            <div class="relative gallery-carousel-container">
+                <div class="gallery-carousel flex w-full space-x-4 md:space-x-2 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none reviews-scrollbar scroll-smooth md:px-0">
+                    <button class="gallery-carousel-card group" data-type="image" data-src="./static/img/Galeria/RDN1.jpg">
+                    <img src="./static/img/Galeria/RDN1.jpg" alt="Imagen de galería para Ramos de Novia" class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                <button class="gallery-carousel-card group" data-type="image" data-src="./static/img/Galeria/RDN2.jpg">
+                    <img src="./static/img/Galeria/RDN2.jpg" alt="Imagen de galería para Ramos de Novia" class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                <button class="gallery-carousel-card group" data-type="image" data-src="./static/img/Galeria/RDN3.jpg">
+                    <img src="./static/img/Galeria/RDN3.jpg" alt="Imagen de galería para Ramos de Novia" class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                <button class="gallery-carousel-card group" data-type="image" data-src="./static/img/Galeria/RDN4.jpg">
+                    <img src="./static/img/Galeria/RDN4.jpg" alt="Imagen de galería para Ramos de Novia" class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                <button class="gallery-carousel-card group" data-type="image" data-src="./static/img/Galeria/RDN5.jpg">
+                    <img src="./static/img/Galeria/RDN5.jpg" alt="Imagen de galería para Ramos de Novia" class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                <button class="gallery-carousel-card group" data-type="image" data-src="./static/img/Galeria/RDN6.jpg">
+                    <img src="./static/img/Galeria/RDN6.jpg" alt="Imagen de galería para Ramos de Novia" class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                <button class="gallery-carousel-card group" data-type="video" data-src="./static/img/Galeria/RDN7.mp4">
+                    <video src="./static/img/Galeria/RDN7.mp4" autoplay loop muted playsinline class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out"></video>
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                </div>
+                <div class="carousel-dots md:hidden"></div>
+            </div>
+        </div>
+
+        <div id="floristeria" class="mb-16">
+            <h3 class="font-headline-lg text-headline-lg text-on-background mb-6 border-b border-primary/20 pb-2">Floristería</h3>
+            <div class="relative gallery-carousel-container">
+                <div class="gallery-carousel flex w-full space-x-4 md:space-x-2 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none reviews-scrollbar scroll-smooth md:px-0">
+                    <button class="gallery-carousel-card group" data-type="image" data-src="./static/img/Galeria/FLRA1.jpg">
+                    <img src="./static/img/Galeria/FLRA1.jpg" alt="Imagen de galería para Floristería" class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                
+                <button class="gallery-carousel-card group" data-type="image" data-src="./static/img/Galeria/FLRA2.jpg">
+                    <img src="./static/img/Galeria/FLRA2.jpg" alt="Imagen de galería para Floristería" class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                <button class="gallery-carousel-card group" data-type="image" data-src="./static/img/Galeria/FLRA3.jpg">
+                    <img src="./static/img/Galeria/FLRA3.jpg" alt="Imagen de galería para Floristería" class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                <button class="gallery-carousel-card group" data-type="image" data-src="./static/img/Galeria/FLRA4.jpg">
+                    <img src="./static/img/Galeria/FLRA4.jpg" alt="Imagen de galería para Floristería" class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                <button class="gallery-carousel-card group" data-type="image" data-src="./static/img/Galeria/FLRA5.jpg">
+                    <img src="./static/img/Galeria/FLRA5.jpg" alt="Imagen de galería para Floristería" class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                <button class="gallery-carousel-card group" data-type="image" data-src="./static/img/Galeria/FLRA6.jpg">
+                    <img src="./static/img/Galeria/FLRA6.jpg" alt="Imagen de galería para Floristería" class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                </div>
+                <div class="carousel-dots md:hidden"></div>
+            </div>
+        </div>
+
+        <div id="novias-magu" class="mb-16">
+            <h3 class="font-headline-lg text-headline-lg text-on-background mb-6 border-b border-primary/20 pb-2">Novias MaGu</h3>
+            <div class="relative gallery-carousel-container">
+                <div class="gallery-carousel flex w-full space-x-4 md:space-x-2 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none reviews-scrollbar scroll-smooth md:px-0">
+                    <button class="gallery-carousel-card group" data-type="image" data-src="./static/img/Galeria/NMG1.jpg">
+                    <img src="./static/img/Galeria/NMG1.jpg" alt="Imagen de galería para Novias MaGu" class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                <button class="gallery-carousel-card group" data-type="video" data-src="./static/img/Galeria/NMG2.mp4">
+                    <video src="./static/img/Galeria/NMG2.mp4" autoplay loop muted playsinline class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out"></video>
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                <button class="gallery-carousel-card group" data-type="video" data-src="./static/img/Galeria/NMG3.mp4">
+                    <video src="./static/img/Galeria/NMG3.mp4" autoplay loop muted playsinline class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out"></video>
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                <button class="gallery-carousel-card group" data-type="video" data-src="./static/img/Galeria/NMG4.mp4">
+                    <video src="./static/img/Galeria/NMG4.mp4" autoplay loop muted playsinline class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out"></video>
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                <button class="gallery-carousel-card group" data-type="video" data-src="./static/img/Galeria/NMG5.mp4">
+                    <video src="./static/img/Galeria/NMG5.mp4" autoplay loop muted playsinline class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out"></video>
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                <button class="gallery-carousel-card group" data-type="image" data-src="./static/img/Galeria/NMG6.jpg">
+                    <img src="./static/img/Galeria/NMG6.jpg" alt="Imagen de galería para Novias MaGu" class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                <button class="gallery-carousel-card group" data-type="image" data-src="./static/img/Galeria/NMG7.jpg">
+                    <img src="./static/img/Galeria/NMG7.jpg" alt="Imagen de galería para Novias MaGu" class="w-full h-full object-cover rounded-lg grayscale dark:grayscale-0 group-hover:grayscale-0 transition-all duration-700 ease-in-out">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                        <span class="material-symbols-outlined text-white text-6xl">open_in_full</span>
+                    </div>
+                </button>
+                </div>
+                <div class="carousel-dots md:hidden"></div>
+            </div>
+        </div>
+
+    </section>
+</main>
+
+<div id="lightbox" class="hidden fixed inset-0 bg-black/80 backdrop-blur-lg z-[100] items-center justify-center p-4 cursor-pointer">
+    <div id="lightbox-content" class="relative max-w-full max-h-full cursor-default">
+    </div>
+    <button id="lightbox-close" class="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-10">
+        <span class="material-symbols-outlined text-5xl">close</span>
+    </button>
+    <button id="lightbox-prev" class="absolute left-4 md:left-10 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors z-10">
+        <span class="material-symbols-outlined text-6xl">chevron_left</span>
+    </button>
+    <button id="lightbox-next" class="absolute right-4 md:right-10 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors z-10">
+        <span class="material-symbols-outlined text-6xl">chevron_right</span>
+    </button>
+</div>
+
+<section class="bg-surface-container-low py-8 px-margin">
+    <div class="max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
+        <div class="flex items-center justify-center gap-4">
+            <span class="material-symbols-outlined text-3xl text-primary">local_shipping</span>
+            <p class="text-on-surface-variant text-sm">Delivery sin costo en día, horario hábil y radio urbano</p>
+        </div>
+        <div class="flex items-center justify-center gap-4">
+            <span class="material-symbols-outlined text-3xl text-primary">receipt_long</span>
+            <p class="text-on-surface-variant text-sm">Todos los productos o servicios pueden ser comercializados con boleta o factura</p>
+        </div>
+    </div>
+</section>
+
+<footer class="relative overflow-hidden bg-surface-container-low text-on-surface-variant pt-16 pb-8 px-margin mt-auto">
+    <img src="./static/img/logo-hoja.svg" alt="" aria-hidden="true" class="pointer-events-none select-none absolute -top-4 -right-4 w-28 h-28 md:w-36 md:h-36 opacity-[0.07] dark:opacity-[0.12] dark:invert" />
+    <div class="max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <!-- Columna 1: Logo y Descripción -->
+        <div class="flex flex-col items-center md:items-start text-center md:text-left">
+            <a href="./index.html" class="flex items-center gap-3 mb-4 group">
+                <img src="./static/img/favicon.png" alt="Favicon La Jardinera" class="w-10 h-10 group-hover:opacity-80 transition-opacity">
+                <span class="font-display-lg text-2xl text-on-background group-hover:opacity-80 transition-opacity">La Jardinera</span>
+            </a>
+            <p class="text-sm mb-4">Diseño floral artesanal y curaduría de eventos para celebrar la belleza efímera de la naturaleza en Valdivia, Chile.</p>
+            <p class="text-xs text-on-surface-variant/70 mt-auto">© 2026 La Jardinera. <br>Desarrollo por Felipe Cuevas & KAAL.</p>
+        </div>
+
+        <!-- Columna 2: Navegación -->
+        <div>
+            <h3 class="font-headline-md text-lg text-on-background mb-4 text-center md:text-left">Navegación</h3>
+            <ul class="space-y-2 text-center md:text-left">
+                <li><a href="./index.html" class="hover:text-primary transition-colors">Inicio</a></li>
+                <li><a href="./servicios.html" class="hover:text-primary transition-colors">Servicios</a></li>
+                <li><a href="./suscripcion-floral.html" class="hover:text-primary transition-colors">Suscripción Floral</a></li>
+                <li><a href="./galeria.html" class="hover:text-primary transition-colors">Galería</a></li>
+                <li><a href="./contacto.html" class="hover:text-primary transition-colors">Contacto</a></li>
+            </ul>
+        </div>
+
+        <!-- Columna 3: Contacto -->
+        <div>
+            <h3 class="font-headline-md text-lg text-on-background mb-4 text-center md:text-left">Contacto</h3>
+            <ul class="space-y-3 text-center md:text-left">
+                <li class="flex items-center justify-center md:justify-start gap-2"><span class="material-symbols-outlined text-primary text-xl">call</span><a href="tel:56997702832" class="hover:text-primary transition-colors">+56 9 9770 2832</a></li>
+                <li class="flex items-center justify-center md:justify-start gap-2"><span class="material-symbols-outlined text-primary text-xl">email</span><a href="mailto:contacto@lajardinerafloreria.cl" class="hover:text-primary transition-colors">contacto@lajardinerafloreria.cl</a></li>
+                <li class="flex items-center justify-center md:justify-start gap-2"><span class="material-symbols-outlined text-primary text-xl">location_on</span><span>Valdivia, Chile</span></li>
+            </ul>
+            <div class="flex justify-center md:justify-start gap-3 mt-6">
+                <a href="https://www.instagram.com/lajardinera.floreria/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="w-10 h-10 flex items-center justify-center rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all duration-300"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                <a href="https://www.facebook.com/floresadomiciliovaldivia/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="w-10 h-10 flex items-center justify-center rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all duration-300"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                <a href="https://maps.app.goo.gl/QNm6ycWU6qznkFZR7" target="_blank" rel="noopener noreferrer" aria-label="Ubicación en Google Maps" class="w-10 h-10 flex items-center justify-center rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all duration-300"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></a>
+            </div>
+        </div>
+
+        <!-- Columna 4: Métodos de Pago -->
+        <div>
+            <h3 class="font-headline-md text-lg text-on-background mb-1 text-center md:text-left">Métodos de Pago</h3>
+            <p class="text-xs text-on-surface-variant/70 mb-4 text-center md:text-left">(Consultar disponibilidad presencial online)</p>
+            <div class="flex flex-wrap justify-center md:justify-start items-center gap-4">
+                <div class="flex flex-col items-center gap-2 text-center">
+                    <img src="./static/img/transbank.png" alt="Logo Transbank" class="h-8 w-auto object-contain">
+                    <span class="text-xs">Crédito/Débito</span>
+                </div>
+                <div class="flex flex-col items-center gap-2 text-center">
+                    <img src="./static/img/transferencia.png" alt="Logo Transferencia" class="h-8 w-auto object-contain">
+                    <span class="text-xs">Transferencia</span>
+                </div>
+                <div class="flex flex-col items-center gap-2 text-center">
+                    <img src="./static/img/efectivo.png" alt="Logo Efectivo" class="h-8 w-auto object-contain">
+                    <span class="text-xs">Efectivo</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script type="module" src="./static/js/main.js"></script>
+</body>
+</html>
