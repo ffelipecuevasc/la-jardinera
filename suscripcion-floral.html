@@ -175,7 +175,7 @@
 
                 <!-- Botón Ver Planes (Hook para Iteración 03) -->
                 <div id="show-plans-container" class="text-left pt-space-6">
-                    <button id="show-plans-btn" type="button" class="inline-flex items-center justify-center gap-space-2 font-label-lg text-label-lg text-white dark:text-neutral-950 bg-primary hover:bg-primary/90 transition-all px-8 py-3.5 rounded-lg shadow-md uppercase tracking-wider font-semibold group cursor-pointer">
+                    <button id="show-plans-btn" type="button" aria-controls="planes" aria-expanded="false" class="inline-flex items-center justify-center gap-space-2 font-label-lg text-label-lg text-white dark:text-neutral-950 bg-primary hover:bg-primary/90 transition-all px-8 py-3.5 rounded-lg shadow-md uppercase tracking-wider font-semibold group cursor-pointer">
                         <svg class="w-5 h-5 text-current" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                             <path d="M3,13A9,9 0 0,0 12,22C12,17 7.97,13 3,13M12,5.5A2.5,2.5 0 0,1 14.5,8A2.5,2.5 0 0,1 12,10.5A2.5,2.5 0 0,1 9.5,8A2.5,2.5 0 0,1 12,5.5M5.6,10.25A2.5,2.5 0 0,0 8.1,12.75C8.63,12.75 9.12,12.58 9.5,12.31C9.5,12.37 9.5,12.43 9.5,12.5A2.5,2.5 0 0,0 12,15A2.5,2.5 0 0,0 14.5,12.5C14.5,12.43 14.5,12.37 14.5,12.31C14.88,12.58 15.37,12.75 15.9,12.75C17.28,12.75 18.4,11.63 18.4,10.25C18.4,9.25 17.81,8.4 16.97,8C17.81,7.6 18.4,6.74 18.4,5.75C18.4,4.37 17.28,3.25 15.9,3.25C15.37,3.25 14.88,3.41 14.5,3.69C14.5,3.63 14.5,3.56 14.5,3.5A2.5,2.5 0 0,0 12,1A2.5,2.5 0 0,0 9.5,3.5C9.5,3.56 9.5,3.63 9.5,3.69C9.12,3.41 8.63,3.25 8.1,3.25A2.5,2.5 0 0,0 5.6,5.75C5.6,6.74 6.19,7.6 7.03,8C6.19,8.4 5.6,9.25 5.6,10.25M12,22A9,9 0 0,0 21,13C16,13 12,17 12,22Z"/>
                         </svg>
@@ -206,160 +206,162 @@
         </div>
     </section>
 
-    <!-- 3. SECCIÓN DE PLANES DE SUSCRIPCIÓN (Acordeón Interactivo) -->
-    <section id="planes" class="opacity-0 h-0 overflow-hidden transition-all duration-700 ease-in-out scroll-mt-24 w-full">
-        <div class="max-w-[80rem] mx-auto py-space-8 px-margin-mobile lg:px-margin-desktop">
-            <div class="text-center mb-space-8">
-                <div class="flex items-center justify-center gap-2 mb-2">
-                    <span class="w-8 h-[1px] bg-primary/40"></span>
-                    <span class="font-headline-sm text-headline-sm italic text-secondary">✦</span>
-                    <span class="w-8 h-[1px] bg-primary/40"></span>
+    <!-- 3. SECCIÓN DE PLANES DE SUSCRIPCIÓN (Acordeón Interactivo con CSS Grid y a11y) -->
+    <section id="planes" class="accordion-grid opacity-0 overflow-hidden scroll-mt-24 w-full" aria-hidden="true" aria-labelledby="planes-title">
+        <div class="overflow-hidden min-h-0">
+            <div class="max-w-[80rem] mx-auto py-space-8 px-margin-mobile lg:px-margin-desktop">
+                <div class="text-center mb-space-8">
+                    <div class="flex items-center justify-center gap-2 mb-2">
+                        <span class="w-8 h-[1px] bg-primary/40"></span>
+                        <span class="font-headline-sm text-headline-sm italic text-secondary">✦</span>
+                        <span class="w-8 h-[1px] bg-primary/40"></span>
+                    </div>
+                    <h2 id="planes-title" tabindex="-1" class="font-headline-xl text-headline-lg lg:text-headline-xl text-on-surface dark:text-dark-on-background mb-2 focus:outline-none">Elige tu Plan de Suscripción</h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant dark:text-dark-on-surface-variant max-w-xl mx-auto">Selecciona la experiencia floral que mejor se adapte a ti o para regalar un detalle inolvidable.</p>
                 </div>
-                <h2 class="font-headline-xl text-headline-lg lg:text-headline-xl text-on-surface dark:text-dark-on-background mb-2">Elige tu Plan de Suscripción</h2>
-                <p class="font-body-md text-body-md text-on-surface-variant dark:text-dark-on-surface-variant max-w-xl mx-auto">Selecciona la experiencia floral que mejor se adapte a ti o para regalar un detalle inolvidable.</p>
-            </div>
 
-            <!-- Grilla de Tarjetas de Precios -->
-            <div id="plans-grid" class="grid grid-cols-1 md:grid-cols-3 gap-space-6 items-stretch">
-                <!-- TARJETA 1: PLAN ESENCIAL -->
-                <article class="group relative flex flex-col bg-surface dark:bg-dark-surface-container-low rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 border border-outline-variant/30 dark:border-dark-surface-variant overflow-hidden">
-                    <div class="w-full aspect-[4/3] overflow-hidden bg-surface-container-low">
-                        <img src="./public/images/suscripcion/plan-esencial.webp"
-                             alt="Ramo del Plan Esencial de suscripción floral"
-                             width="720" height="1280"
-                             loading="lazy"
-                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" />
-                    </div>
-                    <div class="p-space-6 flex flex-col flex-grow">
-                        <h3 class="font-headline-md text-headline-md text-on-surface dark:text-dark-on-background font-semibold">Esencial</h3>
-                        <p class="font-headline-lg text-headline-lg text-primary my-space-2 font-bold">$15.000 <span class="font-body-md text-body-md text-on-surface-variant dark:text-dark-on-surface-variant font-normal">/mes</span></p>
-                        <ul class="space-y-space-2 text-on-surface-variant dark:text-dark-on-surface-variant font-body-sm text-body-sm my-space-4 flex-grow">
-                            <li class="flex items-center gap-space-2">
-                                <svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                                </svg>
-                                <span>Ramo de temporada mediano</span>
-                            </li>
-                            <li class="flex items-center gap-space-2">
-                                <svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                                </svg>
-                                <span>Entrega quincenal</span>
-                            </li>
-                            <li class="flex items-center gap-space-2">
-                                <svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                                </svg>
-                                <span>Guía de cuidados básicos</span>
-                            </li>
-                        </ul>
-                        <a href="./contacto.html?service=Plan%20Esencial" class="mt-space-4 w-full text-center inline-flex items-center justify-center gap-space-2 font-label-md text-label-md uppercase tracking-wider text-white dark:text-neutral-950 bg-primary hover:bg-primary/90 transition-colors px-space-4 py-3 rounded-lg shadow-sm font-semibold">
-                            Seleccionar Plan
-                        </a>
-                    </div>
-                </article>
+                <!-- Grilla de Tarjetas de Precios -->
+                <div id="plans-grid" class="grid grid-cols-1 md:grid-cols-3 gap-space-6 items-stretch">
+                    <!-- TARJETA 1: PLAN ESENCIAL -->
+                    <article class="group relative flex flex-col bg-surface dark:bg-dark-surface-container-low rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 border border-outline-variant/30 dark:border-dark-surface-variant overflow-hidden">
+                        <div class="w-full aspect-[4/3] overflow-hidden bg-surface-container-low">
+                            <img src="./public/images/suscripcion/plan-esencial.webp"
+                                 alt="Ramo del Plan Esencial de suscripción floral"
+                                 width="720" height="1280"
+                                 loading="lazy"
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" />
+                        </div>
+                        <div class="p-space-6 flex flex-col flex-grow">
+                            <h3 class="font-headline-md text-headline-md text-on-surface dark:text-dark-on-background font-semibold">Esencial</h3>
+                            <p class="font-headline-lg text-headline-lg text-primary dark:text-primary-fixed my-space-2 font-bold">$15.000 <span class="font-body-md text-body-md text-on-surface-variant dark:text-dark-on-surface-variant font-normal">/mes</span></p>
+                            <ul class="space-y-space-2 text-on-surface-variant dark:text-dark-on-surface-variant font-body-sm text-body-sm my-space-4 flex-grow">
+                                <li class="flex items-center gap-space-2">
+                                    <svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>Ramo de temporada mediano</span>
+                                </li>
+                                <li class="flex items-center gap-space-2">
+                                    <svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>Entrega quincenal</span>
+                                </li>
+                                <li class="flex items-center gap-space-2">
+                                    <svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>Guía de cuidados básicos</span>
+                                </li>
+                            </ul>
+                            <a href="./contacto.html?service=Plan%20Esencial" class="mt-space-4 w-full text-center inline-flex items-center justify-center gap-space-2 font-label-md text-label-md uppercase tracking-wider text-white dark:text-neutral-950 bg-primary hover:bg-primary/90 transition-colors px-space-4 py-3 rounded-lg shadow-sm font-semibold">
+                                Seleccionar Plan
+                            </a>
+                        </div>
+                    </article>
 
-                <!-- TARJETA 2: PLAN PREMIERE (MÁS POPULAR) -->
-                <article class="group relative flex flex-col bg-surface dark:bg-dark-surface-container-low rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 border-2 border-primary/40 dark:border-primary/50 overflow-hidden">
-                    <!-- Badge Flotante Más Popular -->
-                    <div class="absolute top-4 right-4 z-10 bg-primary text-on-primary font-label-sm uppercase tracking-widest px-3 py-1 rounded-full shadow-md font-semibold">
-                        Más Popular
-                    </div>
-                    <div class="w-full aspect-[4/3] overflow-hidden bg-surface-container-low">
-                        <img src="./public/images/suscripcion/plan-premiere.webp"
-                             alt="Arreglo floral del Plan Premiere de suscripción floral"
-                             width="720" height="1280"
-                             loading="lazy"
-                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" />
-                    </div>
-                    <div class="p-space-6 flex flex-col flex-grow">
-                        <h3 class="font-headline-md text-headline-md text-on-surface dark:text-dark-on-background font-semibold">Premiere</h3>
-                        <p class="font-headline-lg text-headline-lg text-primary my-space-2 font-bold">$30.000 <span class="font-body-md text-body-md text-on-surface-variant dark:text-dark-on-surface-variant font-normal">/mes</span></p>
-                        <ul class="space-y-space-2 text-on-surface-variant dark:text-dark-on-surface-variant font-body-sm text-body-sm my-space-4 flex-grow">
-                            <li class="flex items-center gap-space-2">
-                                <svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                                </svg>
-                                <span>Ramo de autor grande</span>
-                            </li>
-                            <li class="flex items-center gap-space-2">
-                                <svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                                </svg>
-                                <span>Entrega semanal</span>
-                            </li>
-                            <li class="flex items-center gap-space-2">
-                                <svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                                </svg>
-                                <span>Florero de diseño de regalo (1ra entrega)</span>
-                            </li>
-                            <li class="flex items-center gap-space-2">
-                                <svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                                </svg>
-                                <span>Acceso a flores premium</span>
-                            </li>
-                        </ul>
-                        <a href="./contacto.html?service=Plan%20Premiere" class="mt-space-4 w-full text-center inline-flex items-center justify-center gap-space-2 font-label-md text-label-md uppercase tracking-wider text-white dark:text-neutral-950 bg-primary hover:bg-primary/90 transition-colors px-space-4 py-3 rounded-lg shadow-sm font-semibold">
-                            Seleccionar Plan
-                        </a>
-                    </div>
-                </article>
+                    <!-- TARJETA 2: PLAN PREMIERE (MÁS POPULAR) -->
+                    <article class="group relative flex flex-col bg-surface dark:bg-dark-surface-container-low rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 border-2 border-primary/40 dark:border-primary/50 overflow-hidden">
+                        <!-- Badge Flotante Más Popular -->
+                        <div class="absolute top-4 right-4 z-10 bg-primary text-on-primary font-label-sm uppercase tracking-widest px-3 py-1 rounded-full shadow-md font-semibold">
+                            Más Popular
+                        </div>
+                        <div class="w-full aspect-[4/3] overflow-hidden bg-surface-container-low">
+                            <img src="./public/images/suscripcion/plan-premiere.webp"
+                                 alt="Arreglo floral del Plan Premiere de suscripción floral"
+                                 width="720" height="1280"
+                                 loading="lazy"
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" />
+                        </div>
+                        <div class="p-space-6 flex flex-col flex-grow">
+                            <h3 class="font-headline-md text-headline-md text-on-surface dark:text-dark-on-background font-semibold">Premiere</h3>
+                            <p class="font-headline-lg text-headline-lg text-primary dark:text-primary-fixed my-space-2 font-bold">$30.000 <span class="font-body-md text-body-md text-on-surface-variant dark:text-dark-on-surface-variant font-normal">/mes</span></p>
+                            <ul class="space-y-space-2 text-on-surface-variant dark:text-dark-on-surface-variant font-body-sm text-body-sm my-space-4 flex-grow">
+                                <li class="flex items-center gap-space-2">
+                                    <svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>Ramo de autor grande</span>
+                                </li>
+                                <li class="flex items-center gap-space-2">
+                                    <svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>Entrega semanal</span>
+                                </li>
+                                <li class="flex items-center gap-space-2">
+                                    <svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>Florero de diseño de regalo (1ra entrega)</span>
+                                </li>
+                                <li class="flex items-center gap-space-2">
+                                    <svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>Acceso a flores premium</span>
+                                </li>
+                            </ul>
+                            <a href="./contacto.html?service=Plan%20Premiere" class="mt-space-4 w-full text-center inline-flex items-center justify-center gap-space-2 font-label-md text-label-md uppercase tracking-wider text-white dark:text-neutral-950 bg-primary hover:bg-primary/90 transition-colors px-space-4 py-3 rounded-lg shadow-sm font-semibold">
+                                Seleccionar Plan
+                            </a>
+                        </div>
+                    </article>
 
-                <!-- TARJETA 3: PLAN LUXE -->
-                <article class="group relative flex flex-col bg-surface dark:bg-dark-surface-container-low rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 border border-outline-variant/30 dark:border-dark-surface-variant overflow-hidden">
-                    <div class="w-full aspect-[4/3] overflow-hidden bg-surface-container-low">
-                        <img src="./public/images/suscripcion/plan-luxe.webp"
-                             alt="Ramo grande y exuberante del Plan Luxe de suscripción floral"
-                             width="1440" height="1621"
-                             loading="lazy"
-                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" />
-                    </div>
-                    <div class="p-space-6 flex flex-col flex-grow">
-                        <h3 class="font-headline-md text-headline-md text-on-surface dark:text-dark-on-background font-semibold">Luxe</h3>
-                        <p class="font-headline-lg text-headline-lg text-primary my-space-2 font-bold">$45.000 <span class="font-body-md text-body-md text-on-surface-variant dark:text-dark-on-surface-variant font-normal">/mes</span></p>
-                        <ul class="space-y-space-2 text-on-surface-variant dark:text-dark-on-surface-variant font-body-sm text-body-sm my-space-4 flex-grow">
-                            <li class="flex items-center gap-space-2">
-                                <svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                                </svg>
-                                <span>Arreglo escultural extra grande</span>
-                            </li>
-                            <li class="flex items-center gap-space-2">
-                                <svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                                </svg>
-                                <span>Entrega semanal flexible</span>
-                            </li>
-                            <li class="flex items-center gap-space-2">
-                                <svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                                </svg>
-                                <span>Consulta con diseñador floral</span>
-                            </li>
-                            <li class="flex items-center gap-space-2">
-                                <svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                                </svg>
-                                <span>Acceso exclusivo a variedades raras</span>
-                            </li>
-                        </ul>
-                        <a href="./contacto.html?service=Plan%20Luxe" class="mt-space-4 w-full text-center inline-flex items-center justify-center gap-space-2 font-label-md text-label-md uppercase tracking-wider text-white dark:text-neutral-950 bg-primary hover:bg-primary/90 transition-colors px-space-4 py-3 rounded-lg shadow-sm font-semibold">
-                            Seleccionar Plan
-                        </a>
-                    </div>
-                </article>
-            </div>
+                    <!-- TARJETA 3: PLAN LUXE -->
+                    <article class="group relative flex flex-col bg-surface dark:bg-dark-surface-container-low rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 border border-outline-variant/30 dark:border-dark-surface-variant overflow-hidden">
+                        <div class="w-full aspect-[4/3] overflow-hidden bg-surface-container-low">
+                            <img src="./public/images/suscripcion/plan-luxe.webp"
+                                 alt="Ramo grande y exuberante del Plan Luxe de suscripción floral"
+                                 width="1440" height="1621"
+                                 loading="lazy"
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" />
+                        </div>
+                        <div class="p-space-6 flex flex-col flex-grow">
+                            <h3 class="font-headline-md text-headline-md text-on-surface dark:text-dark-on-background font-semibold">Luxe</h3>
+                            <p class="font-headline-lg text-headline-lg text-primary dark:text-primary-fixed my-space-2 font-bold">$45.000 <span class="font-body-md text-body-md text-on-surface-variant dark:text-dark-on-surface-variant font-normal">/mes</span></p>
+                            <ul class="space-y-space-2 text-on-surface-variant dark:text-dark-on-surface-variant font-body-sm text-body-sm my-space-4 flex-grow">
+                                <li class="flex items-center gap-space-2">
+                                    <svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>Arreglo escultural extra grande</span>
+                                </li>
+                                <li class="flex items-center gap-space-2">
+                                    <svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>Entrega semanal flexible</span>
+                                </li>
+                                <li class="flex items-center gap-space-2">
+                                    <svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>Consulta con diseñador floral</span>
+                                </li>
+                                <li class="flex items-center gap-space-2">
+                                    <svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                    <span>Acceso exclusivo a variedades raras</span>
+                                </li>
+                            </ul>
+                            <a href="./contacto.html?service=Plan%20Luxe" class="mt-space-4 w-full text-center inline-flex items-center justify-center gap-space-2 font-label-md text-label-md uppercase tracking-wider text-white dark:text-neutral-950 bg-primary hover:bg-primary/90 transition-colors px-space-4 py-3 rounded-lg shadow-sm font-semibold">
+                                Seleccionar Plan
+                            </a>
+                        </div>
+                    </article>
+                </div>
 
-            <!-- Botón Cerrar Planes -->
-            <div class="text-center mt-space-8">
-                <button id="hide-plans-btn" type="button" class="inline-flex items-center justify-center gap-space-2 font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors cursor-pointer py-2 px-4 rounded-lg">
-                    <svg class="w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/>
-                    </svg>
-                    <span>Cerrar Planes</span>
-                </button>
+                <!-- Botón Cerrar Planes -->
+                <div class="text-center mt-space-8">
+                    <button id="hide-plans-btn" type="button" aria-controls="planes" aria-label="Cerrar catálogo de planes de suscripción" class="inline-flex items-center justify-center gap-space-2 font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors cursor-pointer py-2 px-4 rounded-lg">
+                        <svg class="w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/>
+                        </svg>
+                        <span>Cerrar Planes</span>
+                    </button>
+                </div>
             </div>
         </div>
     </section>

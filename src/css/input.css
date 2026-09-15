@@ -404,3 +404,23 @@ html.dark::view-transition-new(root) {
         transition: none;
     }
 }
+/* ========================================================= */
+/* ACORDEÓN DE PLANES DE SUSCRIPCIÓN                         */
+/* Animación continua basada en CSS Grid (0fr -> 1fr)       */
+/* ========================================================= */
+
+.accordion-grid {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 700ms var(--expo-out), opacity 700ms ease-in-out;
+}
+
+.accordion-grid.is-expanded {
+    grid-template-rows: 1fr;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .accordion-grid {
+        transition: none;
+    }
+}
