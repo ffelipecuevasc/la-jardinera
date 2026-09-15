@@ -4,6 +4,7 @@
     { path: './modules/carousel.js',     fn: 'initCarousel'     },
     { path: './modules/modal.js',        fn: 'initModal'        },
     { path: './modules/subscription.js', fn: 'initSubscription' },
+    { path: './modules/gallery.js',      fn: 'initGallery'      },
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
