@@ -44,23 +44,121 @@
                 <div class="w-px h-8 bg-outline-variant/60 group-hover:bg-primary/40 transition-colors duration-300"
                      aria-hidden="true"></div>
                 <!-- Texto del Logotipo -->
-                <span class="font-headline-md text-headline-md italic tracking-tight text-on-surface group-hover:text-primary transition-colors duration-300">
+                <span class="font-headline-md text-headline-md italic tracking-tight fx-spotlight">
                     La Jardinera
                 </span>
             </a>
         </div>
         <!-- Barra de Navegación (sin estado activo: la 404 no pertenece a ninguna sección) -->
-        <nav class="hidden lg:flex items-center gap-space-4" data-active-classes="text-primary font-semibold">
-            <a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors py-space-1"
-               data-path="inicio" href="/index.html">Inicio</a>
-            <a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors py-space-1"
-               data-path="servicios" href="/servicios.html">Servicios</a>
-            <a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors py-space-1"
-               data-path="suscripcion-floral" href="/suscripcion-floral.html">Suscripción Floral</a>
-            <a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors py-space-1"
-               data-path="galeria" href="/galeria.html">Galería</a>
-            <a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors py-space-1"
-               data-path="contacto" href="/contacto.html">Contacto</a>
+        <nav
+                class="hidden lg:flex items-center gap-1"
+                data-active-classes="text-primary"
+                aria-label="Navegación principal"
+        >
+            <a
+                    class="group relative px-4 py-3
+               font-label-md text-label-md
+               uppercase tracking-[0.16em]
+               text-on-surface-variant
+               hover:text-primary
+               transition-colors duration-300"
+                    data-path="inicio"
+                    href="/index.html"
+            >
+                <span>Inicio</span>
+                <span
+                        class="absolute left-4 right-4 bottom-1
+                   h-px bg-primary
+                   origin-center scale-x-0
+                   group-hover:scale-x-100
+                   transition-transform duration-300"
+                        aria-hidden="true"
+                ></span>
+            </a>
+
+            <a
+                    class="group relative px-4 py-3
+               font-label-md text-label-md
+               uppercase tracking-[0.16em]
+               text-on-surface-variant
+               hover:text-primary
+               transition-colors duration-300"
+                    data-path="servicios"
+                    href="/servicios.html"
+            >
+                <span>Servicios</span>
+                <span
+                        class="absolute left-4 right-4 bottom-1
+                   h-px bg-primary
+                   origin-center scale-x-0
+                   group-hover:scale-x-100
+                   transition-transform duration-300"
+                        aria-hidden="true"
+                ></span>
+            </a>
+
+            <a
+                    class="group relative px-4 py-3
+               font-label-md text-label-md
+               uppercase tracking-[0.16em]
+               text-on-surface-variant
+               hover:text-primary
+               transition-colors duration-300"
+                    data-path="suscripcion-floral"
+                    href="/suscripcion-floral.html"
+            >
+                <span>Suscripción Floral</span>
+                <span
+                        class="absolute left-4 right-4 bottom-1
+                   h-px bg-primary
+                   origin-center scale-x-0
+                   group-hover:scale-x-100
+                   transition-transform duration-300"
+                        aria-hidden="true"
+                ></span>
+            </a>
+
+            <a
+                    class="group relative px-4 py-3
+               font-label-md text-label-md
+               uppercase tracking-[0.16em]
+               text-on-surface-variant
+               hover:text-primary
+               transition-colors duration-300"
+                    data-path="galeria"
+                    href="/galeria.html"
+            >
+                <span>Galería</span>
+                <span
+                        class="absolute left-4 right-4 bottom-1
+                   h-px bg-primary
+                   origin-center scale-x-0
+                   group-hover:scale-x-100
+                   transition-transform duration-300"
+                        aria-hidden="true"
+                ></span>
+            </a>
+
+            <a
+                    class="group relative px-4 py-3
+               font-label-md text-label-md
+               uppercase tracking-[0.16em]
+               text-on-surface-variant
+               hover:text-primary
+               transition-colors duration-300"
+                    data-path="contacto"
+                    href="/contacto.html"
+            >
+                <span>Contacto</span>
+                <span
+                        class="absolute left-4 right-4 bottom-1
+                   h-px bg-primary
+                   origin-center scale-x-0
+                   group-hover:scale-x-100
+                   transition-transform duration-300"
+                        aria-hidden="true"
+                ></span>
+            </a>
         </nav>
         <!-- Íconos de Redes Sociales -->
         <div class="flex items-center gap-space-3">

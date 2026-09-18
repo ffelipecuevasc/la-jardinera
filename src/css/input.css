@@ -424,3 +424,61 @@ html.dark::view-transition-new(root) {
         transition: none;
     }
 }
+
+/* ========================================================= */
+/* LOGOTIPO — EFECTO SPOTLIGHT BOTÁNICO DE ALTA GAMA         */
+/* ========================================================= */
+
+.fx-spotlight {
+    /* 1. Geometría en línea sólida para cálculo de clip-path */
+    display: inline-block;
+
+    /* 2. Fallback de accesibilidad para navegadores sin background-clip */
+    color: rgb(var(--color-on-surface));
+
+    /* 3. Variables locales vinculadas a los tokens del sistema */
+    --spotlight-beam: rgb(var(--color-primary));
+    --spotlight-text: rgb(var(--color-on-surface));
+    --spotlight-unlit: rgb(var(--color-on-surface) / 0.32);
+
+    /* 4. Degradado radial con haz de luz editorial */
+    background: radial-gradient(
+            5ch 100% at 50% 50%,
+            var(--spotlight-beam) 0%,
+            var(--spotlight-text) 42%,
+            var(--spotlight-unlit) 82%
+    ) 0 0 / 300% 100%;
+
+    /* 5. Recorte sobre el glifo de la tipografía */
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    /* 6. Animación continua de barrido */
+    animation: fx-spotlight 3.6s ease-in-out infinite alternate;
+    transition: background-size 400ms ease, opacity 300ms ease;
+}
+
+/* Microinteracción de alta fidelidad al hacer hover sobre el contenedor del logo */
+.group:hover .fx-spotlight {
+    --spotlight-unlit: rgb(var(--color-on-surface) / 0.55);
+    animation-duration: 2.2s;
+}
+
+/* Keyframes de traslación del haz luminoso */
+@keyframes fx-spotlight {
+    0% {
+        background-position: 100% 0;
+    }
+    100% {
+        background-position: 0% 0;
+    }
+}
+
+/* Respeto estricto a las preferencias de accesibilidad del sistema */
+@media (prefers-reduced-motion: reduce) {
+    .fx-spotlight {
+        animation: none;
+        background-position: 50% 0;
+    }
+}
