@@ -16,3 +16,4 @@
 Épica 04 - Iteración 04: Accesibilidad (a11y), Navegación por Teclado y Dark Mode - Completada con éxito. Cierre de Épica 04.
 Épica 05 - Iteración 01: Encofrado Base y Clonación UI Global (Contacto) - Completada con éxito.
 Épica 05 - Iteración 02: Layout Central y Tarjetas de Contacto Premium (Contacto) - Completada con éxito. Cierre oficial de Épica 05.
+Épica 06 - Iteración 01: Creación y Maquetación Integral de "404.html" - Completada con éxito.

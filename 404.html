@@ -3,161 +3,94 @@
 <head>
     <title>Página no encontrada - La Jardinera Florería</title>
     <meta name="description"
-          content="La página que buscas no existe o cambió de lugar. Vuelve al inicio de La Jardinera Florería en Valdivia."/>
-    <!-- La 404 no debe indexarse como contenido del sitio -->
+          content="La página que buscas no existe o ha sido movida. Regresa al inicio de La Jardinera Florería en Valdivia."/>
+    <!-- La 404 no debe indexarse en motores de búsqueda -->
     <meta name="robots" content="noindex, follow"/>
-    <!--
-        EXCEPCIÓN DOCUMENTADA DE RUTAS:
-        Esta página usa rutas absolutas desde la raíz ("/") porque el servidor la entrega
-        desde cualquier URL inexistente (ej: /servicios/ramos/rosas). Con rutas relativas "./"
-        los recursos se resolverían contra esa URL rota y la página se vería sin estilos.
-        Ver: _antigravity/04-bitacora/decisiones-tecnicas.md
-    -->
-    <link rel="icon" type="image/png" href="/public/logos/la-jardinera-original.png"/>
+    <link rel="icon" type="image/png" href="./public/logos/la-jardinera-original.png"/>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <link href="https://fonts.googleapis.com" rel="preconnect"/>
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&amp;family=Noto+Serif:ital,wght@0,400;0,600;1,400;1,600&amp;display=swap"
           rel="stylesheet"/>
-    <link rel="stylesheet" href="/dist/css/output.css"/>
+    <link rel="stylesheet" href="./dist/css/output.css"/>
 </head>
-<body class="bg-background font-body-md text-body-md text-on-surface">
+<body class="bg-background font-body-md text-body-md text-on-surface flex flex-col min-h-screen">
+<!-- HEADER GLOBAL REFACTORIZADO -->
 <header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(53,54,58,0.06)]">
     <div class="h-20 max-w-[80rem] mx-auto px-margin-mobile lg:px-margin-desktop flex items-center justify-between">
         <!-- Logotipo - PNG & TEXTO -->
         <div class="flex items-center">
-            <a class="flex items-center gap-4 group" data-path="inicio" href="/index.html">
+            <a class="flex items-center gap-4 group" data-path="inicio" href="./index.html">
                 <!-- Logotipo PNG — variante original (modo claro) -->
-                <img src="/public/logos/la-jardinera-original.png"
+                <img src="./public/logos/la-jardinera-original.png"
                      alt="Logotipo La Jardinera"
                      class="h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105 block dark:hidden"
                      width="44"
-                     height="44"/>
+                     height="44" />
                 <!-- Logotipo PNG — variante blanca (modo oscuro) -->
-                <img src="/public/logos/la-jardinera-blanco.png"
+                <img src="./public/logos/la-jardinera-blanco.png"
                      alt="Logotipo La Jardinera"
                      class="h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105 hidden dark:block"
                      width="44"
-                     height="44"/>
+                     height="44" />
                 <!-- Separador Vertical Elegante -->
-                <div class="w-px h-8 bg-outline-variant/60 group-hover:bg-primary/40 transition-colors duration-300"
-                     aria-hidden="true"></div>
-                <!-- Texto del Logotipo -->
+                <div class="w-px h-8 bg-outline-variant/60 group-hover:bg-primary/40 transition-colors duration-300" aria-hidden="true"></div>
+                <!-- Texto del Logotipo con Efecto Spotlight -->
                 <span class="font-headline-md text-headline-md italic tracking-tight fx-spotlight">
                     La Jardinera
                 </span>
             </a>
         </div>
-        <!-- Barra de Navegación (sin estado activo: la 404 no pertenece a ninguna sección) -->
+        <!-- Barra de Navegación Desktop (Estado Neutro: 404 no pertenece a ninguna sección activa) -->
         <nav
                 class="hidden lg:flex items-center gap-1"
                 data-active-classes="text-primary"
                 aria-label="Navegación principal"
         >
             <a
-                    class="group relative px-4 py-3
-               font-label-md text-label-md
-               uppercase tracking-[0.16em]
-               text-on-surface-variant
-               hover:text-primary
-               transition-colors duration-300"
+                    class="group relative px-4 py-3 font-label-md text-label-md uppercase tracking-[0.16em] text-on-surface-variant hover:text-primary transition-colors duration-300"
                     data-path="inicio"
-                    href="/index.html"
+                    href="./index.html"
             >
                 <span>Inicio</span>
-                <span
-                        class="absolute left-4 right-4 bottom-1
-                   h-px bg-primary
-                   origin-center scale-x-0
-                   group-hover:scale-x-100
-                   transition-transform duration-300"
-                        aria-hidden="true"
-                ></span>
+                <span class="absolute left-4 right-4 bottom-1 h-px bg-primary origin-center scale-x-0 group-hover:scale-x-100 transition-transform duration-300" aria-hidden="true"></span>
             </a>
 
             <a
-                    class="group relative px-4 py-3
-               font-label-md text-label-md
-               uppercase tracking-[0.16em]
-               text-on-surface-variant
-               hover:text-primary
-               transition-colors duration-300"
+                    class="group relative px-4 py-3 font-label-md text-label-md uppercase tracking-[0.16em] text-on-surface-variant hover:text-primary transition-colors duration-300"
                     data-path="servicios"
-                    href="/servicios.html"
+                    href="./servicios.html"
             >
                 <span>Servicios</span>
-                <span
-                        class="absolute left-4 right-4 bottom-1
-                   h-px bg-primary
-                   origin-center scale-x-0
-                   group-hover:scale-x-100
-                   transition-transform duration-300"
-                        aria-hidden="true"
-                ></span>
+                <span class="absolute left-4 right-4 bottom-1 h-px bg-primary origin-center scale-x-0 group-hover:scale-x-100 transition-transform duration-300" aria-hidden="true"></span>
             </a>
 
             <a
-                    class="group relative px-4 py-3
-               font-label-md text-label-md
-               uppercase tracking-[0.16em]
-               text-on-surface-variant
-               hover:text-primary
-               transition-colors duration-300"
+                    class="group relative px-4 py-3 font-label-md text-label-md uppercase tracking-[0.16em] text-on-surface-variant hover:text-primary transition-colors duration-300"
                     data-path="suscripcion-floral"
-                    href="/suscripcion-floral.html"
+                    href="./suscripcion-floral.html"
             >
                 <span>Suscripción Floral</span>
-                <span
-                        class="absolute left-4 right-4 bottom-1
-                   h-px bg-primary
-                   origin-center scale-x-0
-                   group-hover:scale-x-100
-                   transition-transform duration-300"
-                        aria-hidden="true"
-                ></span>
+                <span class="absolute left-4 right-4 bottom-1 h-px bg-primary origin-center scale-x-0 group-hover:scale-x-100 transition-transform duration-300" aria-hidden="true"></span>
             </a>
 
             <a
-                    class="group relative px-4 py-3
-               font-label-md text-label-md
-               uppercase tracking-[0.16em]
-               text-on-surface-variant
-               hover:text-primary
-               transition-colors duration-300"
+                    class="group relative px-4 py-3 font-label-md text-label-md uppercase tracking-[0.16em] text-on-surface-variant hover:text-primary transition-colors duration-300"
                     data-path="galeria"
-                    href="/galeria.html"
+                    href="./galeria.html"
             >
                 <span>Galería</span>
-                <span
-                        class="absolute left-4 right-4 bottom-1
-                   h-px bg-primary
-                   origin-center scale-x-0
-                   group-hover:scale-x-100
-                   transition-transform duration-300"
-                        aria-hidden="true"
-                ></span>
+                <span class="absolute left-4 right-4 bottom-1 h-px bg-primary origin-center scale-x-0 group-hover:scale-x-100 transition-transform duration-300" aria-hidden="true"></span>
             </a>
 
             <a
-                    class="group relative px-4 py-3
-               font-label-md text-label-md
-               uppercase tracking-[0.16em]
-               text-on-surface-variant
-               hover:text-primary
-               transition-colors duration-300"
+                    class="group relative px-4 py-3 font-label-md text-label-md uppercase tracking-[0.16em] text-on-surface-variant hover:text-primary transition-colors duration-300"
                     data-path="contacto"
-                    href="/contacto.html"
+                    href="./contacto.html"
             >
                 <span>Contacto</span>
-                <span
-                        class="absolute left-4 right-4 bottom-1
-                   h-px bg-primary
-                   origin-center scale-x-0
-                   group-hover:scale-x-100
-                   transition-transform duration-300"
-                        aria-hidden="true"
-                ></span>
+                <span class="absolute left-4 right-4 bottom-1 h-px bg-primary origin-center scale-x-0 group-hover:scale-x-100 transition-transform duration-300" aria-hidden="true"></span>
             </a>
         </nav>
         <!-- Íconos de Redes Sociales -->
@@ -199,7 +132,9 @@
             <!-- Mobile Menu Toggle -->
             <button id="mobile-menu-btn"
                     class="lg:hidden w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-primary transition-all ml-2"
-                    aria-label="Abrir Menú">
+                    aria-label="Abrir Menú"
+                    aria-expanded="false"
+                    aria-controls="mobile-menu">
                 <svg class="text-[18px]" fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                      viewBox="0 0 24 24">
                     <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
@@ -207,88 +142,64 @@
             </button>
         </div>
     </div>
+
+    <!-- Menú Móvil Desplegable (Estado Neutro: sin clase de estado activo) -->
+    <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full bg-surface/95 dark:bg-dark-surface-container-low/95 backdrop-blur-md shadow-lg border-b border-outline-variant/20">
+        <div class="flex flex-col items-center gap-6 py-8 font-label-md text-label-md uppercase tracking-wider font-semibold">
+            <a class="text-on-surface-variant hover:text-primary transition-colors" data-path="inicio" href="./index.html">Inicio</a>
+            <a class="text-on-surface-variant hover:text-primary transition-colors" data-path="servicios" href="./servicios.html">Servicios</a>
+            <a class="text-on-surface-variant hover:text-primary transition-colors" data-path="suscripcion-floral" href="./suscripcion-floral.html">Suscripción Floral</a>
+            <a class="text-on-surface-variant hover:text-primary transition-colors" data-path="galeria" href="./galeria.html">Galería</a>
+            <a class="text-on-surface-variant hover:text-primary transition-colors" data-path="contacto" href="./contacto.html">Contacto</a>
+        </div>
+    </div>
 </header>
 
-<main class="w-full pt-20 bg-background flex flex-col">
-    <!-- ERROR 404: PÁGINA NO ENCONTRADA -->
-    <section
-            class="w-full max-w-[80rem] mx-auto px-margin-mobile lg:px-margin-desktop py-space-8 lg:py-space-10 min-h-[calc(100vh-5rem)] flex items-center"
-            aria-labelledby="error-title">
-        <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-space-6 lg:gap-space-10 items-center">
+<!-- SECCIÓN CENTRAL DE ERROR 404 -->
+<main class="w-full pt-20 flex-grow bg-background flex flex-col items-center justify-center min-h-[80vh] py-space-10">
+    <div class="max-w-2xl mx-auto px-margin-mobile text-center">
 
-            <!-- Columna Imagen: ventana en arco con marco desplazado -->
-            <div class="flex justify-center lg:justify-end lg:order-2">
-                <figure class="relative w-full max-w-[14rem] sm:max-w-[17rem] lg:max-w-[22rem] m-0">
-                    <!-- Marco decorativo desplazado (contorno del arco) -->
-                    <div class="absolute inset-0 translate-x-3 translate-y-3 lg:translate-x-4 lg:translate-y-4 rounded-t-[999px] border border-primary/30"
-                         aria-hidden="true"></div>
-                    <!-- Contenedor Anti-CLS del arco -->
-                    <div class="relative w-full aspect-[4/5] rounded-t-[999px] overflow-hidden bg-surface-container border border-outline-variant/30 shadow-sm">
-                        <img src="/public/images/hero-botanical.webp"
-                             alt=""
-                             width="440"
-                             height="550"
-                             fetchpriority="high"
-                             class="w-full h-full object-cover"/>
-                        <!-- Velo sutil para integrar la foto con la superficie en ambos temas -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-dark-background/25 via-transparent to-transparent"
-                             aria-hidden="true"></div>
-                    </div>
-                </figure>
-            </div>
-
-            <!-- Columna Texto -->
-            <div class="flex flex-col items-center text-center lg:items-start lg:text-left lg:order-1">
-                <!-- Separador con Rombo ✦ (patrón del sitio) -->
-                <div class="flex items-center justify-center gap-2 mb-space-2" aria-hidden="true">
-                    <span class="w-8 h-[1px] bg-primary/40"></span>
-                    <span class="font-headline-sm text-headline-sm italic text-secondary">✦</span>
-                    <span class="w-8 h-[1px] bg-primary/40"></span>
-                </div>
-
-                <p class="font-headline-sm text-headline-sm italic text-on-surface-variant mb-space-1">Error 404</p>
-
-                <h1 id="error-title"
-                    class="font-headline-xl text-headline-lg lg:text-headline-xl text-on-surface tracking-tight mb-space-3 max-w-lg">
-                    No encontramos esta página
-                </h1>
-
-                <p class="font-body-md text-body-md lg:font-body-lg lg:text-body-lg text-on-surface-variant leading-relaxed max-w-md mb-space-6">
-                    Es posible que la dirección esté mal escrita o que la página haya cambiado de lugar.
-                    Puedes volver al inicio o conocer nuestros servicios florales.
-                </p>
-
-                <!-- Acciones de rescate -->
-                <div class="flex flex-col sm:flex-row items-center gap-space-2 w-full sm:w-auto">
-                    <a href="/index.html"
-                       class="w-full sm:w-auto inline-flex items-center justify-center px-space-4 py-3 rounded-xl bg-primary-brand text-neutral-50 font-label-lg text-label-lg uppercase tracking-wider hover:opacity-90 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-                        Volver al inicio
-                    </a>
-                    <a href="/servicios.html"
-                       class="w-full sm:w-auto inline-flex items-center justify-center px-space-4 py-3 rounded-xl border border-outline-variant text-on-surface font-label-lg text-label-lg uppercase tracking-wider hover:border-primary hover:text-primary transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-                        Ver servicios
-                    </a>
-                </div>
-
-                <p class="font-body-sm text-body-sm text-on-surface-variant mt-space-4">
-                    ¿Buscabas algo en particular?
-                    <a href="https://wa.me/56997702832" target="_blank" rel="noopener noreferrer"
-                       class="text-primary underline underline-offset-4 decoration-primary/40 hover:decoration-primary transition-colors">
-                        Escríbenos por WhatsApp
-                    </a>
-                </p>
-            </div>
+        <!-- Separador Editorial con Rombo (✦) -->
+        <div class="flex items-center justify-center gap-2 mb-space-2" aria-hidden="true">
+            <span class="w-8 h-[1px] bg-primary/40"></span>
+            <span class="font-headline-sm text-headline-sm italic text-secondary">✦</span>
+            <span class="w-8 h-[1px] bg-primary/40"></span>
         </div>
-    </section>
+
+        <!-- Código de Error 404 -->
+        <p class="font-display-hero text-headline-xl lg:text-display-hero text-primary font-normal leading-none mb-space-2">
+            404
+        </p>
+
+        <!-- Título H1 -->
+        <h1 class="font-headline-xl text-headline-lg lg:text-headline-xl text-on-surface dark:text-dark-on-background mb-space-3">
+            Esta flor no florece aquí
+        </h1>
+
+        <!-- Párrafo Descriptivo -->
+        <p class="font-body-md text-body-md text-on-surface-variant dark:text-dark-on-surface-variant max-w-md mx-auto mb-space-6 leading-relaxed">
+            El enlace que seguiste no existe o ha cambiado de lugar. Te invitamos a volver al jardín principal para seguir explorando.
+        </p>
+
+        <!-- Botón CTA de Recuperación -->
+        <a href="./index.html"
+           class="inline-flex items-center justify-center px-space-6 py-3.5 rounded-lg bg-primary text-neutral-50 font-label-lg uppercase tracking-wider hover:opacity-90 transition-all shadow-md gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
+            <svg class="w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+            </svg>
+            <span>Volver al Inicio</span>
+        </a>
+
+    </div>
 </main>
 
-<footer class="w-full bg-surface-container-low">
+<!-- FOOTER GLOBAL REFACTORIZADO -->
+<footer class="w-full bg-surface-container-low mt-space-8">
     <div class="max-w-[80rem] mx-auto px-margin-mobile lg:px-margin-desktop py-space-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-6">
-            <!-- COLUMNA 1: Marca -->
+            <!-- COLUMNA 1: Marca y Filosofía -->
             <div class="flex flex-col gap-space-2">
-                <a class="font-headline-md text-headline-md italic tracking-tight text-on-surface" data-path="inicio"
-                   href="/index.html">La Jardinera</a>
+                <a class="font-headline-md text-headline-md italic tracking-tight text-on-surface" data-path="inicio" href="./index.html">La Jardinera</a>
                 <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
                     Es increíble el efecto que generan las flores cuando las ves, cuando las arreglas, cuando las
                     recibes, cuando las regalas.
@@ -296,22 +207,22 @@
                 <span class="font-body-xs text-body-xs text-on-surface-variant pt-space-2">© 2026 Desarrollado por Felipe Cuevas.</span>
             </div>
 
-            <!-- COLUMNA 2: Navegación (sin estado activo) -->
+            <!-- COLUMNA 2: Navegación (Estado Neutro: sin clase de estado activo) -->
             <div class="flex flex-col gap-space-2">
                 <h3 class="font-label-md text-label-md uppercase tracking-wider text-on-surface font-semibold">
                     Navegación
                 </h3>
                 <nav class="flex flex-col gap-space-1" data-active-classes="text-primary font-semibold">
                     <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors"
-                       data-path="inicio" href="/index.html">Inicio</a>
+                       data-path="inicio" href="./index.html">Inicio</a>
                     <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors"
-                       data-path="servicios" href="/servicios.html">Servicios</a>
+                       data-path="servicios" href="./servicios.html">Servicios</a>
                     <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors"
-                       data-path="suscripcion-floral" href="/suscripcion-floral.html">Suscripción Floral</a>
+                       data-path="suscripcion-floral" href="./suscripcion-floral.html">Suscripción Floral</a>
                     <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors"
-                       data-path="galeria" href="/galeria.html">Galería</a>
+                       data-path="galeria" href="./galeria.html">Galería</a>
                     <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors"
-                       data-path="contacto" href="/contacto.html">Contacto</a>
+                       data-path="contacto" href="./contacto.html">Contacto</a>
                 </nav>
             </div>
 
@@ -361,11 +272,11 @@
                              height="18" viewBox="0 0 256 256">
                             <path fill="currentColor"
                                   d="M128 23.064c34.177 0 38.225.13 51.722.745c12.48.57 19.258 2.655 23.769 4.408c5.974 2.322 10.238 5.096 14.717 9.575s7.253 8.743 9.575 14.717c1.753 4.511 3.838 11.289 4.408 23.768c.615 13.498.745 17.546.745 51.723s-.13 38.226-.745 51.723c-.57 12.48-2.655 19.257-4.408 23.768c-2.322 5.974-5.096 10.239-9.575 14.718s-8.743 7.253-14.717 9.574c-4.511 1.753-11.289 3.839-23.769 4.408c-13.495.616-17.543.746-51.722.746s-38.228-.13-51.723-.746c-12.48-.57-19.257-2.655-23.768-4.408c-5.974-2.321-10.239-5.095-14.718-9.574c-4.479-4.48-7.253-8.744-9.574-14.718c-1.753-4.51-3.839-11.288-4.408-23.768c-.616-13.497-.746-17.545-.746-51.723s.13-38.225.746-51.722c.57-12.48 2.655-19.258 4.408-23.769c2.321-5.974 5.095-10.238 9.574-14.717c4.48-4.48 8.744-7.253 14.718-9.575c4.51-1.753 11.288-3.838 23.768-4.408c13.497-.615 17.545-.745 51.723-.745M128 0C93.237 0 88.878.147 75.226.77c-13.625.622-22.93 2.786-31.071 5.95c-8.418 3.271-15.556 7.648-22.672 14.764S9.991 35.738 6.72 44.155C3.555 52.297 1.392 61.602.77 75.226C.147 88.878 0 93.237 0 128s.147 39.122.77 52.774c.622 13.625 2.785 22.93 5.95 31.071c3.27 8.417 7.647 15.556 14.763 22.672s14.254 11.492 22.672 14.763c8.142 3.165 17.446 5.328 31.07 5.95c13.653.623 18.012.77 52.775.77s39.122-.147 52.774-.77c13.624-.622 22.929-2.785 31.07-5.95c8.418-3.27 15.556-7.647 22.672-14.763s11.493-14.254 14.764-22.672c3.164-8.142 5.328-17.446 5.95-31.07c.623-13.653.77-18.012.77-52.775s-.147-39.122-.77-52.774c-.622-13.624-2.786-22.929-5.95-31.07c-3.271-8.418-7.648-15.556-14.764-22.672S220.262 9.99 211.845 6.72c-8.142-3.164-17.447-5.328-31.071-5.95C167.122.147 162.763 0 128 0m0 62.27c-36.302 0-65.73 29.43-65.73 65.73s29.428 65.73 65.73 65.73c36.301 0 65.73-29.428 65.73-65.73c0-36.301-29.429-65.73-65.73-65.73m0 108.397c-23.564 0-42.667-19.103-42.667-42.667S104.436 85.333 128 85.333s42.667 19.103 42.667 42.667s-19.103 42.667-42.667 42.667m83.686-110.994c0 8.484-6.876 15.36-15.36 15.36s-15.36-6.876-15.36-15.36s6.877-15.36 15.36-15.36s15.36 6.877 15.36 15.36"/>
-                        </svg>
-                    </a>
-                    <a aria-label="Facebook" href="https://www.facebook.com/floresadomiciliovaldivia/" target="_blank"
-                       rel="noopener noreferrer"
-                       class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-primary transition-all">
+                </svg>
+            </a>
+            <a aria-label="Facebook" href="https://www.facebook.com/floresadomiciliovaldivia/" target="_blank"
+               rel="noopener noreferrer"
+               class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-primary transition-all">
                         <svg class="text-[16px]" fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="18"
                              height="18" viewBox="0 0 256 256">
                             <path fill="currentColor"
@@ -401,7 +312,6 @@
                         <span>Crédito/Débito</span>
                     </div>
                     <div class="flex items-center gap-space-2 text-on-surface-variant font-body-sm text-body-sm">
-                        <!-- Icono de Transferencia Bancaria (sync_alt) -->
                         <svg class="text-[18px] text-primary flex-shrink-0" fill="currentColor"
                              xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path d="M22 8l-4-4v3H3v2h15v3l4-4zM2 16l4 4v-3h15v-2H6v-3l-4 4z"/>
@@ -409,7 +319,6 @@
                         <span>Transferencia</span>
                     </div>
                     <div class="flex items-center gap-space-2 text-on-surface-variant font-body-sm text-body-sm">
-                        <!-- Icono de Billetes/Efectivo (payments) -->
                         <svg class="text-[18px] text-primary flex-shrink-0" fill="currentColor"
                              xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path d="M19 14V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zm-2 0H3V6h14v8zm-7-7c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zm13 0v11c0 1.1-.9 2-2 2H4v-2h17V7h2z"/>
@@ -421,7 +330,6 @@
         </div>
     </div>
 </footer>
-
-<script type="module" src="/src/js/main.js"></script>
+<script type="module" src="./src/js/main.js"></script>
 </body>
 </html>
