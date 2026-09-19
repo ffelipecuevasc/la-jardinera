@@ -16,7 +16,7 @@
     <div class="h-20 max-w-[80rem] mx-auto px-margin-mobile lg:px-margin-desktop flex items-center justify-between">
         <!-- Logotipo - PNG & TEXTO -->
         <div class="flex items-center">
-            <a class="flex items-center gap-4 group" data-path="inicio" href="index.html">
+            <a class="flex items-center gap-4 group" data-path="inicio" href="./index.html">
                 <!-- Logotipo PNG — variante original (modo claro) -->
                 <img src="./public/logos/la-jardinera-original.png"
                      alt="Logotipo La Jardinera"
@@ -191,13 +191,24 @@
             <!-- Mobile Menu Toggle -->
             <button id="mobile-menu-btn"
                     class="lg:hidden w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-primary transition-all ml-2"
-                    aria-label="Abrir Menú">
+                    aria-label="Abrir Menú"
+                    aria-expanded="false"
+                    aria-controls="mobile-menu">
                 <svg class="text-[18px]" fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                      viewBox="0 0 24 24">
                     <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
                 </svg>
             </button>
         </div>
+    </div>
+
+    <!-- Menú Móvil Desplegable -->
+    <div id="mobile-menu" class="hidden fixed inset-0 z-40 bg-surface/95 dark:bg-dark-surface-container-low/95 backdrop-blur-md flex flex-col items-center justify-center gap-6 pt-20">
+        <a aria-current="page" class="font-label-md text-label-md uppercase tracking-wider transition-colors py-space-1 text-primary font-semibold" data-path="inicio" href="./index.html">Inicio</a>
+        <a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors py-space-1" data-path="servicios" href="./servicios.html">Servicios</a>
+        <a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors py-space-1" data-path="suscripcion-floral" href="./suscripcion-floral.html">Suscripción Floral</a>
+        <a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors py-space-1" data-path="galeria" href="./galeria.html">Galería</a>
+        <a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors py-space-1" data-path="contacto" href="./contacto.html">Contacto</a>
     </div>
 </header>
 <main class="w-full pt-20 bg-background min-h-screen">
@@ -813,7 +824,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-6">
             <div class="flex flex-col gap-space-2"><a
                     class="font-headline-md text-headline-md italic tracking-tight text-on-surface" data-path="inicio"
-                    href="#">La Jardinera</a>
+                    href="./index.html">La Jardinera</a>
                 <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
                     Es increíble el efecto que generan las flores cuando las ves, cuando las arreglas, cuando las
                     recibes, cuando las regalas.
