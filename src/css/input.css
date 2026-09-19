@@ -4,6 +4,11 @@
 
 @layer base {
     :root {
+        /* Tokens de Resaltado (Hi-Liter / fx-marker) */
+        --ink: currentColor;
+        --ink-2: #b4f1c1;
+        --ink-3: #4FF8FF;
+
         /* Easing de transición exponencial */
         --expo-out: cubic-bezier(0.16, 1, 0.3, 1);
 
@@ -237,52 +242,33 @@ html.dark::view-transition-new(root) {
 }
 
 /* ========================================================= */
-/* TITULAR DEL HERO — REVELADO POR PALABRAS                  */
-/* Ver DESIGN.md §7                                          */
+/* TITULAR DEL HERO — RESALTADOR (HI-LITER / FX-MARKER)       */
 /* ========================================================= */
 
-.hero-reveal > span {
-    /* inline-block es obligatorio: transform no se aplica a
-       elementos en línea no reemplazados. Sin overflow declarado,
-       el inline-block conserva su línea base normal, así que todas
-       las palabras siguen alineadas entre sí. */
-    display: inline-block;
-
-    /* El estado oculto vive DENTRO de los keyframes, no en esta
-       regla, y el modo de relleno es "both". Así, si por cualquier
-       motivo la animación no llega a ejecutarse —navegador antiguo,
-       extensión que desactiva animaciones—, el titular simplemente
-       aparece visible en lugar de quedar invisible para siempre.
-       Es el texto más importante de la página: no puede depender
-       de que una animación funcione. */
-    animation: wordRise 800ms var(--expo-out) both;
+.fx-marker {
+    color: var(--ink);
+    display: inline;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    padding: .05em .15em;
+    background: linear-gradient(100deg,
+        color-mix(in srgb, var(--ink-2) 85%, transparent),
+        color-mix(in srgb, var(--ink-2) 60%, transparent)
+    ) no-repeat 0 62%;
+    background-size: 0% 46%;
+    animation: fx-marker 3s ease-in-out infinite;
 }
 
-/* Escalonado. Los saltos de 90ms son lo bastante cortos para que la
-   frase se lea como una sola unidad y lo bastante largos para que se
-   perciba la secuencia. La frase completa se resuelve en ~1,2s. */
-.hero-reveal > span:nth-child(1) { animation-delay: 100ms; }
-.hero-reveal > span:nth-child(2) { animation-delay: 190ms; }
-.hero-reveal > span:nth-child(3) { animation-delay: 280ms; }
-.hero-reveal > span:nth-child(4) { animation-delay: 370ms; }
-
-@keyframes wordRise {
-    from {
-        opacity: 0;
-        /* Desplazamiento en em: escala solo con el tamaño del
-           titular, sin necesidad de variantes por breakpoint. */
-        transform: translateY(0.4em);
-    }
-    to {
-        opacity: 1;
-        transform: none;
-    }
+@keyframes fx-marker {
+    0%        { background-size: 0% 46%;   background-position: 0 62%; }
+    38%, 62%  { background-size: 100% 46%; background-position: 0 62%; }
+    100%      { background-size: 0% 46%;   background-position: 100% 62%; }
 }
 
-/* Movimiento reducido: el titular aparece completo, sin secuencia. */
 @media (prefers-reduced-motion: reduce) {
-    .hero-reveal > span {
+    .fx-marker {
         animation: none;
+        background-size: 100% 46%;
     }
 }
 
