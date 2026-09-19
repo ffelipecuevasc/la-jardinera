@@ -201,14 +201,12 @@
     </div>
 
     <!-- Menú Móvil Desplegable -->
-    <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full bg-surface/95 dark:bg-dark-surface-container-low/95 backdrop-blur-md shadow-lg border-b border-outline-variant/20">
-        <div class="flex flex-col items-center gap-6 py-8 font-label-md text-label-md uppercase tracking-wider font-semibold">
-            <a class="text-on-surface-variant hover:text-primary transition-colors" data-path="inicio" href="./index.html">Inicio</a>
-            <a class="text-on-surface-variant hover:text-primary transition-colors" data-path="servicios" href="./servicios.html">Servicios</a>
-            <a class="text-on-surface-variant hover:text-primary transition-colors" data-path="suscripcion-floral" href="./suscripcion-floral.html">Suscripción Floral</a>
-            <a class="text-on-surface-variant hover:text-primary transition-colors" data-path="galeria" href="./galeria.html">Galería</a>
-            <a aria-current="page" class="text-primary font-semibold" data-path="contacto" href="./contacto.html">Contacto</a>
-        </div>
+    <div id="mobile-menu" class="hidden fixed inset-0 z-40 bg-surface/95 dark:bg-dark-surface-container-low/95 backdrop-blur-md flex flex-col items-center justify-center gap-6 pt-20">
+        <a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors py-space-1" data-path="inicio" href="./index.html">Inicio</a>
+        <a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors py-space-1" data-path="servicios" href="./servicios.html">Servicios</a>
+        <a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors py-space-1" data-path="suscripcion-floral" href="./suscripcion-floral.html">Suscripción Floral</a>
+        <a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors py-space-1" data-path="galeria" href="./galeria.html">Galería</a>
+        <a aria-current="page" class="font-label-md text-label-md uppercase tracking-wider transition-colors py-space-1 text-primary font-semibold" data-path="contacto" href="./contacto.html">Contacto</a>
     </div>
 </header>
 

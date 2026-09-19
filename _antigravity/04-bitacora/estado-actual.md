@@ -21,3 +21,4 @@
 Épica 06 - Iteración 03: Paridad Móvil y Normalización de Enlaces en "servicios.html" - Completada con éxito.
 Épica 06 - Iteración 04: Paridad Móvil y Normalización de Enlaces en "suscripcion-floral.html" - Completada con éxito.
 Épica 06 - Iteración 05: Paridad de Menú Móvil y Normalización de Enlaces en "galeria.html" - Completada con éxito.
+Épica 06 - Iteración 06: Paridad Móvil en "contacto.html" y Cierre de Enrutamiento Global - Completada con éxito. ÉPICA 06 CERRADA TOTALMENTE. PROYECTO CONSOLIDADO AL 100%.
