@@ -1,4 +1,4 @@
-﻿﻿Épica 01 - Iteración 07: Social Proof Elegante (Vanilla JS) - Completada. ÉPICA 01 CERRADA TOTALMENTE.
+﻿﻿﻿Épica 01 - Iteración 07: Social Proof Elegante (Vanilla JS) - Completada. ÉPICA 01 CERRADA TOTALMENTE.
 Épica 01 - Iteración 07: Footer UX/Semántica Hotfix - Completado.
 Épica 01 - Iteración Extras: CTA Texture / UI Lujo Premium - Completado.
 
@@ -27,3 +27,4 @@
 Épica 06 - Iteración 07: Header Móvil Esencial, Panel Anclado y Módulo de Navegación en "index.html" - Completada con éxito.
 Épica 06 - Iteración 08: Header Móvil Esencial y Panel Anclado en "servicios.html" - Completada con éxito.
 Épica 06 - Iteración 09: Header Móvil Esencial y Panel Anclado en "suscripcion-floral.html" - Completada con éxito.
+Épica 06 - Iteración 10: Header Móvil Esencial y Panel Anclado en "galeria.html" - Completada con éxito.
