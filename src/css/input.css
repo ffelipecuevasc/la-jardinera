@@ -256,7 +256,7 @@ html.dark::view-transition-new(root) {
         color-mix(in srgb, var(--ink-2) 60%, transparent)
     ) no-repeat 0 62%;
     background-size: 0% 46%;
-    animation: fx-marker 3s ease-in-out infinite;
+    animation: fx-marker 5s ease-in-out infinite;
 }
 
 @keyframes fx-marker {
