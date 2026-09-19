@@ -19,3 +19,5 @@
 Épica 06 - Iteración 01: Creación y Maquetación Integral de "404.html" - Completada con éxito.
 Épica 06 - Iteración 02: Paridad Móvil y Normalización de Enlaces en "index.html" - Completada con éxito.
 Épica 06 - Iteración 03: Paridad Móvil y Normalización de Enlaces en "servicios.html" - Completada con éxito.
+Épica 06 - Iteración 04: Paridad Móvil y Normalización de Enlaces en "suscripcion-floral.html" - Completada con éxito.
+Épica 06 - Iteración 05: Paridad de Menú Móvil y Normalización de Enlaces en "galeria.html" - Completada con éxito.
