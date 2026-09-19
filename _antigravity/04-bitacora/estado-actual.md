@@ -26,3 +26,4 @@
 Épica 06 - REAPERTURA (Fase 2, Iteraciones 07 a 12): Optimización del Header Móvil.
 Épica 06 - Iteración 07: Header Móvil Esencial, Panel Anclado y Módulo de Navegación en "index.html" - Completada con éxito.
 Épica 06 - Iteración 08: Header Móvil Esencial y Panel Anclado en "servicios.html" - Completada con éxito.
+Épica 06 - Iteración 09: Header Móvil Esencial y Panel Anclado en "suscripcion-floral.html" - Completada con éxito.
