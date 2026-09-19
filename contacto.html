@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="./dist/css/output.css"/>
 </head>
 <body class="bg-background font-body-md text-body-md text-on-surface flex flex-col min-h-screen">
-<!-- HEADER GLOBAL REFACTORIZADO -->
 <header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(53,54,58,0.06)]">
     <div class="h-20 max-w-[80rem] mx-auto px-margin-mobile lg:px-margin-desktop flex items-center justify-between">
         <!-- Logotipo - PNG & TEXTO -->
@@ -25,16 +24,16 @@
                      alt="Logotipo La Jardinera"
                      class="h-11 w-auto shrink-0 object-contain transition-transform duration-300 group-hover:scale-105 block dark:hidden"
                      width="44"
-                     height="44" />
+                     height="44"/>
                 <!-- Logotipo PNG — variante blanca (modo oscuro) -->
                 <img src="./public/logos/la-jardinera-blanco.png"
                      alt="Logotipo La Jardinera"
                      class="h-11 w-auto shrink-0 object-contain transition-transform duration-300 group-hover:scale-105 hidden dark:block"
                      width="44"
-                     height="44" />
-                <!-- Separador Vertical Elegante -->
+                     height="44"/>
+                <!-- Separador Vertical Elegante (solo desde sm) -->
                 <div class="hidden sm:block w-px h-8 bg-outline-variant/60 group-hover:bg-primary/40 transition-colors duration-300" aria-hidden="true"></div>
-                <!-- Texto del Logotipo -->
+                <!-- Texto del Logotipo (una sola línea: 18px en móvil, 24px desde sm) -->
                 <span class="font-headline-md text-headline-sm sm:text-headline-md italic tracking-tight whitespace-nowrap fx-spotlight">
                     La Jardinera
                 </span>
@@ -46,112 +45,117 @@
                 data-active-classes="text-primary"
                 aria-label="Navegación principal"
         >
-            <a
-                    class="group relative px-4 py-3
-               font-label-md text-label-md
-               uppercase tracking-[0.16em]
-               text-on-surface-variant
-               hover:text-primary
-               transition-colors duration-300"
-                    data-path="inicio"
-                    href="./index.html"
+
+            class="group relative px-2.5 xl:px-4 py-3
+            font-label-md text-label-md
+            uppercase tracking-[0.1em] xl:tracking-[0.16em]
+            text-on-surface-variant
+            hover:text-primary
+            transition-colors duration-300"
+            data-path="inicio"
+            href="./index.html"
             >
-                <span>Inicio</span>
-                <span
-                        class="absolute left-4 right-4 bottom-1
+            <span>Inicio</span>
+
+            <span
+                    class="absolute left-2.5 right-2.5 xl:left-4 xl:right-4 bottom-1
                    h-px bg-primary
                    origin-center scale-x-0
                    group-hover:scale-x-100
                    transition-transform duration-300"
-                        aria-hidden="true"
-                ></span>
+                    aria-hidden="true"
+            ></span>
             </a>
 
-            <a
-                    class="group relative px-4 py-3
-               font-label-md text-label-md
-               uppercase tracking-[0.16em]
-               text-on-surface-variant
-               hover:text-primary
-               transition-colors duration-300"
-                    data-path="servicios"
-                    href="./servicios.html"
+
+            class="group relative px-2.5 xl:px-4 py-3
+            font-label-md text-label-md
+            uppercase tracking-[0.1em] xl:tracking-[0.16em]
+            text-on-surface-variant
+            hover:text-primary
+            transition-colors duration-300"
+            data-path="servicios"
+            href="./servicios.html"
             >
-                <span>Servicios</span>
-                <span
-                        class="absolute left-4 right-4 bottom-1
+            <span>Servicios</span>
+
+            <span
+                    class="absolute left-2.5 right-2.5 xl:left-4 xl:right-4 bottom-1
                    h-px bg-primary
                    origin-center scale-x-0
                    group-hover:scale-x-100
                    transition-transform duration-300"
-                        aria-hidden="true"
-                ></span>
+                    aria-hidden="true"
+            ></span>
             </a>
 
-            <a
-                    class="group relative px-4 py-3
-               font-label-md text-label-md
-               uppercase tracking-[0.16em]
-               text-on-surface-variant
-               hover:text-primary
-               transition-colors duration-300"
-                    data-path="suscripcion-floral"
-                    href="./suscripcion-floral.html"
+
+            class="group relative px-2.5 xl:px-4 py-3
+            font-label-md text-label-md
+            uppercase tracking-[0.1em] xl:tracking-[0.16em]
+            text-on-surface-variant
+            hover:text-primary
+            transition-colors duration-300"
+            data-path="suscripcion-floral"
+            href="./suscripcion-floral.html"
             >
-                <span>Suscripción Floral</span>
-                <span
-                        class="absolute left-4 right-4 bottom-1
+            <span>Suscripción Floral</span>
+
+            <span
+                    class="absolute left-2.5 right-2.5 xl:left-4 xl:right-4 bottom-1
                    h-px bg-primary
                    origin-center scale-x-0
                    group-hover:scale-x-100
                    transition-transform duration-300"
-                        aria-hidden="true"
-                ></span>
+                    aria-hidden="true"
+            ></span>
             </a>
 
-            <a
-                    class="group relative px-4 py-3
-               font-label-md text-label-md
-               uppercase tracking-[0.16em]
-               text-on-surface-variant
-               hover:text-primary
-               transition-colors duration-300"
-                    data-path="galeria"
-                    href="./galeria.html"
+
+            class="group relative px-2.5 xl:px-4 py-3
+            font-label-md text-label-md
+            uppercase tracking-[0.1em] xl:tracking-[0.16em]
+            text-on-surface-variant
+            hover:text-primary
+            transition-colors duration-300"
+            data-path="galeria"
+            href="./galeria.html"
             >
-                <span>Galería</span>
-                <span
-                        class="absolute left-4 right-4 bottom-1
+            <span>Galería</span>
+
+            <span
+                    class="absolute left-2.5 right-2.5 xl:left-4 xl:right-4 bottom-1
                    h-px bg-primary
                    origin-center scale-x-0
                    group-hover:scale-x-100
                    transition-transform duration-300"
-                        aria-hidden="true"
-                ></span>
+                    aria-hidden="true"
+            ></span>
             </a>
 
-            <a
-                    aria-current="page"
-                    class="group relative px-4 py-3
-               font-label-md text-label-md
-               uppercase tracking-[0.16em]
-               text-primary
-               transition-colors duration-300"
-                    data-path="contacto"
-                    href="./contacto.html"
+
+            aria-current="page"
+            class="group relative px-2.5 xl:px-4 py-3
+            font-label-md text-label-md
+            uppercase tracking-[0.1em] xl:tracking-[0.16em]
+            text-primary
+            transition-colors duration-300"
+            data-path="contacto"
+            href="./contacto.html"
             >
-                <span>Contacto</span>
-                <span
-                        class="absolute left-4 right-4 bottom-1
+            <span>Contacto</span>
+
+            <span
+                    class="absolute left-2.5 right-2.5 xl:left-4 xl:right-4 bottom-1
                    h-px bg-primary
                    origin-center scale-x-100
                    transition-transform duration-300"
-                        aria-hidden="true"
-                ></span>
+                    aria-hidden="true"
+            ></span>
             </a>
         </nav>
         <!-- Íconos de Redes Sociales -->
-        <div class="flex items-center gap-2 lg:gap-space-3">
+        <div class="flex items-center gap-2 lg:gap-2 xl:gap-space-3">
             <!-- Instagram -->
             <a aria-label="Visitar Instagram"
                class="hidden lg:flex w-8 h-8 rounded-full bg-surface-container items-center justify-center text-on-surface-variant hover:text-primary transition-all"
@@ -204,7 +208,7 @@
         </div>
     </div>
 
-    <!-- Menú Móvil Desplegable -->
+    <!-- Menú Móvil Desplegable (panel anclado bajo la barra) -->
     <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full max-h-[calc(100dvh-5rem)] overflow-y-auto overscroll-contain bg-surface dark:bg-dark-surface-container-low border-t border-outline-variant/30 shadow-[0_8px_24px_rgba(53,54,58,0.12)]">
         <nav class="flex flex-col px-margin-mobile" aria-label="Navegación móvil">
             <a class="flex items-center min-h-[3rem] border-b border-outline-variant/30 font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary" data-path="inicio" href="./index.html">Inicio</a>
@@ -233,7 +237,6 @@
 </header>
 <!-- Capa tenue del menú móvil: HERMANA del <header>, jamás dentro de él -->
 <div id="mobile-menu-scrim" class="hidden lg:hidden fixed inset-x-0 top-20 bottom-0 z-40 bg-neutral-900/40" aria-hidden="true"></div>
-
 <!-- CONTENEDOR PRINCIPAL EDITORIAL Y TARJETAS PREMIUM -->
 <main class="w-full pt-20 flex-grow bg-background flex flex-col justify-center min-h-[85vh]">
     <div class="max-w-[80rem] mx-auto px-margin-mobile lg:px-margin-desktop w-full py-space-10">
