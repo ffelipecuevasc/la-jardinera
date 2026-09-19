@@ -18,3 +18,4 @@
 Épica 05 - Iteración 02: Layout Central y Tarjetas de Contacto Premium (Contacto) - Completada con éxito. Cierre oficial de Épica 05.
 Épica 06 - Iteración 01: Creación y Maquetación Integral de "404.html" - Completada con éxito.
 Épica 06 - Iteración 02: Paridad Móvil y Normalización de Enlaces en "index.html" - Completada con éxito.
+Épica 06 - Iteración 03: Paridad Móvil y Normalización de Enlaces en "servicios.html" - Completada con éxito.
