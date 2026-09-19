@@ -28,3 +28,4 @@
 Épica 06 - Iteración 08: Header Móvil Esencial y Panel Anclado en "servicios.html" - Completada con éxito.
 Épica 06 - Iteración 09: Header Móvil Esencial y Panel Anclado en "suscripcion-floral.html" - Completada con éxito.
 Épica 06 - Iteración 10: Header Móvil Esencial y Panel Anclado en "galeria.html" - Completada con éxito.
+Épica 06 - Iteración 11: Header Móvil Esencial y Panel Anclado en "contacto.html" - Completada con éxito.
