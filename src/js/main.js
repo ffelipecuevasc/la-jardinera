@@ -5,6 +5,7 @@
     { path: './modules/modal.js',        fn: 'initModal'        },
     { path: './modules/subscription.js', fn: 'initSubscription' },
     { path: './modules/gallery.js',      fn: 'initGallery'      },
+    { path: './modules/contact-form.js', fn: 'initContactForm' },
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
