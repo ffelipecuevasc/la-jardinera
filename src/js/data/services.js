@@ -17,7 +17,7 @@ export const servicesData = {
         title: 'Suscripción floral',
         mainImage: './public/images/servicios/suscripcion.webp',
         description: `<p>Las Flores en tu casa o tu lugar de trabajo tienen un poder silencioso, tienen un efecto de felicidad inmediata, transforman cualquier espacio y nuestro estado de ánimo.</p>
-<h4>Así funciona...</h4>
+<h4>Así funciona:</h4>
 <ul>
     <li>Escoge el plan que te hará feliz.</li>
     <li>Cada miércoles o miércoles por medio te llegará un ramo a la puerta de tu casa o trabajo.</li>
@@ -34,10 +34,14 @@ export const servicesData = {
     'gift-cards': {
         title: 'Gift Cards',
         mainImage: './public/images/servicios/gift-cards.webp',
-        description: `<p>Nuestras Gift Cards nacen de una invitación a descubrir el universo de nuestro taller floral y a elegir el momento perfecto para vivirlo.</p>
-<p>Una Gift Card puede consistir en cualquiera de nuestras experiencias, un ramo de flores de autor, talleres creativos o suscripciones florales. Quien la recibe decide cuándo activarla y cómo disfrutarla, en el momento que más le inspire.</p>
-<p>Las más apreciadas son nuestras suscripciones florales. Regalar uno, dos o varios meses de flores es regalar una experiencia que se renueva semana tras semana.</p>
-<p>Los talleres también son una linda alternativa, son encuentros donde las flores se descubren desde otra mirada: una experiencia para aprender, crear con las manos y conectar con otras como tú.</p>
+        description: `<p>Nuestras Gift Cards nacen de una invitación a descubrir el universo de nuestro taller floral y a elegir el momento perfecto para vivirlo. Quien la recibe decide cuándo activarla y cómo disfrutarla.</p>
+<h4>Qué puedes regalar</h4>
+<ul>
+    <li>Ramos de flores de autor, diseñados especialmente para quien los recibe.</li>
+    <li>Talleres creativos, una experiencia para aprender y crear con las manos.</li>
+    <li>Suscripciones florales, la opción más apreciada: una experiencia que se renueva semana tras semana.</li>
+</ul>
+<h4>Para cada ocasión</h4>
 <p>Una Gift Card es el regalo perfecto para un cumpleaños, una celebración, un agradecimiento o la Navidad.</p>`,
         gallery: [
             './public/images/servicios/galeria/gift-cards-1.webp',
@@ -63,9 +67,11 @@ export const servicesData = {
     'ramos-de-autor': {
         title: 'Ramos de Autor',
         mainImage: './public/images/servicios/ramos-de-autor.webp',
-        description: `<p>En nuestro taller, cada ramo comienza con una inspiración distinta y no a partir de modelos pre hechos, cada composición es una única, diseñada para la persona que la recibirá.</p>
+        description: `<p>En nuestro taller, cada ramo comienza con una inspiración distinta, no a partir de modelos prehechos: cada composición es única, diseñada para la persona que la recibirá.</p>
+<h4>Nuestro proceso</h4>
 <p>Combinamos flores frescas de temporada sobre una paleta de colores elegida por el cliente, así convertimos cada ramo en una pieza floral con equilibrio e identidad.</p>
-<p>Las Flores son vivas, continúan transformándose cada día. Los botones se abren lentamente, nuevas formas aparecen, los colores evolucionan y los ramos regalan cada día una nueva sorpresa.</p>`,
+<h4>Una pieza viva</h4>
+<p>Las flores son vivas y continúan transformándose cada día. Los botones se abren lentamente, nuevas formas aparecen, los colores evolucionan y el ramo regala cada día una nueva sorpresa.</p>`,
         gallery: [
             './public/images/servicios/galeria/ramos-de-autor-1.webp',
             './public/images/servicios/galeria/ramos-de-autor-2.webp',
@@ -95,9 +101,14 @@ export const servicesData = {
     'novios-rio': {
         title: 'Novios por el Río',
         mainImage: './public/images/servicios/novios-rio.webp',
-        description: `<p>Te invitamos a vivir una navegación pausada por las tranquilas aguas del Río Calle-Calle, en el corazón de Valdivia, es un momento para disfrutar, contemplar el paisaje y atesorar.</p>
-<p>En ocasiones, navegamos con ambos novios rumbo a la ceremonia; en otras, acompañamos a la novia en su llegada o traslado hacia la celebración, donde familiares y amigos reciben a los recién casados.</p>
-<p>La calma del río, el entorno natural y el encanto de la navegación crean una atmósfera íntima y dulce, convirtiendo el viaje en parte de la celebración. Es un tiempo para respirar, emocionarse, compartir y disfrutar de una perspectiva diferente de la celebración, mientras cada instante queda en fotografías.</p>`,
+        description: `<p>Te invitamos a vivir una navegación pausada por las tranquilas aguas del Río Calle-Calle, en el corazón de Valdivia: un momento para disfrutar, contemplar el paisaje y atesorar.</p>
+<h4>Cómo navegamos contigo</h4>
+<ul>
+    <li>Con ambos novios a bordo, rumbo a la ceremonia.</li>
+    <li>Acompañando a la novia en su llegada o traslado hacia la celebración, donde familiares y amigos reciben a los recién casados.</li>
+</ul>
+<h4>Una experiencia para atesorar</h4>
+<p>La calma del río, el entorno natural y el encanto de la navegación crean una atmósfera íntima y dulce, convirtiendo el viaje en parte de la celebración. Es un tiempo para respirar, emocionarse y compartir, mientras cada instante queda en fotografías.</p>`,
         gallery: [
             './public/images/servicios/galeria/novios-rio-1.webp',
             './public/images/servicios/galeria/novios-rio-2.webp',
@@ -107,11 +118,11 @@ export const servicesData = {
     'eventos': {
         title: 'Eventos y Celebraciones',
         mainImage: './public/images/servicios/eventos.webp',
-        description: `<p>Las flores deben ser parte de la esencia de una celebración. Definen la atmósfera, aportan sensibilidad y transforman un espacio en un lugar inolvidable.</p>
-<p>Para una cena íntima, cumpleaños, aniversario, comida familiar, un cóctel u otra celebración.</p>
-<p>Nuestros proyectos nacen de una conversación, porque cada encuentro tiene un carácter distinto y merece una propuesta floral pensada exclusivamente para ti.</p>
-<p>Nos inspira el espacio, la luz, la estación del año, la mesa, la arquitectura y las personas que la compartirán, así creamos arreglos florales de autor.</p>
-<p>Nos ocupamos de todo el proceso. Diseñamos y elaboramos cada composición en nuestro taller, realizamos el montaje y proporcionamos todos los soportes y elementos necesarios para un resultado fabuloso.</p>`,
+        description: `<p>Las flores deben ser parte de la esencia de una celebración. Definen la atmósfera, aportan sensibilidad y transforman un espacio en un lugar inolvidable: para una cena íntima, un cumpleaños, un aniversario, una comida familiar o un cóctel.</p>
+<h4>Cómo trabajamos</h4>
+<p>Nuestros proyectos nacen de una conversación, porque cada encuentro tiene un carácter distinto y merece una propuesta floral pensada exclusivamente para ti. Nos inspira el espacio, la luz, la estación del año, la mesa, la arquitectura y las personas que la compartirán.</p>
+<h4>Nos ocupamos de todo</h4>
+<p>Diseñamos y elaboramos cada composición en nuestro taller, realizamos el montaje y proporcionamos todos los soportes y elementos necesarios para un resultado fabuloso.</p>`,
         gallery: [
             './public/images/servicios/galeria/eventos-1.webp',
             './public/images/servicios/galeria/eventos-2.webp'
@@ -120,9 +131,14 @@ export const servicesData = {
     'condolencias': {
         title: 'Condolencias',
         mainImage: './public/images/servicios/condolencias.webp',
-        description: `<p>En los momentos de despedida, cuando las emociones son profundas y las palabras pueden quedarse pequeñas, las flores se convierten en un gesto de amor, respeto y acompañamiento.</p>
-<p>Diseñamos homenajes florales que honran la historia y acompañan a quienes quedan.</p>
-<p>Coronas, ramos, centros florales, cubre urnas y composiciones especiales son elaborados en nuestro taller con flores frescas.</p>`,
+        description: `<p>En los momentos de despedida, cuando las emociones son profundas y las palabras pueden quedarse pequeñas, las flores se convierten en un gesto de amor, respeto y acompañamiento. Diseñamos homenajes florales que honran la historia y acompañan a quienes quedan.</p>
+<h4>Nuestros homenajes</h4>
+<ul>
+    <li>Coronas florales.</li>
+    <li>Ramos y centros florales.</li>
+    <li>Cubre urnas.</li>
+    <li>Composiciones especiales, elaboradas en nuestro taller con flores frescas.</li>
+</ul>`,
         gallery: [
             './public/images/servicios/galeria/condolencias-1.webp',
             './public/images/servicios/galeria/condolencias-2.webp'

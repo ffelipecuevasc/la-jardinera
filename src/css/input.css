@@ -321,24 +321,48 @@ html.dark::view-transition-new(root) {
     background-color: rgb(var(--color-primary) / 0.55);
 }
 
-/* --- Tipografía del contenido inyectado --- */
+/* --- Tipografía del contenido inyectado ---
+   Modernización manteniendo el lenguaje visual del sitio: el mismo
+   acento romboidal usado en el rombo "✦" de encabezados de sección
+   y en el <h4> estático "Galería del Servicio" de este mismo modal
+   (borde inferior + ritmo vertical), para que el texto inyectado se
+   sienta parte del mismo sistema y no una plantilla genérica. */
 .modal-prose {
     color: rgb(var(--color-on-surface-variant));
+    font-feature-settings: "liga" 1, "kern" 1;
 }
 
 .modal-prose > * + * {
-    margin-top: 1rem;
+    margin-top: 1.125rem;
 }
 
 .modal-prose h3,
 .modal-prose h4 {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
     font-family: "Noto Serif", serif;
-    font-size: 24px;
-    line-height: 32px;
+    font-size: 22px;
+    line-height: 30px;
     font-weight: 400;
     letter-spacing: -0.01em;
     color: rgb(var(--color-on-surface));
-    margin-top: 2rem;
+    margin-top: 2.25rem;
+    padding-bottom: 0.625rem;
+    border-bottom: 1px solid rgb(var(--color-on-surface-variant) / 0.18);
+}
+
+/* Acento romboidal antes del subtítulo: mismo motivo geométrico
+   que el rombo "✦" de los encabezados de sección del sitio. */
+.modal-prose h3::before,
+.modal-prose h4::before {
+    content: "";
+    flex-shrink: 0;
+    width: 7px;
+    height: 7px;
+    background-color: rgb(var(--color-primary));
+    transform: rotate(45deg);
+    border-radius: 1px;
 }
 
 .modal-prose > :first-child {
@@ -348,11 +372,21 @@ html.dark::view-transition-new(root) {
 .modal-prose p {
     font-size: 16px;
     line-height: 1.75;
+    text-wrap: pretty;
 }
 
+/* Énfasis con trazo de resaltador estático (misma familia visual
+   que .fx-marker del titular del Hero, sin la animación: aquí el
+   texto se lee de corrido dentro de un modal con scroll, así que
+   el acento queda quieto en vez de en bucle). */
 .modal-prose strong {
     color: rgb(var(--color-on-surface));
     font-weight: 600;
+    background-image: linear-gradient(rgb(var(--color-primary) / 0.16), rgb(var(--color-primary) / 0.16));
+    background-repeat: no-repeat;
+    background-size: 100% 0.4em;
+    background-position: 0 88%;
+    padding: 0 0.15em;
 }
 
 .modal-prose ul {
@@ -370,18 +404,21 @@ html.dark::view-transition-new(root) {
     line-height: 1.75;
 }
 
-/* Viñeta como punto de marca, en lugar del carácter "•" escrito
-   dentro del texto. Es decorativa, así que no la lee el lector de
-   pantalla: la semántica ya la aporta el <li>. */
+/* Viñeta en forma de guion corto — distinta a propósito del rombo de
+   los subtítulos de arriba, para que ambos acentos se distingan de
+   un vistazo. El mismo motivo de "línea corta" que ya usan los
+   separadores junto al rombo "✦" de los encabezados de sección. Es
+   decorativa, así que no la lee el lector de pantalla: la semántica
+   ya la aporta el <li>. */
 .modal-prose li::before {
     content: "";
     position: absolute;
     left: 0;
-    top: 0.65em;
-    width: 6px;
-    height: 6px;
-    border-radius: 999px;
-    background-color: rgb(var(--color-primary));
+    top: 0.8em;
+    width: 10px;
+    height: 2px;
+    border-radius: 1px;
+    background-color: rgb(var(--color-primary) / 0.65);
 }
 
 @media (prefers-reduced-motion: reduce) {
