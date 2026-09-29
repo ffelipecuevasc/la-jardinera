@@ -4,11 +4,6 @@
 
 @layer base {
     :root {
-        /* Tokens de Resaltado (Hi-Liter / fx-marker) */
-        --ink: currentColor;
-        --ink-2: #b4f1c1;
-        --ink-3: #4FF8FF;
-
         /* Easing de transición exponencial */
         --expo-out: cubic-bezier(0.16, 1, 0.3, 1);
 
@@ -242,33 +237,88 @@ html.dark::view-transition-new(root) {
 }
 
 /* ========================================================= */
-/* TITULAR DEL HERO — RESALTADOR (HI-LITER / FX-MARKER)       */
+/* TITULAR DEL HERO — CONSTELACIÓN (FX-STARLIGHT)            */
+/* Ver DESIGN.md §7                                          */
+/*                                                           */
+/* Tres campos de destellos titilan sobre el relleno de las  */
+/* letras mientras un brillo lineal recorre el titular.      */
+/* El Hero es un bloque de contraste fijo (DESIGN.md §3):    */
+/* los colores son tokens estáticos leídos con theme(), por  */
+/* lo que el efecto se ve igual en modo claro y oscuro.      */
+/*                                                           */
+/* Tamaños en "em": el efecto escala con el titular (48 px   */
+/* en móvil, 64 px desde lg). Cada capa se desplaza          */
+/* exactamente un mosaico por ciclo: el bucle no tiene salto. */
 /* ========================================================= */
 
-.fx-marker {
+.fx-starlight {
+    /* Tokens del efecto: se sobrescriben por variante */
+    --ink: theme('colors.neutral-50');
+    --ink-3: theme('colors.secondary-container');
+    --star: theme('colors.surface-container-lowest');
+
+    /* Respaldo legible para navegadores sin background-clip: text */
     color: var(--ink);
-    display: inline;
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
-    padding: .05em .15em;
-    background: linear-gradient(100deg,
-        color-mix(in srgb, var(--ink-2) 85%, transparent),
-        color-mix(in srgb, var(--ink-2) 60%, transparent)
-    ) no-repeat 0 62%;
-    background-size: 0% 46%;
-    animation: fx-marker 5s ease-in-out infinite;
 }
 
-@keyframes fx-marker {
-    0%        { background-size: 0% 46%;   background-position: 0 62%; }
-    38%, 62%  { background-size: 100% 46%; background-position: 0 62%; }
-    100%      { background-size: 0% 46%;   background-position: 100% 62%; }
+/* Variante del nombre en cursiva: invierte los tonos para
+   conservar la jerarquía de DESIGN.md §7.3 */
+.fx-starlight--accent {
+    --ink: theme('colors.secondary-container');
+    --ink-3: theme('colors.neutral-50');
 }
 
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    .fx-starlight {
+        color: transparent;
+        background: radial-gradient(circle at 14% 35%, var(--star) 0 .07em, transparent .086em),
+        radial-gradient(circle at 42% 68%, var(--star) 0 .057em, transparent .071em),
+        radial-gradient(circle at 75% 24%, var(--star) 0 .079em, transparent .093em),
+        linear-gradient(100deg, var(--ink), var(--ink-3), var(--ink));
+        background-size: 4.3em 2.15em, 5.35em 2.55em, 6.45em 2.45em, 200% 100%;
+        /* background-clip se declara después del atajo "background",
+           que de lo contrario lo reiniciaría */
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-box-decoration-break: clone;
+        box-decoration-break: clone;
+        filter: drop-shadow(0 0 .3em color-mix(in srgb, var(--ink-3) 40%, transparent));
+        animation: fx-starlight 3.6s linear infinite;
+    }
+}
+
+/* El span anidado hereda el resplandor del exterior (el filtro
+   se aplica a todo el subárbol); duplicarlo lo intensificaría. */
+.fx-starlight .fx-starlight {
+    filter: none;
+}
+
+@keyframes fx-starlight {
+    0% {
+        background-position: 0 0, 0 0, 0 0, 0% 0;
+    }
+    100% {
+        background-position: 4.3em 0, -5.35em 0, 6.45em 0, 200% 0;
+    }
+}
+
+/* Movimiento reducido: sin animación y con el brillo igualado al
+   color base, para que el titular quede sólido y sin tintes
+   parciales. Va después de la variante para ganarle en cascada. */
 @media (prefers-reduced-motion: reduce) {
-    .fx-marker {
+    .fx-starlight {
+        --ink-3: var(--ink);
         animation: none;
-        background-size: 100% 46%;
+    }
+}
+
+/* Alto contraste forzado: sin fondos ni filtros, texto del sistema. */
+@media (forced-colors: active) {
+    .fx-starlight {
+        color: CanvasText;
+        background: none;
+        filter: none;
+        animation: none;
     }
 }
 
@@ -375,10 +425,9 @@ html.dark::view-transition-new(root) {
     text-wrap: pretty;
 }
 
-/* Énfasis con trazo de resaltador estático (misma familia visual
-   que .fx-marker del titular del Hero, sin la animación: aquí el
-   texto se lee de corrido dentro de un modal con scroll, así que
-   el acento queda quieto en vez de en bucle). */
+/* Énfasis con trazo de resaltador estático: el texto se lee de
+   corrido dentro de un modal con scroll, así que el acento queda
+   quieto en vez de en bucle. */
 .modal-prose strong {
     color: rgb(var(--color-on-surface));
     font-weight: 600;
@@ -406,10 +455,8 @@ html.dark::view-transition-new(root) {
 
 /* Viñeta en forma de guion corto — distinta a propósito del rombo de
    los subtítulos de arriba, para que ambos acentos se distingan de
-   un vistazo. El mismo motivo de "línea corta" que ya usan los
-   separadores junto al rombo "✦" de los encabezados de sección. Es
-   decorativa, así que no la lee el lector de pantalla: la semántica
-   ya la aporta el <li>. */
+   un vistazo. Es decorativa, así que no la lee el lector de pantalla:
+   la semántica ya la aporta el <li>. */
 .modal-prose li::before {
     content: "";
     position: absolute;
@@ -427,6 +474,7 @@ html.dark::view-transition-new(root) {
         transition: none;
     }
 }
+
 /* ========================================================= */
 /* ACORDEÓN DE PLANES DE SUSCRIPCIÓN                         */
 /* Animación continua basada en CSS Grid (0fr -> 1fr)       */
@@ -450,6 +498,7 @@ html.dark::view-transition-new(root) {
 
 /* ========================================================= */
 /* LOGOTIPO — EFECTO SPOTLIGHT BOTÁNICO DE ALTA GAMA         */
+/* Ver DESIGN.md §12.1                                       */
 /* ========================================================= */
 
 .fx-spotlight {

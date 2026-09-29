@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "deny": [
+      "Edit(/AGENTS.md)",
+      "Edit(/README.md)",
+      "Edit(/DESIGN.md)",
+      "Edit(/CLAUDE.md)",
+      "Edit(/CLAUDE.local.md)",
+      "Edit(/.claude/**)",
+      "Bash(git add *)",
+      "Bash(git commit)",
+      "Bash(git commit *)",
+      "Bash(git push)",
+      "Bash(git push *)",
+      "Bash(git pull)",
+      "Bash(git pull *)",
+      "Bash(git merge *)",
+      "Bash(git rebase *)",
+      "Bash(git reset *)",
+      "Bash(git revert *)",
+      "Bash(git checkout *)",
+      "Bash(git switch *)",
+      "Bash(git branch -d *)",
+      "Bash(git branch -D *)",
+      "Bash(git stash)",
+      "Bash(git stash *)",
+      "Bash(git tag *)",
+      "Bash(git cherry-pick *)",
+      "Bash(git clean *)",
+      "Bash(git mv *)",
+      "Bash(git rm *)",
+      "Bash(gh pr *)",
+      "Bash(gh release *)",
+      "Bash(wrangler *)",
+      "Bash(npx wrangler *)",
+      "Bash(pnpm dlx wrangler *)",
+      "Bash(npm *)",
+      "Bash(yarn *)"
+    ],
+    "allow": [
+      "Bash(pnpm build)",
+      "Bash(git status)",
+      "Bash(git status *)",
+      "Bash(git diff)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git show *)",
+      "Bash(git blame *)",
+      "Bash(git ls-files *)"
+    ]
+  }
+}
