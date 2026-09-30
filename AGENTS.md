@@ -93,7 +93,7 @@ El control de versiones y la publicación son responsabilidad exclusiva del desa
 |:--------------|:---------------------------------------------------------------------|
 | `pnpm install`| Instala dependencias (solo si el desarrollador lo pide).             |
 | `pnpm dev`    | Tailwind en modo observación.                                        |
-| `pnpm build`  | Compila y minifica `dist/css/output.css`. **Obligatorio al cerrar cada tarea.** |
+| `pnpm run build:cf` | Compila el CSS y genera `_site/` por lista blanca para Cloudflare Pages. | 
 
 Notas:
 
@@ -171,7 +171,7 @@ Notas:
 
 - Cloudflare Pages construye y publica automáticamente cada push a `main`; las demás ramas generan despliegues de vista
   previa.
-- La carpeta `_planificacion/` y la documentación interna **no deben publicarse**; el comando de build de Cloudflare
-  se encarga de excluirlas.
+- La carpeta `_planificacion/` y la documentación interna **no deben publicarse**: Cloudflare Pages publica solo
+  `_site/`, que `pnpm run build:cf` genera por lista blanca (6 HTML, `dist/`, `public/` y `src/js/`).
 - Cloudflare Web Analytics y Google Search Console se gestionan fuera del código: **no** agregues scripts de
   analítica ni etiquetas de verificación sin autorización.

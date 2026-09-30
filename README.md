@@ -80,6 +80,7 @@ dependencias de iconografía externa.
 ├── package.json · pnpm-lock.yaml
 ├── dist/
 │   └── css/output.css         # CSS compilado (generado por pnpm build)
+├── _site/                     # Carpeta publicable generada por pnpm run build:cf (ignorada por Git)
 ├── public/
 │   ├── icons/                 # Logotipos de terceros en SVG
 │   ├── logos/                 # Logotipo de La Jardinera (variante clara y blanca)
@@ -136,7 +137,7 @@ dependencias de iconografía externa.
 | Comando       | Descripción                                                        |
 |:--------------|:-------------------------------------------------------------------|
 | `pnpm dev`    | Compila `src/css/input.css` en modo observación.                   |
-| `pnpm build`  | Compila y minifica `dist/css/output.css` para producción.          |
+| `pnpm run build:cf` | Compila el CSS y genera `_site/` por lista blanca para Cloudflare Pages. |
 
 ---
 
@@ -161,7 +162,8 @@ El sitio se publica con **Cloudflare Pages**, conectado al repositorio de GitHub
 | Parámetro                    | Valor                                                                         |
 |:-----------------------------|:------------------------------------------------------------------------------|
 | Rama de producción           | `main`                                                                        |
-| Comando de compilación       | Compila Tailwind y excluye del despliegue la carpeta `_planificacion/` y la documentación interna |
+| Comando de compilación       | `pnpm run build:cf` (compila Tailwind y genera `_site/` por lista blanca)     |
+| Directorio de salida         | `_site`                                                                       |
 | Dominio personalizado        | `lajardinerafloreria.cl` y `www.lajardinerafloreria.cl`                       |
 | Certificado                  | HTTPS gestionado por Cloudflare                                               |
 
