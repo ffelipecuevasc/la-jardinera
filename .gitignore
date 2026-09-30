@@ -24,3 +24,6 @@ Thumbs.db
 *.njsproj
 *.sln
 *.sw?
+
+# Carpeta publicable generada por scripts/stage-site.mjs (Cloudflare Pages)
+_site/
