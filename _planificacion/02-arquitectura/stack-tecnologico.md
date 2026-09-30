@@ -6,20 +6,23 @@ scripts en HTML o inventar configuraciones de Tailwind) será considerada una re
 
 ## 1. Núcleo Tecnológico
 
-| Capa                   | Tecnología Seleccionada   | Propósito                                                                         |
-|:-----------------------|:--------------------------|:----------------------------------------------------------------------------------|
-| **Gestor de Paquetes** | PNPM (`v11.x`+)           | Gestión determinista de dependencias                                              |
-| **Estructura HTML**    | HTML5 Semántico (MPA)     | Múltiples páginas físicas (`index.html`, `servicios.html`). Cero emulaciones SPA. |
-| **Estilos**            | Tailwind CSS `v3.4.x`     | Compilación local por CLI (`dist/css/output.css`)                                 |
-| **Interactividad**     | JavaScript Vanilla (ES6+) | Módulos estrictos. Cero jQuery, cero frameworks React/Vue.                        |
-| **Despliegue**         | GitHub Actions -> Pages   | CI/CD automático de rama `main`.                                                  |
+| Capa                   | Tecnología Seleccionada          | Propósito                                                                  |
+|:-----------------------|:---------------------------------|:---------------------------------------------------------------------------|
+| **Gestor de Paquetes** | pnpm `11.24.0` (Node `>= 22.13`) | Gestión determinista de dependencias (versión fijada en `packageManager`)  |
+| **Estructura HTML**    | HTML5 Semántico (MPA)            | Seis páginas físicas (cinco de navegación y `404.html`). Cero emulaciones SPA. |
+| **Estilos**            | Tailwind CSS `v3.4.x`            | Compilación local por CLI (`dist/css/output.css`)                          |
+| **Interactividad**     | JavaScript Vanilla (ES6+)        | Módulos estrictos. Cero jQuery, cero frameworks React/Vue.                 |
+| **Despliegue**         | GitHub + Cloudflare Pages        | Despliegue continuo desde `main`, vistas previas por rama, comando `pnpm run build:cf`, salida `_site/` (lista blanca). |
+
+El sistema de diseño vive en **`DESIGN.md`, en la raíz del repositorio**. `_planificacion/02-arquitectura/DESIGN.md` es
+solo una redirección.
 
 ---
 
 ## 2. Configuración Estricta de Tailwind CSS
 
 El agente **NO DEBE** alterar el archivo `tailwind.config.js` inyectando paletas de colores ficticias. El archivo debe
-reflejar el 100% de los tokens definidos en `DESIGN.md`. La configuración autorizada incluye la directiva
+reflejar el 100% de los tokens definidos en `DESIGN.md` (raíz del repositorio). La configuración autorizada incluye la directiva
 `darkMode: 'class'` y la importación íntegra del objeto de colores original (Surface, Primary, Tertiary, etc.).
 
 **Reglas de CSS:**
@@ -29,6 +32,8 @@ reflejar el 100% de los tokens definidos en `DESIGN.md`. La configuración autor
 * ✅ **Obligatorio:** Importar siempre el CSS compilado: `<link rel="stylesheet" href="./dist/css/output.css" />`.
 * ✅ **Obligatorio:** Mantener la capa `@layer base` en `src/css/input.css` para resets globales (ej. reset de
   scrollbar).
+* ✅ **Obligatorio:** Las clases de Tailwind se escriben siempre en forma literal; Tailwind no detecta clases armadas con
+  plantillas.
 
 ---
 

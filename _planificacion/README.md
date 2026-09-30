@@ -215,7 +215,7 @@ Los números siempre con dos dígitos.
 | DT-06 | Footer con dos variantes de contenedor y enlace activo sin `font-body-sm text-body-sm`.                       | Baja      | Épica 08 (componente único) |
 | DT-07 | Texto "Redbank" en la franja de beneficios del Inicio; en Chile la red se llama **Redbanc**.                  | Baja      | Épica 07 · It. 03   |
 | DT-08 | Sin `robots.txt`, `sitemap.xml`, `canonical` ni etiquetas Open Graph.                                         | Media     | Épica 07 · It. 04   |
-| DT-09 | `01-vision/proposito-y-alcance.md` y `02-arquitectura/stack-tecnologico.md` desactualizados (5 páginas, Netlify Forms, GitHub Actions como despliegue). | Baja | Épica 07 · It. 01 |
+| DT-09 | ✅ **Resuelta** (Épica 07 · Iteración 01). `01-vision/proposito-y-alcance.md` y `02-arquitectura/stack-tecnologico.md` desactualizados (5 páginas, Netlify Forms, GitHub Actions como despliegue). | Baja | Épica 07 · It. 01 |
 | DT-10 | `src/js/main.js` importa módulos con ruta variable (`import(path)`): funciona en el navegador, pero impide el análisis de un empaquetador. | Baja (bloqueante para Épica 08) | Épica 08 · It. 02 |
 | DT-11 | Varios archivos guardados con BOM UTF-8 (`index.html`, `input.css`, `main.js`, módulos JS, `tailwind.config.js`). | Baja | Oportunista |
 | DT-12 | Deuda de diseño listada en `DESIGN.md` §5.                                                                    | Baja      | Según iteración     |

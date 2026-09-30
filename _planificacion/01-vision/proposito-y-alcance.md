@@ -11,19 +11,25 @@ implementar características que caigan en la sección "Fuera de Alcance".
 * **Traducción Técnica:** El código UI debe reflejar esta identidad utilizando **exclusivamente** el sistema de diseño
   estricto definido en `DESIGN.md` (tipografías Serif elegantes, colores botánicos, bordes curvos, y contrastes
   precisos).
+* **Publicación:** repositorio en GitHub y despliegue continuo con Cloudflare Pages (`lajardinerafloreria.cl`).
 
 ## 2. Arquitectura de Navegación (Restricción MPA)
 
-El proyecto es estrictamente una **Multi-Page Application (MPA)**. Consta de 5 archivos HTML físicos independientes
-interconectados por una barra de navegación. **Prohibido el uso de enrutadores JavaScript (History API) o emulaciones de
-Single Page Application (SPA).**
+El proyecto es estrictamente una **Multi-Page Application (MPA)**. Consta de 6 archivos HTML físicos independientes:
+cinco páginas interconectadas por una barra de navegación y una página de error. **Prohibido el uso de enrutadores
+JavaScript (History API) o emulaciones de Single Page Application (SPA).**
 
 1. **Inicio (`index.html`):** Hero, propuesta de valor, resumen de servicios, modelo de suscripción y reseñas (carrusel
    vanilla JS).
-2. **Servicios (`servicios.html`):** Catálogo de servicios y enlaces a WhatsApp.
-3. **Suscripción Floral (`suscripcion-floral.html`):** Planes de membresía (b2b y b2c).
-4. **Galería (`galeria.html`):** Vitrina visual interactiva (Filtros DOM vanilla y lightbox modal ligero).
-5. **Contacto (`contacto.html`):** Formulario estático (preparado para Netlify Forms) y mapa.
+2. **Servicios (`servicios.html`):** Catálogo de 8 servicios (`src/js/data/services.js`) con modal de detalle dinámico;
+   su llamado a la acción lleva a `contacto.html?service=...`.
+3. **Suscripción Floral (`suscripcion-floral.html`):** 3 planes de suscripción (Esencial, Premiere y Luxe) para hogar u
+   oficina.
+4. **Galería (`galeria.html`):** Acordeón horizontal por capítulos y visor Lightbox multimodal (imágenes y video). No
+   tiene filtros.
+5. **Contacto (`contacto.html`):** Tarjetas de WhatsApp y correo, y formulario cuyo envío abre WhatsApp con el mensaje
+   armado (`src/js/modules/contact-form.js`). No hay mapa incrustado ni Netlify Forms.
+6. **Página no encontrada (`404.html`):** Página de error con `noindex, follow`, sin enlace activo en la navegación.
 
 ## 3. Límites del Alcance (Scope Boundaries)
 
@@ -41,3 +47,6 @@ Single Page Application (SPA).**
 * **Pasarelas de Pago:** No programes integraciones con Webpay, Stripe o carritos de compra. Todo C2A (Call to Action)
   redirige a WhatsApp.
 * **Frameworks JS:** Cero dependencias pesadas de UI (React, Vue, Alpine.js, jQuery).
+
+> **Nota:** La Épica 08 (planificada, pendiente de aprobación) propone componentes React con renderizado estático; su
+> aprobación exige actualizar este documento.

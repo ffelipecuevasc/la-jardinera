@@ -1,6 +1,6 @@
 # Objetivos y Métricas de Éxito (QA & Performance)
 
-Este documento fija los estándares cualitativos y cuantitativos que el agente Antigravity debe monitorear. Las métricas
+Este documento fija los estándares cualitativos y cuantitativos que los agentes de IA deben monitorear. Las métricas
 no son sugerencias, son requisitos obligatorios (Definition of Done) para cada iteración.
 
 ---
@@ -31,7 +31,7 @@ no son sugerencias, son requisitos obligatorios (Definition of Done) para cada i
 
 ## 3. Criterios de Aceptación Globales (Definition of Done)
 
-Para dar por terminada cualquier iteración o componente, Antigravity debe asegurar:
+Para dar por terminada cualquier iteración o componente, el agente de IA debe asegurar:
 
 1. **Cero JS en línea:** El HTML no contiene scripts en línea ni eventos en atributos (`onclick`).
 2. **Compilación Exitosa:** El CSS generado incluye las clases esperadas tras ejecutar el build.
