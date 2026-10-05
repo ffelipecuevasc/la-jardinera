@@ -638,3 +638,179 @@ fix(hero): cierra H3, H6 y H7 de la iteración 08 (ícono de ubicación, hover d
 
 Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
 ```
+
+### 8.11 Corrección de contraste
+
+**Fecha:** 05-10-2026
+**Alcance:** se aplicó la opción medida en §8.7 (fondo oscuro en el botón y subrayado en el hover) y se declaró el anillo de foco de «Descubrir Más».
+Solo se editaron dos elementos de `<section id="titular">`. No se tocaron `input.css`, el tinte de la tarjeta (`bg-dark-background/45`), las imágenes,
+el titular, el ícono de ubicación, el header, el footer ni las otras páginas.
+
+**Resultado en una línea:** los tres incumplimientos de contraste de la §8.4 quedaron resueltos (peor caso ≥ 4,89:1 en todo lo medido) y «Descubrir Más»
+ya declara su anillo de foco (≥ 3,86:1 contra su fondo adyacente). Queda abierto el anillo **declarado** de «Explorar Servicios» y «Suscripción Floral»
+(hoy usan el nativo del navegador): se reporta con la clase propuesta, sin aplicar (§8.11.4).
+
+#### 8.11.1 Cambios (antes y después)
+
+`git diff -U0`: `@@ -278 +278 @@` y `@@ -293 +293 @@`, ambos dentro del Hero.
+
+| Elemento | Antes | Después | Evidencia (render real, 14 casos) |
+|:--|:--|:--|:--|
+| «Suscripción Floral» (`:278`), solo utilidades de fondo | `bg-surface-container-lowest/10` … `hover:bg-surface-container-lowest/20` | `bg-dark-background/30` … `hover:bg-dark-background/45` (borde, padding, texto, `transition-all` y ausencia de `backdrop-blur` intactos) | Fondo computado `rgba(255, 255, 255, 0.1)` → `rgba(31, 36, 33, 0.3)` en reposo y `rgba(255, 255, 255, 0.2)` → `rgba(31, 36, 33, 0.45)` en hover. Contraste peor caso: reposo 4,4899 → **7,6349:1**; hover 3,6377 → **8,9185:1**. |
+| «Descubrir Más» (`:293`), color de hover | `hover:text-secondary-container` | `hover:underline underline-offset-4` (color base `text-neutral-50` y `transition-colors` conservados) | Color computado en hover: `rgb(255, 194, 198)` → `rgb(248, 247, 243)`, igual al de reposo. `text-decoration-line`: `none` → `underline`; `text-underline-offset`: `4px`. Contraste del color de hover, peor caso: 3,4404 → **4,8894:1**. |
+| «Descubrir Más», foco | sin clases `focus-visible:`; anillo nativo (`outline: auto 1px rgb(16, 16, 16)`, offset 1px) | `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed` (sin `ring-offset`: no tiene fondo sólido propio) | Con Tab real: `outline: solid 2px transparent`, `outline-offset: 2px` y `box-shadow: … rgb(180, 241, 193) 0 0 0 2px`. Contraste del anillo contra su fondo adyacente: peor p5 **3,86:1**, 100 % de los píxeles ≥ 3:1. |
+
+El subrayado se confirmó también por píxeles: con el rebote del ícono detenido, el hover cambia ≈111 px (la línea del subrayado) frente a ≈400 px en el estado anterior
+(donde cambiaba el color de todos los glifos). Revisé tres capturas: el hover de «Descubrir Más» (1280×800 oscuro: texto subrayado y blanco), su foco (1280×800 oscuro) y el foco de «Suscripción Floral» (740×360 claro).
+
+#### 8.11.2 Compilación e invariantes
+
+| Verificación | Estado | Evidencia |
+|:--|:--|:--|
+| `pnpm build` sin errores ni advertencias | ✅ confirmado por ejecución | Salida limpia salvo el aviso conocido de Browserslist. `dist/css/output.css`: 46.538 B → 46.458 B; SHA-256 `2815b4cc8ef490c404df0d39ce6df5c0c0520d7d776e35adfca4bfd115d1e0d9` (antes `31fb352a…47a4`). |
+| Clases en `output.css` | ✅ confirmado por búsqueda de texto | `.hover\:underline:hover`, `.underline-offset-4`, `.focus-visible\:ring-primary-fixed:focus-visible` (`--tw-ring-color: rgb(180 241 193 / …)`), `.hover\:bg-dark-background\/45:hover`, `.bg-dark-background\/30`, `.focus-visible\:ring-2:focus-visible` y `.focus-visible\:outline-none:focus-visible`. |
+| Invariantes en `#titular` | ✅ confirmado por código | `style=` 0, `onclick` 0, `<script` 0, `backdrop-blur-md` 0, `hover:text-secondary-container` 0, `surface-container-lowest/10` y `/20` 0, `text-primary` 0. Único `backdrop-blur-*`: `backdrop-blur-xl` de la tarjeta. Ningún descendiente de `.hero-glass` con `backdrop-filter` computado (14/14). |
+| `fx-starlight`, `h1`, tarjeta e ícono | ✅ confirmado por código y render real | `<span>` idéntico; texto «Florería La Jardinera»; tarjeta `rgba(31, 36, 33, 0.45)` con `blur(24px) saturate(1.5)`; ícono de ubicación `rgb(248, 247, 243)` y `aria-hidden="true"`, sin cambios. |
+| Alcance | ✅ confirmado por código | Solo `index.html` (2 líneas) y `dist/css/output.css` (regenerado; está versionado). |
+
+#### 8.11.3 Contraste (peor caso: p95 del fondo, línea por línea, 7 viewports × 2 temas; idéntico en claro y oscuro)
+
+| Viewport | «Suscripción» reposo (antes → después) | «Suscripción» hover (antes → después) | «Descubrir Más» reposo | «Descubrir Más» hover (antes → después) | Ubicación | «Explorar» |
+|:--|:--|:--|:--|:--|:--|:--|
+| 320×640 | 6,34 → 10,14 | 4,84 → 11,06 | 9,36 | 6,59 → 9,36 | 8,87 | 6,06 |
+| 360×740 | 4,85 → 8,13 | 3,87 → 9,35 | 9,72 | 6,84 → 9,72 | 7,67 | 6,06 |
+| 412×915 | 5,34 → 8,83 | 4,21 → 9,91 | 8,84 | 6,22 → 8,84 | 5,66 | 6,06 |
+| 768×1024 | 4,64 → 7,87 | 3,73 → 9,09 | 4,89 | 3,44 → 4,89 | 4,50 | 6,06 |
+| 740×360 | 4,49 → 7,63 | 3,64 → 8,92 | 6,12 | 4,30 → 6,12 | 5,53 | 6,06 |
+| 1024×768 | 4,54 → 7,72 | 3,67 → 8,93 | 5,35 | 3,76 → 5,35 | 5,03 | 6,06 |
+| 1280×800 | 4,59 → 7,81 | 3,70 → 9,01 | 5,27 | 3,71 → 5,27 | 4,97 | 6,06 |
+
+| Elemento | Peor caso | Mínimo | Estado |
+|:--|:--|:--|:--|
+| «Suscripción Floral», reposo | 7,6349:1 (740×360) | 4,5 | ✅ |
+| «Suscripción Floral», hover | 8,9185:1 (740×360) | 4,5 | ✅ |
+| «Descubrir Más», reposo | 4,8894:1 (768×1024) | 4,5 | ✅ |
+| «Descubrir Más», hover (color computado) | 4,8894:1 (768×1024) | 4,5 | ✅ (el color no cambia; el hover se señala con subrayado) |
+| Texto de ubicación | **4,5016:1** (768×1024) | 4,5 | ✅ con margen de 0,0016 (sin cambios) |
+| «Explorar Servicios» | 6,0562:1 | 4,5 | ✅ (sin cambios) |
+
+#### 8.11.4 Foco por teclado real (Tab por CDP; `:focus-visible` activo en los 3 enlaces, 14/14)
+
+Se recorrió la página con pulsaciones reales de Tab (32 hasta «Explorar Servicios» en ≤768 px y 38 en ≥1024 px, porque el header de escritorio suma elementos enfocables; no los desglosé; luego 1 y 1 hasta los otros dos).
+Para esta etapa se emuló `prefers-reduced-motion` y así el ícono con rebote no genera cambios de píxeles falsos. **Contraste del anillo:** razón entre la luminancia de cada píxel del anillo con foco
+y la del mismo píxel sin foco (el fondo adyacente), sobre los píxeles que cambian dentro de 7 px fuera del borde del elemento.
+
+| Enlace | ¿Anillo declarado? | Anillo computado | Contraste contra el fondo adyacente | Estado |
+|:--|:--|:--|:--|:--|
+| «Descubrir Más» | **Sí** (esta corrección) | `outline: solid 2px transparent`, offset 2px, `box-shadow … rgb(180, 241, 193) 0 0 0 2px` | peor p5 **3,86:1**; peor p90 4,26:1; 100 % de los píxeles ≥ 3:1 | ✅ cumple 1.4.11 (≥ 3:1) |
+| «Explorar Servicios» | **No** | Anillo nativo de Chrome: `outline: auto 1px rgb(16, 16, 16)`, offset 1px | Dos tonos. El tono claro llega a **9,86:1** como mínimo; el oscuro no contrasta con el fondo oscuro (en el peor caso, solo el 40 % de los píxeles del anillo alcanza 3:1) | ⚠️ visible en Chrome, **no declarado** (DESIGN §11.3 y §14.3) |
+| «Suscripción Floral» | **No** | Igual al anterior | Tono claro ≥ **8,49:1**; en el peor caso, solo el 46 % de los píxeles del anillo alcanza 3:1 | ⚠️ visible en Chrome, **no declarado** |
+
+Antes de este cambio, «Descubrir Más» tenía el mismo anillo nativo (tono claro ≥ 5,60:1; en el peor caso, solo el 41 % de los píxeles del anillo alcanzaba 3:1). Corrección menor a la §8.6: los valores raros de ancho y color de los
+dos botones se debían a que se leyeron durante una transición; con 600 ms de espera, los tres enlaces muestran el mismo anillo nativo (`auto 1px rgb(16, 16, 16)`, offset 1px).
+Solo se verificó **Chrome**; el anillo nativo de Safari y Firefox es distinto y no se midió.
+
+**Propuestas, sin aplicar y sin verificar en render** (clases con `primary-fixed`, autorizado para anillos de foco sobre foto en §2.4; `ring-primary` es reactivo y no corresponde en este bloque de contraste fijo):
+
+* «Explorar Servicios» (relleno sólido propio, con *offset*): `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed focus-visible:ring-offset-2 focus-visible:ring-offset-dark-background`
+* «Suscripción Floral» (relleno translúcido, sin *offset*): `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed`
+
+**Observación visual:** el anillo de «Descubrir Más» es cuadrado y queda pegado al texto, porque el enlace no tiene padding ni radio. Cumple lo pedido; si quieres más aire,
+una opción es agregarle `rounded` y un padding mínimo (no se aplicó).
+
+#### 8.11.5 Sin regresión
+
+* **Scroll horizontal:** 13 de 14 casos con `scrollWidth = clientWidth`; a 768×1024 sigue en 772/768, igual que la línea base (H4, no es regresión).
+* **Consola y red:** 0 errores o advertencias y 0 fallos de red en los 14 casos de esta corrida (y 0 de 14 en la corrida de línea base). No reapareció el `ERR_CONNECTION_RESET` transitorio de la §8.3.
+* **Sin cambios:** ícono de ubicación, tinte de la tarjeta, titular, imágenes y resto de la página.
+
+#### 8.11.6 Informativo (no aplicado): tinte de la tarjeta en `/50`
+
+Medido inyectando CSS en el navegador (nada se guardó en el repo), peor caso entre los 7 viewports y ambos temas. Sirve para saber cuánto margen daría un ajuste global futuro.
+
+| Texto | Tinte `/45` (actual) | Tinte `/50` | Margen sobre 4,5 con `/45` → con `/50` |
+|:--|:--|:--|:--|
+| Párrafo (línea por línea) | 4,5588:1 (1280×800) | 5,0409:1 (768×1024) | 0,059 → 0,541 |
+| Texto de ubicación | 4,5016:1 (768×1024) | 5,0059:1 (768×1024) | 0,0016 → 0,506 |
+| «Descubrir Más» | 4,8894:1 (768×1024) | 5,4073:1 (768×1024) | 0,389 → 0,907 |
+
+Pasar a `/50` sumaría cerca de 0,5 de margen a los tres textos. Con `/45`, el texto de ubicación y el párrafo quedan prácticamente sin margen. Nota: el peor caso del párrafo línea por línea (4,5588:1) es algo
+menor que el 4,57:1 de DESIGN §2.10, que usa el p95 del área completa de la tarjeta.
+
+#### 8.11.7 Estado de los hallazgos tras la corrección
+
+| Hallazgo | Estado | Motivo |
+|:--|:--|:--|
+| H6, hover de «Descubrir Más» | ✅ cerrado (render real) | El hover se señala con subrayado y el color base se conserva (4,89:1 como mínimo). |
+| H7, `backdrop-blur-md` anidado | ✅ cerrado (render real) | Sin blur anidado y con contraste del botón de 7,63:1 (reposo) y 8,92:1 (hover). |
+| H8, foco declarado | ⚠️ parcial | «Descubrir Más» declarado (3,86:1); «Explorar Servicios» y «Suscripción Floral» siguen con el anillo nativo (§8.11.4). |
+| H4 (scroll de 4 px a 768 px) y H5 (CLS) | abiertos, fuera del Hero | Sin cambios. |
+
+La iteración sigue «Completada con reservas»; `estado-actual.md` no se modificó.
+
+#### 8.11.8 Propuestas de edición para `DESIGN.md` (las aplica el desarrollador)
+
+### Propuesta de edición — `DESIGN.md`
+**Sección:** §11.3 Botones, fila «Vidrio (sobre foto)» y nota posterior
+**Motivo:** la variante documentada dejó de cumplir dentro de la tarjeta del Hero; además, la nota actual dice que el segundo desenfoque «no aporta nada», y la medición mostró lo contrario (oscurecía el botón).
+```diff
+-| Vidrio (sobre foto)  | `bg-surface-container-lowest/10 hover:bg-surface-container-lowest/20 backdrop-blur-md text-neutral-50` |
++| Vidrio (sobre foto)  | `bg-surface-container-lowest/10 hover:bg-surface-container-lowest/20 backdrop-blur-md text-neutral-50` (fuera de la tarjeta del Hero) |
++| Vidrio sobre la tarjeta del Hero (§11.7) | `bg-dark-background/30 hover:bg-dark-background/45 text-neutral-50` (sin `backdrop-blur`) |
+```
+```diff
+-**Botón "Vidrio" dentro de la tarjeta del Hero (§11.7):** no lleva `backdrop-blur-md`. La tarjeta ya difumina el fondo y
+-un segundo desenfoque anidado no aporta nada y encarece el pintado.
++**Botón "Vidrio" dentro de la tarjeta del Hero (§11.7):** lleva `bg-dark-background/30 hover:bg-dark-background/45` y no
++lleva `backdrop-blur-md`. Medido en render, el desenfoque anidado oscurecía el fondo del botón (luminancia p95 de 0,16 a 0,10);
++sin él, el contraste se resuelve con el relleno oscuro (7,63:1 en reposo y 8,92:1 en hover como mínimo).
+```
+```diff
+ Todo botón o enlace-botón incluye foco visible: `focus-visible:outline-none focus-visible:ring-2
+ focus-visible:ring-primary` (con `focus-visible:ring-offset-2` en rellenos sólidos).
++Sobre fotografía o en bloques de contraste fijo (Hero) el anillo es `focus-visible:ring-primary-fixed` (§2.4): `ring-primary`
++es reactivo y en modo claro no llega a 3:1 sobre la tarjeta oscura (el mismo color `#316944` midió 1,05–1,38:1 en el ícono de ubicación antes de H3).
++El `ring-offset-2` solo se usa con relleno sólido propio.
+```
+
+### Propuesta de edición — `DESIGN.md`
+**Sección:** §11.7 Tarjeta de vidrio del Hero (estado final) y §2.10
+**Motivo:** reflejar el estado final de la tarjeta y los contrastes medidos.
+````diff
+ 8. **Verificación:** el contraste del texto sobre la tarjeta se mide en render real, línea por línea, con el percentil 95
+    del fondo y en 7 viewports (§14, punto 7).
++9. **Botones y enlaces de la tarjeta:**
++   - «Explorar Servicios»: botón de marca (`bg-primary-brand text-neutral-50 hover:opacity-90`), 6,06:1.
++   - «Suscripción Floral»: variante «Vidrio sobre la tarjeta» (§11.3), `bg-dark-background/30 hover:bg-dark-background/45`; 7,63:1 en reposo y 8,92:1 en hover.
++   - «Descubrir Más»: `text-neutral-50 hover:underline underline-offset-4 transition-colors`. El hover **no cambia el color**
++     (con `secondary-container` medía 3,44:1); se señala con subrayado. Anillo
++     `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed` (3,86:1 contra el fondo adyacente), sin `ring-offset`.
++   - Ícono de ubicación: `text-neutral-50` con `aria-hidden="true"`.
+````
+```diff
+ | Enlace activo del header sobre la foto, claro / oscuro | 4,82:1 / 5,86:1 | 4,5 | AA |
++| «Suscripción Floral», reposo / hover (740×360)       | 7,63:1 / 8,92:1  | 4,5    | AA    |
++| «Descubrir Más», reposo y hover (768×1024)           | 4,89:1           | 4,5    | AA    |
++| Texto de ubicación (768×1024)                        | 4,50:1           | 4,5    | AA (margen mínimo) |
++| «Explorar Servicios» (texto sobre `#316944`)         | 6,06:1           | 4,5    | AA    |
++| Anillo de foco de «Descubrir Más» contra el fondo adyacente | 3,86:1    | 3      | AA (1.4.11) |
+```
+
+#### 8.11.9 Archivos y mensaje de commit sugerido
+
+Archivos tocados en esta corrección: `index.html` (2 líneas), `dist/css/output.css` (regenerado; versionado) y esta bitácora (solo esta subsección 8.11). `_site/` (ignorado por Git) no se regeneró.
+Parte de este seguimiento (H3, H6 y H7) ya quedó en el commit `9cd0c06`; el mensaje siguiente cubre **todo el seguimiento** por si prefieres reunirlo en un solo commit (por ejemplo, con *amend* o *squash*).
+
+```text
+fix(hero): cierra el seguimiento de la iteración 08 (H3, H6, H7, contraste de botones y foco visible)
+
+- Ícono de ubicación: text-neutral-50 y aria-hidden (idéntico en ambos temas)
+- Suscripción Floral: sin backdrop-blur anidado y con fondo bg-dark-background/30 (hover /45);
+  contraste mínimo de 7,63:1 en reposo y 8,92:1 en hover
+- Descubrir Más: el hover pasa a subrayado (hover:underline underline-offset-4) y conserva su color
+  base (4,89:1 como mínimo); agrega el anillo de foco focus-visible:ring-primary-fixed (3,86:1)
+- Regenera dist/css/output.css
+- Registra el seguimiento, las mediciones y las propuestas para DESIGN.md en la bitácora
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+```
