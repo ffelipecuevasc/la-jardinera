@@ -477,3 +477,164 @@ Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
 Archivos para el commit: `index.html`, `src/css/input.css`, `dist/css/output.css`, las dos imágenes nuevas,
 `_planificacion/04-bitacora/bitacora-epica-01/bitacora-iteracion-08.md`, `_planificacion/04-bitacora/estado-actual.md` y
 `_planificacion/03-planificacion/epicas/epica-01-inicio/iteracion-08.md`. Conviene dejar `objetivos-y-metricas.md` en un commit aparte.
+
+---
+
+## 8. Seguimiento (cierre de H3, H6 y H7)
+
+> **Nota de numeración:** el encargo pedía una «sección 7», pero esta bitácora ya tiene una sección 7 («Mensaje de commit
+> sugerido»). Para no duplicar el número, el seguimiento va como sección 8.
+
+**Fecha:** 05-10-2026
+**Agente:** Claude Code (Sonnet 5.5)
+**Alcance:** commit de seguimiento dentro de `<section id="titular">`: cerrar H3, H6 y H7 (§5.2). No se tocaron `input.css`, el tinte
+de la tarjeta (`bg-dark-background/45`), las imágenes, el titular, el header, el footer, las otras páginas ni `estado-actual.md`.
+El scroll horizontal de 4 px a 768 px (H4) y el CLS (H5) siguen como deuda fuera del Hero.
+
+**Resultado en una línea:** H3 quedó cerrado. H6 y H7 quedaron cerrados **en código**, pero al medir en render real aparecieron
+tres incumplimientos de contraste (§8.4) que **no se corrigieron** por instrucción: se reportan con su medición y sus propuestas.
+
+### 8.1 Cambios (antes y después)
+
+Tres líneas de `index.html`, todas dentro del Hero (`git diff -U0`: `@@ -278 +278 @@`, `@@ -286 +286 @@`, `@@ -293 +293 @@`).
+
+| ID | Elemento | Antes | Después | Evidencia |
+|:--|:--|:--|:--|:--|
+| H3 | Ícono de ubicación (`:286`) | `class="text-primary text-[18px]"`, sin `aria-hidden`. Color computado reactivo: `#316944` en claro y `#8CC79A` en oscuro. Contraste 1,05–1,38:1 (claro) y 2,60–4,58:1 (oscuro). | `class="text-neutral-50 text-[18px]"` con `aria-hidden="true"`. | Render real: color computado `rgb(248, 247, 243)` en **los 14 casos** (7 viewports × 2 temas) y `aria-hidden="true"`. Contraste del ícono 4,67–10,18:1 (mín. 3:1). |
+| H6 | Enlace «Descubrir Más» (`:293`) | `text-neutral-50 hover:text-neutral-50 … transition-colors` (el hover no cambiaba nada). | `text-neutral-50 hover:text-secondary-container … transition-colors` (ya tenía la transición; no se agregó). | Render real, hover con ratón simulado por CDP en los 14 casos: `rgb(248, 247, 243)` → `rgb(255, 194, 198)` → vuelve a `rgb(248, 247, 243)` al salir. Transición computada de 0,15 s (`color`, `fill`, etc.). |
+| H7 | Botón «Suscripción Floral» (`:278`) | `bg-surface-container-lowest/10 backdrop-blur-md text-neutral-50 …` | `bg-surface-container-lowest/10 text-neutral-50 …` (sin `backdrop-blur-md`). | Render real: 0 descendientes de `.hero-glass` con `backdrop-filter` computado en los 14 casos; el botón tiene `backdrop-filter: none`; el único es `blur(24px) saturate(1.5)` de la tarjeta (`backdrop-blur-xl`). |
+
+**Revisión de otros `backdrop-blur` (H7):** «Explorar Servicios» no tiene ninguno. Ningún otro descendiente de `.hero-glass` lo tiene (búsqueda de
+texto y estilo computado). No hay nada más que reportar en este punto.
+
+### 8.2 Compilación e invariantes
+
+| Verificación | Estado | Evidencia |
+|:--|:--|:--|
+| `pnpm build` sin errores ni advertencias | ✅ confirmado por ejecución | Salida limpia salvo el aviso conocido de Browserslist. `dist/css/output.css`: 46.529 B → 46.538 B; SHA-256 `31fb352a96fa4bb0281b99f9a4d9da6bb7486842dfc339ce39a67d6c0d6c47a4` (antes `59a51b94…a572`). |
+| Clases en `output.css` | ✅ confirmado por búsqueda de texto | `.text-neutral-50` y `.hover\:text-secondary-container:hover` (`color: rgb(255 194 198 / …)`) presentes; `.transition-colors` también. |
+| Invariantes en `#titular` | ✅ confirmado por código | `style=` 0, `onclick` 0, `<script` 0, `href="#"` 0, `backdrop-blur-md` 0, `text-primary` 0, `text-dark-neutral-100` 0, `la-jardinera-blanco` 0. Único `backdrop-blur-*` en la sección: `backdrop-blur-xl`, en la etiqueta de la propia tarjeta; ninguno en sus descendientes. |
+| `fx-starlight` idéntico y texto del `h1` | ✅ confirmado por código y render real | Comparación de cadena exacta del `<span>`; texto accesible «Florería La Jardinera» en los 14 casos. |
+| IDs únicos; `style=` en la página | ✅ confirmado por código | Sin IDs duplicados; 1 `style=` en `index.html` (la textura del banner, deuda registrada). |
+| Alcance | ✅ confirmado por código | Solo `index.html` (3 líneas) y `dist/css/output.css` regenerado. `git ls-files dist/css/output.css` lo lista: **`dist/css/output.css` está versionado** en este árbol. |
+
+### 8.3 Render real
+
+**Método:** el mismo de §4 (Chrome 154 *headless* por CDP, scripts temporales en el *scratchpad* fuera del repositorio, servidor local
+`python -m http.server`), en los 7 viewports y ambos temas (14 casos). Contraste del **peor caso: percentil 95 del fondo, línea por línea**
+(rectángulos de cada línea de texto; el ícono, como gráfico). Se midió de nuevo el fondo efectivo de los botones; no se dio por supuesto.
+
+- **Consola y red:** la segunda corrida completa dio **0 errores o advertencias de consola y 0 fallos de red en los 14 casos**. La primera
+  corrida registró un `net::ERR_CONNECTION_RESET` en 768×1024 (claro y oscuro) cuyo recurso no pude identificar, porque ese script aún no
+  guardaba la URL. **No se reprodujo** en la segunda corrida ni en 10 cargas adicionales de diagnóstico (5 a 768×1024 y 5 a 1280×800, con registro de URL).
+  Lo trato como un reinicio transitorio del servidor local, pero queda sin causa demostrada.
+- **Scroll horizontal:** igual que la línea base. 13 de 14 casos con `scrollWidth = clientWidth`; a 768×1024 es 772/768, el valor preexistente de H4 (no es una regresión).
+
+### 8.4 Contraste medido (peor caso por viewport; idéntico en claro y oscuro)
+
+| Viewport | Ubicación (≥4,5) | «Descubrir Más» reposo (≥4,5) | «Descubrir Más» **hover** (≥4,5) | Ícono (≥3) | «Suscripción Floral» reposo (≥4,5) | «Explorar Servicios» (≥4,5) |
+|:--|:--|:--|:--|:--|:--|:--|
+| 320×640 | 8,87 | 9,36 | 6,59 | 10,18 | 6,34 | 6,06 |
+| 360×740 | 7,67 | 9,72 | 6,84 | 6,58 | 4,85 | 6,06 |
+| 412×915 | 5,66 | 8,84 | 6,22 | 4,78 | 5,34 | 6,06 |
+| 768×1024 | **4,5016** | 4,89 | **3,44 ✗** | 4,67 | 4,64 | 6,06 |
+| 740×360 | 5,53 | 6,12 | **4,30 ✗** | 5,81 | **4,4899 ✗** | 6,06 |
+| 1024×768 | 5,03 | 5,35 | **3,76 ✗** | 5,13 | 4,54 | 6,06 |
+| 1280×800 | 4,97 | 5,27 | **3,71 ✗** | 5,09 | 4,59 | 6,06 |
+
+| Elemento | Peor caso | Mínimo | Estado |
+|:--|:--|:--|:--|
+| Texto de ubicación | 4,5016:1 (768×1024) | 4,5 | ✅ cumple, pero con 0,0016 de margen |
+| «Descubrir Más», reposo | 4,89:1 (768×1024) | 4,5 | ✅ |
+| Ícono de ubicación (gráfico) | 4,67:1 (768×1024) | 3 | ✅ |
+| «Explorar Servicios» (texto sobre `#316944`) | 6,06:1 | 4,5 | ✅ |
+| **«Suscripción Floral», reposo** | **4,4899:1 (740×360)** | 4,5 | ❌ **no cumple** (por 0,010) |
+| **«Suscripción Floral», hover** (`hover:bg-surface-container-lowest/20`) | **3,64:1 (740×360)**; rango 3,64–4,84 | 4,5 | ❌ **no cumple** en 6 de 7 viewports |
+| **«Descubrir Más», hover** (`secondary-container`) | **3,44:1 (768×1024)**; rango 3,44–6,84 | 4,5 | ❌ **no cumple** en 4 de 7 viewports |
+
+Texto pequeño (11–14 px, sin peso grande): se aplica el mínimo de 4,5:1.
+
+### 8.5 Corrección de una inferencia anterior (H7)
+
+En la §5.2 (H7) escribí que el `backdrop-blur-md` anidado «sería visualmente inerte (inferencia: no se aisló en render)». **Era falso.**
+Al restituirlo por inyección de CSS en el navegador (sin guardar nada en el repo), el fondo efectivo del botón se oscurece de forma
+apreciable: la luminancia relativa p95 baja de 0,164 a 0,096 a 320×640 y de 0,168 a 0,097 a 740×360, y el contraste del texto pasa de
+4,49:1 a 6,68:1 en el peor caso. Es decir, el desenfoque anidado **sí tenía efecto** (oscurecía el botón) y quitarlo, como pediste, deja
+al botón con el fondo claro que se ve en las capturas. Con el botón completo y el método de la ejecución anterior (p95 con 3 px de margen),
+el contraste pasó de 6,39–6,80:1 a 4,23–4,64:1. Esa diferencia no se había anticipado.
+
+### 8.6 Foco visible (H8, sin cambios)
+
+| Enlace | Clases `focus-visible:` | Resultado en render real (Tab previo, `:focus-visible` activo) |
+|:--|:--|:--|
+| «Descubrir Más» | ninguna | `outline: auto 1px rgb(16, 16, 16)`, `outline-offset: 1px` (anillo nativo de Chrome). En la captura de 1280×800 oscuro se ve un aro claro nítido alrededor del enlace. |
+| «Explorar Servicios», «Suscripción Floral» | ninguna | Anillo nativo activo (`outline-style: auto`). Los valores de ancho y color de estos dos (3 px, `rgb(248, 247, 243)`) difieren de los de «Descubrir Más»; probablemente se leyeron durante la transición (`transition-all`), pero no lo comprobé, así que no los uso como evidencia. |
+
+**«Descubrir Más» conserva un anillo de foco visible (el nativo del navegador), pero no declara el anillo del sistema** que exigen DESIGN §11.3 y §14.3.
+Revisé una sola captura de foco (1280×800 oscuro); no se midió el contraste del anillo. **Propuesta, sin aplicar:**
+`focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed` (`primary-fixed` está autorizado para anillos de foco
+sobre foto, §2.4; `ring-primary` es un token reactivo y no corresponde en este bloque de contraste fijo). Esta clase no se verificó en render.
+
+### 8.7 Incumplimientos y propuestas (no aplicadas)
+
+Por instrucción, **no se cambió el tinte de la tarjeta ni colores fuera de lo autorizado**. Las propuestas se **midieron inyectando CSS** en
+el navegador (nada se guardó en el repo; modo claro, 7 viewports, peor caso). `n/m` = no medido.
+
+| Variante | «Suscripción» reposo | «Suscripción» hover | Ubicación | «Descubrir Más» reposo | «Descubrir Más» hover |
+|:--|:--|:--|:--|:--|:--|
+| **Actual (aplicada)** | **4,49** ❌ | **3,64** ❌ | 4,50 | 4,89 | **3,44** ❌ |
+| Blur restituido (`backdrop-blur-md`) | 6,68 | n/m | 4,50 | 4,89 | 3,44 |
+| Tinte de la tarjeta `/55` | 5,26 | 4,12 ❌ | 5,55 | 5,93 | 4,17 ❌ |
+| Tinte de la tarjeta `/65` | 6,13 | 4,76 | 7,04 | 7,39 | 5,20 |
+| Botón `bg-dark-background/30`, hover `bg-dark-background/45` | 7,63 | 8,92 | 4,50 | 4,89 | 3,44 ❌ |
+
+**Recomendación (la decides tú):**
+
+1. **«Suscripción Floral» (A):** reemplazar `bg-surface-container-lowest/10 hover:bg-surface-container-lowest/20` por
+   `bg-dark-background/30 hover:bg-dark-background/45`. Cumple en reposo (≥7,63:1) y en hover (≥8,92:1) sin tocar el tinte. Cambia la variante
+   «Vidrio» de DESIGN §11.3 (ver propuesta de edición abajo).
+2. **«Descubrir Más» hover:** `secondary-container` sobre texto de 11 px no alcanza 4,5:1 en 4 de 7 viewports (peor 3,44:1). Una opción sin tocar el tinte:
+   dejar el color en `text-neutral-50` y señalar el hover con `hover:underline underline-offset-4` (el contraste queda igual que en reposo, 4,89–9,72:1).
+3. **Alternativa global (B):** subir el tinte a `/65` corrige todo lo medido (incluido el hover de «Descubrir Más» con 5,20:1), pero cambia el aspecto de la tarjeta y
+   no estaba autorizado en esta tarea. `/55` **no** basta (hover del botón 4,12:1 y hover de «Descubrir Más» 4,17:1).
+
+### Propuesta de edición — `DESIGN.md`
+**Sección:** §11.3 Botones, fila «Vidrio (sobre foto)»
+**Motivo:** solo aplica si adoptas la opción A: la variante documentada deja de cumplir el contraste dentro de la tarjeta del Hero sin el desenfoque anidado.
+```diff
+-| Vidrio (sobre foto)  | `bg-surface-container-lowest/10 hover:bg-surface-container-lowest/20 backdrop-blur-md text-neutral-50` |
++| Vidrio (sobre foto)  | `bg-surface-container-lowest/10 hover:bg-surface-container-lowest/20 backdrop-blur-md text-neutral-50` (fuera de la tarjeta del Hero) |
++| Vidrio sobre la tarjeta del Hero (§11.7) | `bg-dark-background/30 hover:bg-dark-background/45 text-neutral-50` (sin `backdrop-blur`) |
+```
+
+### 8.8 Estado de cada hallazgo
+
+| Hallazgo | Estado | Motivo |
+|:--|:--|:--|
+| H3, ícono de ubicación | ✅ cerrado (render real) | Color computado idéntico en ambos temas, `aria-hidden="true"` y contraste 4,67–10,18:1. |
+| H6, hover de «Descubrir Más» | ⚠️ cerrado en lo funcional; **reserva de contraste** | El hover ya cambia el color (confirmado), pero el color de hover mide 3,44–6,84:1 y no cumple 4,5:1 en 4 de 7 viewports. |
+| H7, `backdrop-blur-md` anidado | ⚠️ cerrado en código; **efecto secundario** | Sin blur anidado (0 descendientes con `backdrop-filter`), pero el texto de «Suscripción Floral» queda en 4,49:1 (reposo) y 3,64:1 (hover). |
+| H8, foco declarado | abierto | Sin cambios; propuesta de clase en §8.6. |
+| H4 (scroll de 4 px a 768 px) y H5 (CLS) | abiertos, fuera del Hero | Sin cambios, como se indicó. |
+
+### 8.9 Observación adicional (no corregida)
+
+La flecha de «Explorar Servicios» (`<svg class="text-[18px] ml-2">`) y la de «Descubrir Más» son decorativas y no llevan `aria-hidden="true"` (DESIGN §13);
+no estaban en el alcance de este seguimiento y se dejaron igual.
+
+### 8.10 Archivos y mensaje de commit sugerido
+
+Archivos tocados: `index.html` (3 líneas), `dist/css/output.css` (regenerado, versionado en este árbol) y esta bitácora (solo esta sección 8).
+`estado-actual.md` no se modificó; la iteración sigue «Completada con reservas». `_site/` (ignorado por Git) no se regeneró en este seguimiento.
+
+```text
+fix(hero): cierra H3, H6 y H7 de la iteración 08 (ícono de ubicación, hover de Descubrir Más y blur anidado)
+
+- Ícono de ubicación: text-neutral-50 y aria-hidden (idéntico en ambos temas)
+- Descubrir Más: hover:text-secondary-container (el hover ya reacciona al cursor)
+- Suscripción Floral: quita el backdrop-blur-md anidado dentro de la tarjeta de vidrio
+- Regenera dist/css/output.css
+- Registra el seguimiento y los incumplimientos de contraste que quedan abiertos en la bitácora
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+```
