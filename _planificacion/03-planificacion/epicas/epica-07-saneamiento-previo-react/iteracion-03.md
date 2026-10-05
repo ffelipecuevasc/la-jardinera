@@ -13,6 +13,10 @@ intacto. `AGENTS.md`, `README.md` y `DESIGN.md` son solo lectura.
 **Autorización explícita de esta iteración:** edición de los HTML y de `src/css/input.css` en lo descrito abajo, y de la
 tabla §12 de `_planificacion/README.md`.
 
+**Prerrequisito:** la Épica 01 · Iteración 08 reemplazó el fondo CSS del Hero por `<picture>`. El Hero ya no tiene
+`style=` ni usa `.bg-hero-botanical`. Si al ejecutar la Tarea 0 el Hero todavía tiene `style="background-image: ..."`,
+la Iteración 08 no se ha ejecutado: detente y repórtalo.
+
 ## 1. Objetivo de la Iteración
 
 Que el marcado de las seis páginas esté libre de defectos conocidos (texto suelto en el footer de Servicios, estilos en
@@ -24,7 +28,8 @@ y 1279 px quede demostrado en un navegador real, no estimado.
 ### Tarea 0: Línea base (solo lectura)
 
 1. `pnpm build` y SHA-256 de `dist/css/output.css`.
-2. Conteo de `style="` por archivo en los 6 HTML.
+2. Conteo de `style="` por archivo en los 6 HTML. Esperado: **4** en total (la textura de ruido de los cuatro banners);
+   el Hero de `index.html` ya no debe tener ninguno.
 3. **Balance de etiquetas.** Con un script temporal (no lo dejes en el repositorio), cuenta apertura y cierre de `a`,
    `div`, `section`, `article`, `button`, `nav`, `ul`, `li`, `main`, `header`, `footer`, `span`, `p`, `h1`, `h2`, `h3` y
    `h4` en cada HTML, ignorando comentarios. Reporta cualquier desbalance. Corrige **solo** el de la Tarea 1; el
@@ -44,8 +49,8 @@ restante sea el estado activo de la navegación. Verifica que el balance de `<a>
 
 ### Tarea 2: DT-03 — Estilos en línea a clases
 
-Hay cinco `style=` en el marcado: la textura de ruido del banner en `index.html`, `servicios.html`,
-`suscripcion-floral.html` y `galeria.html`, y el fondo del Hero en `index.html`.
+Hay cuatro `style=` en el marcado: la textura de ruido del banner en `index.html`, `servicios.html`,
+`suscripcion-floral.html` y `galeria.html`. (El del Hero se resolvió en la Épica 01 · Iteración 08.)
 
 1. **Antes de borrar nada**, copia literalmente la cadena base64 del `url('data:image/svg+xml;base64,...')` de cada uno
    de los cuatro banners y compáralas: deben ser idénticas entre sí. Si alguna difiere, detente y repórtalo.
@@ -56,20 +61,13 @@ Hay cinco `style=` en el marcado: la textura de ruido del banner en `index.html`
    .bg-noise {
        background-image: url("data:image/svg+xml;base64,<CADENA BASE64 COPIADA LITERALMENTE>");
    }
-
-   /* Fotografía botánica del Hero del Inicio. La ruta es relativa a dist/css/output.css */
-   .bg-hero-botanical {
-       background-image: url("../../public/images/hero-botanical.webp");
-   }
    ```
 3. En cada uno de los cuatro banners, quita el `style="..."` y agrega la clase `bg-noise` al final de la lista de
    clases del mismo `<div>` (`absolute inset-0 opacity-20 mix-blend-overlay pointer-events-none bg-noise`).
-4. En el Hero de `index.html`, quita `style="background-image: ..."` y agrega `bg-hero-botanical` a las clases del
-   `<div>` (que ya tiene `bg-cover bg-center`).
-5. Ejecuta `pnpm build` y confirma en `dist/css/output.css` que `.bg-noise` contiene la misma cadena base64 (compara
-   los primeros 60 caracteres y la longitud) y que `.bg-hero-botanical` apunta a `../../public/images/hero-botanical.webp`.
-6. Resultado esperado: **0** `style="` en el marcado de los 6 HTML.
-7. Los `style` que JavaScript asigna en tiempo de ejecución (`document.body.style.overflow`, `style.setProperty` del
+4. Ejecuta `pnpm build` y confirma en `dist/css/output.css` que `.bg-noise` contiene la misma cadena base64 (compara
+   los primeros 60 caracteres y la longitud).
+5. Resultado esperado: **0** `style="` en el marcado de los 6 HTML.
+6. Los `style` que JavaScript asigna en tiempo de ejecución (`document.body.style.overflow`, `style.setProperty` del
    carrusel) **no** son marcado y quedan fuera de esta tarea; solo menciónalos en la bitácora.
 
 ### Tarea 3: DT-05 — Botones sociales del footer de `404.html`
@@ -146,16 +144,16 @@ Si no dispones de navegador, deja esta parte como `🕒 PENDIENTE` y entrega est
 
 ### Tarea 7: Hallazgos a reportar sin corregir
 
-1. El Hero del Inicio pinta su fotografía con `background-image` (CSS) y no con una etiqueta `<img fetchpriority="high">`,
-   así que el navegador la descubre más tarde y puede empeorar el LCP. Cambiarlo altera el marcado del Hero: se decide
-   con medición, en otra iteración.
+1. Resuelto en la Épica 01 · Iteración 08: el Hero usa `<img fetchpriority="high">` dentro de `<picture>`. Aquí solo
+   se registra como cerrado; no hay nada que hacer.
 2. DT-06: los footers tienen dos variantes de contenedor y el enlace activo pierde `font-body-sm text-body-sm`. Se
    resuelve en la Épica 08, cuando el footer sea un solo componente.
 
 ### Tarea 8: Registro
 
 1. Crea `_planificacion/04-bitacora/bitacora-epica-07/bitacora-iteracion-03.md` con la plantilla del §8.2, con una tabla
-   de estado por deuda (DT-01, DT-03, DT-05, DT-13, DT-07, DT-02) y su evidencia.
+   de estado por deuda (DT-01, DT-03, DT-05, DT-13, DT-07, DT-02) y su evidencia. La evidencia de DT-03 es "4 `style=`
+   resueltos en esta iteración; el del Hero se resolvió en la Épica 01 · Iteración 08".
 2. En la tabla del §12 de `_planificacion/README.md`, marca como ✅ resueltas solo las que tengan evidencia. DT-02 solo
    pasa a ✅ si la verificación en render real se ejecutó de verdad.
 3. Agrega la línea a `_planificacion/04-bitacora/estado-actual.md`. Si H8 se certificó, agrégala como "Épica 06 -
@@ -182,8 +180,8 @@ Si no dispones de navegador, deja esta parte como `🕒 PENDIENTE` y entrega est
 * **Escenario 2: Cero Estilos en Línea**
     * **Dado** los 6 HTML
     * **Cuando** se busca `style="` en el marcado
-    * **Entonces** hay 0 ocurrencias; la textura de los banners y la foto del Hero se ven idénticas a antes (misma URL
-      de imagen y misma cadena base64).
+    * **Entonces** hay 0 ocurrencias; la textura de los banners se ve idéntica a antes (misma cadena base64) y el Hero
+      se mantiene como lo dejó la Épica 01 · Iteración 08.
 * **Escenario 3: Redes Sociales en la 404**
     * **Dado** `404.html` en un viewport móvil
     * **Cuando** se llega al footer

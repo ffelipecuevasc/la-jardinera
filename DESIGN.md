@@ -194,6 +194,20 @@ Ambas etiquetas `<img>` llevan el mismo `alt` y los mismos `width`/`height`. Pro
 | Oscuro | Enlaces neutros          | 7,64:1  | AAA   |
 | Oscuro | Botón Instagram          | 6,64:1  | AA    |
 
+### 2.10 Contrastes medidos en render real (Hero, Épica 01 · Iteración 08)
+
+Medidos con píxeles reales en 7 viewports. Resultados idénticos en ambos temas (el Hero es un bloque de contraste fijo,
+§3). El fondo se toma en el percentil 95 más claro del área de la tarjeta, y cada línea de texto se mide por separado.
+
+| Elemento                                   | Peor caso medido | Mínimo | Nivel |
+|:-------------------------------------------|:-----------------|:-------|:------|
+| Párrafo (768×1024)                         | 4,57:1           | 4,5    | AA    |
+| "La Jardinera", segunda línea del titular (768×1024) | 3,22:1 | 3      | AA (texto grande) |
+| "Florería", primera línea del titular      | 4,12:1           | 3      | AA (texto grande) |
+| Enlace activo del header sobre la foto, claro / oscuro | 4,82:1 / 5,86:1 | 4,5 | AA |
+
+El margen del párrafo es estrecho: **si cambia la fotografía del Hero, se vuelve a medir** (ver §11.7, regla 1).
+
 ---
 
 ## 3. Tokens de contraste fijo (Hero y bloques fotográficos)
@@ -214,6 +228,9 @@ prefijo `dark-` es heredado; conceptualmente significa "contraste fijo", no "mod
 
 **Excepción documentada:** `dark:bg-dark-surface-container-low` se usa además como fondo del panel móvil y de
 tarjetas en modo oscuro. Es un uso heredado y aceptado; no se extiende a componentes nuevos.
+
+**Restricción de uso:** `dark-neutral-100` (`#8A918B`) no alcanza AA como texto sobre la tarjeta de vidrio del Hero
+(≈ 1,5–2,3:1 a 11 px). No usarlo para texto sobre fotografía; usar `neutral-50` (§11.7).
 
 ---
 
@@ -250,6 +267,7 @@ de componentes. Para ritmo entre secciones y bloques, usar siempre los tokens `s
 | `rounded-lg`    | 0,25 rem | Botones rectangulares, campos de formulario.                         |
 | `rounded-xl`    | 0,5 rem  | Tarjetas, imágenes, paneles.                                         |
 | `rounded-2xl`   | 1 rem    | Valor por defecto de Tailwind (no redefinido): formulario de contacto, hoja del modal. |
+| `rounded-3xl`   | 1,5 rem  | Valor por defecto de Tailwind (no redefinido). **Solo** la tarjeta de vidrio del Hero (§11.7). |
 | `rounded-full`  | **0,75 rem** | **No es un círculo.** Está redefinido: produce esquinas de 12 px.  |
 | `rounded-[999px]` | píldora/círculo real | Única forma de lograr un círculo verdadero.               |
 
@@ -262,6 +280,7 @@ de componentes. Para ritmo entre secciones y bloques, usar siempre los tokens `s
 | Tarjeta en reposo / hover   | `shadow-sm` → `hover:shadow-md` (o `hover:shadow-lg`) |
 | Banners y bloques destacados| `shadow-xl`                                     |
 | Modales                     | `shadow-2xl`                                    |
+| Tarjeta de vidrio del Hero  | `shadow-2xl` (excepción documentada, §11.7)     |
 
 El color de las sombras personalizadas deriva de `neutral-900` (`#35363A`).
 
@@ -299,8 +318,11 @@ Hallazgos abiertos. No bloquean el trabajo, pero ningún componente nuevo debe r
    `<head>`, que choca con la regla "cero JS en línea"; requiere una excepción documentada.
 8. **Favicon** de trazo negro poco legible en pestañas oscuras: se puede añadir un segundo `<link rel="icon"
    media="(prefers-color-scheme: dark)">` (aquí la media query sí es correcta).
-9. **Estilos en línea heredados:** textura de ruido del banner (4 páginas) y fondo del Hero del Inicio usan `style=`.
-   Deben migrar a clases en `input.css`.
+9. **Estilos en línea heredados:** la textura de ruido del banner (4 páginas) usa `style=`. Debe migrar a una clase en
+   `input.css`. (El del Hero del Inicio se resolvió en la Épica 01 · Iteración 08: ahora es un `<picture>`.)
+10. **Imágenes del Hero fuera de la convención de carpetas:** `hero-botanical-desktop.webp` y
+    `hero-botanical-mobile.webp` viven en `public/images/` y no en `public/images/<sección>/` (§13). Mover cuando se
+    toque de nuevo el Hero.
 
 ---
 
@@ -325,10 +347,13 @@ brillo lineal recorre el titular. Reemplaza al antiguo resaltador `fx-marker`. S
 del Hero de `index.html`.
 
 ```html
-<h1 class="font-display-hero text-headline-xl lg:text-display-hero text-neutral-50 font-semibold max-w-4xl tracking-tight leading-none mb-space-4">
+<h1 class="font-display-hero text-headline-xl lg:text-display-hero text-neutral-50 font-semibold max-w-4xl tracking-tight leading-none">
     <span class="fx-starlight">Florería <span class="fx-starlight fx-starlight--accent italic font-normal">La Jardinera</span></span>
 </h1>
 ```
+
+El `<h1>` vive dentro de la tarjeta de vidrio del Hero (§11.7); el espaciado con el párrafo lo da el `gap-space-3` de la
+tarjeta, por eso ya no lleva `mb-space-4`.
 
 ### 7.2 Tokens del efecto
 
@@ -469,6 +494,9 @@ duration-700 ease-out`. Variantes de fondo en Servicios: `bg-primary/10` y `bg-s
 | Vidrio (sobre foto)  | `bg-surface-container-lowest/10 hover:bg-surface-container-lowest/20 backdrop-blur-md text-neutral-50` |
 | Ícono (header)       | `w-11 h-11 lg:w-9 lg:h-9 rounded-full bg-surface-container text-on-surface-variant hover:text-primary hover:bg-surface-container-high` |
 
+**Botón "Vidrio" dentro de la tarjeta del Hero (§11.7):** no lleva `backdrop-blur-md`. La tarjeta ya difumina el fondo y
+un segundo desenfoque anidado no aporta nada y encarece el pintado.
+
 Todo botón o enlace-botón incluye foco visible: `focus-visible:outline-none focus-visible:ring-2
 focus-visible:ring-primary` (con `focus-visible:ring-offset-2` en rellenos sólidos).
 
@@ -489,6 +517,35 @@ controles blancos y anillo `focus-visible:ring-white`.
 
 Plan destacado con `ring-2 ring-primary`, elevación `md:-mt-space-3` e insignia `bg-primary-brand text-neutral-50`
 sobre la foto. Precios `text-primary dark:text-primary-fixed font-semibold`.
+
+### 11.7 Tarjeta de vidrio del Hero (Inicio)
+
+Contenedor centrado del titular (§7), el párrafo, los botones y la fila de ubicación sobre la fotografía del Hero. La
+fotografía se ve a pleno color: el Hero **no lleva scrims** (degradados oscuros, opacidad ni capas de oscurecido); la
+legibilidad la da esta tarjeta. Es un bloque de contraste fijo (§3) y Patrón B (§2.7): relleno estático con su propio
+primer plano, idéntico en ambos temas.
+
+```html
+<div class="hero-glass flex flex-col items-center text-center gap-space-3 p-space-4 md:p-space-8 rounded-3xl border border-white/20 bg-dark-background/45 backdrop-blur-xl backdrop-saturate-150 shadow-2xl">
+    <!-- h1 (§7), párrafo, botones y fila meta -->
+</div>
+```
+
+1. **Tinte:** `bg-dark-background/45` es el mínimo medido que cumple AA con la fotografía actual (§2.10). Si cambia la
+   fotografía y no alcanza, subir a `/55` y luego a `/65`; si `/65` tampoco basta, el problema es la fotografía (demasiado
+   clara bajo la tarjeta): se cambia la imagen, no se agregan scrims.
+2. **Respaldo sin `backdrop-filter`:** en `input.css`, un bloque `@supports not (...)` **fuera de `@layer`**, después de
+   Starlight, sube el fondo de `.hero-glass` al 85 %. Debe quedar después de las utilidades en `output.css`; dentro de
+   `@layer components` las utilidades le ganarían y nunca se aplicaría.
+3. **Texto:** `text-neutral-50` para el párrafo y la fila meta; el titular mantiene su jerarquía (§7.3). Prohibido
+   `text-dark-neutral-100` sobre la tarjeta (§3).
+4. **Sin `backdrop-blur` anidado** dentro de la tarjeta (ver el botón "Vidrio", §11.3).
+5. **Fila meta:** ubicación y enlace "Descubrir Más" van como última fila de la tarjeta, separada con
+   `border-t border-white/20`, sin banda ni fondo propios.
+6. **Movimiento:** el ícono con `animate-bounce` lleva `motion-reduce:animate-none` (§12.4).
+7. **Radio y sombra:** `rounded-3xl` y `shadow-2xl` son excepciones documentadas (§4.3 y §4.4), exclusivas de esta tarjeta.
+8. **Verificación:** el contraste del texto sobre la tarjeta se mide en render real, línea por línea, con el percentil 95
+   del fondo y en 7 viewports (§14, punto 7).
 
 ---
 
@@ -528,6 +585,12 @@ Todo efecto continuo o de desplazamiento declara su alternativa en `@media (pref
 - **Imágenes:** `.webp` en `public/images/<sección>/`, videos `.mp4` en `public/images/galeria/`. Siempre con `width`,
   `height` y `alt`. `fetchpriority="high"` para la imagen principal sobre el pliegue; `loading="lazy"` para el resto.
   Contenedor con `aspect-*` y `object-cover` para CLS = 0.
+- **`<picture>`:** se usa **solo** para dirección de arte por orientación (`media="(orientation: portrait)"`), nunca para
+  el tema claro/oscuro (§2.8). El `width` y `height` declarados son siempre los reales del archivo.
+- **Hero del Inicio:** dos archivos, `hero-botanical-desktop.webp` (2752×1536, ≈ 16:9, ≤ 300 KB) y
+  `hero-botanical-mobile.webp` (1536×2752, ≈ 9:16, ≤ 200 KB). El `<img>` del escritorio lleva `fetchpriority="high"` y
+  es la única imagen del Hero con ese atributo. La composición deja el centro (que cubre la tarjeta, §11.7) con
+  luminosidad media o baja y el interés visual en los bordes.
 
 ---
 
@@ -539,6 +602,9 @@ Todo efecto continuo o de desplazamiento declara su alternativa en `@media (pref
 4. Modales con `role="dialog"`, `aria-modal`, trampa de foco, `Escape`, fondo `inert` y retorno del foco.
 5. Estados sincronizados: `aria-expanded`, `aria-current="page"`, `aria-hidden`, `aria-label` dinámico del menú.
 6. Contenido generado accesible: contadores con `aria-live="polite"` que no se reescriben sin cambios.
+7. **Texto sobre fotografía:** se mide en render real, línea por línea (no el rectángulo completo del bloque), con el
+   percentil 95 más claro del fondo y en los 7 viewports de `_planificacion/README.md` §7. Medir el bloque entero mezcla
+   líneas de colores distintos y da resultados engañosos.
 
 ---
 
@@ -551,3 +617,7 @@ Todo efecto continuo o de desplazamiento declara su alternativa en `@media (pref
 - **Épica 07:** documento trasladado a la raíz del repositorio como fuente única. El titular del Hero reemplaza el
   resaltador `fx-marker` por el efecto `fx-starlight` (§7). Se documentan header, footer, botones, capas, radios y la
   deuda de diseño abierta (§5).
+- **Épica 01 · Iteración 08 (extensión):** el Hero del Inicio pasa a fotografía a pleno color con dirección de arte
+  (`<picture>`), sin scrims y con el logotipo retirado (ya está en la barra de navegación). Contenido en una tarjeta de
+  vidrio (§11.7). Nuevos: §2.10, §11.7, restricción de `dark-neutral-100` en §3, `rounded-3xl` y `shadow-2xl` como
+  excepciones (§4.3, §4.4), `<picture>` y las imágenes del Hero en §13, y la regla de medición en §14.

@@ -30,3 +30,12 @@ Para que el agente dé por superada esta Épica, debe auditar y confirmar positi
     imágenes de Unsplash fueron descargadas, convertidas a `.webp` y enrutadas localmente desde `public/images/`.
 *   [ ] **Preparación de Tema (Dark Mode):** La lógica de JS está preparada (`toggleTheme`) para alternar la clase
     `dark` en el `<html>` sin errores.
+
+## 4. Extensiones posteriores al cierre
+
+| Iteración | Tipo                     | Entregable                                                                                                | Estado |
+|:----------|:-------------------------|:----------------------------------------------------------------------------------------------------------|:-------|
+| 08        | Extensión no planificada | Hero vivo: fotografía a pleno color, tarjeta de vidrio y retiro del logotipo (comentarios de la clienta). | 🕒 Ejecutada con reservas; pendiente de certificación (Lighthouse y prueba en dispositivo real) |
+
+Estas extensiones no reabren el DoD de la Épica 01; el estado de la épica sigue siendo "cerrada". La especificación está
+en `iteracion-08.md` y la evidencia, en `04-bitacora/bitacora-epica-01/bitacora-iteracion-08.md`.

@@ -6,6 +6,11 @@
 > bitácora y el nombre del archivo si es otro.
 > **Origen:** comentarios de la dueña de La Jardinera sobre el Hero del Inicio.
 > **Precedente de reapertura:** Épica 06, Fase 2 (`README.md` §11, "Iteración no planificada").
+> **Revisión posterior a la ejecución (05-10-2026):** la primera ejecución dejó la iteración "completada con
+> reservas" (pendientes: Lighthouse y prueba en dispositivo real). Este documento incorpora cuatro correcciones que
+> la ejecución dejó en evidencia: (1) el respaldo `@supports` va **fuera** de `@layer` (Tarea 3); (2) la franja
+> "Hero Meta Footer" estaba omitida (Tarea 2, regla 6); (3) la tabla de imágenes no coincidía con los archivos
+> definitivos; (4) el contraste del titular se mide línea por línea (Tarea 5, punto 4).
 
 **⚠️ DIRECTIVA DE INICIO (Chain of Thought):**
 La Épica 01 está cerrada, pero la clienta pidió tres cambios sobre el Hero (`#titular`) de `index.html`. Esta iteración
@@ -27,10 +32,13 @@ border border-white/20 rounded-3xl shadow-2xl`) es solo **referencia de efecto**
 
 **Imágenes (las pone el desarrollador, no las creas ni las modificas):**
 
-| Archivo                                         | Proporción | Píxeles   | Peso objetivo |
-|:------------------------------------------------|:-----------|:----------|:--------------|
-| `public/images/hero-botanical-desktop.webp`     | 16:9       | 2400×1350 | ≤ 300 KB      |
-| `public/images/hero-botanical-mobile.webp`      | 9:16       | 1080×1920 | ≤ 180 KB      |
+| Archivo                                         | Proporción | Píxeles definitivos | Peso definitivo | Peso máximo |
+|:------------------------------------------------|:-----------|:--------------------|:----------------|:------------|
+| `public/images/hero-botanical-desktop.webp`     | ≈ 16:9     | 2752×1536           | 155,4 KB        | ≤ 300 KB    |
+| `public/images/hero-botanical-mobile.webp`      | ≈ 9:16     | 1536×2752           | 186,1 KB        | ≤ 200 KB    |
+
+La recomendación inicial era 2400×1350 y 1080×1920. Se aceptaron las dimensiones reales de los archivos porque el peso
+cumple; el `width` y `height` declarados en el HTML son siempre los **reales** del archivo.
 
 **Coordinación con la Épica 07, Iteración 03 (DT-03):** esa iteración convierte el `style="background-image…"` del Hero
 en la clase `.bg-hero-botanical`. Con `<picture>` esa clase deja de existir. Esta iteración **debe ejecutarse antes** de
@@ -73,8 +81,10 @@ exacta en modo claro y oscuro (el Hero es un bloque de contraste fijo, `DESIGN.m
    crees imágenes de relleno ni apuntes a archivos inexistentes.
 2. Con un script temporal (no lo dejes en el repositorio) o con `view`, reporta de cada archivo: formato real
    (WebP), ancho y alto en píxeles, proporción y peso en KB. Compara con la tabla.
-3. Si difieren de lo esperado, **no corrijas nada**: reporta la diferencia. Tolerancia: ±5 % en píxeles y hasta un 15 %
-   sobre el peso objetivo; más allá, repórtalo como hallazgo (no bloquea el marcado, sí la certificación).
+3. Si difieren de lo esperado, **no corrijas nada**: reporta la diferencia. El criterio duro es el **peso** (hasta un
+   15 % sobre el máximo de la tabla); las dimensiones pueden diferir si el desarrollador las aceptó, y se reportan como
+   dato informativo. Más allá de la tolerancia de peso, repórtalo como hallazgo (no bloquea el marcado, sí la
+   certificación).
 4. Mira ambas imágenes con `view`. Confirma que son la misma fotografía recompuesta (misma escena y paleta). Si
    muestran escenas distintas, repórtalo, porque el `alt` debe describir ambas.
 
@@ -90,10 +100,10 @@ Reemplaza únicamente el contenido de `<section id="titular">`. Mantén el `id`,
     <picture>
         <source media="(orientation: portrait)"
                 srcset="./public/images/hero-botanical-mobile.webp"
-                type="image/webp" width="1080" height="1920">
+                type="image/webp" width="1536" height="2752">
         <img src="./public/images/hero-botanical-desktop.webp"
              alt="<ALT EN ESPAÑOL DE CHILE>"
-             width="2400" height="1350"
+             width="2752" height="1536"
              fetchpriority="high" decoding="async"
              class="absolute inset-0 w-full h-full object-cover">
     </picture>
@@ -110,7 +120,9 @@ Reemplaza únicamente el contenido de `<section id="titular">`. Mantén el `id`,
             <p class="font-body-lg text-body-lg text-neutral-50 max-w-2xl font-light leading-relaxed">
                 <em>…texto actual…</em>
             </p>
-            <!-- Resto de elementos que hoy existan en el bloque, conservados -->
+            <!-- Botones (CTAs) del bloque actual, conservados -->
+            <!-- Fila meta: ubicación + "Descubrir Más", como última fila de la tarjeta, separada con
+                 border-t border-white/20 y sin banda ni desenfoque propios -->
         </div>
     </div>
 </section>
@@ -134,7 +146,14 @@ Reglas:
 6. **Resto del contenido del Hero** (botones u otros): se mueve **dentro de la tarjeta**, conservando textos, enlaces,
    orden y clases, y se ajusta solo la alineación (de `items-start` a centrado). No los rediseñes. Si un botón "Vidrio"
    (`bg-surface-container-lowest/10`) queda con un contraste pobre sobre la tarjeta, **repórtalo con la medición y
-   propón la corrección sin aplicarla**.
+   propón la corrección sin aplicarla**. Regla general: dentro de la tarjeta no debe quedar un `backdrop-blur` propio
+   anidado; si lo hay, repórtalo como hallazgo.
+    * **Franja "Hero Meta Footer"** (ubicación "Valdivia, Región de Los Ríos, Chile" y enlace "Descubrir Más"): es un
+      oscurecido (`bg-dark-background/80 backdrop-blur-sm`) que contradice el Escenario 1. Pasa **dentro de la tarjeta**
+      como su última fila, separada del resto con `border-t border-white/20` y padding superior, **sin** el
+      contenedor-banda. Conserva textos, destino del enlace y orden. El texto de esa fila pasa a `text-neutral-50`
+      (`text-dark-neutral-100` no alcanza el contraste a 11 px). El ícono con `animate-bounce` lleva
+      `motion-reduce:animate-none` (`DESIGN.md` §12.4).
 7. **Tokens:** `rounded-3xl` y `shadow-2xl` son los valores del `index.html` antiguo. Revisa `DESIGN.md` §4 y
    `tailwind.config.js`: si existen tokens de radio y sombra autorizados para tarjetas sobre foto, úsalos en su lugar y
    explícalo; si no, deja estos y propón el cambio de documentación (Anexo C). `border-white/20` ya está autorizado
@@ -144,8 +163,10 @@ Reglas:
 
 ### Tarea 3: CSS en `src/css/input.css`
 
-1. **Respaldo sin `backdrop-filter`.** En un bloque `@layer components` (reutiliza el existente si lo hay, sin
-   mezclar con el bloque de Starlight), agrega:
+1. **Respaldo sin `backdrop-filter`.** En un bloque propio **fuera de cualquier `@layer`**, después del bloque de
+   Starlight (como ya hacen Starlight y el modal), agrega. **No lo pongas dentro de `@layer components`:** las
+   utilidades de Tailwind (`bg-dark-background/45`) se emiten en una capa posterior y le ganarían, así que el respaldo
+   nunca se aplicaría:
 
    ```css
    /* Tarjeta de vidrio del Hero (Inicio). Ver DESIGN.md §3 y §11.   */
@@ -168,7 +189,8 @@ Reglas:
 1. `pnpm build` sin errores ni advertencias.
 2. Confirma por búsqueda de texto en `dist/css/output.css` que existen: `.backdrop-blur-xl`, `.backdrop-saturate-150`,
    `.bg-dark-background\/45`, `.border-white\/20`, `.rounded-3xl` (o el token que hayas usado), `.shadow-2xl` (o su
-   token), `.hero-glass` dentro del `@supports not`, y que **no** quedan `.bg-hero-botanical` ni `.opacity-45` usados
+   token), `.hero-glass` dentro del `@supports not` **ubicado después de las utilidades** en el archivo (verifícalo por posición),
+   y que **no** quedan `.bg-hero-botanical` ni `.opacity-45` usados
    por el Hero.
 3. Ejecuta `pnpm run build:cf` y confirma que `_site/public/images/` contiene los dos WebP nuevos y que el peso de cada
    uno está bajo el límite de 25 MiB de Cloudflare Pages.
@@ -186,7 +208,9 @@ en **modo claro y oscuro**. Evidencia por cada viewport y tema; si no tienes nav
    `hero-botanical-mobile.webp`; en horizontal (740×360, 1024×768, 1280×800), la de escritorio. Reporta `currentSrc`.
 4. **Contraste (criterio AA):** mide con valores reales de píxeles. Para cada viewport, toma una captura con el texto
    oculto temporalmente (inyectando CSS desde la consola, sin guardarlo en el repo), calcula la luminancia del **percentil
-   95 más claro** del área de la tarjeta (el peor caso, no el promedio) y obtén la razón contra:
+   95 más claro** del área de la tarjeta (el peor caso, no el promedio). **Mide cada línea de texto por separado**
+   (por ejemplo con `Range.getClientRects()`), no el rectángulo completo del `h1`: mezclar "Florería" con "La
+   Jardinera" dio 2,88:1 en una ejecución, y medida línea por línea daba 3,84:1. Obtén la razón contra:
    `neutral-50` (párrafo y primera línea del `h1`, mínimo **4,5:1** para el párrafo y **3:1** para el `h1` por ser
    texto grande) y `secondary-container` (segunda línea del `h1`, mínimo **3:1**).
     - Si algún valor no alcanza, **sube el tinte de la tarjeta** de `bg-dark-background/45` a `/55`, luego `/65`,

@@ -447,6 +447,8 @@ Agregar al final de `_planificacion/03-planificacion/epicas/epica-01-inicio/defi
 Estas extensiones no reabren el DoD de la Épica 01; el estado de la épica sigue siendo "cerrada".
 ```
 
+**Aplicado el 05-10-2026:** el Anexo B quedó registrado como sección 4 de `definicion-epica.md`, con el estado «🕒 Ejecutada con reservas; pendiente de certificación (Lighthouse y prueba en dispositivo real)».
+
 ### 6.5 Propuesta para `decisiones-tecnicas.md` (no estaba autorizado a editarlo)
 
 *«Épica 01 · It. 08 — Respaldo `@supports not (backdrop-filter…)` de `.hero-glass` fuera de `@layer`: las utilidades de Tailwind se emiten
