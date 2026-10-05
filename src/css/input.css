@@ -323,6 +323,27 @@ html.dark::view-transition-new(root) {
 }
 
 /* ========================================================= */
+/* TARJETA DE VIDRIO DEL HERO — RESPALDO SIN BACKDROP-FILTER */
+/* Ver DESIGN.md §3 y §11                                    */
+/*                                                           */
+/* Si el navegador no soporta backdrop-filter, la tarjeta    */
+/* sube a un fondo casi opaco para no perder el contraste    */
+/* del texto.                                                */
+/*                                                           */
+/* Va FUERA de @layer components a propósito: la utilidad    */
+/* bg-dark-background/45 del marcado pertenece a la capa de  */
+/* utilidades, que se emite después de los componentes y     */
+/* anularía este respaldo. Fuera de la capa, el bloque se    */
+/* emite después de las utilidades y gana en cascada.        */
+/* ========================================================= */
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .hero-glass {
+        background-color: color-mix(in srgb, theme('colors.dark-background') 85%, transparent);
+    }
+}
+
+/* ========================================================= */
 /* MODAL DE SERVICIO — SCROLL Y TIPOGRAFÍA INYECTADA         */
 /* Ver DESIGN.md §8                                          */
 /*                                                           */

@@ -1,4 +1,4 @@
-# Objetivos y Métricas de Éxito (QA & Performance)
+6# Objetivos y Métricas de Éxito (QA & Performance)
 
 Este documento fija los estándares cualitativos y cuantitativos que los agentes de IA deben monitorear. Las métricas
 no son sugerencias, son requisitos obligatorios (Definition of Done) para cada iteración.

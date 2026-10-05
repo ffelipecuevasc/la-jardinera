@@ -239,69 +239,66 @@
     <div class="flex flex-col w-full">
         <!-- 1. HERO SECTION -->
         <section id="titular"
-                 class="relative w-full -mt-20 overflow-hidden bg-dark-background text-dark-on-background min-h-[92vh] flex flex-col justify-between">
-            <!-- Hero Botanical Background with Scrim -->
-            <div class="absolute inset-0 w-full h-full bg-cover bg-center opacity-45 transform scale-105 transition-transform duration-1000 ease-out"
-                 aria-label="Close-up fine art photography of lush wild botanical flowers, garden roses, ranunculus, delicate olive foliage, damp dark green stems with morning dewdrops on deep charcoal surface, moody soft cinematic directional morning lighting, editorial luxury florist look, color palette of deep moss green, dusty blush pink, ivory and charcoal."
-                 role="img" style="background-image: url('./public/images/hero-botanical.webp')">
-            </div>
-            <!-- Ambient Gradient Scrims -->
-            <div class="absolute inset-0 bg-gradient-to-t from-dark-background via-dark-background/60 to-transparent"></div>
-            <div class="absolute inset-0 bg-gradient-to-r from-dark-background/80 via-transparent to-dark-background/40"></div>
-            <!-- Empty Spacer for Header clearance -->
-            <div class="h-24 lg:h-32 relative z-10"></div>
-            <!-- Hero Content -->
-            <div class="relative z-10 max-w-[80rem] mx-auto w-full px-margin-mobile lg:px-margin-desktop py-space-6 flex flex-col items-start justify-center">
-                <!-- Logotipo Oficial La Jardinera -->
-                <img src="./public/logos/la-jardinera-blanco.png"
-                     alt="Logotipo oficial La Jardinera - Florería y Jardinería Fresca"
-                     class="w-[80px] h-[100px] object-contain mb-space-3 drop-shadow-[0_2px_10px_rgba(0,0,0,0.15)]"
-                     fetchpriority="high"/>
-                <!-- Headline -->
-                <h1 class="font-display-hero text-headline-xl lg:text-display-hero text-neutral-50 font-semibold max-w-4xl tracking-tight leading-none mb-space-4">
-                    <span class="fx-starlight">Florería <span class="fx-starlight fx-starlight--accent italic font-normal">La Jardinera</span></span>
-                </h1>
-                <!-- Editorial Paragraph -->
-                <p class="font-body-lg text-body-lg text-dark-on-surface-variant max-w-2xl font-light leading-relaxed mb-space-6">
-                    <em>Amamos las flores, trabajar y convivir con ellas. Es increíble el efecto que generan cuando las
-                        ves,
-                        cuando las arreglas, cuando las recibes, cuando las regalas, cuando las dedicas.</em>
-                </p>
-                <!-- CTAs & Micro-details -->
-                <div class="flex flex-wrap items-center gap-space-3">
-                    <a class="inline-flex items-center justify-center px-space-4 py-3 rounded-lg bg-primary-brand text-neutral-50 font-label-lg text-label-lg uppercase tracking-wider hover:opacity-90 transition-all shadow-md"
-                       href="#servicios">
-                        <span>Explorar Servicios</span>
-                        <svg class="text-[18px] ml-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="24"
-                             height="24" viewBox="0 0 24 24">
-                            <path d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8-8-8z"/>
-                        </svg>
-                    </a>
-                    <a class="inline-flex items-center justify-center px-space-4 py-3 rounded-lg bg-surface-container-lowest/10 backdrop-blur-md text-neutral-50 font-label-lg text-label-lg uppercase tracking-wider hover:bg-surface-container-lowest/20 transition-all"
-                       href="#suscripcion">
-                        <span>Suscripción Floral</span>
-                    </a>
-                </div>
-            </div>
-            <!-- Hero Meta Footer -->
-            <div class="relative z-10 w-full bg-dark-background/80 backdrop-blur-sm py-space-3">
-                <div class="max-w-[80rem] mx-auto px-margin-mobile lg:px-margin-desktop flex flex-col sm:flex-row items-center justify-between gap-space-2">
-                    <div class="flex items-center gap-space-2 text-dark-neutral-100 font-label-sm text-label-sm tracking-widest uppercase">
-                        <svg class="text-primary text-[18px]" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
-                             width="24" height="24" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5.5-2.5 7.51-3.49L17.5 6.5 9.99 9.99 6.5 17.5zm5.5-6.6c.61 0 1.1.49 1.1 1.1s-.49 1.1-1.1 1.1-1.1-.49-1.1-1.1.49-1.1 1.1-1.1z"/>
-                        </svg>
-                        <span><strong>Valdivia</strong>, Región de Los Ríos, Chile</span>
+                 class="relative w-full -mt-20 overflow-hidden bg-dark-background text-dark-on-background min-h-[92vh] flex items-center justify-center">
+            <!-- Fotografía a pleno color: sin scrims, sin opacidad, sin escala -->
+            <picture>
+                <source media="(orientation: portrait)"
+                        srcset="./public/images/hero-botanical-mobile.webp"
+                        type="image/webp" width="1536" height="2752">
+                <img src="./public/images/hero-botanical-desktop.webp"
+                     alt="Manos de florista envolviendo en papel kraft un ramo de rosas fucsia, gerberas, claveles y alstroemerias"
+                     width="2752" height="1536"
+                     fetchpriority="high" decoding="async"
+                     class="absolute inset-0 w-full h-full object-cover">
+            </picture>
+            <!-- Contenedor de la tarjeta (libera el header fijo con pt-24) -->
+            <div class="relative z-10 w-full max-w-4xl mx-auto px-margin-mobile lg:px-margin-desktop pt-24 pb-space-8">
+                <!-- Tarjeta de vidrio -->
+                <div class="hero-glass flex flex-col items-center text-center gap-space-3 p-space-4 md:p-space-8 rounded-3xl border border-white/20 bg-dark-background/45 backdrop-blur-xl backdrop-saturate-150 shadow-2xl">
+                    <!-- Headline -->
+                    <h1 class="font-display-hero text-headline-xl lg:text-display-hero text-neutral-50 font-semibold max-w-4xl tracking-tight leading-none">
+                        <span class="fx-starlight">Florería <span class="fx-starlight fx-starlight--accent italic font-normal">La Jardinera</span></span>
+                    </h1>
+                    <!-- Editorial Paragraph -->
+                    <p class="font-body-lg text-body-lg text-neutral-50 max-w-2xl font-light leading-relaxed">
+                        <em>Amamos las flores, trabajar y convivir con ellas. Es increíble el efecto que generan cuando las
+                            ves,
+                            cuando las arreglas, cuando las recibes, cuando las regalas, cuando las dedicas.</em>
+                    </p>
+                    <!-- CTAs -->
+                    <div class="flex flex-wrap items-center justify-center gap-space-3">
+                        <a class="inline-flex items-center justify-center px-space-4 py-3 rounded-lg bg-primary-brand text-neutral-50 font-label-lg text-label-lg uppercase tracking-wider hover:opacity-90 transition-all shadow-md"
+                           href="#servicios">
+                            <span>Explorar Servicios</span>
+                            <svg class="text-[18px] ml-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="24"
+                                 height="24" viewBox="0 0 24 24">
+                                <path d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8-8-8z"/>
+                            </svg>
+                        </a>
+                        <a class="inline-flex items-center justify-center px-space-4 py-3 rounded-lg bg-surface-container-lowest/10 backdrop-blur-md text-neutral-50 font-label-lg text-label-lg uppercase tracking-wider hover:bg-surface-container-lowest/20 transition-all"
+                           href="#suscripcion">
+                            <span>Suscripción Floral</span>
+                        </a>
                     </div>
-                    <a aria-label="Desplazarse a servicios"
-                       class="flex items-center gap-2 text-dark-neutral-100 hover:text-neutral-50 font-label-sm text-label-sm uppercase tracking-widest transition-colors"
-                       href="#servicios">
-                        <span>Descubrir Más</span>
-                        <svg class="text-[16px] animate-bounce" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
-                             width="24" height="24" viewBox="0 0 24 24">
-                            <path d="m20 12-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"/>
-                        </svg>
-                    </a>
+                    <!-- Fila de datos: ubicación y desplazamiento -->
+                    <div class="w-full pt-space-3 border-t border-white/20 flex flex-col sm:flex-row items-center justify-between gap-space-2">
+                        <div class="flex items-center gap-space-2 text-neutral-50 font-label-sm text-label-sm tracking-widest uppercase">
+                            <svg class="text-primary text-[18px]" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                                 width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5.5-2.5 7.51-3.49L17.5 6.5 9.99 9.99 6.5 17.5zm5.5-6.6c.61 0 1.1.49 1.1 1.1s-.49 1.1-1.1 1.1-1.1-.49-1.1-1.1.49-1.1 1.1-1.1z"/>
+                            </svg>
+                            <span><strong>Valdivia</strong>, Región de Los Ríos, Chile</span>
+                        </div>
+                        <a aria-label="Desplazarse a servicios"
+                           class="flex items-center gap-2 text-neutral-50 hover:text-neutral-50 font-label-sm text-label-sm uppercase tracking-widest transition-colors"
+                           href="#servicios">
+                            <span>Descubrir Más</span>
+                            <svg class="text-[16px] animate-bounce motion-reduce:animate-none" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                                 width="24" height="24" viewBox="0 0 24 24">
+                                <path d="m20 12-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"/>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
