@@ -814,3 +814,114 @@ fix(hero): cierra el seguimiento de la iteración 08 (H3, H6, H7, contraste de b
 
 Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
 ```
+
+### 8.12 Anillo de foco de los botones
+
+**Fecha:** 05-10-2026
+**Alcance:** se declaró el anillo de foco visible de «Explorar Servicios» y «Suscripción Floral» (DESIGN §11.3 y §14.3) con las clases propuestas en la §8.11.4. Solo se editaron esos dos elementos de
+`<section id="titular">`, sin quitar ninguna clase existente. No se tocaron `input.css`, el tinte de la tarjeta, las imágenes, el titular, el ícono de ubicación, «Descubrir Más», el header,
+el footer ni las otras páginas.
+
+**Resultado en una línea:** los dos botones declaran ahora un anillo de 2 px en `primary-fixed` y alcanzan ≥ 3:1 contra su fondo adyacente en el peor caso (3,67:1 y 4,01:1, con el 100 % de los píxeles del anillo
+sobre 3:1). Con esto, los tres enlaces del Hero declaran su anillo de foco.
+
+#### 8.12.1 Cambios (antes y después)
+
+`git diff -U0`: `@@ -270 +270 @@` y `@@ -278 +278 @@`, ambos dentro del Hero. El estado «antes» es el de la corrida anterior (§8.11): el árbol de trabajo estaba limpio y el código era el del commit `3989ee6`.
+
+| Botón | Antes | Después | Evidencia (render real, 14 casos, Tab real) |
+|:--|:--|:--|:--|
+| «Explorar Servicios» (`:270`, relleno sólido `bg-primary-brand`) | Sin clases `focus-visible:`. Anillo nativo de Chrome: `outline: auto 1px rgb(16, 16, 16)`, offset 1px. | Se agregan `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed focus-visible:ring-offset-2 focus-visible:ring-offset-dark-background`. | `outline: solid 2px transparent`; `box-shadow: rgb(31, 36, 33) 0 0 0 2px, rgb(180, 241, 193) 0 0 0 4px, …` (2 px de *offset* oscuro + 2 px de anillo; conserva la sombra `shadow-md`). Grosor medido en píxeles: 2 px en los 4 lados. |
+| «Suscripción Floral» (`:278`, relleno translúcido `bg-dark-background/30`) | Sin clases `focus-visible:`. Anillo nativo: `outline: auto 1px rgb(16, 16, 16)`, offset 1px. | Se agregan `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed` (sin *offset*). | `outline: solid 2px transparent`; `box-shadow: rgb(255, 255, 255) 0 0 0 0, rgb(180, 241, 193) 0 0 0 2px, …`. Grosor medido: 2 px en los 4 lados. |
+
+#### 8.12.2 Compilación e invariantes
+
+| Verificación | Estado | Evidencia |
+|:--|:--|:--|
+| `pnpm build` sin errores ni advertencias | ✅ confirmado por ejecución | Salida limpia salvo el aviso conocido de Browserslist. `dist/css/output.css`: 46.458 B → 46.547 B; SHA-256 `007451f666f270216fe6ece6bd26055445a512000af237fa09089c9fd48f01a2` (antes `2815b4cc…e0d9`). |
+| Clases en `output.css` | ✅ confirmado por búsqueda de texto | `.focus-visible\:ring-primary-fixed:focus-visible` (`rgb(180 241 193 / …)`), `.focus-visible\:ring-offset-2:focus-visible` (`--tw-ring-offset-width: 2px`), `.focus-visible\:ring-offset-dark-background:focus-visible` (`--tw-ring-offset-color: #1f2421`), `.focus-visible\:ring-2:focus-visible` y `.focus-visible\:outline-none:focus-visible`. |
+| Invariantes en `#titular` | ✅ confirmado por código | `style=` 0, `onclick` 0, `<script` 0, `backdrop-blur-md` 0, `text-primary` 0. Único `backdrop-blur-*`: `backdrop-blur-xl` de la tarjeta; ninguno en sus descendientes (0 con `backdrop-filter` computado, 14/14). `fx-starlight` idéntico; texto del `h1` «Florería La Jardinera». IDs únicos; 1 `style=` en la página (el del banner, deuda registrada). |
+| Alcance | ✅ confirmado por código | Solo `index.html` (2 líneas) y `dist/css/output.css` (regenerado; versionado). «Descubrir Más», el ícono y la tarjeta quedaron idénticos. |
+
+#### 8.12.3 Foco por teclado real (Tab por CDP; `:focus-visible` activo, 14/14)
+
+**Método:** el de la §8.11.4 (pulsaciones reales de Tab, `prefers-reduced-motion` emulado en esta etapa, 600 ms de espera antes de medir y comparación píxel a píxel entre la captura con foco y la
+misma captura sin foco). **Ajuste al método:** con *offset*, la franja del *offset* también cambia de color, y esos píxeles no son el anillo. Por eso aquí solo se miden los **píxeles sólidos del anillo**
+(color `#B4F1C1`, tolerancia de 14 niveles) dentro de 9 px fuera del borde del elemento, y se agrega el contraste del anillo contra su vecino inmediato exterior y contra el interior (perfiles por el
+punto medio de los cuatro lados). Con este método, «Descubrir Más» da lo mismo que en la §8.11.4 (p5 3,86:1; 100 %).
+
+| Botón | Grosor del anillo | Peor p5 del contraste (anillo vs fondo adyacente exterior) | % de píxeles del anillo ≥ 3:1 (peor caso) | Vecino inmediato exterior (mín.) | Vecino inmediato interior (mín.) | Estado |
+|:--|:--|:--|:--|:--|:--|:--|
+| «Explorar Servicios» | 2 px | **3,67:1** | **100 %** | 3,60:1 | 12,23:1 (franja del *offset*, `#1F2421`) | ✅ cumple 1.4.11 (≥ 3:1) |
+| «Suscripción Floral» (sin *offset*) | 2 px | **4,01:1** | **100 %** | 4,08:1 | 5,67:1 (borde del relleno del botón) | ✅ cumple 1.4.11 (≥ 3:1) |
+| «Descubrir Más» (sin cambios) | 2 px | 3,86:1 | 100 % | 3,87:1 | n/a | ✅ |
+
+Rango de píxeles de anillo medidos por caso: 1.104–1.264 («Explorar Servicios») y 806–824 («Suscripción Floral»).
+**«Suscripción Floral» alcanza 3:1 sin *offset*** (4,01:1 en el peor caso), así que no se cambió ni se agregó nada más.
+Para comparar con el estado anterior: el anillo nativo de Chrome tenía un tono claro de al menos 9,86:1 («Explorar») y 8,49:1 («Suscripción»), pero en el peor caso solo el 40 % y el 46 % de sus
+píxeles llegaba a 3:1, porque su tono oscuro no contrasta con el fondo oscuro. El anillo declarado es de un solo tono y uniforme.
+
+Revisé tres capturas (1280×800 oscuro y 320×640 claro para «Explorar Servicios»; 740×360 claro para «Suscripción Floral»): el anillo verde claro es nítido; en «Explorar Servicios» se ve la franja
+oscura del *offset* entre el botón y el anillo, y en «Suscripción Floral» el anillo queda pegado al borde del botón. Solo se verificó **Chrome**; Safari y Firefox no se midieron.
+
+#### 8.12.4 Sin regresión
+
+* **Contraste de texto de ambos botones:** sin cambios. Se compararon 84 valores (6 métricas × 14 casos) contra la corrida anterior: **0 diferencias**. Peor caso: «Suscripción Floral» 7,6349:1 en reposo y 8,9185:1 en hover;
+  «Explorar Servicios» 6,0562:1 (mínimo 4,5:1 en todos).
+* **Scroll horizontal:** 13 de 14 casos con `scrollWidth = clientWidth`; a 768×1024 sigue en 772/768, igual que la línea base (H4, no es regresión).
+* **Consola y red:** 0 errores o advertencias y 0 fallos de red en los 14 casos.
+* **Sin cambios:** ícono de ubicación, «Descubrir Más», tinte de la tarjeta (`rgba(31, 36, 33, 0.45)`), titular, imágenes y resto de la página. «Explorar Servicios» conserva `shadow-md` (el `box-shadow` computado con foco la incluye).
+
+#### 8.12.5 Estado de los hallazgos
+
+| Hallazgo | Estado | Motivo |
+|:--|:--|:--|
+| H8, foco declarado | ✅ cerrado (render real, Chrome) | Los tres enlaces del Hero declaran su anillo de foco y alcanzan ≥ 3:1 contra su fondo adyacente (3,67 / 4,01 / 3,86:1). Safari y Firefox sin verificar. |
+| H4 (scroll de 4 px a 768 px) y H5 (CLS) | abiertos, fuera del Hero | Sin cambios. |
+
+La iteración sigue «Completada con reservas» (Lighthouse y revisión en dispositivo real pendientes); `estado-actual.md` no se modificó.
+
+#### 8.12.6 Complemento a las propuestas para `DESIGN.md` (las aplica el desarrollador)
+
+Las propuestas de la §8.11.8 **aún no están aplicadas** en `DESIGN.md`. Al aplicarlas, usa estas versiones finales: reemplazan a las dos primeras viñetas de la regla 9 de §11.7 propuesta en la §8.11.8
+y agregan dos filas a la tabla de §2.10.
+
+### Propuesta de edición — `DESIGN.md`
+**Sección:** §11.7, regla 9 (botones y enlaces de la tarjeta), y §2.10
+**Motivo:** documentar el anillo de foco declarado de los tres enlaces y su contraste medido (todo el texto de las viñetas es nuevo; no existe en el `DESIGN.md` actual).
+````diff
++9. **Botones y enlaces de la tarjeta:**
++   - «Explorar Servicios»: botón de marca (`bg-primary-brand text-neutral-50 hover:opacity-90`), 6,06:1. Anillo de foco con
++     *offset* (relleno sólido propio): `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed
++     focus-visible:ring-offset-2 focus-visible:ring-offset-dark-background`.
++   - «Suscripción Floral»: variante «Vidrio sobre la tarjeta» (§11.3), `bg-dark-background/30 hover:bg-dark-background/45`;
++     7,63:1 en reposo y 8,92:1 en hover. Anillo de foco sin *offset* (relleno translúcido):
++     `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed`.
++   - «Descubrir Más»: `text-neutral-50 hover:underline underline-offset-4 transition-colors` (el hover no cambia el color; con
++     `secondary-container` medía 3,44:1). Anillo `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed`, sin `ring-offset`.
++   - Ícono de ubicación: `text-neutral-50` con `aria-hidden="true"`.
+````
+```diff
++| Anillo de foco de «Descubrir Más» contra el fondo adyacente | 3,86:1    | 3      | AA (1.4.11) |
++| Anillo de foco de «Explorar Servicios» (con *offset*)         | 3,67:1    | 3      | AA (1.4.11) |
++| Anillo de foco de «Suscripción Floral» (sin *offset*)         | 4,01:1    | 3      | AA (1.4.11) |
+```
+(Si ya agregaste la fila de «Descubrir Más» de la §8.11.8, basta con las dos filas nuevas.)
+
+#### 8.12.7 Archivos y mensaje de commit sugerido
+
+Archivos tocados en este ajuste: `index.html` (2 líneas), `dist/css/output.css` (regenerado; versionado) y esta bitácora (solo esta subsección 8.12). `_site/` (ignorado por Git) no se regeneró.
+Es un **commit nuevo** sobre lo ya publicado (`3989ee6`); no requiere *amend* ni *squash*.
+
+```text
+fix(hero): declara el anillo de foco de Explorar Servicios y Suscripción Floral
+
+- Explorar Servicios: focus-visible:ring-2 ring-primary-fixed con ring-offset-2 y
+  ring-offset-dark-background (relleno sólido); anillo de 2 px, 3,67:1 como mínimo
+- Suscripción Floral: focus-visible:ring-2 ring-primary-fixed sin offset (relleno translúcido);
+  anillo de 2 px, 4,01:1 como mínimo
+- Regenera dist/css/output.css
+- Registra la medición con Tab real y el complemento para DESIGN.md en la bitácora (8.12)
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+```
