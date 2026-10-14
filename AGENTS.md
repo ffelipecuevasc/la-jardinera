@@ -125,7 +125,9 @@ Notas:
     - `#mobile-menu-scrim` es el nodo hermano inmediatamente posterior a `</header>`.
     - La barra mide `h-20`; el panel (`top-full`, `max-h-[calc(100dvh-5rem)]`) y la capa tenue (`top-20`) dependen de
       ese valor. Si uno cambia, cambian todos.
-8. **Rutas relativas** con `./` para todo recurso y enlace interno.
+8. **Rutas relativas** con `./` para todo recurso y enlace interno. Excepción: `404.html` declara `<base href="/">` como
+   segunda etiqueta de su `<head>` (después de `<meta charset>`), porque Cloudflare Pages la sirve en rutas anidadas
+   (`/servicios/xyz`) y las rutas `./` deben resolverse desde la raíz del sitio.
 9. **Imágenes** en `.webp` bajo `public/images/`, con `width`, `height`, `alt` descriptivo y `loading="lazy"` bajo el
    pliegue. Contenedores con `aspect-*` para CLS = 0.
 10. **Accesibilidad:** objetivos táctiles de 44 × 44 px, foco visible, `aria-*` sincronizados, trampas de foco en

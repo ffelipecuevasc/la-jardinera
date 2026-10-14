@@ -318,8 +318,9 @@ Hallazgos abiertos. No bloquean el trabajo, pero ningún componente nuevo debe r
    `<head>`, que choca con la regla "cero JS en línea"; requiere una excepción documentada.
 8. **Favicon** de trazo negro poco legible en pestañas oscuras: se puede añadir un segundo `<link rel="icon"
    media="(prefers-color-scheme: dark)">` (aquí la media query sí es correcta).
-9. **Estilos en línea heredados:** la textura de ruido del banner (4 páginas) usa `style=`. Debe migrar a una clase en
-   `input.css`. (El del Hero del Inicio se resolvió en la Épica 01 · Iteración 08: ahora es un `<picture>`.)
+9. **Estilos en línea heredados (resuelto):** la textura de ruido del banner (4 páginas) vive en la clase `.bg-noise`
+   de `input.css` (`@layer components`); el HTML solo agrega `bg-noise` al `<div>` del banner. El del Hero del Inicio
+   se resolvió en la Épica 01 · Iteración 08: ahora es un `<picture>`.
 10. **Imágenes del Hero fuera de la convención de carpetas:** `hero-botanical-desktop.webp` y
     `hero-botanical-mobile.webp` viven en `public/images/` y no en `public/images/<sección>/` (§13). Mover cuando se
     toque de nuevo el Hero.
@@ -456,7 +457,10 @@ Rejilla `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-6` sobre `bg-s
 
 1. Marca (`font-headline-md italic`), frase de filosofía y crédito de desarrollo.
 2. Navegación (`<nav data-active-classes="text-primary font-semibold">`) con los 5 enlaces.
-3. Contacto (`tel:`, `mailto:`, Google Maps) con íconos `text-primary` y botones sociales `w-8 h-8 bg-surface-container`.
+3. Contacto (`tel:`, `mailto:`, Google Maps) con íconos `text-primary` y botones sociales `w-8 h-8 bg-surface-container`,
+   siempre visibles (sin `hidden lg:flex`). El segundo `<path>` del ícono de Facebook lleva
+   `class="fill-surface-container"` y nunca un color fijo: el relleno debe coincidir con el fondo del botón en ambos
+   temas (en oscuro, 6,64:1 frente al círculo).
 4. Medios de pago: Crédito/Débito, Transferencia, Efectivo.
 
 Pendiente de unificación (ver §5.3).

@@ -37,8 +37,9 @@ espera confirmación.
 
 ### Tarea 1: Marcado del titular
 
-En `index.html`, el `<h1>` del Hero debe quedar así (solo cambia el `<span>` interno; las clases del `<h1>` no se
-tocan):
+En `index.html`, el `<h1>` del Hero debe quedar así (cambia el `<span>` interno; en las clases del `<h1>` se agrega
+`lg:font-semibold`, para que "Florería" conserve el peso 600 desde 1024 px, y no se incluye `mb-space-4`, que
+`DESIGN.md` §7.1 ya retiró; el resto de las clases no se toca):
 
 ```html
 <h1 class="font-display-hero text-headline-xl lg:text-display-hero text-neutral-50 font-semibold lg:font-semibold max-w-4xl tracking-tight leading-none">

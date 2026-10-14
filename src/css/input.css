@@ -237,6 +237,19 @@ html.dark::view-transition-new(root) {
 }
 
 /* ========================================================= */
+/* TEXTURA DE RUIDO DE LOS BANNERS                           */
+/* Ver DESIGN.md §2.7                                        */
+/* ========================================================= */
+
+@layer components {
+
+    /* Textura de ruido fractal de los banners de marca (DESIGN.md §2.7) */
+    .bg-noise {
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48ZmlsdGVyIGlkPSJhIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC42IiBudW1PY3RhdmVzPSIzIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI2EpIi8+PC9zdmc+");
+    }
+}
+
+/* ========================================================= */
 /* TITULAR DEL HERO — CONSTELACIÓN (FX-STARLIGHT)            */
 /* Ver DESIGN.md §7                                          */
 /*                                                           */

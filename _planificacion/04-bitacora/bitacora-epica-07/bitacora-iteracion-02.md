@@ -387,3 +387,39 @@ La casilla "0 `style=` en el marcado de los 6 HTML…" **no** queda cubierta: la
 ```
 
 **Siguiente paso:** Épica 07 · Iteración 03 (saneamiento, 404 con `<base>` y "Redbanc"). Debe ejecutarse **después** de esta, no en paralelo, porque ambas tocan `input.css` e `index.html`.
+
+---
+
+## 9. Registro de las decisiones del desarrollador sobre los hallazgos (14-10-2026)
+
+> Sección agregada después de la entrega del §8. No cambia ningún código: solo deja constancia de las decisiones del desarrollador sobre los hallazgos y actualiza el estado de los pendientes.
+
+| Hallazgo | Decisión del desarrollador | Registro |
+|:--|:--|:--|
+| Desfase de los destellos de `−.16em` (§8.7, fila de campos y brillo) | **Aceptado**, sin corrección. | Decisión aceptada. Desfase de fase de 0,089 a 0,134 s en el ciclo de 3,6 s; el mosaico y el bucle no cambian. Deja de figurar como pendiente de juicio visual. |
+| H-9: contraste de `#ffc2c6` frente al píxel más luminoso (2,73 a 3,04:1) | **Observación**; no se cambian colores. | Se registra como **DT-20** (severidad Baja) en `_planificacion/README.md` §12. Ver la verificación del percentil 95 abajo. |
+| H-7: desborde transparente de hasta 11 px del `<h1>` | Hallazgo **registrado**, sin corrección en la Iteración 03. | Documentado en §8.8 y en la regla 8 propuesta para `DESIGN.md` §7.4. |
+| H-8: 4 px de scroll horizontal de 768 a 1023 px (fuera del Hero) | Hallazgo **registrado**, sin corrección en la Iteración 03. | Documentado en §8.8. |
+| H-10: frase desactualizada antes del bloque de la Tarea 1 | Actualizar la frase. | Hecho: la frase de `iteracion-02.md` ahora dice que se agrega `lg:font-semibold` y que no se incluye `mb-space-4`; coincide con el código final. |
+
+**Verificación del criterio "con el percentil 95 cumple" (DT-20).** El texto de la decisión afirmaba que con el percentil 95 el contraste cumple; esa medición no existía en la bitácora, así que se hizo el 14-10-2026 (Chrome 155 headless, perfil aislado, las mismas 14 cargas del §8: 7 viewports × claro y oscuro, `h1` oculto, región del `<h1>`, tono `#ffc2c6` frente a la luminancia del fondo; **medido en render real (headless)**). Los resultados son idénticos en claro y oscuro:
+
+| Viewport | Mediana | Percentil 90 | Percentil 95 | Percentil 99 | Máximo |
+|:--|:--:|:--:|:--:|:--:|:--:|
+| 320 × 640 | 5,85 | 4,28 | **3,86** | 3,55 | 3,50 |
+| 360 × 740 | 6,22 | 3,43 | **3,10** | 2,91 | 2,88 |
+| 412 × 915 | 5,73 | 2,96 | **2,88** | 2,83 | 2,83 |
+| 768 × 1024 | 5,90 | 4,86 | **4,75** | 4,40 | 4,22 |
+| 740 × 360 | 4,90 | 2,97 | **2,91** | 2,88 | 2,85 |
+| 1024 × 768 | 4,82 | 3,77 | **3,48** | 3,10 | 3,01 |
+| 1280 × 800 | 4,88 | 3,88 | **3,63** | 3,18 | 3,07 |
+
+**Conclusión honesta:** con el percentil 95 el contraste es ≥ 3:1 (mínimo para texto grande) en **5 de los 7 viewports**; en **412 × 915 (2,88:1)** y **740 × 360 (2,91:1)** queda algo por debajo. No es un cambio de esta iteración (los tonos y el fondo no variaron) y el desarrollador lo trata como observación; por eso DT-20 se registra con esas cifras y no con "cumple" a secas. La mediana es ≥ 4,82:1 en todos los viewports.
+
+**Estado de la Iteración 02 (A4): sigue "Completada con reservas".** 🕒 PENDIENTES del desarrollador: traza de pintado en un móvil real, contraste forzado real de Windows, Firefox y Safari, y la lista manual de la §5.1 (y la del §8.10). La consola y el build de las otras 5 páginas se miden en la Iteración 03 (Parte B) y se registran en su bitácora.
+
+### 9.1 Mensaje de commit sugerido para este ajuste de registro
+
+```text
+Épica 07 - Iteración 02: Registra las decisiones sobre los hallazgos (destellos aceptados, contraste como DT-20 con el percentil 95 medido, H-7 y H-8 sin corregir) y actualiza la especificación.
+```
