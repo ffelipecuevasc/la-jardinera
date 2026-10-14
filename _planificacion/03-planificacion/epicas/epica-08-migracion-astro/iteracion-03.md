@@ -67,7 +67,7 @@ repórtalo y conserva cada una donde corresponde (por ejemplo, con un campo `eti
 ### Tarea 5: Registro
 
 Bitácora, `estado-actual.md`, DT-06 marcada ✅ con evidencia y commit sugerido
-`refactor(footer): unifica el pie de página en un componente Astro`.
+`Épica 08 - Iteración 03: Unifica el pie de página en un componente Astro.`
 
 ## 3. Auditoría de No-Regresión e Invariantes
 

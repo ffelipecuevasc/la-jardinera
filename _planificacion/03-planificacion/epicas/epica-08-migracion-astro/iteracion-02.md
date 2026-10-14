@@ -183,7 +183,8 @@ diferencias** salvo las rutas ya normalizadas, el `<link>` del CSS y el `<script
 ### Tarea 9: Registro
 
 Bitácora, línea en `estado-actual.md`, DT-10, DT-14, DT-16 y DT-17 marcadas en §12 solo con evidencia, y mensaje de
-commit sugerido: `refactor(astro): migra las 6 páginas a Astro en paridad literal`.
+commit sugerido (una línea, formato de `AGENTS.md` §3.5, máximo 200 caracteres):
+`Épica 08 - Iteración 02: Migra las 6 páginas a Astro en paridad literal con el HTML de referencia.`
 
 ## 3. Auditoría de No-Regresión e Invariantes
 

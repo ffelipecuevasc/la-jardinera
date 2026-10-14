@@ -229,7 +229,9 @@ Si no dispones de navegador, deja esta parte como `🕒 PENDIENTE` y entrega est
    actual y la nota "corregida en código; pendiente de verificación en producción".
 3. Agrega la línea a `_planificacion/04-bitacora/estado-actual.md`. Si H8 se certificó, agrégala como "Épica 06 -
    Iteración 13: certificada en render real (ver Épica 07 · Iteración 03)"; si no, no la des por cerrada.
-4. Entrega el mensaje de commit sugerido, separado por tarea si corresponde.
+4. Entrega **un único** mensaje de commit sugerido, de una sola línea, con el formato de `AGENTS.md` §3.5:
+   `Épica 07 - Iteración 03: <descripción>.`, máximo 200 caracteres contados con el prefijo (cuenta caracteres reales,
+   no bytes). Sin cuerpo, sin viñetas y sin dividirlo por tarea.
 
 ## 3. Auditoría de No-Regresión e Invariantes
 

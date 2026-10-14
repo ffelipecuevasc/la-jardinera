@@ -214,7 +214,7 @@ El proyecto se desarrolla con apoyo de agentes de IA bajo reglas estrictas:
 ## 14. Convenciones
 
 🔹 **Idioma:** todo el contenido, el código comentado y la documentación se escriben en español de Chile.
-🔹 **Commits:** formato *Conventional Commits* en español, por ejemplo `fix(footer): corrige enlace de marca en servicios`.
+🔹 **Commits:** formato «Épica NN - Iteración NN: descripción», una sola línea, máximo 200 caracteres.
 🔹 **Ramas:** `main` para producción; ramas descriptivas (`feat/...`, `fix/...`) para trabajo en curso.
 🔹 **Codificación:** UTF-8 en todos los archivos.
 

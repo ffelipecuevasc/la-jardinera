@@ -447,3 +447,17 @@ PENDIENTE (no verificable).
 
 **Estado de la iteración tras esta actualización:** **Completada con reservas.** Siguen 🕒 PENDIENTES el modo oscuro, el
 menú móvil y el modal de Servicios en producción, y el dato histórico del paso 1 (no verificable).
+
+### 8.6 Cierre del paso 1 de la §5.4
+
+Decisión del desarrollador del 13-10-2026. Esta subsección no reescribe nada anterior: cierra el último dato histórico
+que la §8.1 y la §8.5 dejaron en 🕒 PENDIENTE.
+
+| Criterio | Estado | Evidencia |
+|:--|:--:|:--|
+| Paso 1 de la §5.4: estado previo al cambio del comando de Cloudflare (¿había archivos internos públicos antes?) | **No verificable** (cerrado) | El estado de `/README.md`, `/AGENTS.md` y `/package.json` antes del cambio de comando **no se registró**, y no se puede reconstruir: el comando anterior ya fue reemplazado y no queda evidencia de cómo respondían esas rutas en ese momento. No se marca ✅, porque no hay evidencia de que se haya comprobado. |
+| Riesgo vigente por no haberlo registrado | Sin riesgo | **[NAV]** Hoy ninguna de las siete rutas internas probadas (`/README.md`, `/AGENTS.md`, `/DESIGN.md`, `/package.json`, `/_planificacion/README.md`, `/tailwind.config.js` y `/scripts/stage-site.mjs`) expone contenido; todas muestran la 404 del sitio (código HTTP no leído; §8.1 y §8.5). **[CÓD]** Las 13 exclusiones están ausentes de `_site/` (§4.1). |
+
+**Efecto sobre el estado de la iteración:** el paso 1 deja de ser un pendiente abierto y queda registrado como "no
+verificable". Sigue 🕒 PENDIENTE solo la verificación en producción del modo oscuro, el menú móvil y el modal de
+Servicios (§8.5). El estado de la iteración sigue siendo **Completada con reservas**.

@@ -50,7 +50,7 @@ la capa tenue de las 6 páginas.
 
 ### Tarea 4: Registro
 
-Bitácora, `estado-actual.md` y commit sugerido `refactor(header): unifica header y panel móvil en un componente Astro`.
+Bitácora, `estado-actual.md` y commit sugerido `Épica 08 - Iteración 04: Unifica el header y el panel móvil en un componente Astro.`
 
 ## 3. Auditoría de No-Regresión e Invariantes
 

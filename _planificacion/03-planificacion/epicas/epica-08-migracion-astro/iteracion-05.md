@@ -68,7 +68,7 @@ solo para el Inicio, con `<script type="application/ld+json" set:html={JSON.stri
 2. En la Épica 07 · It. 04 no se edita nada más allá de su nota de traslado.
 3. Acciones del desarrollador: las del §3 de la Épica 07 · It. 04 (Search Console, redirección sin `www`, vistas
    previas en WhatsApp y Facebook), a ejecutar **después** del paso a producción (It. 08).
-4. Commit sugerido: `feat(seo): agrega canonical, Open Graph, robots y sitemap desde el layout`.
+4. Commit sugerido: `Épica 08 - Iteración 05: Agrega canonical, Open Graph, robots y sitemap desde el layout.`
 
 ## 3. Auditoría de No-Regresión e Invariantes
 

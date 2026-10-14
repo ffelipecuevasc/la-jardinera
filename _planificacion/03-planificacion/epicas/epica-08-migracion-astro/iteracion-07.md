@@ -49,7 +49,7 @@ puede seguir ejecutándose (es idempotente); quitarlo es opcional y se documenta
 
 ### Tarea 4: Registro
 
-Bitácora, `estado-actual.md`, DT-15 ✅ y commit sugerido `fix(tema): aplica el tema antes del primer pintado`.
+Bitácora, `estado-actual.md`, DT-15 ✅ y commit sugerido `Épica 08 - Iteración 07: Aplica el tema antes del primer pintado.`
 
 ## 3. Criterios de Aceptación (Definition of Done)
 

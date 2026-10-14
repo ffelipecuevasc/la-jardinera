@@ -57,7 +57,7 @@ que la línea base de la It. 01; CLS = 0.
 ### Tarea 6: Registro
 
 Bitácora, línea de cierre de épica en `estado-actual.md`, `decisiones-tecnicas.md` (ADR-001 → "Implementada") y commit
-sugerido `docs(planificacion): certifica y cierra la Épica 08 (migración a Astro)`.
+sugerido `Épica 08 - Iteración 08: Certifica y cierra la Épica 08 (migración a Astro).`
 
 ## 3. Criterios de Aceptación (Definition of Done)
 

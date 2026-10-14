@@ -35,7 +35,7 @@ de qué bloques extraer.
 ### Tarea 2: Verificación y registro
 
 `scripts/comparar-con-referencia.mjs` contra la salida de la It. 05: 0 diferencias. Bitácora, `estado-actual.md` y commit
-sugerido `refactor(secciones): extrae bloques repetidos a componentes Astro`.
+sugerido `Épica 08 - Iteración 06: Extrae los bloques repetidos a componentes Astro.`
 
 ## 3. Criterios de Aceptación (Definition of Done)
 
