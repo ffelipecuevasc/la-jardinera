@@ -1,7 +1,8 @@
 # Iteración 03: Saneamiento de Deuda Técnica y Certificación del Hallazgo H8
 
 **⚠️ DIRECTIVA DE INICIO (Chain of Thought):**
-Esta iteración limpia lo que distorsionaría la migración a componentes de la Épica 08 y cierra la Fase 2 de la Épica 06,
+Esta iteración limpia lo que distorsionaría la migración a Astro de la Épica 08 (los defectos se copiarían a los
+componentes) y cierra la Fase 2 de la Épica 06,
 que sigue abierta porque el Hallazgo H8 (Iteración 13) quedó ejecutado pero sin certificar en render real. Son cinco
 correcciones pequeñas y una certificación. **Cada corrección es independiente:** aplícalas y verifícalas una por una, y
 si una falla no bloquees las demás.
@@ -147,7 +148,7 @@ Si no dispones de navegador, deja esta parte como `🕒 PENDIENTE` y entrega est
 1. Resuelto en la Épica 01 · Iteración 08: el Hero usa `<img fetchpriority="high">` dentro de `<picture>`. Aquí solo
    se registra como cerrado; no hay nada que hacer.
 2. DT-06: los footers tienen dos variantes de contenedor y el enlace activo pierde `font-body-sm text-body-sm`. Se
-   resuelve en la Épica 08, cuando el footer sea un solo componente.
+   resuelve en la Épica 08 · Iteración 03 (migración a Astro), cuando el footer sea un solo componente.
 
 ### Tarea 8: Registro
 

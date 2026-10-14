@@ -193,7 +193,7 @@ Además de esta regla escrita, `.claude/settings.json` bloquea estos comandos a 
 
 | Elemento              | Formato                                   | Ejemplo                                   |
 |:----------------------|:------------------------------------------|:------------------------------------------|
-| Carpeta de épica      | `epica-NN-slug-en-minusculas`             | `epica-08-componentes-react`              |
+| Carpeta de épica      | `epica-NN-slug-en-minusculas`             | `epica-08-migracion-astro`                |
 | Especificación        | `iteracion-NN.md`                         | `iteracion-03.md`                         |
 | Carpeta de bitácoras  | `bitacora-epica-NN`                       | `bitacora-epica-08`                       |
 | Bitácora              | `bitacora-iteracion-NN.md`                | `bitacora-iteracion-03.md`                |
@@ -210,15 +210,19 @@ Los números siempre con dos dígitos.
 | DT-01 | `servicios.html`, footer columna 1: falta la apertura `<a` del enlace de marca; el navegador muestra el texto `class="..." ... >La Jardinera` en pantalla. | Alta | Épica 07 · It. 03 |
 | DT-02 | Hallazgo H8 (barra de escritorio entre 1024 y 1099 px) corregido en la Iteración 13 sin certificación en render real. | Media | Épica 07 · It. 03 |
 | DT-03 | `style=` heredados: textura de ruido del banner (Inicio, Servicios, Suscripción, Galería) y fondo del Hero del Inicio. | Media | Épica 07 · It. 03 |
-| DT-04 | `index.html` no declara `<meta name="description">`.                                                          | Media     | Épica 07 · It. 04   |
+| DT-04 | `index.html` no declara `<meta name="description">`.                                                          | Media     | Épica 08 · It. 05 (trasladada desde Épica 07 · It. 04) |
 | DT-05 | `404.html`: botones sociales del footer con `hidden lg:flex`, invisibles en móvil (el resto de páginas los muestra). | Baja | Épica 07 · It. 03 |
-| DT-06 | Footer con dos variantes de contenedor y enlace activo sin `font-body-sm text-body-sm`.                       | Baja      | Épica 08 (componente único) |
+| DT-06 | Footer con dos variantes de contenedor y enlace activo sin `font-body-sm text-body-sm`.                       | Baja      | Épica 08 · It. 03 (componente Astro) |
 | DT-07 | Texto "Redbank" en la franja de beneficios del Inicio; en Chile la red se llama **Redbanc**.                  | Baja      | Épica 07 · It. 03   |
-| DT-08 | Sin `robots.txt`, `sitemap.xml`, `canonical` ni etiquetas Open Graph.                                         | Media     | Épica 07 · It. 04   |
+| DT-08 | Sin `robots.txt`, `sitemap.xml`, `canonical` ni etiquetas Open Graph.                                         | Media     | Épica 08 · It. 05 (trasladada desde Épica 07 · It. 04) |
 | DT-09 | ✅ **Resuelta** (Épica 07 · Iteración 01). `01-vision/proposito-y-alcance.md` y `02-arquitectura/stack-tecnologico.md` desactualizados (5 páginas, Netlify Forms, GitHub Actions como despliegue). | Baja | Épica 07 · It. 01 |
 | DT-10 | `src/js/main.js` importa módulos con ruta variable (`import(path)`): funciona en el navegador, pero impide el análisis de un empaquetador. | Baja (bloqueante para Épica 08) | Épica 08 · It. 02 |
 | DT-11 | Varios archivos guardados con BOM UTF-8 (`index.html`, `input.css`, `main.js`, módulos JS, `tailwind.config.js`). | Baja | Oportunista |
 | DT-12 | Deuda de diseño listada en `DESIGN.md` §5.                                                                    | Baja      | Según iteración     |
+| DT-14 | `404.html` usa rutas relativas (`./dist/...`, `./public/...`); servida en una ruta anidada (`/a/b/x`) se vería sin estilos. Hallazgo por análisis de código, pendiente de confirmar en producción. | Media | Épica 08 · It. 02 |
+| DT-15 | El tema oscuro se aplica en `DOMContentLoaded`: destello claro en la carga para quien prefiere modo oscuro. | Baja | Épica 08 · It. 07 (opcional, requiere excepción) |
+| DT-16 | `dist/css/output.css` versionado en Git (archivo generado). | Baja | Épica 08 · It. 02 |
+| DT-17 | `<meta charset>` no es la primera etiqueta del `<head>` en varias páginas. | Baja | Épica 08 · It. 02 |
 
 ---
 
@@ -228,6 +232,7 @@ Los números siempre con dos dígitos.
 |:------------|:--------------------------------------------------------------------------------------------------------|
 | 2026        | Creación como `_antigravity/` para gobernar al agente Antigravity (Épicas 01 a 06).                     |
 | Épica 07    | Renombrada a `_planificacion/`; constitución reescrita para operar con varios agentes; `DESIGN.md` trasladado a la raíz del repositorio. |
+| 13-10-2026  | La Épica 08 "Componentes React" (solo planificada) se reemplaza por `epica-08-migracion-astro/`; la Épica 07 · It. 04 (SEO) se traslada a la Épica 08 · It. 05. |
 
 Las bitácoras de las Épicas 01 a 06 conservan las rutas `_antigravity/...` que usaban al momento de escribirse: son
 registro histórico y no se editan.

@@ -1,12 +1,17 @@
-# Épica 07: Gobernanza Multiagente, Titular Starlight y Saneamiento Previo a React
+# Épica 07: Gobernanza Multiagente, Titular Starlight y Saneamiento Previo a la Migración
+
+> **Replanificada el 13-10-2026:** la Épica 08 deja de ser "Componentes React" y pasa a ser la **migración
+> estructural a Astro** (`epica-08-migracion-astro/`). Las Iteraciones 01 a 03 de esta épica no cambian de objetivo;
+> la **Iteración 04 (SEO técnico) se traslada** a la Épica 08 · Iteración 05, donde se resuelve una sola vez en el layout
+> en vez de editar seis `<head>` a mano.
 
 > **Prerrequisito:** certificar en render real la Iteración 13 de la Épica 06 (Hallazgo H8). Mientras no se certifique,
 > la Fase 2 de la Épica 06 sigue abierta y su verificación se absorbe en la Iteración 03 de esta épica.
 
 ## 1. Objetivo de la Épica
 
-Preparar el proyecto para trabajar con más de un agente de IA y dejarlo en un estado limpio antes de introducir React
-(Épica 08):
+Preparar el proyecto para trabajar con más de un agente de IA y dejarlo en un estado limpio antes de migrar la
+estructura a Astro (Épica 08):
 
 1. Reorganizar la gobernanza: `_antigravity/` pasa a `_planificacion/`, nacen `AGENTS.md`, `README.md` y `DESIGN.md`
    en la raíz, y Claude Code queda restringido por permisos.
@@ -14,14 +19,15 @@ Preparar el proyecto para trabajar con más de un agente de IA y dejarlo en un e
 3. Reemplazar el resaltador del titular del Hero por el efecto **Starlight**, adaptado al sistema de diseño.
 4. Saldar la deuda técnica que distorsionaría la migración a componentes (enlace roto del footer de Servicios,
    estilos en línea, diferencias entre footers, íconos con defectos de contraste).
-5. Completar el SEO técnico básico que Google Search Console espera encontrar.
+5. ~~Completar el SEO técnico básico que Google Search Console espera encontrar.~~ Trasladado a la Épica 08 ·
+   Iteración 05.
 
 ## 2. Alcance
 
 * **Archivos:** los 6 HTML (solo donde cada iteración lo indique), `src/css/input.css`, `scripts/`, `package.json`
   (solo la línea de `build:cf`), `.gitignore`, `.claude/` (solo lectura para el agente), `_planificacion/**`, y los
   documentos raíz (`AGENTS.md`, `README.md`, `DESIGN.md`), que edita únicamente el desarrollador.
-* **Fuera de alcance:** cambios de arquitectura (React, empaquetadores) y cambios de contenido comercial.
+* **Fuera de alcance:** cambios de arquitectura (Astro, empaquetadores) y cambios de contenido comercial.
 
 ## 3. Plan de Iteraciones
 
@@ -30,7 +36,7 @@ Preparar el proyecto para trabajar con más de un agente de IA y dejarlo en un e
 | 01        | Desarrollador (hecho) + Agente | Agente: verifica el renombrado, integra `build:cf` y `.gitignore`, comprueba `_site/` y deja al día `stack-tecnologico.md` y `proposito-y-alcance.md` (DT-09). Desarrollador: cambia el comando de Cloudflare al final. |
 | 02        | Agente                       | Titular del Hero con `fx-starlight`: verifica si el desarrollador ya lo aplicó, o lo aplica; retiro de `fx-marker`. |
 | 03        | Agente                       | Saneamiento: DT-01 (enlace roto del footer de Servicios), DT-03 (estilos en línea a clases), DT-05 (botones sociales del footer de la 404), DT-13 (ícono de Facebook en modo oscuro), DT-07 (solo con confirmación) y certificación en render real de H8 (DT-02). |
-| 04        | Agente + Desarrollador       | SEO técnico: `meta description` del Inicio (DT-04), `canonical` y Open Graph, `robots.txt`, `sitemap.xml` y, con autorización, datos estructurados (DT-08). |
+| 04        | —                            | ⛔ **Trasladada a la Épica 08 · Iteración 05.** Contenido original: SEO técnico: `meta description` del Inicio (DT-04), `canonical` y Open Graph, `robots.txt`, `sitemap.xml` y, con autorización, datos estructurados (DT-08). |
 
 ### Detalle de la Iteración 01 (despliegue por lista blanca)
 
@@ -40,7 +46,8 @@ Preparar el proyecto para trabajar con más de un agente de IA y dejarlo en un e
 4. `.gitignore` agrega `_site/`.
 
 Beneficio clave para la Épica 08: la configuración de Cloudflare queda **igual en todas las ramas**; cada rama define
-qué hace `build:cf` en su propio `package.json`.
+qué hace `build:cf` en su propio `package.json`. En la migración a Astro, `build:cf` pasa a ser `astro build` con
+`outDir: './_site'`, sin tocar el panel de Cloudflare.
 
 Límites de Cloudflare Pages a vigilar: **25 MiB por archivo** y **20 000 archivos por despliegue**. Los `.mp4` de la
 galería son los candidatos a superar el primero.
@@ -51,7 +58,7 @@ galería son los candidatos a superar el primero.
 * `.bg-hero-botanical`: fondo del Hero del Inicio con `url("../../public/images/hero-botanical.webp")` (ruta relativa a
   `dist/css/output.css`).
 
-### Detalle de la Iteración 04 (URLs canónicas)
+### Detalle de la Iteración 04 (URLs canónicas) — vigente como referencia para la Épica 08 · Iteración 05
 
 Cloudflare Pages **redirige con un 308** cada `/pagina.html` a `/pagina` y `/index.html` a `/`. Por eso las URLs
 canónicas y las del sitemap se escriben **sin extensión**: `/`, `/servicios`, `/suscripcion-floral`, `/galeria`,
@@ -70,5 +77,6 @@ contradictoria.
   jerarquía de `DESIGN.md` §7.3.
 * [ ] 0 `style=` en el marcado de los 6 HTML; footer de Servicios sin texto basura; ícono de Facebook legible en
   ambos temas; H8 certificado en render real.
-* [ ] Search Console reconoce el `sitemap.xml`, y ninguna página indexable carece de descripción ni de `canonical`.
+* [ ] ~~Search Console reconoce el `sitemap.xml`, y ninguna página indexable carece de descripción ni de `canonical`.~~
+  Trasladado al DoD de la Épica 08.
 * [ ] `pnpm build` sin errores y consola limpia en las 6 páginas, en modo claro y oscuro.

@@ -1,5 +1,10 @@
 # Iteración 04: SEO Técnico (Descripción, Canonical, Open Graph, `robots.txt` y `sitemap.xml`)
 
+> ⛔ **TRASLADADA (13-10-2026) a la Épica 08 · Iteración 05 (migración a Astro). No ejecutar en esta épica.**
+> Con Astro, descripción, `canonical`, Open Graph y sitemap se generan una sola vez desde el layout y la fuente única
+> de navegación. Esta especificación se conserva como **referencia de contenido** (textos, URLs canónicas sin
+> extensión, imagen Open Graph y acciones del desarrollador en Search Console) para esa iteración.
+
 **⚠️ DIRECTIVA DE INICIO (Chain of Thought):**
 El sitio está en Cloudflare Pages, con Web Analytics y Google Search Console ya conectados, pero le faltan las señales
 que Search Console espera: `index.html` no tiene `<meta name="description">`, ninguna página declara `canonical`, no
@@ -177,7 +182,8 @@ ya existen en el repositorio**. No inventes horarios, dirección de calle, coord
    ejecutaron y verificaron.
 4. Decisión en `decisiones-tecnicas.md`: "URLs canónicas sin extensión por el comportamiento de Cloudflare Pages",
    incluyendo la observación de que cada enlace interno con `.html` produce un salto 308 (impacto marginal; se evalúa
-   en la Épica 08, cuando la navegación sea una fuente única).
+   en la Épica 08, cuando la navegación sea una fuente única; con Astro, los enlaces internos pasan a `/servicios`
+   sin extensión).
 
 ## 3. Acciones del Desarrollador (fuera del alcance del agente)
 
