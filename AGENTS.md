@@ -74,8 +74,9 @@ El control de versiones y la publicación son responsabilidad exclusiva del desa
 3. Para mover o renombrar archivos versionados, **propón** el comando `git mv` correspondiente; no lo ejecutes.
 4. **Prohibido** desplegar: nada de `wrangler`, ni cambios en el panel de Cloudflare. El sitio se publica solo, desde
    la rama `main`, mediante Cloudflare Pages.
-5. Al cerrar una tarea, sugiere un mensaje de commit en formato *Conventional Commits* y en español:
-   `feat(hero): reemplaza el destacador del H1 por el efecto Starlight`.
+5. Al cerrar una tarea, sugiere UN mensaje de commit de una sola línea, en español de Chile, con el formato
+   `Épica NN - Iteración NN: <descripción>.` y un máximo de 200 caracteres contados con el prefijo. Sin cuerpo ni
+   viñetas. Fuera de una iteración, usa `Épica NN - <descripción>.`.
 
 ---
 
