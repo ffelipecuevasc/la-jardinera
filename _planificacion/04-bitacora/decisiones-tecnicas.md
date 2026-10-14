@@ -23,3 +23,13 @@ Guardas de `stage-site.mjs` (todas se evalúan antes de borrar `_site/`; si una 
 * Hay páginas `.html` en la raíz y existen `dist/`, `public/` y `src/js/`.
 * `_site/` no contiene código fuente (`src/css`, `tailwind.config.js`, `package.json`): la carpeta de salida nunca es de trabajo.
 * **Nueva (Iteración 01, tras el incidente de `_site/`):** `scripts.build` de `package.json` (leído sin BOM) no contiene `_site` y sí contiene `dist/css/output.css`, y `dist/css/output.css` existe con más de 0 bytes. Evita publicar en silencio un CSS desactualizado cuando la compilación escribe fuera de `dist/`.
+
+## Cierre de la Épica 07 con reservas — 14-10-2026
+
+* **Decisión del desarrollador:** la Épica 07 se cierra "Completada con reservas". Las verificaciones manuales pendientes
+  (DT-14 en producción, favicon en una pestaña real, Firefox y Safari, traza de pintado en móvil real, contraste forzado
+  real de Windows) **no bloquean** la Épica 08 y quedan en "Seguimiento posterior al cierre" de su `definicion-epica.md`.
+* **Criterio:** una casilla del DoD se marca `[x]` solo con evidencia citada en una bitácora; la evidencia parcial deja la
+  casilla abierta con una nota.
+* **Galería:** las cancelaciones `net::ERR_ABORTED` de `.mp4` son comportamiento normal de Chrome con videos grandes
+  (diagnóstico en la bitácora de cierre §3); no se registran como deuda.
