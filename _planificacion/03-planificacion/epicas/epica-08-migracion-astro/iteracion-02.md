@@ -144,6 +144,8 @@ En cada `src/pages/*.astro`:
 
 4. Comprobación: `grep -rn "\./public/\|\.html\"" src/` debe devolver 0 resultados en marcado y datos (los comentarios
    explicativos de `contact-form.js` pueden mencionarlos; actualízalos si corresponde).
+5. Al migrar la 404 a rutas absolutas, retira el `<base href="/"/>` agregado en la Épica 07 · Iteración 03 (Tarea 3b) y
+   verifica `/a/b/xyz` otra vez.
 
 ### Tarea 6: URLs antiguas
 
@@ -175,7 +177,8 @@ diferencias** salvo las rutas ya normalizadas, el `<link>` del CSS y el `<script
    videos), carrusel de reseñas, cambio de tema y formulario de contacto (abre WhatsApp con el texto) funcionan; consola
    limpia. La 404 en `/a/b/inexistente` se ve con estilos (DT-14).
 7. **Desarrollador:** *push* de la rama; confirmar en el log de Cloudflare la versión de Node y que la vista previa
-   `*.pages.dev` funciona.
+   `*.pages.dev` funciona. El log del 13-10-2026 mostró Node 22.13.0 en modo mantenimiento y un aviso `EBADENGINE` de
+   corepack 0.36 (pide `^22.22.2`); fijar `NODE_VERSION` con una versión 22.x reciente evita ambos.
 
 ### Tarea 9: Registro
 

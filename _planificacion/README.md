@@ -222,7 +222,7 @@ Los números siempre con dos dígitos.
 | DT-14 | `404.html` usa rutas relativas (`./dist/...`, `./public/...`); servida en una ruta anidada (`/a/b/x`) se vería sin estilos. **Confirmada en producción (13-10-2026, `/servicios/xyz`); se resuelve en Épica 07 · It. 03 con `<base href="/">`.** | Media | Épica 07 · It. 03 |
 | DT-15 | El tema oscuro se aplica en `DOMContentLoaded`: destello claro en la carga para quien prefiere modo oscuro. | Baja | Épica 08 · It. 07 (opcional, requiere excepción) |
 | DT-16 | `dist/css/output.css` versionado en Git (archivo generado). | Baja | Épica 08 · It. 02 |
-| DT-17 | `<meta charset>` no es la primera etiqueta del `<head>` en varias páginas. | Baja | Épica 08 · It. 02 |
+| DT-17 | `<meta charset>` no es la primera etiqueta del `<head>` en varias páginas. `404.html` se corrige en Épica 07 · It. 03 (orden del `<head>`); las otras 5 páginas, en Épica 08 · It. 02. | Baja | Épica 07 · It. 03 (404.html); Épica 08 · It. 02 (otras 5) |
 
 ---
 

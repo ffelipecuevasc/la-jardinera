@@ -3,13 +3,14 @@
 **⚠️ DIRECTIVA DE INICIO (Chain of Thought):**
 Esta iteración limpia lo que distorsionaría la migración a Astro de la Épica 08 (los defectos se copiarían a los
 componentes) y cierra la Fase 2 de la Épica 06,
-que sigue abierta porque el Hallazgo H8 (Iteración 13) quedó ejecutado pero sin certificar en render real. Son cinco
+que sigue abierta porque el Hallazgo H8 (Iteración 13) quedó ejecutado pero sin certificar en render real. Son seis
 correcciones pequeñas y una certificación. **Cada corrección es independiente:** aplícalas y verifícalas una por una, y
 si una falla no bloquees las demás.
 
 En estas correcciones se permite tocar, además de los HTML indicados, `src/css/input.css` (solo lo que se pide) y la
 tabla del §12 de `_planificacion/README.md`. Todo lo demás del `<head>`, del `<main>` y del `<footer>` permanece
-intacto. `AGENTS.md`, `README.md` y `DESIGN.md` son solo lectura.
+intacto, salvo el reordenamiento del `<head>` de `404.html` que pide la Tarea 3b. `AGENTS.md`, `README.md` y
+`DESIGN.md` son solo lectura.
 
 **Autorización explícita de esta iteración:** edición de los HTML y de `src/css/input.css` en lo descrito abajo, y de la
 tabla §12 de `_planificacion/README.md`.
@@ -21,8 +22,8 @@ la Iteración 08 no se ha ejecutado: detente y repórtalo.
 ## 1. Objetivo de la Iteración
 
 Que el marcado de las seis páginas esté libre de defectos conocidos (texto suelto en el footer de Servicios, estilos en
-línea, botones invisibles en la 404, ícono ilegible en modo oscuro) y que el ancho de la barra de escritorio entre 1024
-y 1279 px quede demostrado en un navegador real, no estimado.
+línea, botones invisibles en la 404, 404 sin estilos en rutas con subcarpeta, ícono ilegible en modo oscuro) y que el
+ancho de la barra de escritorio entre 1024 y 1279 px quede demostrado en un navegador real, no estimado.
 
 ## 2. Tareas Técnicas (Ejecución Estricta)
 
@@ -90,48 +91,58 @@ logotipo**. Causa (por código): `404.html` tiene 23 referencias `./` (favicon, 
 inexistente y el navegador resuelve `./` contra la subcarpeta de la URL pedida (`/servicios/dist/css/output.css`, que no
 existe). Decisión del desarrollador: corregirlo en esta iteración y no esperar a la Épica 08.
 
-**Alcance (solo `404.html`):** en el `<head>`, agrega `<base href="/"/>` como **primera etiqueta después de
-`<meta charset>`** y antes de cualquier `<link>` o `<script>`. **Sin ningún otro cambio en `404.html`** por esta tarea
-(los de la Tarea 3 son aparte). No toques los otros cinco HTML.
+**Alcance (solo el `<head>` de `404.html`):** `<meta charset>` y `<base href="/"/>` deben quedar como las **dos primeras
+etiquetas del `<head>`**, en ese orden, antes del `<link rel="icon">` y de cualquier otro elemento con URL. Es solo un
+cambio de orden (se mueve la línea de `<meta charset>`) más la línea nueva de `<base>`: **no cambia ningún otro
+contenido ni clase.** No toques los otros cinco HTML.
 
 ```html
-<meta charset="utf-8"/>
-<base href="/"/>
+<head>
+    <meta charset="utf-8"/>
+    <base href="/"/>
+    <title>Página no encontrada - La Jardinera Florería</title>
+    <!-- … resto del <head> en su orden actual (description, robots, favicon, viewport, fuentes, CSS) … -->
 ```
 
 **Justificación:** resuelve todas las rutas `./` desde la raíz del sitio, mantiene la regla de rutas relativas
 (`AGENTS.md` §5.8) y conserva la paridad exacta de header y footer con las demás páginas (no hay que cambiar ni una
-ruta del marcado).
+ruta del marcado). Al ir antes de todo elemento con URL, el `<base>` alcanza también al favicon: hoy, en `404.html`, el
+`<link rel="icon">` está en la línea 9, **antes** de `<meta charset>` (línea 10), y la especificación de HTML pide que
+`<base>` preceda a todo elemento con atributos de URL.
 
-**Hallazgo previo que la tarea debe vigilar (DT-17):** en `404.html`, el `<link rel="icon" ... href="./public/logos/...">`
-está en la línea 9, **antes** de `<meta charset>` (línea 10). Con la instrucción de arriba, el `<base>` queda después del
-favicon, y la especificación de HTML pide que `<base>` preceda a todo elemento con atributos de URL. Ejecuta la tarea
-tal como está escrita y comprueba el favicon en (ii) y (iii). Si el favicon no resuelve desde la raíz, **no lo
-corrijas**: repórtalo y propón, sin aplicar, mover `<meta charset>` y `<base>` por encima del `<link rel="icon">`
-(requiere confirmación del desarrollador).
+**Alcance respecto de DT-17 (decisión del desarrollador, 13-10-2026):** el reordenamiento cubre DT-17 **solo en
+`404.html`**. Las otras 5 páginas conservan su `<head>` actual y se corrigen en la Épica 08 · Iteración 02. DT-17 no se
+marca como resuelta en esta iteración.
 
 **Comprobaciones:**
 
-1. **Marcado.** `404.html` no contiene `href="#` (hoy hay 0; las anclas se resolverían contra la raíz). Hay exactamente un
-   `<base`, ubicado después de `<meta charset>` y antes del primer `<script>` y del último `<link>`. `git diff` de
-   `404.html` atribuible a esta tarea: **1 línea agregada**. Los otros cinco HTML, sin cambios por esta tarea.
+1. **Marcado.** `404.html` no contiene `href="#` (hoy hay 0; las anclas se resolverían contra la raíz). Hay exactamente
+   un `<meta charset` y un `<base`, y son los **dos primeros hijos** de `<head>`, en ese orden; ningún `<link>` ni
+   `<script>` los precede. En el `git diff` de `404.html`, el hunk del `<head>` muestra solo la línea de `<meta charset>`
+   movida y la línea nueva de `<base>` (1 eliminada y 2 agregadas), sin otros cambios en el `<head>`. Los otros cinco
+   HTML, sin cambios por esta tarea.
 2. **Simulación local de Cloudflare.** Con `pnpm run build:cf`, sirve `_site/` con un servidor temporal de Node o Python
    (script fuera del repositorio, en el scratchpad; no lo dejes en el proyecto) que responda `404.html` **con estado
-   404** para cualquier ruta inexistente. Desde `/a/b/xyz`, comprueba que el CSS, el favicon, los logotipos, `main.js` y
-   los módulos que este importa, y los enlaces del header y del footer resuelven a URLs **de la raíz** (por ejemplo
-   `/dist/css/output.css`, `/public/logos/...`, `/src/js/main.js`) y que cada recurso responde **200**. Repite desde un
-   primer nivel (`/xyz`) y desde una ruta de tres niveles. Entrega la tabla recurso × URL resuelta × estado. Nota: el
-   servidor simulado no reproduce el redireccionamiento 308 de `/pagina.html` a `/pagina` de Cloudflare; los enlaces
-   `./index.html` del header resolverán a `/index.html`, y en producción Cloudflare los redirige.
+   404** para cualquier ruta inexistente. Desde `/a/b/xyz`, comprueba que el CSS, **el favicon**, los logotipos,
+   `main.js` y los módulos que este importa, y los enlaces del header y del footer resuelven a URLs **de la raíz** (por
+   ejemplo `/dist/css/output.css`, `/public/logos/la-jardinera-original.png`, `/src/js/main.js`) y que cada recurso
+   responde **200**. Repite desde un primer nivel (`/xyz`) y desde una ruta de tres niveles. Entrega la tabla recurso ×
+   URL resuelta × estado, con el favicon en fila propia. Nota: el servidor simulado no reproduce el redireccionamiento
+   308 de `/pagina.html` a `/pagina` de Cloudflare; los enlaces `./index.html` del header resolverán a `/index.html`, y
+   en producción Cloudflare los redirige.
 3. **Render real** de `/a/b/xyz` en 360×740 y 1280×800, en modo claro y oscuro, solo si dispones de un navegador
-   controlable (no instales nada): estilos aplicados, logotipo visible, header y footer completos, consola sin errores.
-   Si no, deja el ítem como `🕒 PENDIENTE` con esta lista manual:
+   controlable (no instales nada): estilos aplicados, logotipo visible, header y footer completos, consola sin errores, y
+   **la solicitud del favicon dirigida a la raíz** (`/public/logos/la-jardinera-original.png`, en el registro de red o
+   en la pestaña). Si no, deja el ítem como `🕒 PENDIENTE` con esta lista manual:
     * [ ] Abrir `http://localhost:<puerto>/a/b/xyz` (servidor de la simulación) en 360×740 y 1280×800.
     * [ ] Confirmar estilos, logotipo, header, footer y botones sociales visibles.
+    * [ ] Confirmar que la pestaña muestra el favicon y que su solicitud apunta a la raíz.
     * [ ] Repetir en modo oscuro y revisar la consola.
-4. **Producción (acción del desarrollador, tras el despliegue).** Abrir `https://www.lajardinerafloreria.cl/servicios/xyz`
-   y confirmar que se ve con estilos, logotipo, header y footer, y que sus enlaces llevan a la raíz del sitio. El agente
-   la registra como `🕒 PENDIENTE` hasta recibir la confirmación.
+4. **Orden final del `<head>`.** Copia en la bitácora de esta iteración la lista de etiquetas del `<head>` de
+   `404.html`, en su orden final (tipo y atributo identificador de cada una), para dejar constancia del cambio.
+5. **Producción (acción del desarrollador, tras el despliegue).** Abrir `https://www.lajardinerafloreria.cl/servicios/xyz`
+   y confirmar que se ve con estilos, logotipo, header y footer, que la pestaña muestra el favicon y que sus enlaces
+   llevan a la raíz del sitio. El agente la registra como `🕒 PENDIENTE` hasta recibir la confirmación.
 
 ### Tarea 4: DT-13 — Ícono de Facebook ilegible en modo oscuro (6 páginas)
 
@@ -210,7 +221,8 @@ Si no dispones de navegador, deja esta parte como `🕒 PENDIENTE` y entrega est
    de estado por deuda (DT-01, DT-03, DT-05, DT-13, DT-07, DT-14, DT-02) y su evidencia. La evidencia de DT-03 es "4
    `style=` resueltos en esta iteración; el del Hero se resolvió en la Épica 01 · Iteración 08". La de DT-14 distingue
    la simulación local (Tarea 3b, comprobaciones 1 a 3) de la verificación en producción, que sigue 🕒 PENDIENTE hasta
-   que el desarrollador la confirme.
+   que el desarrollador la confirme. La bitácora incluye además el orden final del `<head>` de `404.html` (Tarea 3b,
+   comprobación 4) y una fila de DT-17 limitada a `404.html`.
 2. En la tabla del §12 de `_planificacion/README.md`, marca como ✅ resueltas solo las que tengan evidencia. DT-02 solo
    pasa a ✅ si la verificación en render real se ejecutó de verdad. DT-14 solo pasa a ✅ cuando la simulación local se
    ejecutó de verdad y el desarrollador confirmó `/servicios/xyz` en producción; hasta entonces se deja con su estado
@@ -263,4 +275,5 @@ Si no dispones de navegador, deja esta parte como `🕒 PENDIENTE` y entrega est
 * **Escenario 7: 404 en ruta con subcarpeta**
     * **Dado** `/servicios/xyz` en producción
     * **Cuando** se abre
-    * **Entonces** se ve con estilos, logotipo, header y footer, y sus enlaces llevan a la raíz del sitio.
+    * **Entonces** se ve con estilos, logotipo, header y footer, y sus enlaces llevan a la raíz del sitio. El favicon
+      también se carga desde la raíz.

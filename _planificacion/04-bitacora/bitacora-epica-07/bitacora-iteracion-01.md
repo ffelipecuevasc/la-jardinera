@@ -413,3 +413,37 @@ Tipos de evidencia usados:
 modal, los 404 de `/tailwind.config.js` y `/scripts/stage-site.mjs`, y el dato histórico del paso 1. Lo confirmado
 cubre la configuración de Cloudflare, el despliegue desde `_site/` y la ausencia de contenido interno en producción.
 Hallazgo nuevo: DT-14 (confirmado en producción).
+
+### 8.5 Actualización con las respuestas del desarrollador (13-10-2026)
+
+El desarrollador respondió en el navegador, en producción (`https://www.lajardinerafloreria.cl`). No se leyeron códigos
+HTTP: lo confirmado es lo que se vio en pantalla. Esta subsección **no reescribe** las anteriores; actualiza los
+criterios que la §8.1 dejó en 🕒 PENDIENTE.
+
+| Criterio | Estado | Evidencia |
+|:--|:--:|:--|
+| Las 6 páginas reales cargan con estilos e imágenes (§8.1, fila "Las 6 páginas reales") | ✅ | **[NAV]** Confirmado en el navegador por el desarrollador. Código HTTP no leído; no se midió consola. La 404 en una ruta con subcarpeta no está cubierta: es el hallazgo DT-14. |
+| `/tailwind.config.js` y `/scripts/stage-site.mjs` muestran la 404 del sitio (§8.1, fila respectiva) | ✅ (código HTTP no leído) | **[NAV]** Confirmado en el navegador por el desarrollador: ambas rutas muestran la página 404 del sitio. Código HTTP no leído, igual que en las otras cinco rutas internas. **[CÓD]** Ambas ausentes de `_site/` (§4.1). |
+| Modo oscuro, menú móvil y modal de Servicios funcionan en producción | 🕒 PENDIENTE | El desarrollador indicó que **no** están confirmados todavía. Lista manual: alternar el tema en producción; abrir y cerrar el menú en un viewport móvil; abrir un servicio en `/servicios` y cerrarlo con el botón y con `Escape`. |
+| Estado previo al cambio (§5.4, paso 1) | 🕒 PENDIENTE (no verificable retroactivamente) | Sin cambios respecto de la §8.1. Se necesita una decisión del desarrollador: cerrarlo como "no verificable" o mantenerlo abierto. |
+| DT-14 (404 sin estilos en rutas con subcarpeta) | Abierta; corrección planificada | Sin cambios respecto de la §8.1. Se corrige en la Épica 07 · Iteración 03, Tarea 3b. |
+
+**Actualización de los pasos de la §5.4 (sin editar esa sección):**
+
+| Paso de la §5.4 | Estado | Evidencia |
+|:--|:--:|:--|
+| 5. Verificación en producción | 🕒 PENDIENTE (parcial) | ✅ Siete rutas internas muestran la 404 del sitio: `/README.md`, `/AGENTS.md`, `/DESIGN.md`, `/package.json`, `/_planificacion/README.md`, `/tailwind.config.js` y `/scripts/stage-site.mjs` (**[NAV]**, código HTTP no leído). ✅ Las 6 páginas reales cargan con estilos e imágenes (**[NAV]**, código HTTP no leído). 🕒 Modo oscuro, menú móvil y modal de Servicios. |
+
+Los pasos 2, 3, 4 y 6 de la §5.4 conservan el estado de la §8.2 (2, 3 y 4 ✅; 6 no aplica), y el paso 1 sigue 🕒
+PENDIENTE (no verificable).
+
+**Decisiones del desarrollador registradas en esta actualización (13-10-2026), ya reflejadas en las especificaciones:**
+
+* **DT-17 solo en `404.html`:** en la Iteración 03, Tarea 3b, `<meta charset>` y `<base href="/"/>` pasan a ser las dos
+  primeras etiquetas del `<head>` de `404.html`, antes del `<link rel="icon">`. Las otras 5 páginas conservan el orden
+  actual hasta la Épica 08 · Iteración 02.
+* **Épica 08 · Iteración 02:** debe fijar `NODE_VERSION` con una versión 22.x reciente (evita el modo mantenimiento de
+  22.13.0 y el aviso `EBADENGINE` de corepack 0.36) y retirar el `<base href="/"/>` de la 404 al pasar a rutas absolutas.
+
+**Estado de la iteración tras esta actualización:** **Completada con reservas.** Siguen 🕒 PENDIENTES el modo oscuro, el
+menú móvil y el modal de Servicios en producción, y el dato histórico del paso 1 (no verificable).
