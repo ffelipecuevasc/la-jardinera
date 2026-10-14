@@ -350,3 +350,66 @@ feat(despliegue): publica desde _site/ con build:cf y actualiza la documentació
 - Actualiza propósito, métricas y stack al sitio real (DT-09 resuelta).
 - Incorpora las especificaciones de la Épica 07 y la bitácora de la Iteración 01.
 ```
+
+## 8. Cierre de pendientes del desarrollador (13-10-2026)
+
+Esta sección se agrega al cierre, con la evidencia que aportó el desarrollador el 13-10-2026. **No modifica** las
+secciones 1 a 7 ni la §5.4: esa lista se cierra aquí, paso por paso, solo con la evidencia de esta sección (ver §8.2).
+
+Tipos de evidencia usados:
+
+* **[LOG]** confirmado por el log del despliegue de Cloudflare, aportado por el desarrollador (el agente no tiene acceso
+  al panel).
+* **[CAPTURA]** confirmado por la captura del panel de Cloudflare Pages, aportada por el desarrollador.
+* **[NAV]** confirmado en el navegador por el desarrollador (no se leyeron códigos HTTP).
+* **[CÓD]** confirmado por código, con comandos de solo lectura ejecutados por el agente en esta sesión.
+
+### 8.1 Criterios
+
+| Criterio | Estado | Evidencia |
+|:--|:--:|:--|
+| Configuración de Cloudflare Pages (§5.4, paso 3) | ✅ | **[CAPTURA]** Settings → Build del proyecto `la-jardinera`, 13-10-2026: repositorio `ffelipecuevasc/la-jardinera`; *Build command* `pnpm run build:cf`; *Build output* `_site`; *Root directory* vacío (raíz del repositorio); rama de producción `main`; despliegues automáticos *Enabled*; *Build watch paths* `*`; *Build system version* 3; caché de compilación *Disabled* (no afecta a la iteración). |
+| `build:cf` y `_site/` ignorada existen en el commit desplegado | ✅ | **[CÓD]** `git show bfe52d6:package.json` línea 10: `"build:cf": "pnpm build && node scripts/stage-site.mjs"`. `git show bfe52d6:.gitignore` línea 29: `_site/`. |
+| La guarda nueva de `stage-site.mjs` viaja en el commit desplegado (nota del §5.4, paso 2) | ✅ | **[CÓD]** `git show bfe52d6:scripts/stage-site.mjs` contiene la guarda (líneas 58 a 68: lee `package.json`, aborta si el CSS quedaría desactualizado y exige `dist/css/output.css` no vacío). |
+| El commit desplegado representa el código actual | ✅ | **[CÓD]** El log corresponde a `bfe52d6`; HEAD es `893eb1f`. `git diff --name-status bfe52d6 HEAD` lista 10 archivos, todos nuevos (`A`) y todos de `epica-08-migracion-astro/` (1.145 inserciones). `git diff bfe52d6 HEAD` sobre `scripts/`, `package.json`, `.gitignore`, `src/`, `dist/` y los HTML no muestra diferencias. |
+| Compilación en Cloudflare | ✅ | **[LOG]** Repositorio clonado; `pnpm install` OK; `pnpm run build:cf` OK. |
+| Línea de `stage-site` en el registro (§5.4, paso 4) | ✅ | **[LOG]** `[stage-site] 6 páginas y 3 directorios preparados en ./_site`. |
+| Despliegue exitoso | ✅ | **[LOG]** 114 archivos; "Your site was deployed!". **[CÓD]** Coherente con el repositorio: `git ls-tree -r bfe52d6` da 6 HTML + 1 CSS + 97 de `public/` + 10 de `src/js/` = 114. Los 112 de la §4.1 eran de la compilación del 29-09-2026: `public/` pasó de 95 a 97 archivos por `hero-botanical-desktop.webp` y `hero-botanical-mobile.webp` (agregados después, `git diff --name-status fceb1eb bfe52d6 -- public`). |
+| Versión de Node usada | ✅ registrada, **no fijada** | **[LOG]** Node 22.13.0 y pnpm 11.24.0 "detectados del entorno". **[CÓD]** `git ls-files` no contiene `.nvmrc`, `.node-version`, `.tool-versions`, `.npmrc`, `pnpm-workspace.yaml` ni `wrangler.*`; `package.json` no declara `engines` y su `devEngines` fija solo pnpm `11.24.0`. Por lo tanto, el repositorio no es la fuente de la versión: sale del entorno de compilación de Cloudflare. La captura no incluye variables de entorno; si existiera `NODE_VERSION` en el panel, no se verificó. 22.13.0 es justo el mínimo documentado (`>= 22.13`). Avisos del log sin impacto: Node 22.13.0 en modo mantenimiento y `EBADENGINE` de corepack 0.36 (pide `^22.22.2`). **Decisión del desarrollador:** no fijar Node en esta iteración; se resuelve en la Épica 08 · Iteración 02 (ver §8.3). |
+| Documentos internos no expuestos: `/README.md`, `/AGENTS.md`, `/DESIGN.md`, `/package.json`, `/_planificacion/README.md` | ✅ (contenido no expuesto; código HTTP no leído) | **[NAV]** Las cinco rutas muestran la página 404 del sitio y ninguna expone contenido. Confirmado por la página 404 mostrada; **código HTTP no leído**. **[CÓD]** Coherente con §4.1: las 13 exclusiones ausentes de `_site/`. |
+| `/tailwind.config.js` y `/scripts/stage-site.mjs` responden 404 (lista del §5.4, paso 5) | 🕒 PENDIENTE | El desarrollador indicó "los demás recursos que probó" sin enumerarlos. Falta confirmar que estas dos rutas se abrieron. **[CÓD]** Ambas ausentes de `_site/` (§4.1). |
+| Las 6 páginas reales cargan con estilos e imágenes (`/`, `/servicios`, `/suscripcion-floral`, `/galeria`, `/contacto` y la 404 en una ruta de primer nivel) | 🕒 PENDIENTE | No confirmado por el desarrollador. Lista manual: abrir cada una en producción y comprobar estilos, imágenes, logotipos y consola sin errores. |
+| Modo oscuro, menú móvil y modal de Servicios funcionan en producción (§5.4, paso 5) | 🕒 PENDIENTE | No confirmado. Lista manual: alternar el tema, abrir y cerrar el menú en un viewport móvil y abrir un servicio en `/servicios`. |
+| Estado previo al cambio (§5.4, paso 1: ¿había archivos internos públicos antes?) | 🕒 PENDIENTE (no verificable retroactivamente) | No se registró cómo respondían esas rutas antes del cambio de comando. Hoy no exponen contenido ([NAV]), así que no hay riesgo vigente; solo falta el dato histórico. |
+| Reversión (§5.4, paso 6) | No aplica | El despliegue terminó sin errores; no hizo falta restaurar el comando anterior ni usar *Rollback*. |
+| **Hallazgo DT-14: la 404 se ve sin estilos en rutas con subcarpeta** | 🔴 Confirmado en producción; **no corregido aquí** | **[NAV]** `/servicios/xyz` muestra la 404 sin estilos ni logotipo. **[CÓD]** `404.html` tiene 23 referencias `./` en `src`/`href` (`grep -oE '(src\|href)="\./[^"]*"'`), entre ellas el favicon (línea 9), el CSS `./dist/css/output.css` (línea 16) y `./src/js/main.js` (línea 359). Cloudflare sirve esa misma página para cualquier ruta inexistente, y el navegador resuelve `./` contra la subcarpeta (`/servicios/dist/css/output.css`), que no existe. Corrección decidida: `<base href="/"/>` en la Épica 07 · Iteración 03, Tarea 3b. |
+
+### 8.2 Equivalencia con los pasos de la §5.4 (sin editar esa sección)
+
+| Paso de la §5.4 | Estado | Evidencia |
+|:--|:--:|:--|
+| 1. Comprobar el estado previo | 🕒 PENDIENTE (no verificable) | Ver §8.1. |
+| 2. *Commit* y *push* con `stage-site.mjs`, `package.json` y `.gitignore` | ✅ | **[CÓD]** Los tres están en `bfe52d6`, con la guarda incluida; el **[LOG]** muestra que Cloudflare clonó ese commit y ejecutó `build:cf`. |
+| 3. Cambio de comando y salida en Cloudflare | ✅ | **[CAPTURA]** |
+| 4. Reintento y línea de `stage-site` en el registro | ✅ | **[LOG]** |
+| 5. Verificación en producción | 🕒 PENDIENTE (parcial) | ✅ cinco documentos internos muestran la 404 (**[NAV]**); 🕒 `/tailwind.config.js` y `/scripts/stage-site.mjs`; 🕒 las 6 páginas reales; 🕒 modo oscuro, menú móvil y modal. |
+| 6. Reversión si algo falla | No aplica | Despliegue exitoso. |
+
+### 8.3 Propuestas y registro (no aplicadas)
+
+* **Node sin fijar.** El repositorio no fija Node; Cloudflare usa el de su entorno (22.13.0 en este despliegue). La
+  definición de la Épica 08 (`definicion-epica.md`, línea 150) ya prevé `NODE_VERSION=22` y `PNPM_VERSION=11.24.0`
+  como variables de entorno, y su `iteracion-02.md` (paso 7) exige confirmar la versión de Node en el log. Esa
+  iteración **no** menciona el aviso `EBADENGINE` (corepack 0.36 pide `^22.22.2`) ni el modo de mantenimiento de
+  22.13.0; conviene sumarlos al paso 7 al resolver el punto.
+* **DT-14** pasa a la Iteración 03 de esta épica como Tarea 3b (decisión del desarrollador, 13-10-2026). La Épica 08 ·
+  Iteración 02 deberá retirar el `<base>` cuando la 404 use rutas absolutas con Astro.
+* **Hallazgo adicional (no corregido):** en los 6 HTML, `<link rel="icon">` precede a `<meta charset>` (por ejemplo,
+  `404.html` líneas 9 y 10). Es el DT-17 ya registrado y afecta a la Tarea 3b (ver su especificación).
+
+### 8.4 Estado de la iteración
+
+**Completada con reservas.** Quedan 🕒 PENDIENTES: las 6 páginas reales en producción, modo oscuro / menú móvil /
+modal, los 404 de `/tailwind.config.js` y `/scripts/stage-site.mjs`, y el dato histórico del paso 1. Lo confirmado
+cubre la configuración de Cloudflare, el despliegue desde `_site/` y la ausencia de contenido interno en producción.
+Hallazgo nuevo: DT-14 (confirmado en producción).

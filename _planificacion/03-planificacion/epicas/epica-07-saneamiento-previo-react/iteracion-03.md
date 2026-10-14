@@ -82,6 +82,57 @@ w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-
 
 Corrige también la sangría desalineada de ese bloque (solo espacios en blanco). No toques los `<svg>`.
 
+### Tarea 3b: DT-14 — 404 sin estilos en rutas con subcarpeta
+
+**Origen:** el desarrollador confirmó el 13-10-2026 en producción que `/servicios/xyz` muestra la 404 **sin estilos ni
+logotipo**. Causa (por código): `404.html` tiene 23 referencias `./` (favicon, `./dist/css/output.css`, logotipos,
+`./src/js/main.js` y los enlaces del header y del footer). Cloudflare Pages sirve esa misma página para cualquier ruta
+inexistente y el navegador resuelve `./` contra la subcarpeta de la URL pedida (`/servicios/dist/css/output.css`, que no
+existe). Decisión del desarrollador: corregirlo en esta iteración y no esperar a la Épica 08.
+
+**Alcance (solo `404.html`):** en el `<head>`, agrega `<base href="/"/>` como **primera etiqueta después de
+`<meta charset>`** y antes de cualquier `<link>` o `<script>`. **Sin ningún otro cambio en `404.html`** por esta tarea
+(los de la Tarea 3 son aparte). No toques los otros cinco HTML.
+
+```html
+<meta charset="utf-8"/>
+<base href="/"/>
+```
+
+**Justificación:** resuelve todas las rutas `./` desde la raíz del sitio, mantiene la regla de rutas relativas
+(`AGENTS.md` §5.8) y conserva la paridad exacta de header y footer con las demás páginas (no hay que cambiar ni una
+ruta del marcado).
+
+**Hallazgo previo que la tarea debe vigilar (DT-17):** en `404.html`, el `<link rel="icon" ... href="./public/logos/...">`
+está en la línea 9, **antes** de `<meta charset>` (línea 10). Con la instrucción de arriba, el `<base>` queda después del
+favicon, y la especificación de HTML pide que `<base>` preceda a todo elemento con atributos de URL. Ejecuta la tarea
+tal como está escrita y comprueba el favicon en (ii) y (iii). Si el favicon no resuelve desde la raíz, **no lo
+corrijas**: repórtalo y propón, sin aplicar, mover `<meta charset>` y `<base>` por encima del `<link rel="icon">`
+(requiere confirmación del desarrollador).
+
+**Comprobaciones:**
+
+1. **Marcado.** `404.html` no contiene `href="#` (hoy hay 0; las anclas se resolverían contra la raíz). Hay exactamente un
+   `<base`, ubicado después de `<meta charset>` y antes del primer `<script>` y del último `<link>`. `git diff` de
+   `404.html` atribuible a esta tarea: **1 línea agregada**. Los otros cinco HTML, sin cambios por esta tarea.
+2. **Simulación local de Cloudflare.** Con `pnpm run build:cf`, sirve `_site/` con un servidor temporal de Node o Python
+   (script fuera del repositorio, en el scratchpad; no lo dejes en el proyecto) que responda `404.html` **con estado
+   404** para cualquier ruta inexistente. Desde `/a/b/xyz`, comprueba que el CSS, el favicon, los logotipos, `main.js` y
+   los módulos que este importa, y los enlaces del header y del footer resuelven a URLs **de la raíz** (por ejemplo
+   `/dist/css/output.css`, `/public/logos/...`, `/src/js/main.js`) y que cada recurso responde **200**. Repite desde un
+   primer nivel (`/xyz`) y desde una ruta de tres niveles. Entrega la tabla recurso × URL resuelta × estado. Nota: el
+   servidor simulado no reproduce el redireccionamiento 308 de `/pagina.html` a `/pagina` de Cloudflare; los enlaces
+   `./index.html` del header resolverán a `/index.html`, y en producción Cloudflare los redirige.
+3. **Render real** de `/a/b/xyz` en 360×740 y 1280×800, en modo claro y oscuro, solo si dispones de un navegador
+   controlable (no instales nada): estilos aplicados, logotipo visible, header y footer completos, consola sin errores.
+   Si no, deja el ítem como `🕒 PENDIENTE` con esta lista manual:
+    * [ ] Abrir `http://localhost:<puerto>/a/b/xyz` (servidor de la simulación) en 360×740 y 1280×800.
+    * [ ] Confirmar estilos, logotipo, header, footer y botones sociales visibles.
+    * [ ] Repetir en modo oscuro y revisar la consola.
+4. **Producción (acción del desarrollador, tras el despliegue).** Abrir `https://www.lajardinerafloreria.cl/servicios/xyz`
+   y confirmar que se ve con estilos, logotipo, header y footer, y que sus enlaces llevan a la raíz del sitio. El agente
+   la registra como `🕒 PENDIENTE` hasta recibir la confirmación.
+
 ### Tarea 4: DT-13 — Ícono de Facebook ilegible en modo oscuro (6 páginas)
 
 El segundo `<path>` del ícono de Facebook del footer tiene `fill="#edefe9"` fijo. Ese valor coincide con el fondo del
@@ -100,6 +151,9 @@ blanca sobre gris claro (contraste **1,52:1**; con la corrección, 6,64:1).
 En `index.html`, el texto dice "Redbank, efectivo y transferencias bancarias". En Chile la red se escribe **Redbanc**.
 Es texto comercial de la florería: **no lo cambies por tu cuenta.** Repórtalo con su ubicación exacta y espera a que el
 desarrollador confirme en el chat. Si lo confirma, cambia únicamente esa palabra.
+
+> **Confirmado por el desarrollador el 13-10-2026: corregir a 'Redbanc'.** No vuelvas a preguntar; aplica el cambio de
+> esa única palabra y repórtalo con su ubicación exacta.
 
 ### Tarea 6: DT-02 — Certificación de H8 (barra de escritorio entre 1024 y 1279 px)
 
@@ -153,10 +207,14 @@ Si no dispones de navegador, deja esta parte como `🕒 PENDIENTE` y entrega est
 ### Tarea 8: Registro
 
 1. Crea `_planificacion/04-bitacora/bitacora-epica-07/bitacora-iteracion-03.md` con la plantilla del §8.2, con una tabla
-   de estado por deuda (DT-01, DT-03, DT-05, DT-13, DT-07, DT-02) y su evidencia. La evidencia de DT-03 es "4 `style=`
-   resueltos en esta iteración; el del Hero se resolvió en la Épica 01 · Iteración 08".
+   de estado por deuda (DT-01, DT-03, DT-05, DT-13, DT-07, DT-14, DT-02) y su evidencia. La evidencia de DT-03 es "4
+   `style=` resueltos en esta iteración; el del Hero se resolvió en la Épica 01 · Iteración 08". La de DT-14 distingue
+   la simulación local (Tarea 3b, comprobaciones 1 a 3) de la verificación en producción, que sigue 🕒 PENDIENTE hasta
+   que el desarrollador la confirme.
 2. En la tabla del §12 de `_planificacion/README.md`, marca como ✅ resueltas solo las que tengan evidencia. DT-02 solo
-   pasa a ✅ si la verificación en render real se ejecutó de verdad.
+   pasa a ✅ si la verificación en render real se ejecutó de verdad. DT-14 solo pasa a ✅ cuando la simulación local se
+   ejecutó de verdad y el desarrollador confirmó `/servicios/xyz` en producción; hasta entonces se deja con su estado
+   actual y la nota "corregida en código; pendiente de verificación en producción".
 3. Agrega la línea a `_planificacion/04-bitacora/estado-actual.md`. Si H8 se certificó, agrégala como "Épica 06 -
    Iteración 13: certificada en render real (ver Épica 07 · Iteración 03)"; si no, no la des por cerrada.
 4. Entrega el mensaje de commit sugerido, separado por tarea si corresponde.
@@ -202,3 +260,7 @@ Si no dispones de navegador, deja esta parte como `🕒 PENDIENTE` y entrega est
     * **Cuando** se lee
     * **Entonces** DT-07 aparece como "a la espera de confirmación" si no se aplicó, y ninguna medición de render se
       presenta como ✅ sin haberse ejecutado.
+* **Escenario 7: 404 en ruta con subcarpeta**
+    * **Dado** `/servicios/xyz` en producción
+    * **Cuando** se abre
+    * **Entonces** se ve con estilos, logotipo, header y footer, y sus enlaces llevan a la raíz del sitio.

@@ -213,13 +213,13 @@ Los números siempre con dos dígitos.
 | DT-04 | `index.html` no declara `<meta name="description">`.                                                          | Media     | Épica 08 · It. 05 (trasladada desde Épica 07 · It. 04) |
 | DT-05 | `404.html`: botones sociales del footer con `hidden lg:flex`, invisibles en móvil (el resto de páginas los muestra). | Baja | Épica 07 · It. 03 |
 | DT-06 | Footer con dos variantes de contenedor y enlace activo sin `font-body-sm text-body-sm`.                       | Baja      | Épica 08 · It. 03 (componente Astro) |
-| DT-07 | Texto "Redbank" en la franja de beneficios del Inicio; en Chile la red se llama **Redbanc**.                  | Baja      | Épica 07 · It. 03   |
+| DT-07 | Texto "Redbank" en la franja de beneficios del Inicio; en Chile la red se llama **Redbanc**. Corrección a Redbanc confirmada; se ejecuta en Épica 07 · It. 03. | Baja      | Épica 07 · It. 03   |
 | DT-08 | Sin `robots.txt`, `sitemap.xml`, `canonical` ni etiquetas Open Graph.                                         | Media     | Épica 08 · It. 05 (trasladada desde Épica 07 · It. 04) |
 | DT-09 | ✅ **Resuelta** (Épica 07 · Iteración 01). `01-vision/proposito-y-alcance.md` y `02-arquitectura/stack-tecnologico.md` desactualizados (5 páginas, Netlify Forms, GitHub Actions como despliegue). | Baja | Épica 07 · It. 01 |
 | DT-10 | `src/js/main.js` importa módulos con ruta variable (`import(path)`): funciona en el navegador, pero impide el análisis de un empaquetador. | Baja (bloqueante para Épica 08) | Épica 08 · It. 02 |
 | DT-11 | Varios archivos guardados con BOM UTF-8 (`index.html`, `input.css`, `main.js`, módulos JS, `tailwind.config.js`). | Baja | Oportunista |
 | DT-12 | Deuda de diseño listada en `DESIGN.md` §5.                                                                    | Baja      | Según iteración     |
-| DT-14 | `404.html` usa rutas relativas (`./dist/...`, `./public/...`); servida en una ruta anidada (`/a/b/x`) se vería sin estilos. Hallazgo por análisis de código, pendiente de confirmar en producción. | Media | Épica 08 · It. 02 |
+| DT-14 | `404.html` usa rutas relativas (`./dist/...`, `./public/...`); servida en una ruta anidada (`/a/b/x`) se vería sin estilos. **Confirmada en producción (13-10-2026, `/servicios/xyz`); se resuelve en Épica 07 · It. 03 con `<base href="/">`.** | Media | Épica 07 · It. 03 |
 | DT-15 | El tema oscuro se aplica en `DOMContentLoaded`: destello claro en la carga para quien prefiere modo oscuro. | Baja | Épica 08 · It. 07 (opcional, requiere excepción) |
 | DT-16 | `dist/css/output.css` versionado en Git (archivo generado). | Baja | Épica 08 · It. 02 |
 | DT-17 | `<meta charset>` no es la primera etiqueta del `<head>` en varias páginas. | Baja | Épica 08 · It. 02 |
