@@ -223,6 +223,8 @@ Los números siempre con dos dígitos.
 | DT-15 | El tema oscuro se aplica en `DOMContentLoaded`: destello claro en la carga para quien prefiere modo oscuro. | Baja | Épica 08 · It. 07 (opcional, requiere excepción) |
 | DT-16 | `dist/css/output.css` versionado en Git (archivo generado). | Baja | Épica 08 · It. 02 |
 | DT-17 | `<meta charset>` no es la primera etiqueta del `<head>` en varias páginas. `404.html` se corrige en Épica 07 · It. 03 (orden del `<head>`); las otras 5 páginas, en Épica 08 · It. 02. | Baja | Épica 07 · It. 03 (404.html); Épica 08 · It. 02 (otras 5) |
+| DT-18 | ✅ **Resuelta** (Épica 07 · Iteración 02, 14-10-2026). Recorte de glifos de `fx-starlight`: `background-clip: text` no pinta fuera de la caja del `span` y la cursiva sobresale (la "J" de "La Jardinera" al abrir línea, ≈ 7,25 px a 48 px; la "a" final, ≈ 0,75 px). Corregida con `padding-inline: .16em; margin-inline: -.16em` en `.fx-starlight--accent`; verificada en render real (Chrome 155 headless, 7 viewports × claro y oscuro: 0 px recortados). Sin verificar en Firefox, Safari ni dispositivo real. | Media | Épica 07 · It. 02 |
+| DT-19 | ✅ **Resuelta** (Épica 07 · Iteración 02, 14-10-2026). "Florería" salía en peso 400 desde 1024 px porque `lg:text-display-hero` (token con `fontWeight: 400`) pisaba a `font-semibold`; contradicción entre `DESIGN.md` §1.2 (400) y §7.3 (600). Corregida con `lg:font-semibold` en el `<h1>` del Hero; verificada en render real (peso 600 en los 7 viewports). Queda pendiente reflejarla en `DESIGN.md` (propuesta en la bitácora de la Iteración 02). | Baja | Épica 07 · It. 02 |
 
 ---
 

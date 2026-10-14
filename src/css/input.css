@@ -266,6 +266,12 @@ html.dark::view-transition-new(root) {
 .fx-starlight--accent {
     --ink: theme('colors.secondary-container');
     --ink-3: theme('colors.neutral-50');
+
+    /* La tinta de la cursiva sobresale de la caja del span (la "J" al abrir
+       línea y la "a" final) y background-clip: text no pinta fuera de ella:
+       el relleno lateral la cubre y el margen negativo lo compensa. */
+    padding-inline: .16em;
+    margin-inline: -.16em;
 }
 
 @supports ((-webkit-background-clip: text) or (background-clip: text)) {

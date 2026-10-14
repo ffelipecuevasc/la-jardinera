@@ -41,7 +41,7 @@ En `index.html`, el `<h1>` del Hero debe quedar así (solo cambia el `<span>` in
 tocan):
 
 ```html
-<h1 class="font-display-hero text-headline-xl lg:text-display-hero text-neutral-50 font-semibold max-w-4xl tracking-tight leading-none mb-space-4">
+<h1 class="font-display-hero text-headline-xl lg:text-display-hero text-neutral-50 font-semibold lg:font-semibold max-w-4xl tracking-tight leading-none">
     <span class="fx-starlight">Florería <span class="fx-starlight fx-starlight--accent italic font-normal">La Jardinera</span></span>
 </h1>
 ```

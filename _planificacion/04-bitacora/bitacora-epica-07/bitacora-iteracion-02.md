@@ -172,3 +172,218 @@ Además, para `_planificacion/` (no protegido): quitar `mb-space-4` del bloque d
 ```text
 Épica 07 - Iteración 02: Verifica el titular Starlight en render real (Caso A); registra el recorte de glifos y el peso 400 de Florería desde 1024 px, pendientes de aprobación.
 ```
+
+---
+
+## 8. Cierre de la Iteración 02: aplicación de las dos correcciones aprobadas (14-10-2026)
+
+> Esta sección se agrega después de la aprobación del desarrollador. Las secciones 1 a 7 quedan como registro de la primera pasada: sus "pendientes de aprobación" (§5.1, primera casilla) y el commit sugerido del §7 quedan **superados** por esta sección.
+
+### 8.1 Decisiones y alcance autorizado
+
+| # | Decisión del desarrollador (14-10-2026) | Aplicación |
+|:--|:--|:--|
+| 1 | Recorte de glifos (H-1): aplicar la corrección candidata y probarla en los 7 viewports. | `padding-inline: .16em; margin-inline: -.16em` en `.fx-starlight--accent`. |
+| 2 | Peso de "Florería" (H-2): 600 en todos los tamaños. | `lg:font-semibold` en el `<h1>` del Hero. |
+
+Archivos tocados: `src/css/input.css`, `index.html`, `dist/css/output.css` (regenerado con `pnpm build`), esta bitácora, `estado-actual.md` (una línea), el bloque de marcado de la Tarea 1 de `iteracion-02.md` y las filas DT-18 y DT-19 del §12 de `_planificacion/README.md`. Búsqueda previa con la herramienta de búsqueda: `.fx-starlight--accent` solo se usa en `index.html` (línea 260), en `input.css` y en la documentación de `DESIGN.md` §7.1; no hay otro uso que la corrección pueda afectar.
+
+### 8.2 Cambios en el código (`git diff`)
+
+```diff
+--- a/index.html
+-<h1 class="font-display-hero text-headline-xl lg:text-display-hero text-neutral-50 font-semibold max-w-4xl tracking-tight leading-none">
++<h1 class="font-display-hero text-headline-xl lg:text-display-hero text-neutral-50 font-semibold lg:font-semibold max-w-4xl tracking-tight leading-none">
+
+--- a/src/css/input.css   (dentro de .fx-starlight--accent)
+     --ink-3: theme('colors.neutral-50');
++
++    /* La tinta de la cursiva sobresale de la caja del span (la "J" al abrir
++       línea y la "a" final) y background-clip: text no pinta fuera de ella:
++       el relleno lateral la cubre y el margen negativo lo compensa. */
++    padding-inline: .16em;
++    margin-inline: -.16em;
+```
+
+Sin `style=`, sin `onclick`, sin clases armadas con plantillas (la clase `lg:font-semibold` está escrita en forma literal).
+
+### 8.3 Compilación (confirmado por código)
+
+| Comprobación | Resultado | Evidencia |
+|:--|:--:|:--|
+| `pnpm build` sin errores | ✅ | Dos corridas, código de salida 0 comprobado en la segunda. El aviso de `caniuse-lite` es el conocido; no se ejecutó `update-browserslist-db`. |
+| `output.css` contiene `.lg\:font-semibold` | ✅ | `.lg\:font-semibold{font-weight:600}`, búsqueda de texto en `dist/css/output.css`. |
+| Orden de cascada | ✅ | Dentro del mismo `@media (min-width:1024px)`, `.lg\:font-semibold` (posición 46391) va **después** de `.lg\:text-display-hero` (posición 46065), por lo que gana. Sin otro `@media` entre ambas. |
+| `output.css` solo cambia en lo esperado | ✅ | Comparado regla por regla con `HEAD`: 1 regla modificada (`.fx-starlight--accent`, +2 declaraciones) y 1 regla nueva (`.lg\:font-semibold`); 46.545 → 46.622 caracteres. SHA-256 nuevo: `6333fb61480f62e9f892c790d0d1e1fbfdb67230278ebc0ec1cbb41adf58d991` (el anterior era `007451f6…01a2`). |
+
+### 8.4 Método y niveles de confianza
+
+Chrome 155.0.8059.40 (headless, el ya instalado; no se instaló nada), controlado por CDP desde scripts temporales en el scratchpad de la sesión (fuera del repositorio). Perfil aislado (`--user-data-dir` en el scratchpad) y puertos de depuración propios (9343, 9344 y 9345); no se ejecutó `chrome --version`. Al terminar: 0 procesos de Chrome o Node de la sesión activos y `git status` sin archivos sueltos (ningún `*.stackdump`).
+
+- **Antes y después medidos en esta misma sesión**, con el mismo script y los 7 viewports × claro y oscuro (14 cargas, sin caché): "antes" con el código sin tocar; "después" con las correcciones.
+- **Recorte:** capturas ×8 de la "J" y de la "a" final (y ×4 del `<h1>` completo), con el efecto detenido en t = 0 frente a **texto sólido** inyectado solo en la página de prueba, ambas sobre un fondo plano negro (también solo en la página de prueba). Se cuentan los píxeles con tinta en el texto sólido (canal máximo ≥ 200) que el efecto no pinta (< 100). El ancho es la extensión horizontal de esos píxeles, en px CSS.
+- **Estados simulados:** el "antes" del barrido de anchos se reconstruye con CSS inyectado (`padding-inline:0; margin-inline:0` y `h1{font-weight:400}` desde 1024 px); la simulación coincide con el "antes" real medido en los 7 viewports (líneas, ancho y alto del `<h1>` y peso).
+- Clasificación: **confirmado por código** = lectura del CSS compilado o del fuente; **confirmado en render real (headless)** = medición en Chrome; **emulado** = media query emulada por CDP (`prefers-reduced-motion`, `forced-colors`).
+
+### 8.5 H-1: recorte de glifos (tabla antes → después)
+
+Medido en claro y en oscuro: los resultados son idénticos entre temas.
+
+| Viewport | Líneas del `span` interno | "J" perdida: antes → después | "a" final perdida: antes → después |
+|:--|:--:|:--|:--|
+| 320 × 640 | 2 | 7,25 px (1.035 px de captura) → **0** | 0,75 px (45 px) → **0** |
+| 360 × 740 | 2 | 7,25 px (1.035 px) → **0** | 0,75 px (45 px) → **0** |
+| 412 × 915 | 2 | 7,25 px (1.035 px) → **0** | 0,75 px (45 px) → **0** |
+| 768 × 1024 | 1 | 0 → 0 (la "J" va a mitad de línea) | 0,75 px (44 px) → **0** |
+| 740 × 360 | 1 | 0 → 0 | 0,75 px (44 px) → **0** |
+| 1024 × 768 | 1 | 0 → 0 | 0,63 px (38 px) → **0** |
+| 1280 × 800 | 1 | 0 → 0 | 0,63 px (38 px) → **0** |
+
+- **Píxeles que se recuperan:** la "J" recupera **7,25 px** de su pie izquierdo en los tres viewports donde abre línea (320, 360 y 412 px); la "a" final recupera **0,75 px** (< 1024 px) y **0,63 px** (≥ 1024 px). La medición de tinta con el lienzo de la primera pasada daba 1,41 y 1,22 px para la "a" con otro criterio (cualquier tinta fuera de la caja); aquí se cuentan solo los píxeles claramente ausentes, por eso la cifra es menor.
+- **Conteo estricto** (texto sólido ≥ 250 y efecto < 30) sobre el `<h1>` completo: **0 píxeles** en las 14 cargas. El conteo laxo del `<h1>` completo (706 a 2.519 px) es borde antialias (píxeles parcialmente cubiertos por el recorte del texto), no tinta perdida; por eso no se usa como criterio.
+- Inspección visual de las capturas ampliadas (360 × 740: "J"; 1280 × 800: "a"): el pie de la "J" pasa de un corte plano recto a la curva completa; el terminal de la "a" queda íntegro.
+
+### 8.6 H-2: peso de "Florería" (tabla antes → después)
+
+| Viewport | "Florería" antes → después | "La Jardinera" antes → después | Archivo de fuente de "Florería" (Chrome) |
+|:--|:--:|:--:|:--|
+| 320 × 640 | 600 → 600 | 400 cursiva → 400 cursiva | `Noto-Serif-SemiBold` |
+| 360 × 740 | 600 → 600 | 400 cursiva → 400 cursiva | `Noto-Serif-SemiBold` |
+| 412 × 915 | 600 → 600 | 400 cursiva → 400 cursiva | `Noto-Serif-SemiBold` |
+| 740 × 360 | 600 → 600 | 400 cursiva → 400 cursiva | `Noto-Serif-SemiBold` |
+| 768 × 1024 | 600 → 600 | 400 cursiva → 400 cursiva | `Noto-Serif-SemiBold` |
+| 1024 × 768 | **400 → 600** | 400 cursiva → 400 cursiva | (a 1280 px: antes `Noto-Serif` regular, ahora `Noto-Serif-SemiBold`) |
+| 1280 × 800 | **400 → 600** | 400 cursiva → 400 cursiva | `Noto-Serif-SemiBold`, fuente real (no sintetizada) |
+
+- Interletrado computado sin cambios: −1,2 px a 48 px y −1,28 px a 64 px (la corrección no toca el tracking).
+- Con 600 desde 1024 px el texto es algo más ancho, como se esperaba: el `<h1>` pasa de **609,63 a 622,30 px** (+12,67 px, +2,1 %). Sigue en **1 línea**, con la misma altura (72 px). La tarjeta de vidrio queda idéntica (**816 × 458,75 px** antes y después) y el titular no la desborda: el contenido del titular queda a 31,84 px de cada borde interior de la tarjeta (antes 38,19 px).
+- Barrido de **281 anchos** (280 a 1400 px, paso de 4 px, más los 7 viewports): 0 anchos con distinto número de líneas y 0 con distinta altura de tarjeta. Desde 1024 px el `<h1>` mide 622,30 px en todo el tramo (máximo medido en el barrido).
+- Nombre accesible del `<h1>` (árbol de accesibilidad de Chrome): rol `heading`, nombre **"Florería La Jardinera"**, antes y después.
+
+### 8.7 Sin regresión
+
+| Comprobación | Estado | Evidencia |
+|:--|:--:|:--|
+| Número de líneas del título por viewport | ✅ render real | Idéntico en los 7 viewports (span interno / exterior: 2/3, 2/2, 2/2, 1/1, 1/1, 1/1, 1/1 en 320, 360, 412, 768, 740, 1024 y 1280 px) y en los 281 anchos del barrido (0 diferencias). La posición de la "J" y de la "a" en pantalla es idéntica hasta 768 px; desde 1024 px se corren 6,33 px por el ensanchamiento del peso 600 (el titular sigue centrado). |
+| Sin scroll horizontal nuevo | ✅ render real | `scrollWidth` del documento idéntico antes y después en los 281 anchos. Excepción conocida: 772/768 px a 768 × 1024 (ver H-8: abarca 768 a 1023 px, igual antes y después, fuera del Hero). |
+| Ancestros del `<h1>` | ✅ render real | Solo `section` recorta (`overflow-x: hidden`, a todo el ancho del viewport); ningún ancestro del `<h1>` cambia su `scrollWidth`. El relleno asoma dentro del padding de la tarjeta (ver H-7). |
+| Campos de destellos y brillo | ✅ cuantificado; 🕒 juicio visual | El campo de destellos del `span` interno se corre **−.16em** respecto de las letras (−7,68 px a 48 px; −10,24 px a 64 px) porque su fondo nace en el borde exterior del relleno. Equivale a un desfase de fase de 0,134 s, 0,108 s y 0,089 s (capas 1 a 3) en un ciclo de 3,6 s; el mosaico y el bucle no cambian. El brillo (capa 4, 200 % del ancho de la caja) se estira con la caja: +12,0 % (320 a 412 px, dos fragmentos), +5,8 % (768 y 740 px) y +5,7 % (≥ 1024 px). En las capturas a t = 0 un destello cae en otro lugar (se ve junto a la "a" de "Jardinera" a 360 px). Es un desfase constante de un campo que se anima; que sea o no perceptible lo juzga el desarrollador. |
+| Bucle sin salto | ✅ render real | 140 comprobaciones (5 por span × 2 spans × 14 cargas), **0 fallidas**; a 3600 ms vuelve exactamente a t = 0. |
+| Movimiento reducido | ✅ emulado | 14 de 14: `animation-name: none` y `--ink-3` igualado a `--ink` en ambos spans. |
+| Alto contraste forzado | ✅ emulado | 14 de 14: color `CanvasText`, sin imagen de fondo, `filter: none` y sin animación. 🕒 Falta el contraste forzado real de Windows. |
+| Claro y oscuro idénticos | ✅ render real | Mismo hash del recorte del `<h1>` en claro y oscuro en los 7 viewports (antes y después). |
+| Consola limpia | ✅ render real | 0 mensajes `error`/`warning`, 0 excepciones y 0 entradas de registro de nivel `error`/`warning` en las 14 cargas, antes y después (solo la página de Inicio). |
+| Contraste del titular | ✅ sin cambios | Los tonos (`#f8f7f3`, `#ffc2c6`, `#fff`) y el fondo bajo el titular no cambian: el contraste del peor caso es idéntico a dos decimales en las 14 cargas y el medio también, salvo 4,83 → 4,84 a 1280 px (claro y oscuro) por una variación de ±0,0002 en la luminancia del fondo (ruido de la foto). **No existía una medición numérica previa en esta bitácora**, así que el "antes" se midió en esta sesión con el código sin tocar. Con el tono más bajo (`#ffc2c6`) frente al píxel **más luminoso** del fondo bajo el `<h1>`: 2,73 a 3,04:1; frente a la luminancia media: 4,65 a 5,73:1. Ver H-9. |
+| Reglas del efecto intactas | ✅ por código | `.fx-starlight` y demás reglas, `@keyframes`, `prefers-reduced-motion` y `forced-colors` sin cambios; solo cambia `.fx-starlight--accent`. |
+
+### 8.8 Hallazgos nuevos (fuera de alcance: se reportan, no se corrigen)
+
+- **H-7. Desborde transparente del `<h1>` por el relleno.** El `<h1>` tiene ahora `scrollWidth > clientWidth` por hasta **11 px** (0 a 7 px bajo 1024 px; 11 px desde 1024 px), porque la caja con relleno del `span` interno sobresale `.16em` a cada extremo (con `box-decoration-break: clone`, también en cada fragmento si el `span` se parte en dos líneas). Es relleno transparente: no hay scroll de página (el `scrollWidth` del documento no cambia), ningún ancestro lo recorta (la tarjeta tiene `overflow: visible` y relleno de 32 px en móvil y 64 px desde `md`) y el recorte de píxeles es 0. Queda documentado en la propuesta de la regla 8 de `DESIGN.md` §7.4. No se espera impacto, pero conviene confirmarlo en Firefox y Safari.
+- **H-8. El desborde horizontal de 4 px abarca de 768 a 1023 px, no solo 768 px.** El barrido de anchos mostró `scrollWidth = clientWidth + 4` en los 64 anchos medidos entre 768 y 1020 px, **idéntico antes y después** de esta iteración. Nace en `div.flex.flex-col.w-full` (contenedor de las secciones de `main`), fuera del Hero. La línea de `estado-actual.md` de la Iteración 08 de la Épica 01 lo registraba solo a 768 px. No se corrige.
+- **H-9. Contraste frente al píxel más luminoso del fondo.** Con el criterio del píxel más luminoso de la región (no un criterio por área), el tono `#ffc2c6` queda en 2,73 a 3,04:1, por debajo de 3:1 en 6 de los 7 viewports (todos salvo 768 × 1024; el texto de 48 y 64 px es "texto grande", que exige 3:1). La certificación de AA de la Épica 01, Iteración 08, se hizo con el tinte mínimo `/45`; aquí no se reevaluó con otro criterio ni se corrige nada. Se deja como observación para el desarrollador.
+- **H-10. Frase desactualizada en la especificación.** La frase que antecede al bloque de la Tarea 1 de `iteracion-02.md` dice "las clases del `<h1>` no se tocan"; tras esta iteración el bloque sí agrega `lg:font-semibold` y quita `mb-space-4`. Solo se autorizó editar el bloque de marcado; la frase queda por actualizar.
+
+### 8.9 Criterios de aceptación: estado final
+
+| Criterio | Estado | Evidencia |
+|:--|:--:|:--|
+| Tarea 5.1, titular completo sin letras recortadas (antes ❌) | ✅ render real (headless) | §8.5: 0 px perdidos en las 14 cargas. |
+| Escenario 2, jerarquía tipográfica intacta (antes ❌ desde 1024 px) | ✅ render real (headless) | §8.6: "Florería" 600 y "La Jardinera" 400 cursiva en los 7 viewports. |
+| Escenarios 1, 3, 4 y 5 | ✅ | Sin regresión (§8.7); lo no medido en dispositivo real sigue como 🕒 PENDIENTE. |
+| Deuda DT-18 y DT-19 | ✅ | Registradas y marcadas como resueltas en `_planificacion/README.md` §12, con la reserva de que solo se midió Chrome. |
+
+### 8.10 🕒 PENDIENTES (lo que no se pudo medir)
+
+- [ ] **Traza de pintado en un móvil real** (costo de animar `background-position`; con el relleno la superficie pintada del `span` interno crece hasta 12 %, sin efecto esperado pero sin medir).
+- [ ] **Contraste forzado real de Windows** (solo se emuló la media query).
+- [ ] **Firefox y Safari:** `background-clip: text` con relleno y `box-decoration-break: clone`, y el desborde transparente de H-7. Esta iteración solo se midió en Chrome 155.
+- [ ] **Lista manual de §5.1 (primera pasada)**, salvo su primera casilla (ya resuelta): mirar el titular en 360 y 1280 px (pie de la "J" y terminal de la "a"), esperar más de 3,6 s para ver el bucle, activar "Reducir movimiento", activar el contraste alto real, alternar claro y oscuro, revisar consola y traza de pintado.
+- [ ] **Juicio visual del desfase de los destellos** (§8.7, fila de campos y brillo).
+- [ ] Consola y `pnpm build` de las otras 5 páginas (solo se midió Inicio).
+
+### 8.11 Archivos modificados y propuestas para archivos protegidos
+
+**Modificados por el agente:** `src/css/input.css`, `index.html`, `dist/css/output.css` (generado), `_planificacion/03-planificacion/epicas/epica-07-saneamiento-previo-react/iteracion-02.md` (solo el bloque de marcado de la Tarea 1), `_planificacion/README.md` (§12: filas DT-18 y DT-19), esta bitácora y `_planificacion/04-bitacora/estado-actual.md` (una línea).
+
+Las propuestas siguientes **reemplazan** a las del §6 (consolidadas y finales; reflejan exactamente las clases y valores del código). No se aplican.
+
+### Propuesta de edición — `DESIGN.md`
+**Sección:** §1.2 Escala (párrafo "Importante")
+**Motivo:** el token `display-hero` declara peso 400 y `lg:text-display-hero` lo impone desde 1024 px por encima de `font-semibold`; hay que dejar escrita la excepción del `<h1>` del Hero para resolver la contradicción con §7.3 (600).
+```diff
+  **Importante:** las clases `font-*` solo fijan la **familia** y las clases `text-*` fijan **tamaño, interlineado y
+  peso**. Siempre se usan en pareja: `font-headline-md text-headline-md`.
++
++ **Excepción (H1 del Hero):** `display-hero` declara peso 400 y `lg:text-display-hero` lo aplica desde 1024 px por
++ encima de `font-semibold`. Para que "Florería" conserve el peso 600 de §7.3 en todos los tamaños, el `<h1>` repite
++ `lg:font-semibold` (Tailwind lo emite después de `lg:text-display-hero`, dentro del mismo `@media`).
+```
+
+### Propuesta de edición — `DESIGN.md`
+**Sección:** §1.3 Mapa de uso (fila "H1 del Hero (Inicio)")
+**Motivo:** reflejar la clase `lg:font-semibold` del `<h1>`.
+```diff
+- | H1 del Hero (Inicio)             | `font-display-hero text-headline-xl lg:text-display-hero font-semibold tracking-tight leading-none` + §7 |
++ | H1 del Hero (Inicio)             | `font-display-hero text-headline-xl lg:text-display-hero font-semibold lg:font-semibold tracking-tight leading-none` + §7 |
+```
+
+### Propuesta de edición — `DESIGN.md`
+**Sección:** §7.1 Descripción (bloque de marcado)
+**Motivo:** el marcado debe coincidir letra por letra con `index.html`.
+```diff
+- <h1 class="font-display-hero text-headline-xl lg:text-display-hero text-neutral-50 font-semibold max-w-4xl tracking-tight leading-none">
++ <h1 class="font-display-hero text-headline-xl lg:text-display-hero text-neutral-50 font-semibold lg:font-semibold max-w-4xl tracking-tight leading-none">
+```
+
+### Propuesta de edición — `DESIGN.md`
+**Sección:** §7.3 Jerarquía tipográfica (después de la tabla)
+**Motivo:** declarar que el peso 600 rige en todos los tamaños y por qué el `<h1>` repite la clase.
+```diff
+  | "La Jardinera"    | 400  | Cursiva | `secondary-container` |
+
++ El peso 600 de "Florería" rige en **todos** los tamaños: el `<h1>` lleva `font-semibold lg:font-semibold` porque
++ `lg:text-display-hero` (peso 400, §1.2) lo sobrescribiría desde 1024 px. Ambos pesos usan las fuentes reales
++ (`Noto Serif` 600 y `Noto Serif` 400 cursiva), sin síntesis de trazo (§1.1).
++
+  El efecto conserva la tipografía del sistema: **no** cambia familia, tracking ni tamaño.
+```
+
+### Propuesta de edición — `DESIGN.md`
+**Sección:** §7.4 Reglas técnicas (regla 8 nueva)
+**Motivo:** documentar la holgura lateral que evita el recorte de glifos de la cursiva y sus efectos conocidos.
+```diff
+  7. **Regla de seguridad para toda animación de entrada del proyecto:** un estado oculto (`opacity: 0`) nunca vive en
+     la regla base, solo dentro de los keyframes con `animation-fill-mode: both`.
++ 8. **Holgura lateral de la cursiva:** `background-clip: text` solo pinta dentro de la caja del `span` y la tinta de
++    la cursiva sobresale de ella (la "J" al abrir línea, ≈ 7 px a 48 px, y la "a" final, ≈ 1 px).
++    `.fx-starlight--accent` declara `padding-inline: .16em` y `margin-inline: -.16em`: el relleno cubre la tinta y el
++    margen negativo conserva el ancho de línea y los saltos de línea. Efectos conocidos: la caja del `span` interno es
++    hasta 12 % más ancha (el brillo se estira en proporción), su campo de destellos se corre `.16em` respecto de las
++    letras y el `<h1>` queda con hasta 11 px de desborde transparente (`scrollWidth > clientWidth`) que cabe en el
++    relleno de la tarjeta.
+```
+
+### Propuesta de edición — `_planificacion/03-planificacion/epicas/epica-07-saneamiento-previo-react/definicion-epica.md` (Definition of Done de la Épica 07)
+**Sección:** §4 Definition of Done
+**Motivo:** qué casillas cubre ahora la Iteración 02 y cuáles quedan parciales.
+```diff
+- * [ ] El titular del Hero muestra el efecto Starlight, respeta movimiento reducido y alto contraste, y conserva la
+-   jerarquía de `DESIGN.md` §7.3.
++ * [x] El titular del Hero muestra el efecto Starlight, respeta movimiento reducido y alto contraste, y conserva la
++   jerarquía de `DESIGN.md` §7.3. (Iteración 02, 14-10-2026: Chrome 155 headless, 7 viewports × claro y oscuro;
++   movimiento reducido y contraste forzado por emulación; pendientes: dispositivo real, contraste forzado real de
++   Windows, Firefox y Safari.)
+...
+- * [ ] `pnpm build` sin errores y consola limpia en las 6 páginas, en modo claro y oscuro.
++ * [ ] `pnpm build` sin errores y consola limpia en las 6 páginas, en modo claro y oscuro. (Parcial tras la
++   Iteración 02: `pnpm build` sin errores y consola limpia solo medida en el Inicio; faltan las otras 5 páginas.)
+```
+La casilla "0 `style=` en el marcado de los 6 HTML…" **no** queda cubierta: la Iteración 02 no agregó ningún `style=` (0 nuevos), pero los heredados (DT-03) se tratan en la Iteración 03. Las casillas de despliegue, `_antigravity/`, `AGENTS.md` y 25 MiB no dependen de esta iteración. Además, queda por actualizar la frase que antecede al bloque de la Tarea 1 de `iteracion-02.md` (H-10).
+
+### 8.12 Mensaje de commit sugerido (reemplaza al del §7)
+
+```text
+Épica 07 - Iteración 02: Corrige el recorte de glifos de la cursiva del titular Starlight y fija Florería en peso 600 desde 1024 px; verificado en render real, con DT-18 y DT-19 registradas.
+```
+
+**Siguiente paso:** Épica 07 · Iteración 03 (saneamiento, 404 con `<base>` y "Redbanc"). Debe ejecutarse **después** de esta, no en paralelo, porque ambas tocan `input.css` e `index.html`.
