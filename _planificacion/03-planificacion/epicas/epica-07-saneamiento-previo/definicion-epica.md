@@ -81,10 +81,16 @@ contradictoria.
   Evidencia: [bitácora 01](../../../04-bitacora/bitacora-epica-07/bitacora-iteracion-01.md) §2 ("Auditoría del renombrado" y búsqueda de
   `_antigravity`: solo quedan rutas recientes en `.idea/`, ignorado por Git).
 * [ ] Claude Code carga `AGENTS.md` (sin `CLAUDE.md` en el proyecto) y los permisos bloquean edición de archivos
-  protegidos y operaciones de escritura de Git. **Evidencia parcial:** [bitácora 01](../../../04-bitacora/bitacora-epica-07/bitacora-iteracion-01.md) §2
-  confirma que no existe `CLAUDE.md`, `CLAUDE.local.md` ni `.claude/CLAUDE.md` y que `.claude/settings.json` es JSON
-  válido, y la §5.1 registra un comando Git de escritura denegado por el clasificador de permisos. Ninguna bitácora
-  demuestra que los permisos bloqueen la edición de archivos protegidos.
+  protegidos y operaciones de escritura de Git.
+    * **Confirmado por configuración** (`.claude/settings.json`, reglas `deny`; no existe `settings.local.json` ni hay
+      reglas `ask`): `Edit` sobre `AGENTS.md`, `README.md`, `DESIGN.md`, `CLAUDE.md`, `CLAUDE.local.md` y `.claude/**`, y
+      los comandos Git que escriben (los de `AGENTS.md` §3, más `git restore`, `apply` y `update-index`), `gh pr`,
+      `gh release`, `wrangler`, `npm` y `yarn`. Sin `CLAUDE.md` en el proyecto: bitácora 01 §2.
+    * **Falta:** (a) sin regla de bloqueo, solo la instrucción de `AGENTS.md`: `package.json`, `pnpm-lock.yaml`,
+      `tailwind.config.js`, `_planificacion/01-vision/**` y `_planificacion/02-arquitectura/**`; (b) los `deny` cubren la
+      herramienta `Edit`, no `Write` ni escrituras desde `Bash`. Propuesta en la
+      [bitácora de cierre](../../../04-bitacora/bitacora-epica-07/bitacora-cierre-epica-07.md) §6.
+    * **Prueba real manual por el desarrollador: pendiente.**
 * [x] Cloudflare publica desde `_site/` con `pnpm run build:cf`, y `/README.md`, `/AGENTS.md`, `/DESIGN.md`,
   `/package.json` y `/_planificacion/README.md` responden 404 en producción. Evidencia:
   [bitácora 01](../../../04-bitacora/bitacora-epica-07/bitacora-iteracion-01.md) §8.5 (configuración y despliegue confirmados por el desarrollador; las

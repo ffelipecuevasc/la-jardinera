@@ -17,7 +17,7 @@ desarrollador, 14-10-2026).
 | 03 · Saneamiento y H8 | Completada con reservas: DT-01, 02, 03, 05, 07 y 13 resueltas; DT-14 corregida en código. | [bitacora-iteracion-03.md](bitacora-iteracion-03.md) |
 | 04 · SEO técnico | Trasladada a la Épica 08 · Iteración 05. | — |
 
-DoD actualizado en [definicion-epica.md](../../03-planificacion/epicas/epica-07-saneamiento-previo-react/definicion-epica.md) §4:
+DoD actualizado en [definicion-epica.md](../../03-planificacion/epicas/epica-07-saneamiento-previo/definicion-epica.md) §4:
 6 casillas con `[x]` y evidencia citada, 2 abiertas (permisos de Claude Code, con evidencia parcial; la 404 en producción,
 DT-14) y 1 tachada (Search Console, movida a la Épica 08 · Iteración 05).
 
@@ -108,3 +108,59 @@ los 10 archivos (≈ 48,7 MB en total) aunque no todos estén a la vista. Puede 
   simulado y el resto es comportamiento normal de Chrome.
 * La bitácora 02 §9 no repite el texto largo de DT-20 (solo remite a la fila y conserva la tabla de percentiles), así
   que no se ajusta.
+
+## 6. Ajustes finales (14-10-2026)
+
+**Renombre de carpeta.** La carpeta de la épica se renombró de `…-react` a `…-previo` el 14-10-2026 (`git mv` del
+desarrollador); las menciones antiguas en `bitacora-iteracion-02.md` (líneas 306 y 366) se conservan como registro
+histórico. Se actualizaron la ruta del enlace de esta bitácora y el comando de renombre de
+`epica-08-migracion-astro/definicion-epica.md` (línea 100), que apuntaba a otro destino (`…-previo-migracion`).
+
+**Verificación de permisos** (solo lectura de `.claude/settings.json`; no existe `settings.local.json`; no hay reglas `ask`).
+
+| Protegido por `AGENTS.md` §2 y §3 | Regla | Clasificación |
+|:--|:--|:--|
+| `AGENTS.md`, `README.md`, `DESIGN.md` | `deny`: `Edit(/AGENTS.md)`, `Edit(/README.md)`, `Edit(/DESIGN.md)` | Confirmado por configuración (solo la herramienta `Edit`) |
+| `CLAUDE.md`, `CLAUDE.local.md`, `.claude/**` | `deny`: `Edit` de cada uno | Confirmado por configuración (solo `Edit`) |
+| `_planificacion/01-vision/**`, `_planificacion/02-arquitectura/**` | Ninguna | Sin regla (solo instrucción de `AGENTS.md`) |
+| `package.json`, `pnpm-lock.yaml`, `tailwind.config.js` | Ninguna | Sin regla (solo instrucción de `AGENTS.md`) |
+| Git que modifica el repositorio (`add`, `commit`, `push`, `pull`, `merge`, `rebase`, `reset`, `revert`, `checkout`, `switch`, `branch -d/-D`, `stash`, `tag`, `cherry-pick`, `clean`, `mv`, `rm`) y `gh pr` | `deny` de cada uno | Confirmado por configuración |
+| Extras: `git restore`, `apply`, `update-index`, `gh release`, `wrangler` (también por `npx` y `pnpm dlx`), `npm`, `yarn` | `deny` | Confirmado por configuración |
+| Lectura permitida | `allow`: `pnpm build`, `git status`, `diff`, `log`, `show`, `blame`, `ls-files` | Confirmado por configuración |
+
+"Confirmado por configuración" significa que hay una regla explícita en el archivo; **no se probó en uso real** (no se
+intentó editar ningún archivo protegido, para no incumplir `AGENTS.md` §2). La casilla de permisos del DoD sigue abierta:
+dos filas de la tabla no tienen regla y los `deny` cubren la herramienta `Edit`, no `Write` ni escrituras desde `Bash`
+(en esta misma sesión se escribieron archivos de planificación con Node sin bloqueo, lo que indica que `Bash` no tiene una
+regla de escritura de archivos). Prueba real manual por el desarrollador: pendiente.
+
+### Propuesta de edición — `.claude/settings.json`
+**Sección:** `permissions`
+**Motivo:** los archivos que `AGENTS.md` §2 protege "solo con autorización explícita en el chat" no tienen regla; con `ask`
+se pide confirmación sin bloquear las ediciones autorizadas. Los tres documentos raíz se refuerzan contra `Write`.
+```diff
+  "permissions": {
+    "deny": [
+      "Edit(/DESIGN.md)",
++     "Write(/AGENTS.md)",
++     "Write(/README.md)",
++     "Write(/DESIGN.md)",
+      ...
+    ],
++   "ask": [
++     "Edit(/package.json)",
++     "Edit(/pnpm-lock.yaml)",
++     "Edit(/tailwind.config.js)",
++     "Edit(/_planificacion/01-vision/**)",
++     "Edit(/_planificacion/02-arquitectura/**)"
++   ],
+    "allow": [
+```
+Esto no impide las escrituras desde `Bash` (por ejemplo `sed -i` o un script de Node); cerrar esa vía exige reglas `deny`
+adicionales sobre `Bash` que conviene evaluar aparte.
+
+**Tarea opcional de videos.** Se agregó la Tarea 3 (opcional, dentro de la Iteración 06, que ya es opcional) a
+[iteracion-06.md](../../03-planificacion/epicas/epica-08-migracion-astro/iteracion-06.md): carga diferida de los videos
+de la Galería (≈ 48,7 MB, 10 videos). No es deuda técnica ni bloquea la certificación de la épica. La tabla de
+iteraciones de `epica-08-migracion-astro/definicion-epica.md` tiene una sola fila de entregable por iteración y no
+enumera tareas, así que no se modificó.

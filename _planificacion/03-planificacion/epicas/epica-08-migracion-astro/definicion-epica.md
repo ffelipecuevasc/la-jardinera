@@ -97,7 +97,7 @@ ADR-001 de la It. 01). Comandos que debe ejecutar el desarrollador:
 
 ```bash
 git rm -r _planificacion/03-planificacion/epicas/epica-08-componentes-react
-git mv _planificacion/03-planificacion/epicas/epica-07-saneamiento-previo-react _planificacion/03-planificacion/epicas/epica-07-saneamiento-previo-migracion
+git mv _planificacion/03-planificacion/epicas/epica-07-saneamiento-previo-react _planificacion/03-planificacion/epicas/epica-07-saneamiento-previo
 ```
 
 ---
