@@ -80,17 +80,18 @@ contradictoria.
 * [x] `_antigravity/` no existe; ninguna configuración activa (Cloudflare, Antigravity) apunta a esa ruta.
   Evidencia: [bitácora 01](../../../04-bitacora/bitacora-epica-07/bitacora-iteracion-01.md) §2 ("Auditoría del renombrado" y búsqueda de
   `_antigravity`: solo quedan rutas recientes en `.idea/`, ignorado por Git).
-* [ ] Claude Code carga `AGENTS.md` (sin `CLAUDE.md` en el proyecto) y los permisos bloquean edición de archivos
-  protegidos y operaciones de escritura de Git.
-    * **Confirmado por configuración** (`.claude/settings.json`, reglas `deny`; no existe `settings.local.json` ni hay
-      reglas `ask`): `Edit` sobre `AGENTS.md`, `README.md`, `DESIGN.md`, `CLAUDE.md`, `CLAUDE.local.md` y `.claude/**`, y
-      los comandos Git que escriben (los de `AGENTS.md` §3, más `git restore`, `apply` y `update-index`), `gh pr`,
-      `gh release`, `wrangler`, `npm` y `yarn`. Sin `CLAUDE.md` en el proyecto: bitácora 01 §2.
-    * **Falta:** (a) sin regla de bloqueo, solo la instrucción de `AGENTS.md`: `package.json`, `pnpm-lock.yaml`,
-      `tailwind.config.js`, `_planificacion/01-vision/**` y `_planificacion/02-arquitectura/**`; (b) los `deny` cubren la
-      herramienta `Edit`, no `Write` ni escrituras desde `Bash`. Propuesta en la
-      [bitácora de cierre](../../../04-bitacora/bitacora-epica-07/bitacora-cierre-epica-07.md) §6.
-    * **Prueba real manual por el desarrollador: pendiente.**
+* [x] Claude Code carga `AGENTS.md` (sin `CLAUDE.md` en el proyecto) y los permisos bloquean edición de archivos
+  protegidos y operaciones de escritura de Git. **Cerrada por configuración** (14-10-2026), sin prueba de bloqueo en
+  uso real. Evidencia: [bitácora de cierre](../../../04-bitacora/bitacora-epica-07/bitacora-cierre-epica-07.md) §6 y §6.1; sin `CLAUDE.md` en el proyecto:
+  bitácora 01 §2.
+    * **Confirmado por configuración** (`.claude/settings.json`, JSON válido): reglas `deny` de `Edit` y `Write` sobre
+      `AGENTS.md`, `README.md` y `DESIGN.md`; `deny` de `Edit` sobre `CLAUDE.md`, `CLAUDE.local.md` y `.claude/**`;
+      `deny` de los comandos Git que escriben (los de `AGENTS.md` §3, más `git restore`, `apply` y `update-index`),
+      `gh pr`, `gh release`, `wrangler`, `npm` y `yarn`; `ask` de `Edit` sobre `package.json`, `pnpm-lock.yaml`,
+      `tailwind.config.js`, `_planificacion/01-vision/**` y `_planificacion/02-arquitectura/**`.
+    * **Límites declarados:** no hay prueba de bloqueo en uso real. Las escrituras desde `Bash` (por ejemplo con Node o
+      `sed -i`) no están cubiertas por reglas y dependen de `AGENTS.md` y de la revisión del desarrollador con
+      `git diff` antes de cada commit.
 * [x] Cloudflare publica desde `_site/` con `pnpm run build:cf`, y `/README.md`, `/AGENTS.md`, `/DESIGN.md`,
   `/package.json` y `/_planificacion/README.md` responden 404 en producción. Evidencia:
   [bitácora 01](../../../04-bitacora/bitacora-epica-07/bitacora-iteracion-01.md) §8.5 (configuración y despliegue confirmados por el desarrollador; las
@@ -122,8 +123,9 @@ Pendientes manuales del desarrollador. No bloquean la Épica 08.
 * [ ] **Firefox y Safari:** H8 (barra entre 1024 y 1279 px) y la 404 en rutas anidadas; también el titular Starlight.
 * [ ] **Traza de pintado en un móvil real** (animación del titular Starlight).
 * [ ] **Contraste forzado real de Windows** (titular Starlight; solo se emuló).
-* [ ] **Casilla de permisos de Claude Code** (§4, segunda casilla): demostrar que se bloquea la edición de archivos
-  protegidos.
+* [ ] **Prueba real manual de los permisos (opcional):** el desarrollador puede comprobar en una sesión de Claude Code
+  que se bloquea la escritura de un archivo protegido. Ya no bloquea la casilla del DoD, que se cerró por
+  configuración (una prueba de lectura de `DESIGN.md` no demuestra bloqueo de escritura).
 * [ ] **Propuestas a archivos protegidos aún sin aplicar** (las aplica solo el desarrollador):
     * `DESIGN.md` §5, ítem 9 (DT-03 resuelta con `.bg-noise`): [bitácora 03](../../../04-bitacora/bitacora-epica-07/bitacora-iteracion-03.md) §6.
     * `DESIGN.md` §10, ítem 3 (botones sociales visibles y "f" de Facebook sin color fijo): bitácora 03 §6.

@@ -33,3 +33,15 @@ Guardas de `stage-site.mjs` (todas se evalúan antes de borrar `_site/`; si una 
   casilla abierta con una nota.
 * **Galería:** las cancelaciones `net::ERR_ABORTED` de `.mp4` son comportamiento normal de Chrome con videos grandes
   (diagnóstico en la bitácora de cierre §3); no se registran como deuda.
+
+## Casilla de permisos de la Épica 07 cerrada por configuración — 14-10-2026
+
+* **Decisión del desarrollador:** la casilla del DoD sobre permisos de Claude Code se cierra con la verificación de
+  `.claude/settings.json` (JSON válido; `deny` de `Edit` y `Write` sobre `AGENTS.md`, `README.md` y `DESIGN.md`, `deny` de
+  `Edit` sobre `CLAUDE.md`, `CLAUDE.local.md` y `.claude/**`, `deny` de Git que escribe, y `ask` de `Edit` sobre
+  `package.json`, `pnpm-lock.yaml`, `tailwind.config.js`, `01-vision/**` y `02-arquitectura/**`).
+* **Alternativa descartada:** exigir una prueba de bloqueo real (intentar escribir un archivo protegido). Se descartó
+  porque `AGENTS.md` §2 prohíbe a los agentes modificar esos archivos, ni siquiera "para probar"; queda como verificación
+  opcional del desarrollador.
+* **Límite aceptado:** las escrituras desde `Bash` (Node, `sed -i`) no tienen regla; las cubren `AGENTS.md` y la revisión
+  con `git diff` antes de cada commit.

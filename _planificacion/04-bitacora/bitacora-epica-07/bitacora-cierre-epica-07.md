@@ -164,3 +164,22 @@ adicionales sobre `Bash` que conviene evaluar aparte.
 de la Galería (≈ 48,7 MB, 10 videos). No es deuda técnica ni bloquea la certificación de la épica. La tabla de
 iteraciones de `epica-08-migracion-astro/definicion-epica.md` tiene una sola fila de entregable por iteración y no
 enumera tareas, así que no se modificó.
+
+### 6.1 Cierre de la casilla de permisos (14-10-2026)
+
+El desarrollador aplicó a mano la propuesta de §6 en `.claude/settings.json`. Se verificó **solo lectura** (sin
+modificarlo; el JSON se parseó con Node sin escribir): es **JSON válido** y contiene, con el texto exacto de las líneas:
+
+* `deny`, líneas 5 a 13: `"Write(/AGENTS.md)"`, `"Write(/README.md)"`, `"Write(/DESIGN.md)"`, `"Edit(/AGENTS.md)"`,
+  `"Edit(/README.md)"`, `"Edit(/DESIGN.md)"`, `"Edit(/CLAUDE.md)"`, `"Edit(/CLAUDE.local.md)"` y `"Edit(/.claude/**)"`.
+* `ask`, líneas 58 a 63: `"Edit(/package.json)"`, `"Edit(/pnpm-lock.yaml)"`, `"Edit(/tailwind.config.js)"`,
+  `"Edit(/_planificacion/01-vision/**)"` y `"Edit(/_planificacion/02-arquitectura/**)"`.
+* Los 17 comandos Git que escriben de `AGENTS.md` §3 siguen en `deny` (41 reglas `deny`, 5 `ask`, 9 `allow`).
+
+**Decisión del desarrollador:** la casilla se cierra con la confirmación por configuración, sin prueba de bloqueo en uso
+real; la prueba de **lectura** de `DESIGN.md` que hizo en una sesión nueva no demuestra bloqueo de escritura y no se usa
+como evidencia. No se intentó editar ningún archivo protegido (`AGENTS.md` §2).
+
+**Límites:** no hay prueba de bloqueo en uso real. Las escrituras desde `Bash` (por ejemplo con Node o `sed -i`) no están
+cubiertas por reglas y dependen de `AGENTS.md` y de la revisión del desarrollador con `git diff` antes de cada commit. La
+prueba real manual queda como verificación opcional en "Seguimiento posterior al cierre".
