@@ -45,3 +45,67 @@ Guardas de `stage-site.mjs` (todas se evalúan antes de borrar `_site/`; si una 
   opcional del desarrollador.
 * **Límite aceptado:** las escrituras desde `Bash` (Node, `sed -i`) no tienen regla; las cubren `AGENTS.md` y la revisión
   con `git diff` antes de cada commit.
+
+## ADR-001 — Migración estructural a Astro (Épica 08)
+
+* **Estado:** Aprobada (15-10-2026). El desarrollador revisó y aceptó las decisiones D1 a D9.
+
+### Contexto
+
+* El header, el panel móvil y el footer están **duplicados en los 6 HTML**, y todo cambio en ellos exige paridad exacta
+  en los 6 archivos (`AGENTS.md` §5, regla 6).
+* El costo ya se pagó: la Fase 2 de la Épica 06 (Iteraciones 07 a 13) replicó el nuevo header una página por iteración y
+  el Hallazgo H8 obligó a repetir la corrección, idéntica, en los 6 archivos. La Épica 07 · Iteración 03 corrigió además
+  defectos nacidos de esa duplicación (DT-01, marcado roto en el footer de Servicios; DT-13, ícono de Facebook del
+  footer en las 6 páginas).
+* El `<head>` (metadatos, fuentes, favicon) también está repetido, y el SEO técnico pendiente (DT-04, DT-08) obligaría a
+  editar 6 `<head>` a mano.
+* Objetivo de la épica: cambiar **solo la estructura** (de 6 HTML escritos a mano a un proyecto Astro con un layout y
+  componentes compartidos), sin cambiar lo que ve ni lo que recibe el visitante: mismo contenido, imágenes, estilos,
+  diseño, módulos Vanilla y configuración de Cloudflare Pages.
+* La prueba de concepto de la planificación (Astro `7.3.8` + Tailwind `3.4.19` vía PostCSS, 13-10-2026) compiló el Inicio,
+  Servicios y la 404 sin errores y con 0 scripts y 0 estilos en línea. Es evidencia de factibilidad, no de paridad: la
+  paridad se certifica en las iteraciones.
+
+### Decisión
+
+| #  | Decisión |
+|:---|:---------|
+| D1 | **Astro `7.3.8`** (serie `7.x`), salida estática, **sin adaptador**. `@astrojs/cloudflare` solo hace falta para SSR. |
+| D2 | **Tailwind CSS `3.4.19` vía PostCSS** (`postcss.config.cjs` con `tailwindcss` y `autoprefixer`). `tailwind.config.js` se conserva y solo cambia `content`. La integración `@astrojs/tailwind` no admite Astro 7. |
+| D3 | `build.format: 'file'` y `trailingSlash: 'never'`: genera `servicios.html`, etc., con los nombres de hoy; Cloudflare mantiene su redirección 308 a `/servicios`. |
+| D4 | `outDir: './_site'`; `build:cf` pasa a ser `astro build`. Cloudflare Pages no cambia de configuración. |
+| D5 | `build.inlineStylesheets: 'never'` y `vite.build.assetsInlineLimit: 0`: la salida mantiene "cero JS y CSS en línea". |
+| D6 | `public/` se queda donde está y se sirve desde la raíz (`/images/...`, `/logos/...`, `/icons/...`). Se agrega `public/_redirects` con `/public/*  /:splat  301` para no romper URLs antiguas. Alternativa B, validada en la prueba: `publicDir: './static'` con `static/public/`. |
+| D7 | **Rutas absolutas desde la raíz** (`/`, `/servicios`, `/images/...`) en lugar de `./`. Corrige la 404 en rutas anidadas y evita la redirección 308 en cada clic interno. |
+| D8 | Los módulos Vanilla de `src/js/` **no se reescriben**: `main.js` pasa a importaciones estáticas (cierra DT-10) y se carga con un `<script>` procesado por Astro en el layout, que sale como archivo externo con *hash*. |
+| D9 | Páginas en `src/pages/*.astro`; solo layout, header, footer y `<head>` se componentizan de forma obligatoria. Las secciones de cada página se copian literales. Componentizar secciones repetidas es opcional (Iteración 06). |
+
+Estructura objetivo: `src/pages/` (6 páginas), `src/layouts/BaseLayout.astro`, `src/components/` (`SiteHeader`,
+`SiteFooter`, `SeoHead`), `src/data/navegacion.js`, `astro.config.mjs` y `postcss.config.cjs`.
+
+### Alternativas descartadas
+
+* **Vite + React con *prerender* propio** (plan anterior de la Épica 08, "Componentes React con Renderizado Estático"):
+  exige un plugin de *prerender* propio, traducir los 6 HTML a JSX y mantener esa maquinaria; Astro entrega el mismo
+  resultado (HTML estático con componentes) con copia literal del marcado.
+* **React en el cliente:** envía JavaScript de interfaz al navegador y pierde el HTML completo sin JavaScript, con costo en
+  rendimiento y SEO; contradice el objetivo de no cambiar lo que recibe el visitante.
+* **Tailwind 4 en esta épica:** cambia la configuración y los valores por defecto (riesgo de regresión visual) y mezclarlo
+  con la migración estructural impediría atribuir diferencias; queda para una épica futura.
+
+### Consecuencias
+
+* **Cambia el stack declarado:** `AGENTS.md` §4, §5 y §7, `stack-tecnologico.md` y `proposito-y-alcance.md` deben
+  actualizarse **antes** de la Iteración 02 (propuestas en `propuestas-documentos-protegidos.md`, sección A); `README.md` y
+  `DESIGN.md`, en la Iteración 08 (sección B). Los edita el desarrollador.
+* **Se retiran** `scripts/stage-site.mjs` (Astro publica solo lo que compila más `public/`) y `dist/`
+  (`dist/css/output.css` deja de versionarse; cierra DT-16).
+* **Las rutas pasan de `./` a `/`:** la 404 deja de depender de `<base href="/">` para funcionar en rutas anidadas
+  (DT-14, hoy corregida con `<base>` y pendiente de verificar en producción) y se corrigen las rutas `./public/` también
+  en los datos JS (`services.js`, `carousel.js`, `data-src` de la Galería).
+* **Se cierran** DT-10, DT-16 y DT-17 (Iteración 02), DT-06 (Iteración 03) y DT-04 y DT-08 (Iteración 05).
+* La configuración de Cloudflare Pages no cambia (`pnpm run build:cf`, directorio `_site`); `main` no se toca hasta la
+  Iteración 08, y revertir producción es un clic en el panel de Cloudflare.
+* Riesgos y mitigaciones: ver `definicion-epica.md` §7. La referencia de paridad es la instantánea de la Iteración 01
+  (`referencia/`, fuera de Git).
