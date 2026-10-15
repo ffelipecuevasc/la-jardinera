@@ -48,7 +48,7 @@ Guardas de `stage-site.mjs` (todas se evalúan antes de borrar `_site/`; si una 
 
 ## ADR-001 — Migración estructural a Astro (Épica 08)
 
-* **Estado:** Aprobada (15-10-2026). El desarrollador revisó y aceptó las decisiones D1 a D9.
+* **Estado:** Aprobada (14-10-2026). El desarrollador revisó y aceptó las decisiones D1 a D9.
 
 ### Contexto
 

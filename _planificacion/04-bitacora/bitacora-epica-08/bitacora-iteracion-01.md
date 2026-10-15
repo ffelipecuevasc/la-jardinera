@@ -10,7 +10,7 @@ Especificación: [`iteracion-01.md`](../../03-planificacion/epicas/epica-08-migr
 
 ## 1. Resumen ejecutivo
 
-* **ADR-001** agregado al final de [`decisiones-tecnicas.md`](../decisiones-tecnicas.md): contexto, decisiones D1 a D9 (Astro `7.3.8`, sin actualizar), alternativas descartadas, consecuencias y estado "Aprobada (15-10-2026)".
+* **ADR-001** agregado al final de [`decisiones-tecnicas.md`](../decisiones-tecnicas.md): contexto, decisiones D1 a D9 (Astro `7.3.8`, sin actualizar), alternativas descartadas, consecuencias y estado "Aprobada (14-10-2026)".
 * **Documentos protegidos:** no se aplicó ninguno. Las propuestas de la sección A de `propuestas-documentos-protegidos.md` se entregaron en el reporte final, en el formato de `AGENTS.md` §2. La sección B (`README.md`, `DESIGN.md`) queda para la Iteración 08.
 * **Línea base:** `_site/` del estado actual copiado a `referencia/sitio/` (114 archivos, fuera de Git); `referencia/inventario.json` con las 6 páginas; **84 capturas** (6 páginas × 7 viewports × 2 temas) en `referencia/capturas/`, tomadas en Chrome 155 headless.
 * **Pendientes del desarrollador:** Lighthouse de las 6 páginas en producción y verificación de la 404 en producción (DT-14). Ver §4 y §5.
@@ -123,3 +123,73 @@ Sin cambios: los 6 HTML, `src/`, `dist/` (`pnpm run build:cf` regeneró `dist/cs
 ```
 
 Longitud contada con Node: 190 caracteres.
+
+---
+
+## 8. Ajustes posteriores
+
+**Fecha del ajuste:** 15-10-2026 (según el reloj del sistema, que pasó la medianoche durante la sesión) · **Agente:** Claude Code · **Alcance autorizado:** `decisiones-tecnicas.md` (solo la fecha del estado del ADR-001), esta bitácora y una línea en `estado-actual.md`. La Iteración 01 sigue abierta: faltan los pendientes del desarrollador (§8.4).
+
+### 8.1 Corrección de la fecha del ADR-001
+
+* El desarrollador indicó 15-10-2026 por error. La fecha real de la aprobación es **14-10-2026** (el reloj del sistema también marcaba 14-10-2026 al ejecutar la iteración); el estado correcto del ADR-001 es "Aprobada (14-10-2026)". Este ajuste se ejecutó después, ya con el reloj en 15-10-2026.
+* Búsqueda de `15-10-2026` en los archivos versionados: 3 ocurrencias, todas relacionadas con la aprobación del ADR-001.
+
+| Archivo | Línea | Contexto | Acción |
+|:--------|------:|:---------|:-------|
+| `_planificacion/04-bitacora/decisiones-tecnicas.md` | 51 | `* **Estado:** Aprobada (15-10-2026).` | Corregida a 14-10-2026. |
+| `_planificacion/04-bitacora/bitacora-epica-08/bitacora-iteracion-01.md` | 13 | Resumen ejecutivo: estado "Aprobada (15-10-2026)" | Corregida a 14-10-2026. |
+| `_planificacion/04-bitacora/bitacora-epica-08/bitacora-iteracion-01.md` | 99 | §5, punto 6: describe la discrepancia entre el reloj del sistema y la fecha indicada | **Sin cambio, a propósito:** es el registro de lo observado al ejecutar la iteración. Queda reemplazado por esta sección (§8.1). |
+
+* `estado-actual.md` no contenía `15-10-2026`: la línea de la Iteración 01 ya decía 14-10-2026 y no se modificó.
+* Confirmado por búsqueda de texto (`git grep`), no por render.
+
+### 8.2 Propuestas documentales faltantes (🕒 sin aplicar)
+
+Las propuestas se entregaron en el reporte de la sesión, en el formato de `AGENTS.md` §2, con el texto actual exacto de cada archivo (cada línea `-` se comprobó por programa contra el archivo real). Ningún archivo protegido se modificó.
+
+| # | Archivo y sección | Origen | Estado |
+|:--|:------------------|:-------|:-------|
+| 1 | `AGENTS.md` §9 (despliegue: `_site/` pasa a ser la salida de `astro build`) | Nueva | 🕒 PENDIENTE (la aplica el desarrollador) |
+| 2 | `_planificacion/README.md` §6 y §7 (reglas de acero y estándar de verificación), con nota de transición | Nueva | 🕒 PENDIENTE (la aplica el desarrollador) |
+| 3 | `_planificacion/01-vision/objetivos-y-metricas.md` §3, punto 4 (rutas "relativas seguras") y errata `6#` del título | Nueva, hallada en la revisión de coherencia | 🕒 PENDIENTE (requiere decisión del desarrollador) |
+| 4 | `README.md`: nota de transición al inicio (no bloquear la lectura obligatoria hasta la Iteración 08) | Nueva, hallada en la revisión de coherencia | 🕒 PENDIENTE (requiere decisión del desarrollador) |
+| A1 | `AGENTS.md` §5, regla 8: la propuesta original quedó desactualizada (no contempla la excepción del `<base href="/">` agregada en la Épica 07 · Iteración 03) | Corrección a la sección A | 🕒 PENDIENTE |
+| A2 | `AGENTS.md` §5, regla 6: la nota de transición estaba fuera del bloque `diff`; se integra al texto de la regla | Corrección a la sección A | 🕒 PENDIENTE |
+| A3 | `AGENTS.md` §7: la propuesta original elimina la línea de paridad; se mantiene mientras header y footer estén duplicados | Corrección a la sección A | 🕒 PENDIENTE |
+
+Observación sin corrección: la propuesta para `AGENTS.md` §5 regla 2 ("el único `<script>` permitido…") y la de §7 ("0 `<script>` sin `src`") chocarán con el JSON-LD opcional de la Iteración 05 y con el script de tema opcional de la Iteración 07 cuando se aprueben; se resuelve al aprobar esas excepciones. No bloquea la Iteración 02.
+
+El desarrollador aplicará a mano antes de la Iteración 02: `AGENTS.md` §4, §5, §7 y §9; `stack-tecnologico.md`; `proposito-y-alcance.md`; y `_planificacion/README.md` §6 y §7. Esa lista **reemplaza** a la de §5.7 y §6 de esta bitácora (que solo nombraba `AGENTS.md` §4 y §5 y `stack-tecnologico.md`).
+
+### 8.3 Revisión de coherencia (solo lectura, confirmada por código)
+
+Se simuló la aplicación de todas las propuestas y se buscaron en `AGENTS.md`, `README.md`, `DESIGN.md`, `_planificacion/README.md`, `01-vision/` y `02-arquitectura/` las menciones de `dist/css/output.css`, React, `stage-site`, lista blanca, `./public`, `./`, "paridad exacta" y "seis archivos HTML". Resultado:
+
+| Archivo | Menciones que seguirían contradiciendo | ¿Bloquean la Iteración 02 (`AGENTS.md` §1)? | Se corrigen en |
+|:--------|:---------------------------------------|:--------------------------------------------|:---------------|
+| `AGENTS.md` | Ninguna | No | — |
+| `_planificacion/02-arquitectura/stack-tecnologico.md` | Ninguna | No | — |
+| `_planificacion/README.md` | Ninguna fuera del registro histórico (§12 y §13) | No | — |
+| `_planificacion/01-vision/proposito-y-alcance.md` | Ninguna (la salida sigue siendo 6 HTML) | No | — |
+| `_planificacion/01-vision/objetivos-y-metricas.md` | 1: §3, punto 4, rutas "relativas seguras (`./`)" | **Sí, literalmente** (Definition of Done global) | Antes de la Iteración 02 (propuesta #3) |
+| `README.md` | Menciones en 10 secciones (§1, §2, §4, §5, §6, §7, §8, §10, §12 y §15); la propuesta B cubre solo §1, §2, §5, §7, §8 y §15, y deja sin cubrir §4, §6, §10 y §12 | **Sí, literalmente** | Nota de transición ahora (propuesta #4); contenido en la Iteración 08, ampliando la sección B con §4, §6, §10 y §12 |
+| `DESIGN.md` | 6 menciones: ubicación de archivos (líneas 43, 348, 409 y 542) y estado del footer (§5.3, línea 307, y §10, línea 466), que cambia con DT-06 en la Iteración 03 | No (no cambian tokens ni reglas de diseño) | Iteración 08 (y §5.3 y §10 al cerrar la Iteración 03) |
+
+### 8.4 Pendientes del desarrollador (🕒 PENDIENTE, sin cifras)
+
+* Lighthouse móvil y escritorio de las 6 páginas en producción (Performance, Accessibility, Best Practices, SEO, LCP y CLS): 🕒 PENDIENTE. No se ejecutó ni se registra ninguna cifra.
+* DT-14 en producción (`/servicios/xyz` y `/a/b/inexistente`): 🕒 PENDIENTE. No se registra ningún resultado ni se toca `_planificacion/README.md` §12.
+* Aplicar las propuestas de §8.2 (las que el desarrollador indicó que aplicará a mano) y decidir sobre las propuestas #3 y #4.
+
+### 8.5 Hallazgos fuera de alcance (solo reportados)
+
+* `objetivos-y-metricas.md`, línea 1: el título empieza con `6#` en vez de `#` (errata); incluida en la propuesta #3.
+* El ADR-001, en "Consecuencias", enumera los documentos a actualizar antes de la Iteración 02 (`AGENTS.md` §4, §5 y §7, `stack-tecnologico.md` y `proposito-y-alcance.md`); la lista real ahora incluye `AGENTS.md` §9 y `_planificacion/README.md` §6 y §7. No se editó el ADR (la autorización cubría solo la fecha).
+* `propuestas-documentos-protegidos.md` (sección A) conserva las tres propuestas desactualizadas (A1 a A3) y no incluye las nuevas; no se editó por estar fuera del alcance autorizado.
+
+### 8.6 Archivos modificados
+
+* `_planificacion/04-bitacora/decisiones-tecnicas.md`: 1 línea (fecha del estado del ADR-001).
+* `_planificacion/04-bitacora/bitacora-epica-08/bitacora-iteracion-01.md`: 1 corrección de fecha (§1) y esta sección.
+* `_planificacion/04-bitacora/estado-actual.md`: 1 línea nueva al final.
