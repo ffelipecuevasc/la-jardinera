@@ -9,9 +9,10 @@ Chile.
 🔹 **Repositorio:** `https://github.com/ffelipecuevasc/la-jardinera`
 🔹 **Desarrollo:** [Felipe Cuevas](https://felipecuevas.dev)
 
-**Transición (Épica 08):** este documento describe el proyecto migrado a Astro. Hasta cerrar la Iteración 02, los
-comandos de la rama siguen siendo los previos (Tailwind compilado por CLI y un servidor estático aparte para
-previsualizar); desde la Iteración 02 rigen los de Astro descritos aquí.
+> **Transición (Épica 08):** este documento describe el proyecto migrado a Astro. Hasta cerrar la Iteración 02, los
+> comandos de la rama siguen siendo los previos (Tailwind compilado por CLI y un servidor estático aparte para
+> previsualizar); desde la Iteración 02 rigen los de Astro descritos aquí.
+
 ---
 
 ## 1. Descripción del proyecto
@@ -79,7 +80,7 @@ dependencias de iconografía externa.
 ├── DESIGN.md                  # Sistema de diseño: única fuente de la verdad visual
 ├── README.md                  # Este documento
 ├── tailwind.config.js         # Tokens de diseño para Tailwind
-├── package.json · pnpm-lock.yaml├── dist/
+├── package.json · pnpm-lock.yaml
 ├── _site/                     # Salida de astro build (pnpm run build:cf), publicada por Cloudflare (ignorada por Git)
 ├── public/
 │   ├── _redirects             # /public/* → /:splat (301, URLs antiguas)
@@ -124,14 +125,13 @@ dependencias de iconografía externa.
 
 2. Inicia el servidor de desarrollo de Astro (recarga en caliente) y abre la dirección local que indica la terminal:
 
-    ```bash
-    pnpm dev
-    ```
+   ```bash
+   pnpm dev
+   ```
 
 3. Antes de publicar, genera `_site/` y revísalo tal como lo servirá Cloudflare Pages:
 
    ```bash
-   pnpm build
    pnpm run build:cf
    pnpm preview
    ```

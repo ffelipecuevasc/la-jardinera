@@ -82,14 +82,14 @@ El control de versiones y la publicación son responsabilidad exclusiva del desa
 
 ## 4. Stack y comandos
 
-**Transición (Épica 08):** hasta cerrar la Iteración 02, la rama todavía no tiene Astro y los comandos vigentes son
-los previos (Tailwind por CLI con `pnpm dev` y `pnpm build`, y un servidor estático aparte para previsualizar). Desde
-la Iteración 02 rigen los comandos de Astro descritos aquí.
+> **Transición (Épica 08):** hasta cerrar la Iteración 02, la rama todavía no tiene Astro y los comandos vigentes son
+> los previos (Tailwind por CLI con `pnpm dev` y `pnpm build`, y un servidor estático aparte para previsualizar). Desde
+> la Iteración 02 rigen los comandos de Astro descritos aquí.
 
 | Capa           | Tecnología                                                                |
 |:---------------|:--------------------------------------------------------------------------|
-| Estructura      | Astro `7.x` con salida estática: 6 páginas `.astro` en `src/pages/` (MPA) |
-| Estilos         | Tailwind CSS `3.4.x` vía PostCSS, procesado por Astro                     |
+| Estructura     | Astro `7.x` con salida estática: 6 páginas `.astro` en `src/pages/` (MPA) |
+| Estilos        | Tailwind CSS `3.4.x` vía PostCSS, procesado por Astro                     |
 | Interactividad | JavaScript Vanilla ES6+ en módulos (`src/js/`)                            |
 | Paquetes       | **pnpm `11.24.0`** (Node.js `>= 22.13`). Prohibido `npm` o `yarn`.        |
 | Hosting        | GitHub + Cloudflare Pages, dominio `lajardinerafloreria.cl`               |
@@ -99,7 +99,7 @@ la Iteración 02 rigen los comandos de Astro descritos aquí.
 | `pnpm install`| Instala dependencias (solo si el desarrollador lo pide).             |
 | `pnpm dev`    | Servidor de desarrollo de Astro (recarga en caliente).               |
 | `pnpm preview`| Sirve `_site/` tal como se publicará.                                |
-| `pnpm run build:cf` | `astro build`: genera `_site/` para Cloudflare Pages.          | 
+| `pnpm run build:cf` | `astro build`: genera `_site/` para Cloudflare Pages. |
 
 Notas:
 

@@ -115,7 +115,8 @@ El detalle vive en `AGENTS.md` §5; aquí se listan para consulta rápida:
 
 ## 7. Estándar de verificación
 
-**Transición:** hasta cerrar la Iteración 02 de la Épica 08 rigen los comandos previos (`pnpm build` y `dist/css/output.css`); desde la Iteración 02, los de esta lista.
+> **Transición:** hasta cerrar la Iteración 02 de la Épica 08 rigen los comandos previos (`pnpm build` y
+> `dist/css/output.css`); desde la Iteración 02, los de esta lista.
 
 1. **Compilación:** `pnpm run build:cf` sin errores y clases nuevas presentes en el CSS de `_site/_astro/`.
 2. **Invariantes por búsqueda de texto** en `_site/**/*.html`: `style=`, `onclick`, `<style>`, `<script>` sin `src`,
@@ -231,7 +232,7 @@ Criterios de severidad:
 | DT-12 | Deuda de diseño listada en `DESIGN.md` §5.                                                                    | Baja      | Según iteración     |
 | DT-13 | ✅ **Resuelta** (Épica 07 · Iteración 03, 14-10-2026). Ícono de Facebook del footer: segundo path con `fill="#edefe9"` fijo; en modo oscuro la "f" tenía 1,52:1 de contraste. Corregido con `class="fill-surface-container"` en las 6 páginas; verificado en render real: en oscuro 6,64:1 y en claro idéntico a antes (0 píxeles de diferencia). | Media | Épica 07 · It. 03 |
 | DT-14 | ✅ **Resuelta** (corregida en Épica 07 · Iteración 03, 14-10-2026; verificada en producción el 16-10-2026, Épica 08 · Iteración 01). `404.html` usa rutas relativas (`./dist/...`, `./public/...`); servida en una ruta anidada (`/a/b/x`) se veía sin estilos. **Confirmada en producción (13-10-2026, `/servicios/xyz`).** Corregida en código con `<base href="/">`; verificada en la simulación local de Cloudflare y en render real (`/xyz`, `/a/b/xyz`, `/a/b/c/xyz` y `/servicios/xyz`: todo resuelve a la raíz con 200). **Verificada en producción el 16-10-2026** mediante Lighthouse en `/xyz`, `/servicios/xyz` y `/a/b/inexistente`: renderizado con estilos, logotipo y header, y estado HTTP 404 (bitácora de la Épica 08 · It. 01, §9). Salvedad: no se inspeccionaron la pestaña Red ni el detalle del error de consola; el reporte marca un error de consola en las 404, que se infiere asociado a la propia respuesta 404, sin verificar. | Media | Épica 07 · It. 03 |
-| DT-15 | El tema oscuro se aplica en `DOMContentLoaded`: destello claro en la carga para quien prefiere modo oscuro. | Baja | Épica 08 · It. 07 (opcional, requiere excepción) |
+| DT-15 | El tema oscuro se aplica en `DOMContentLoaded`: destello claro en la carga para quien prefiere modo oscuro. | Media | Épica 08 · It. 07 (opcional, requiere excepción) |
 | DT-16 | `dist/css/output.css` versionado en Git (archivo generado). | Baja | Épica 08 · It. 02 |
 | DT-17 | `<meta charset>` no es la primera etiqueta del `<head>` en varias páginas. **`404.html` corregida** en Épica 07 · Iteración 03 (14-10-2026: `<meta charset>` y `<base>` son las dos primeras etiquetas del `<head>`, verificado en el DOM de Chrome); las otras 5 páginas, en Épica 08 · It. 02. DT-17 sigue abierta por esas 5. | Baja | Épica 08 · It. 02 (otras 5) |
 | DT-18 | ✅ **Resuelta** (Épica 07 · Iteración 02, 14-10-2026). Recorte de glifos de `fx-starlight`: `background-clip: text` no pinta fuera de la caja del `span` y la cursiva sobresale (la "J" de "La Jardinera" al abrir línea, ≈ 7,25 px a 48 px; la "a" final, ≈ 0,75 px). Corregida con `padding-inline: .16em; margin-inline: -.16em` en `.fx-starlight--accent`; verificada en render real (Chrome 155 headless, 7 viewports × claro y oscuro: 0 px recortados). Sin verificar en Firefox, Safari ni dispositivo real. | Media | Épica 07 · It. 02 |
