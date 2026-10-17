@@ -9,14 +9,17 @@ Chile.
 🔹 **Repositorio:** `https://github.com/<usuario>/<repositorio>` *(completar)*
 🔹 **Desarrollo:** [Felipe Cuevas](https://felipecuevas.dev)
 
+**Transición (Épica 08):** este documento describe el proyecto migrado a Astro. Hasta cerrar la Iteración 02, los
+comandos de la rama siguen siendo los previos (Tailwind compilado por CLI y un servidor estático aparte para
+previsualizar); desde la Iteración 02 rigen los de Astro descritos aquí.
 ---
 
 ## 1. Descripción del proyecto
 
-El sitio es una aplicación **multipágina (MPA) estática**: seis documentos HTML independientes, estilizados con
-Tailwind CSS compilado localmente y animados con módulos de JavaScript nativo (ES6+). No depende de frameworks de
-interfaz, de un backend ni de un gestor de contenidos, lo que permite tiempos de carga bajos, un despliegue simple y un
-mantenimiento predecible.
+El sitio es una aplicación **multipágina (MPA) estática** generada con **Astro**: seis páginas que comparten un layout,
+un header y un footer únicos, estilizadas con Tailwind CSS y animadas con módulos de JavaScript nativo (ES6+). Astro
+trabaja solo en compilación: el navegador recibe HTML completo, sin frameworks de interfaz, backend ni gestor de
+contenidos, lo que permite tiempos de carga bajos, un despliegue simple y un mantenimiento predecible.
 
 Toda llamada a la acción comercial (cotizaciones, suscripciones, consultas) termina en **WhatsApp** o en el correo del
 taller; el formulario de contacto arma el mensaje y lo abre en WhatsApp listo para enviar.
@@ -27,12 +30,12 @@ taller; el formulario de contacto arma el mensaje y lo abre en WhatsApp listo pa
 
 | Página                    | Ruta                         | Contenido principal                                               |
 |:--------------------------|:-----------------------------|:------------------------------------------------------------------|
-| Inicio                    | `/index.html`                | Hero editorial, servicios destacados, suscripción, galería, reseñas |
-| Servicios                 | `/servicios.html`            | Catálogo de 8 servicios con modal de detalle y galería dinámica    |
-| Suscripción Floral        | `/suscripcion-floral.html`   | Hero con cross-fade, condiciones, zona de envío y 3 planes         |
-| Galería                   | `/galeria.html`              | 6 capítulos en acordeón horizontal (34 piezas) y visor Lightbox    |
-| Contacto                  | `/contacto.html`             | Canales directos y formulario que se envía por WhatsApp            |
-| Página no encontrada      | `/404.html`                  | Página de error con retorno al Inicio (`noindex`)                  |
+| Inicio                    | `/`                          | Hero editorial, servicios destacados, suscripción, galería, reseñas |
+| Servicios                 | `/servicios`                 | Catálogo de 8 servicios con modal de detalle y galería dinámica    |
+| Suscripción Floral        | `/suscripcion-floral`        | Hero con cross-fade, condiciones, zona de envío y 3 planes         |
+| Galería                   | `/galeria`                   | 6 capítulos en acordeón horizontal (34 piezas) y visor Lightbox    |
+| Contacto                  | `/contacto`                  | Canales directos y formulario que se envía por WhatsApp            |
+| Página no encontrada      | Cualquier ruta inexistente   | Página de error con retorno al Inicio (`noindex`); se publica como `404.html` |
 
 ---
 
@@ -53,8 +56,8 @@ dependencias de iconografía externa.
 
 | Capa                   | Tecnología                                   | Detalle                                                    |
 |:-----------------------|:---------------------------------------------|:-----------------------------------------------------------|
-| Estructura             | HTML5 semántico                              | Seis páginas físicas, sin enrutador del lado del cliente   |
-| Estilos                | Tailwind CSS `3.4.x`                         | Compilación por CLI a `dist/css/output.css`                 |
+| Estructura             | Astro `7.x` (salida estática)                | Seis páginas en `src/pages/` compiladas a HTML; sin enrutador ni JS de interfaz en el cliente |
+| Estilos                | Tailwind CSS `3.4.x`                         | Vía PostCSS, procesado por Astro; CSS con *hash* en `_site/_astro/` |
 | Interactividad         | JavaScript Vanilla (ES6+)                    | Módulos cargados desde un orquestador único (`main.js`)    |
 | Tipografías            | Noto Serif y Montserrat                      | Google Fonts                                               |
 | Gestor de paquetes     | pnpm `11.24.0`                               | Requiere Node.js `>= 22.13`                                |
@@ -71,24 +74,27 @@ dependencias de iconografía externa.
 
 ```text
 .
-├── index.html · servicios.html · suscripcion-floral.html
-├── galeria.html · contacto.html · 404.html
+├── astro.config.mjs · postcss.config.cjs
 ├── AGENTS.md                  # Reglas para agentes de IA (Claude Code, Antigravity)
 ├── DESIGN.md                  # Sistema de diseño: única fuente de la verdad visual
 ├── README.md                  # Este documento
 ├── tailwind.config.js         # Tokens de diseño para Tailwind
-├── package.json · pnpm-lock.yaml
-├── dist/
-│   └── css/output.css         # CSS compilado (generado por pnpm build)
-├── _site/                     # Carpeta publicable generada por pnpm run build:cf (ignorada por Git)
+├── package.json · pnpm-lock.yaml├── dist/
+├── _site/                     # Salida de astro build (pnpm run build:cf), publicada por Cloudflare (ignorada por Git)
 ├── public/
+│   ├── _redirects             # /public/* → /:splat (301, URLs antiguas)
+│   ├── robots.txt
 │   ├── icons/                 # Logotipos de terceros en SVG
 │   ├── logos/                 # Logotipo de La Jardinera (variante clara y blanca)
 │   └── images/                # Fotografías .webp y videos .mp4 por sección
 ├── src/
+│   ├── pages/                 # index, servicios, suscripcion-floral, galeria, contacto y 404 (.astro)
+│   ├── layouts/               # BaseLayout.astro: <head>, header, footer y script
+│   ├── components/            # SiteHeader, SiteFooter y SeoHead
+│   ├── data/navegacion.js     # Fuente única de rutas y etiquetas de navegación
 │   ├── css/input.css          # Capa base, variables de tema y componentes CSS
 │   └── js/
-│       ├── main.js            # Orquestador de módulos
+│       ├── main.js            # Orquestador de módulos (importaciones estáticas)
 │       ├── data/              # services.js, reviews.js
 │       └── modules/           # theme, navigation, carousel, modal, subscription, gallery, contact-form
 ├── scripts/                   # Herramientas de mantenimiento
@@ -101,7 +107,8 @@ dependencias de iconografía externa.
 
 1. **Node.js** `22.13` o superior.
 2. **pnpm** `11.24.0` (el campo `packageManager` de `package.json` fija la versión).
-3. Un servidor HTTP local para previsualizar: los módulos ES no funcionan abriendo los archivos con `file://`.
+3. No hace falta un servidor aparte: `pnpm dev` (Astro) sirve el sitio en local y `pnpm preview` sirve `_site/` tal
+   como se publicará.
 
 ---
 
@@ -115,19 +122,18 @@ dependencias de iconografía externa.
    pnpm install
    ```
 
-2. Inicia Tailwind en modo observación:
+2. Inicia el servidor de desarrollo de Astro (recarga en caliente) y abre la dirección local que indica la terminal:
 
-   ```bash
-   pnpm dev
-   ```
+    ```bash
+    pnpm dev
+    ```
 
-3. En otra terminal, sirve la raíz del proyecto por HTTP (por ejemplo, con la extensión Live Server del editor o con
-   `python -m http.server 5500`) y abre `http://localhost:5500`.
-
-4. Antes de publicar, genera el CSS de producción:
+3. Antes de publicar, genera `_site/` y revísalo tal como lo servirá Cloudflare Pages:
 
    ```bash
    pnpm build
+   pnpm run build:cf
+   pnpm preview
    ```
 
 ---
@@ -136,8 +142,9 @@ dependencias de iconografía externa.
 
 | Comando       | Descripción                                                        |
 |:--------------|:-------------------------------------------------------------------|
-| `pnpm dev`    | Compila `src/css/input.css` en modo observación.                   |
-| `pnpm run build:cf` | Compila el CSS y genera `_site/` por lista blanca para Cloudflare Pages. |
+| `pnpm dev`    | Servidor de desarrollo de Astro con recarga en caliente.           |
+| `pnpm preview`| Sirve `_site/` tal como se publicará.                              |
+| `pnpm run build:cf` | `astro build`: genera `_site/` para Cloudflare Pages.        |
 
 ---
 
@@ -162,7 +169,7 @@ El sitio se publica con **Cloudflare Pages**, conectado al repositorio de GitHub
 | Parámetro                    | Valor                                                                         |
 |:-----------------------------|:------------------------------------------------------------------------------|
 | Rama de producción           | `main`                                                                        |
-| Comando de compilación       | `pnpm run build:cf` (compila Tailwind y genera `_site/` por lista blanca)     |
+| Comando de compilación       | `pnpm run build:cf` (`astro build`, genera `_site/`)                          |
 | Directorio de salida         | `_site`                                                                       |
 | Dominio personalizado        | `lajardinerafloreria.cl` y `www.lajardinerafloreria.cl`                       |
 | Certificado                  | HTTPS gestionado por Cloudflare                                               |
@@ -192,7 +199,7 @@ Reglas de código que sostienen estas métricas:
 
 ✅ Cero JavaScript y CSS en línea.
 ✅ Imágenes con `width`, `height`, `alt` y contenedor con relación de aspecto.
-✅ Rutas relativas (`./`) para funcionar en cualquier alojamiento estático.
+✅ Rutas absolutas desde la raíz (`/servicios`, `/images/...`), válidas en cualquier profundidad de URL.
 ✅ Verificación en navegador real, en modo claro y oscuro, en siete tamaños de pantalla.
 
 ---
@@ -222,10 +229,10 @@ El proyecto se desarrolla con apoyo de agentes de IA bajo reglas estrictas:
 
 ## 15. Hoja de ruta
 
-1. **Épica 07 — Gobernanza multiagente y pulido del Hero:** reorganización de la planificación, documentación para
-   Claude Code, nuevo efecto del titular principal y saneamiento de deuda técnica.
-2. **Épica 08 — Componentes React con renderizado estático:** header, navegación y footer como componentes
-   reutilizables, generados como HTML en tiempo de compilación para conservar el rendimiento y el SEO actuales.
+1. **Épica 07 — Gobernanza multiagente y pulido del Hero** (completada con reservas, 14-10-2026): reorganización de
+   la planificación, documentación para Claude Code, nuevo efecto del titular principal y saneamiento de deuda técnica.
+2. **Épica 08 — Migración estructural a Astro** (en curso): layout, header, footer y SEO como componentes únicos,
+   generados como HTML estático en compilación, con el mismo contenido, diseño y despliegue en Cloudflare Pages.
 
 ---
 
