@@ -96,9 +96,12 @@ Estructura objetivo: `src/pages/` (6 páginas), `src/layouts/BaseLayout.astro`, 
 
 ### Consecuencias
 
-* **Cambia el stack declarado:** `AGENTS.md` §4, §5 y §7, `stack-tecnologico.md` y `proposito-y-alcance.md` deben
-  actualizarse **antes** de la Iteración 02 (propuestas en `propuestas-documentos-protegidos.md`, sección A); `README.md` y
-  `DESIGN.md`, en la Iteración 08 (sección B). Los edita el desarrollador.
+* **Cambia el stack declarado.** Documentos a actualizar, según `propuestas-documentos-protegidos.md` (fuente vigente;
+  los edita el desarrollador; **ninguna propuesta aplicada todavía** al 16-10-2026):
+    * **Antes de la Iteración 02:** `AGENTS.md` §4, §5 (con las correcciones A1 y A2), §7 (con A3) y §9;
+      `stack-tecnologico.md`; `proposito-y-alcance.md`; `_planificacion/README.md` §6 y §7; `objetivos-y-metricas.md`;
+      y `README.md` (sección B completa).
+    * **En la Iteración 08:** `DESIGN.md`.
 * **Se retiran** `scripts/stage-site.mjs` (Astro publica solo lo que compila más `public/`) y `dist/`
   (`dist/css/output.css` deja de versionarse; cierra DT-16).
 * **Las rutas pasan de `./` a `/`:** la 404 deja de depender de `<base href="/">` para funcionar en rutas anidadas

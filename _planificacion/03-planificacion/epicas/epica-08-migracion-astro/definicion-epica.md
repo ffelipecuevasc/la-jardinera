@@ -195,7 +195,12 @@ Cloudflare (despliegue anterior).
 * [ ] 0 `style=`, 0 `onclick`, 0 `<script>` ejecutables sin `src` (salvo la excepción de la It. 07 si se aprueba; el
   JSON-LD opcional de la It. 05 es un bloque de datos) y 0 `<style>` en `_site/**/*.html`.
 * [ ] 0 referencias a `./public/` en el código fuente; las URLs antiguas `/public/...` redirigen con 301.
-* [ ] Lighthouse de las 6 páginas igual o mejor que la línea base; CLS = 0.
+* [ ] Lighthouse de las 6 páginas, en móvil y escritorio: el sitio actual (producción) y el nuevo (vista previa de la
+  rama) se miden en la misma sesión, 3 corridas por página y modo, y se comparan las medianas. Aceptación: Performance
+  no más de 10 puntos por debajo (móvil) ni de 3 (escritorio) de la mediana de referencia; Accesibilidad, Best
+  Practices y SEO no menores que la referencia; CLS mediano ≤ 0,1 y no mayor que el de referencia más 0,01. El LCP se
+  registra sin umbral. La 404 se mide en una ruta anidada (/a/b/inexistente). La línea base del 16-10-2026 (bitácora de
+  la It. 01, §9) es histórica y no es la referencia de comparación.
 * [ ] Cloudflare Pages publica desde `_site/` sin cambios de configuración y sin exponer `_planificacion/`,
   `AGENTS.md`, `README.md`, `DESIGN.md` ni `package.json`.
 * [ ] `AGENTS.md`, `README.md`, `stack-tecnologico.md` y `proposito-y-alcance.md` actualizados por el desarrollador.

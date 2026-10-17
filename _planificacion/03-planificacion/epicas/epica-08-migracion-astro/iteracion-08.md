@@ -34,8 +34,11 @@ tema y 404 anidada. Sin navegador automatizable, `🕒 PENDIENTE` con lista manu
 
 ### Tarea 3: Rendimiento (desarrollador)
 
-Lighthouse móvil y escritorio de las 6 páginas en la vista previa de Cloudflare. Criterio: cada métrica igual o mejor
-que la línea base de la It. 01; CLS = 0.
+Lighthouse móvil y escritorio de las 6 páginas: el sitio actual (producción) y el nuevo (vista previa de Cloudflare de
+la rama) en la misma sesión, 3 corridas por página y modo. Criterio: el de Lighthouse de `definicion-epica.md` §8
+(medianas; Performance no más de 10 puntos por debajo en móvil ni de 3 en escritorio; Accesibilidad, Best Practices y
+SEO no menores que la referencia; CLS mediano ≤ 0,1 y no mayor que el de referencia más 0,01; LCP sin umbral; 404 en
+`/a/b/inexistente`). La línea base del 16-10-2026 (bitácora de la It. 01, §9) es histórica y no es la referencia.
 
 ### Tarea 4: Documentación
 
@@ -66,9 +69,10 @@ sugerido `Épica 08 - Iteración 08: Certifica y cierra la Épica 08 (migración
     * **Cuando** se compara con la producción nueva
     * **Entonces** solo aparecen las diferencias planificadas, en los 7 viewports y ambos temas.
 * **Escenario 2: Rendimiento**
-    * **Dado** Lighthouse de las 6 páginas
-    * **Cuando** se compara con la línea base
-    * **Entonces** ninguna métrica empeora y CLS = 0.
+    * **Dado** Lighthouse de las 6 páginas, en móvil y escritorio, del sitio actual y del nuevo medidos en la misma
+      sesión (3 corridas por página y modo)
+    * **Cuando** se comparan las medianas
+    * **Entonces** se cumple el criterio de Lighthouse de `definicion-epica.md` §8.
 * **Escenario 3: Despliegue sin cambios de configuración**
     * **Dado** el panel de Cloudflare Pages
     * **Cuando** se revisa
