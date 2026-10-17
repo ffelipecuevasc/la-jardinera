@@ -82,53 +82,62 @@ El control de versiones y la publicación son responsabilidad exclusiva del desa
 
 ## 4. Stack y comandos
 
-| Capa            | Tecnología                                                        |
-|:----------------|:------------------------------------------------------------------|
-| Estructura      | HTML5 semántico, sitio multipágina (MPA) de 6 archivos             |
-| Estilos         | Tailwind CSS `3.4.x` compilado por CLI a `dist/css/output.css`     |
-| Interactividad  | JavaScript Vanilla ES6+ en módulos (`src/js/`)                     |
-| Paquetes        | **pnpm `11.24.0`** (Node.js `>= 22.13`). Prohibido `npm` o `yarn`. |
-| Hosting         | GitHub + Cloudflare Pages, dominio `lajardinerafloreria.cl`        |
+**Transición (Épica 08):** hasta cerrar la Iteración 02, la rama todavía no tiene Astro y los comandos vigentes son
+los previos (Tailwind por CLI con `pnpm dev` y `pnpm build`, y un servidor estático aparte para previsualizar). Desde
+la Iteración 02 rigen los comandos de Astro descritos aquí.
+
+| Capa           | Tecnología                                                                |
+|:---------------|:--------------------------------------------------------------------------|
+| Estructura      | Astro `7.x` con salida estática: 6 páginas `.astro` en `src/pages/` (MPA) |
+| Estilos         | Tailwind CSS `3.4.x` vía PostCSS, procesado por Astro                     |
+| Interactividad | JavaScript Vanilla ES6+ en módulos (`src/js/`)                            |
+| Paquetes       | **pnpm `11.24.0`** (Node.js `>= 22.13`). Prohibido `npm` o `yarn`.        |
+| Hosting        | GitHub + Cloudflare Pages, dominio `lajardinerafloreria.cl`               |
 
 | Comando       | Uso                                                                  |
 |:--------------|:---------------------------------------------------------------------|
 | `pnpm install`| Instala dependencias (solo si el desarrollador lo pide).             |
-| `pnpm dev`    | Tailwind en modo observación.                                        |
-| `pnpm run build:cf` | Compila el CSS y genera `_site/` por lista blanca para Cloudflare Pages. | 
+| `pnpm dev`    | Servidor de desarrollo de Astro (recarga en caliente).               |
+| `pnpm preview`| Sirve `_site/` tal como se publicará.                                |
+| `pnpm run build:cf` | `astro build`: genera `_site/` para Cloudflare Pages.          | 
 
 Notas:
 
 - El aviso `Browserslist: caniuse-lite is outdated` es conocido. **No** ejecutes `npx update-browserslist-db`.
-- Los módulos ES no funcionan con `file://`. Para probar en navegador, sirve la raíz por HTTP (por ejemplo, la
-  extensión Live Server o `python -m http.server 5500`).
-- **React no forma parte del stack actual.** Su incorporación está planificada en la Épica 08 y no debe adelantarse.
+- Para probar en navegador usa `pnpm dev` o, tras compilar, `pnpm preview`.
+- **No se usan frameworks de interfaz** (React, Vue, Preact, etc.) ni islas hidratadas: Astro solo genera HTML en
+  compilación. Tailwind 4 queda fuera hasta una épica dedicada.
 
 ---
 
 ## 5. Reglas de arquitectura (no negociables)
 
-1. **MPA estricta.** Seis archivos HTML físicos: `index.html`, `servicios.html`, `suscripcion-floral.html`,
-   `galeria.html`, `contacto.html` y `404.html`. Prohibido emular una SPA.
-2. **Cero JS y CSS en línea.** Prohibidos `style="..."`, `onclick` y `<script>` con lógica. Los únicos `style=`
-   existentes son deuda técnica registrada (ver `_planificacion/README.md` §12); no agregues nuevos.
-3. **Módulos ES6.** Toda la lógica vive en `src/js/modules/*.js`, se registra en `src/js/main.js` y exporta una
+1. **MPA estricta.** Seis páginas en `src/pages/` (`index`, `servicios`, `suscripcion-floral`, `galeria`, `contacto`
+   y `404`) que Astro compila a seis archivos HTML. Prohibido emular una SPA (sin `ClientRouter` ni transiciones de
+   página de Astro) y prohibidas las directivas `client:*`.
+2. **Cero JS y CSS en línea.** Prohibidos `style="..."`, `onclick`, `<script is:inline>` y `<style>` en archivos
+   `.astro`. El único `<script>` permitido es el del layout que carga `src/js/main.js`.
+3. **Módulos ES6.** Toda la lógica vive en `src/js/modules/*.js`, se importa de forma estática en `src/js/main.js` y exporta una
    función `initX()` con cláusula de guarda (`if (!elemento) return;`). Selectores en caché, delegación de eventos,
    nada en `window`, módulos desacoplados.
 4. **Solo tokens de `DESIGN.md` y `tailwind.config.js`.** Prohibido inventar colores, tamaños o clases. Los tonos
    `neutral-*` por defecto de Tailwind que no están declarados en el proyecto no deben usarse en código nuevo.
 5. **Clases de Tailwind siempre literales.** Tailwind no detecta clases armadas con plantillas (`` `sm:grid-cols-${n}` ``).
    Si una clase se construye dinámicamente, debe existir escrita en forma literal en algún archivo del `content`.
-6. **Header y footer están duplicados en los 6 HTML.** Todo cambio en ellos se replica en los 6 archivos con paridad
-   exacta, usando `index.html` como fuente de la verdad. Solo difiere el enlace activo; `404.html` no tiene ninguno.
+6. **Header y footer son componentes únicos** (`src/components/SiteHeader.astro` y `SiteFooter.astro`) y sus enlaces
+   salen de `src/data/navegacion.js`. Las clases activa e inactiva se escriben como cadenas literales completas. La
+   404 usa `paginaActiva = null`. **Transición:** hasta que la It. 03 (footer) y la It. 04 (header) de la Épica 08 los
+   extraigan, header y footer siguen duplicados en las 6 páginas `.astro`, con paridad exacta y `index.astro` como
+   fuente de la verdad; solo difiere el enlace activo y la 404 no tiene ninguno.
 7. **Invariantes del header** (causa raíz de defectos anteriores):
     - Ningún descendiente de `<header>` lleva la clase `fixed`.
     - `#mobile-menu-scrim` es el nodo hermano inmediatamente posterior a `</header>`.
     - La barra mide `h-20`; el panel (`top-full`, `max-h-[calc(100dvh-5rem)]`) y la capa tenue (`top-20`) dependen de
       ese valor. Si uno cambia, cambian todos.
-8. **Rutas relativas** con `./` para todo recurso y enlace interno. Excepción: `404.html` declara `<base href="/">` como
-   segunda etiqueta de su `<head>` (después de `<meta charset>`), porque Cloudflare Pages la sirve en rutas anidadas
-   (`/servicios/xyz`) y las rutas `./` deben resolverse desde la raíz del sitio.
-9. **Imágenes** en `.webp` bajo `public/images/`, con `width`, `height`, `alt` descriptivo y `loading="lazy"` bajo el
+8. **Rutas absolutas desde la raíz:** páginas sin extensión (`/servicios`) y recursos de `public/` sin el prefijo
+   (`/images/...`). Prohibido `./public/`. La 404 ya no necesita `<base href="/">`: con rutas absolutas se resuelve
+   igual en rutas anidadas (`/servicios/xyz`); el `<base>` se retira en la It. 02.
+9. **Imágenes** en `.webp` bajo `public/images/` (servidas como `/images/...`), con `width`, `height`, `alt` descriptivo y `loading="lazy"` bajo el
    pliegue. Contenedores con `aspect-*` para CLS = 0.
 10. **Accesibilidad:** objetivos táctiles de 44 × 44 px, foco visible, `aria-*` sincronizados, trampas de foco en
     modales, contraste WCAG 2.1 AA verificado en modo claro **y** oscuro.
@@ -151,9 +160,11 @@ Notas:
 
 ## 7. Verificación mínima (Definition of Done global)
 
-- `pnpm build` termina sin errores y `dist/css/output.css` contiene las clases nuevas (búscalas por texto).
-- Búsquedas de invariantes: 0 `style="` nuevos, 0 `onclick`, 0 `href="#"` en navegación y footer, IDs únicos.
-- Paridad entre los 6 HTML cuando se toca header o footer.
+- `pnpm run build:cf` termina sin errores y el CSS de `_site/_astro/` contiene las clases nuevas (búscalas por texto).
+- Búsquedas de invariantes en `_site/**/*.html`: 0 `style="`, 0 `onclick`, 0 `<style>`, 0 `<script>` sin `src`,
+  0 `href="#"` en navegación y footer, IDs únicos.
+- Paridad entre las 6 páginas cuando se toca header o footer, mientras sigan duplicados (hasta las It. 03 y 04 de la
+  Épica 08).
 - Render real en 320×640, 360×740, 412×915, 768×1024, 740×360, 1024×768 y 1280×800, en modo claro y oscuro,
   cuando hay cambios visuales. Si no dispones de un navegador automatizable, **no lo inventes**: deja el ítem como
   `🕒 PENDIENTE` con la lista de comprobaciones manuales.
@@ -175,6 +186,7 @@ Notas:
 - Cloudflare Pages construye y publica automáticamente cada push a `main`; las demás ramas generan despliegues de vista
   previa.
 - La carpeta `_planificacion/` y la documentación interna **no deben publicarse**: Cloudflare Pages publica solo
-  `_site/`, que `pnpm run build:cf` genera por lista blanca (6 HTML, `dist/`, `public/` y `src/js/`).
+  `_site/`, que `pnpm run build:cf` (`astro build`) genera con las 6 páginas compiladas, los recursos con *hash* de
+  `_site/_astro/` y el contenido de `public/`.
 - Cloudflare Web Analytics y Google Search Console se gestionan fuera del código: **no** agregues scripts de
   analítica ni etiquetas de verificación sin autorización.
