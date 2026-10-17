@@ -9,10 +9,10 @@ scripts en HTML o inventar configuraciones de Tailwind) será considerada una re
 | Capa                   | Tecnología Seleccionada          | Propósito                                                                  |
 |:-----------------------|:---------------------------------|:---------------------------------------------------------------------------|
 | **Gestor de Paquetes** | pnpm `11.24.0` (Node `>= 22.13`) | Gestión determinista de dependencias (versión fijada en `packageManager`)  |
-| **Estructura HTML**    | HTML5 Semántico (MPA)            | Seis páginas físicas (cinco de navegación y `404.html`). Cero emulaciones SPA. |
-| **Estilos**            | Tailwind CSS `v3.4.x`            | Compilación local por CLI (`dist/css/output.css`)                          |
-| **Interactividad**     | JavaScript Vanilla (ES6+)        | Módulos estrictos. Cero jQuery, cero frameworks React/Vue.                 |
-| **Despliegue**         | GitHub + Cloudflare Pages        | Despliegue continuo desde `main`, vistas previas por rama, comando `pnpm run build:cf`, salida `_site/` (lista blanca). |
+| **Estructura**         | Astro `7.x`, salida estática (MPA) | Seis páginas en `src/pages/`; layout y componentes compilados a HTML. Cero SPA, cero islas. |
+| **Estilos**            | Tailwind CSS `v3.4.x` vía PostCSS | Procesado por Astro; CSS con *hash* en `_site/_astro/`                    |
+| **Interactividad**     | JavaScript Vanilla (ES6+)        | Módulos estrictos. Cero jQuery, cero frameworks de interfaz (React/Vue/Preact). |
+| **Despliegue**         | GitHub + Cloudflare Pages        | Despliegue continuo desde `main`, vistas previas por rama, comando `pnpm run build:cf` (`astro build`), salida `_site/`. |
 
 El sistema de diseño vive en **`DESIGN.md`, en la raíz del repositorio**. `_planificacion/02-arquitectura/DESIGN.md` es
 solo una redirección.
@@ -29,7 +29,8 @@ reflejar el 100% de los tokens definidos en `DESIGN.md` (raíz del repositorio).
 
 * ❌ **Prohibido:** Estilos en línea (`style="..."`).
 * ❌ **Prohibido:** Enlazar Tailwind mediante CDN (`<script src="https://cdn.tailwindcss.com"></script>`).
-* ✅ **Obligatorio:** Importar siempre el CSS compilado: `<link rel="stylesheet" href="./dist/css/output.css" />`.
+* ✅ **Obligatorio:** Importar `src/css/input.css` una sola vez, en el *frontmatter* de `BaseLayout.astro`.
+* ✅ **Obligatorio:** `build.inlineStylesheets: 'never'` y `vite.build.assetsInlineLimit: 0` en `astro.config.mjs`.
 * ✅ **Obligatorio:** Mantener la capa `@layer base` en `src/css/input.css` para resets globales (ej. reset de
   scrollbar).
 * ✅ **Obligatorio:** Las clases de Tailwind se escriben siempre en forma literal; Tailwind no detecta clases armadas con
@@ -43,8 +44,8 @@ El código JavaScript debe tratarse como software de nivel producción. Se aplic
 
 1. **Cero JS en línea:** Prohibido el uso de atributos como `onclick`, `onchange` o bloques `<script>` con lógica
    incrustada en el HTML.
-2. **Módulos ES6:** Toda la lógica debe residir en `src/js/modules/*.js` y ser importada exclusivamente desde un
-   `src/js/main.js` inyectado al final del `<body>` con `type="module"`.
+2. **Módulos ES6:** Toda la lógica debe residir en `src/js/modules/*.js` e importarse de forma **estática** desde
+   `src/js/main.js`, que `BaseLayout.astro` carga al final del `<body>` con un `<script>` procesado por Astro.
 3. **Encapsulamiento y Scope:** Prohibido contaminar el objeto global `window`. Las variables deben estar encapsuladas
    en sus respectivos módulos exportados.
 4. **Eficiencia DOM (Caché):** Si un elemento del DOM se utiliza más de una vez en un módulo, su selección
