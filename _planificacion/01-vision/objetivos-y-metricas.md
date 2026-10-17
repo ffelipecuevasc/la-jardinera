@@ -1,7 +1,10 @@
-6# Objetivos y Métricas de Éxito (QA & Performance)
+# Objetivos y Métricas de Éxito (QA & Performance)
 
 Este documento fija los estándares cualitativos y cuantitativos que los agentes de IA deben monitorear. Las métricas
-no son sugerencias, son requisitos obligatorios (Definition of Done) para cada iteración.
+de la §2 son la meta de calidad del sitio. Cada iteración debe acercarse a ellas o, como mínimo, no empeorarlas; las
+épicas estructurales (como la Épica 08) aplican el criterio de no regresión de su propio Definition of Done, y la
+brecha respecto de la meta se registra como deuda técnica (§12 de `_planificacion/README.md`). Los criterios de la §3
+sí son obligatorios en cada iteración.
 
 ---
 
@@ -37,5 +40,6 @@ Para dar por terminada cualquier iteración o componente, el agente de IA debe a
 2. **Compilación Exitosa:** El CSS generado incluye las clases esperadas tras ejecutar el build.
 3. **Responsividad Comprobada:** Los componentes escalan y reaccionan de manera predecible en pantallas móviles (menú
    hamburguesa) y desktop (navegación extendida).
-4. **Rutas Inquebrantables:** Las referencias a assets (imágenes, CSS, JS) funcionan universalmente usando rutas
-   relativas seguras (`./` o `./src/...`).
+4. **Rutas Inquebrantables:** Las referencias a assets (imágenes, CSS, JS) y los enlaces internos funcionan en
+   cualquier profundidad de URL usando rutas absolutas desde la raíz (`/`, `/servicios`, `/images/...`); prohibido
+   `./public/`.
