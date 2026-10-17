@@ -165,7 +165,7 @@ Cloudflare (despliegue anterior).
 | 05  | SEO técnico en el layout (trasladada de Épica 07 · It. 04)    | `description`, `canonical`, Open Graph, `robots.txt` y `sitemap.xml`; DT-04 y DT-08 cerradas.                             | Sí |
 | 06  | Componentes de sección repetidos                              | Bloques idénticos en 2 o más páginas (p. ej. banner con textura) extraídos sin cambio visual.                             | Opcional |
 | 07  | Tema oscuro sin destello inicial                              | Excepción aprobada para un único script en línea en `<head>`; sin destello en modo oscuro.                                 | Opcional |
-| 08  | Certificación transversal y paso a producción                 | Render real 7 viewports × 2 temas, Lighthouse ≥ línea base, documentación actualizada, fusión a `main`.                  | Sí |
+| 08  | Certificación transversal y paso a producción                 | Render real 7 viewports × 2 temas, Lighthouse según el criterio del §8 (medianas de 3 corridas en la misma sesión), documentación actualizada, fusión a `main`. | Sí |
 
 ---
 

@@ -470,3 +470,254 @@ pestaña Red ni el error de consola; el diagnóstico de DT-21 es solo de lectura
 ```
 
 Longitud contada con Node: 186 caracteres.
+
+---
+
+## 11. Ajuste 3 (cierre documental)
+
+> **Corrección por decisión posterior del desarrollador (Ajuste 4):** el destino de las deudas de rendimiento pasó de
+> "Épica 09 — Rendimiento" a "Épica 10 — Rendimiento". Los textos de esta sección ya reflejan el cambio; ver §12.
+
+**Fecha:** 16-10-2026 · **Agente:** Claude Code · **Alcance autorizado:** `_planificacion/README.md` §12,
+`definicion-epica.md` (solo la línea "Lighthouse ≥ línea base"), `propuestas-documentos-protegidos.md`, esta bitácora y
+una línea en `estado-actual.md`. Precondiciones: rama `feat/migracion-astro`, árbol limpio (el ajuste 2 ya estaba
+confirmado en el commit `b80d4bf`), Node `v24.16.0`, pnpm `11.24.0`. Sin red, sin instalaciones y sin ejecutar Lighthouse.
+
+### 11.1 Decisiones del desarrollador registradas
+
+* DT-21 (rendimiento móvil) tiene como destino la **Épica 10 — Rendimiento (por planificar)**, que se planificará después
+  de cerrar la Épica 08. No se creó ninguna carpeta, archivo ni planificación de la Épica 10: solo se la nombra como destino.
+* Los hallazgos fuera de alcance del ajuste 2 (§9.7) pasan a deuda técnica, agrupados en 4 deudas nuevas, todas con
+  destino Épica 10. Esto reemplaza lo dicho en el encabezado de §9.7 ("sin deuda nueva salvo DT-21").
+* Los umbrales de `objetivos-y-metricas.md` §2 son la **meta del sitio**, no un requisito de cada iteración. Las épicas
+  estructurales (como la 08) aplican el criterio de no regresión de su propio DoD y la brecha queda como deuda. Se
+  resuelve ajustando la propuesta A.8, sin editar el documento protegido. Esto cierra el hallazgo n.º 10 de §9.7.
+* `AGENTS.md` lleva una nota de transición análoga a la de `README.md`.
+* Pendiente del desarrollador: verificar si `lajardinerafloreria.cl` (sin `www`) redirige a `www.lajardinerafloreria.cl`
+  (los PDF midieron el dominio sin `www`). Sin peticiones de red en este ajuste.
+
+### 11.2 Deudas técnicas (`_planificacion/README.md` §12)
+
+El §12 no enuncia criterios de severidad por escrito; se aplicó el que muestran sus filas: **Alta** = defecto visible que
+rompe la página (DT-01); **Media** = afecta SEO, contraste, accesibilidad o rendimiento medidos (DT-04, DT-08, DT-13,
+DT-21); **Baja** = sin efecto visible o solo de mantenimiento (DT-06, DT-11, DT-20).
+
+| ID | Título | Severidad | Destino | Hechos (confirmados por código el 16-10-2026) |
+|:---|:-------|:----------|:--------|:----------------------------------------------|
+| DT-21 | Rendimiento móvil por debajo del umbral (existente) | Media | Épica 10 — Rendimiento (por planificar) | Solo cambió el destino (antes: "pendiente de decisión"). |
+| DT-22 | Logotipos PNG sobredimensionados | Media | Épica 10 | 306.435 B y 229.345 B, 3446 × 3504 px, mostrados a 44 × 44 en las 6 páginas; el claro también es el favicon. Hipótesis: explican los 299 KiB de Lighthouse. |
+| DT-23 | Imágenes sin `width`/`height` y `lazy` sobre el pliegue | Media | Épica 10 | 9 en `index.html` y 24 en `galeria.html` (conteo por programa: 9 de 9 y 24 de 24 son además `lazy`); Servicios L272 y Suscripción L261, L264 y L267. |
+| DT-24 | Accesibilidad del Inicio (91) | Media | Épica 10 | `carousel.js` L28 (ARIA en `div` sin `role`) y 4 enlaces solo de ícono (`index.html` L614, L636, L660 y L683). |
+| DT-25 | Orden de encabezados | Baja | Épica 10 | `index.html` L318 y L334 (`h4`) y `carousel.js` L42; `servicios.html` L288; `404.html` L239. |
+
+**Duplicados:** ninguno. DT-04 (metadescripción del Inicio) ya cubre esa auditoría de SEO y no se repite; DT-06 y DT-17
+no se relacionan con estos hechos. Se descartaron como deuda por ya estar planificados o no ser accionables: los videos de la
+Galería (tarea opcional de la Épica 08 · It. 06), "Redistribución forzada" (origen no localizado) y "enlaces idénticos"
+(revisión manual de Lighthouse).
+
+### 11.3 Cambio en `definicion-epica.md` §6 (fila 08)
+
+* **Antes:** `Render real 7 viewports × 2 temas, Lighthouse ≥ línea base, documentación actualizada, fusión a `main`.`
+* **Después:** `Render real 7 viewports × 2 temas, Lighthouse según el criterio del §8 (medianas de 3 corridas en la misma sesión), documentación actualizada, fusión a `main`.`
+* No había menciones de destino de deudas en ese documento que corregir. Ninguna otra línea se tocó.
+
+### 11.4 Propuestas ajustadas (`propuestas-documentos-protegidos.md`)
+
+* **Cabecera:** sección "Cómo aplicarlas" (única fuente vigente; `-` se borra, `+` se agrega; orden sugerido: `AGENTS.md`,
+  `02-arquitectura`, `01-vision`, `_planificacion/README.md`, `README.md`).
+* **A.1 (`AGENTS.md` §4):** bloque nuevo con la nota de transición bajo el título de la sección. Sin renumerar las demás.
+* **A.8 (`objetivos-y-metricas.md`):** bloque nuevo que precisa el carácter de los umbrales en la introducción (texto
+  exacto de las dos líneas actuales como `-`).
+* Tabla de estado y observaciones de la §0 actualizadas. Siguen todas 🕒 pendientes de aplicar.
+* **Verificación por programa:** 78 de 78 líneas `-` coinciden con el texto actual de su documento: `AGENTS.md` 22,
+  `stack-tecnologico.md` 7, `proposito-y-alcance.md` 4, `_planificacion/README.md` 7, `objetivos-y-metricas.md` 5 y
+  `README.md` 33. Sin excepciones. Las 31 líneas de contexto y los 29 bloques también coinciden como secuencia.
+
+### 11.5 Estado
+
+**Completada con reservas — pendiente que el desarrollador aplique las propuestas protegidas (Escenario 2) y verifique la
+redirección del dominio sin www.** No se marca cerrada.
+
+### 11.6 Pendientes del desarrollador
+
+1. Aplicar A.1 a A.9 de `propuestas-documentos-protegidos.md` (Escenario 2 de la Iteración 01), antes de la Iteración 02.
+2. Verificar si `lajardinerafloreria.cl` redirige a `www.lajardinerafloreria.cl` (🕒 PENDIENTE; no se hicieron peticiones).
+3. Planificar las Épicas 09 (Revisión móvil) y 10 (Rendimiento) después de cerrar la Épica 08 (corregido por el Ajuste 4; antes decía "Épica 09").
+4. Revisar y hacer el commit.
+
+### 11.7 Mensaje de commit sugerido
+
+```text
+Épica 08 - Iteración 01: Registra DT-22 a DT-25 con destino Épica 10, ajusta la fila 08 del plan y agrega a las propuestas la nota de transición de AGENTS.md y el carácter de los umbrales.
+```
+
+---
+
+## 12. Ajuste 4: cambio de destino de las deudas de rendimiento y registro de la solicitud de revisión móvil
+
+**Fecha:** 16-10-2026 · **Agente:** Claude Code · **Alcance autorizado:** `_planificacion/README.md` (§12, o la sección que
+la constitución indique para solicitudes), esta bitácora, `estado-actual.md` y `propuestas-documentos-protegidos.md` (solo
+las menciones de "Épica 09 — Rendimiento"). Precondiciones: rama `feat/migracion-astro`; árbol con los cambios sin
+confirmar del Ajuste 3 (5 archivos, los mismos que toca este ajuste); Node `v24.16.0`; pnpm `11.24.0`. Sin red, sin
+instalaciones y sin ejecutar Lighthouse.
+
+**Lectura:** se leyó completo `_planificacion/README.md` (1 a 246). `AGENTS.md` ya estaba cargado en la sesión y no cambió.
+De la bitácora se releyeron las secciones 11.1 a 11.7 y, de `estado-actual.md`, sus últimas líneas. `definicion-epica.md`
+no se releyó (ya leído en la sesión; solo cambió la fila 08, en el Ajuste 3). Ningún documento contradice a otro.
+
+### 12.1 Decisiones del desarrollador registradas
+
+1. Orden de las épicas siguientes a la 08, ambas **por planificar**: primero **Épica 09 — Revisión móvil del sitio** y
+   después **Épica 10 — Rendimiento**. Esto reemplaza lo indicado en el Ajuste 3 ("Épica 09 — Rendimiento").
+2. DT-21 y DT-22 a DT-25 pasan a destino **Épica 10 — Rendimiento (por planificar)**.
+3. La solicitud sobre el hero móvil se registra como **solicitud de mejora**, no como deuda técnica, con destino
+   **Épica 09 — Revisión móvil (por planificar)**. El registro debe poder ampliarse con nuevas solicitudes.
+4. No se crean carpetas, archivos de épica ni planificación de las Épicas 09 y 10: solo se nombran como destino. Si la
+   constitución no define dónde registrar solicitudes, no se inventa una estructura: se registra aquí y se proponen opciones.
+5. El desarrollador aún no aplicó ninguna propuesta documental protegida; las aplicará a mano desde
+   `propuestas-documentos-protegidos.md`.
+
+### 12.2 Destinos corregidos
+
+*Corrección por decisión posterior del desarrollador (Ajuste 4).* Se reemplazó "Épica 09 — Rendimiento" por
+"Épica 10 — Rendimiento" en: `_planificacion/README.md` §12 (filas DT-21 a DT-25; el resto de cada fila quedó intacto),
+`estado-actual.md` (línea del Ajuste 3), `propuestas-documentos-protegidos.md` (observaciones de la §0) y la §11 de esta
+bitácora (11.1, 11.2, 11.6 y 11.7).
+
+| ID | Título | Destino anterior | Destino vigente |
+|:---|:-------|:-----------------|:----------------|
+| DT-21 | Rendimiento móvil por debajo del umbral | Épica 09 — Rendimiento | Épica 10 — Rendimiento (por planificar) |
+| DT-22 | Logotipos PNG sobredimensionados | Épica 09 — Rendimiento | Épica 10 — Rendimiento (por planificar) |
+| DT-23 | Imágenes sin `width`/`height` y `lazy` sobre el pliegue | Épica 09 — Rendimiento | Épica 10 — Rendimiento (por planificar) |
+| DT-24 | Accesibilidad del Inicio (91) | Épica 09 — Rendimiento | Épica 10 — Rendimiento (por planificar) |
+| DT-25 | Orden de encabezados | Épica 09 — Rendimiento | Épica 10 — Rendimiento (por planificar) |
+
+**Menciones de "Épica 09" encontradas** (búsqueda en todo el repositorio, sin `node_modules`, `dist`, `_site` ni
+`referencia`): todas estaban en archivos autorizados y quedaron corregidas (`_planificacion/README.md` L230 a L234,
+`estado-actual.md` L51, esta bitácora y `propuestas-documentos-protegidos.md` L55). No hay menciones en archivos no
+autorizados. Tras el cambio, "Épica 09" solo aparece como Revisión móvil (decisión 3) y en las notas de corrección de esta sección y de la 11; ninguna mención la nombra como Rendimiento salvo la columna "Destino anterior" de la tabla de arriba.
+
+### 12.3 Solicitud de mejora del hero móvil
+
+**Dónde se registra.** La constitución (`_planificacion/README.md`) **no define** un lugar para solicitudes de mejora, ideas
+o épicas futuras (confirmado por código: ninguna de sus 13 secciones lo contempla; el §12 es solo de deuda técnica). Por la
+decisión 4 no se inventó una estructura: la solicitud queda **en esta bitácora** y se proponen las opciones siguientes.
+
+| Opción | Descripción | Ventajas | Inconvenientes |
+|:-------|:------------|:---------|:---------------|
+| 1 (recomendada) | Sección nueva "§14 Registro de solicitudes de mejora" en `_planificacion/README.md`, con tabla análoga al §12 (ID, página, viewport, solicitud, destino, estado). | Un solo lugar, que todo agente lee en el protocolo de inicio (§4). Reutiliza el patrón del §12. Se amplía con una fila por solicitud. | Requiere autorización para editar otra sección de la constitución. |
+| 2 | Archivo `_planificacion/03-planificacion/solicitudes-de-mejora.md`. | Admite el detalle completo de cada solicitud. | Cambia la estructura del §3 y agrega un archivo que hay que descubrir. |
+| 3 | Esperar a planificar la Épica 09 y registrarlas en su `definicion-epica.md`. | Sin estructura nueva. | Mientras tanto quedan solo en bitácoras cerradas y se pueden perder. |
+
+**Contenido registrado** (solicitud n.º 1; se numera solo para referencia dentro de esta bitácora):
+
+| Campo | Valor |
+|:------|:------|
+| Página | Inicio (`index.html`, sección `#titular`) |
+| Viewport | Móvil |
+| Estado actual (según el desarrollador) | El título (`h1`) y el párrafo descriptivo del hero se ven demasiado grandes y la tarjeta de vidrio ocupa casi toda la pantalla. |
+| Cambio solicitado | Reducir el tamaño del título y del párrafo; ocultar en móvil el ícono SVG y la fila "Valdivia, Región de Los Ríos, Chile"; dejar únicamente "Descubrir más" con la flecha hacia abajo. |
+| Destino | Épica 09 — Revisión móvil (por planificar) |
+| Estado | Pendiente de definir |
+
+**Pendiente de definir con el desarrollador:** tamaños de texto objetivo; alineación de "Descubrir más"; comportamiento
+desde 768 px; qué anchos exactos cuentan como "móvil". Además, la solicitud no menciona los dos botones del hero
+("Explorar Servicios" y "Suscripción Floral", `index.html` L269 a L282): falta definir si se mantienen en móvil.
+
+**Consideraciones (recomendación del asesor, no decisión):**
+
+* **(a)** No hacerlo durante la Épica 08: exige paridad visual y su línea base se tomó con el hero actual.
+* **(b)** El contraste del hero se calibró en la Épica 01 · Iteración 08 (tinte mínimo /45, métrica de percentil 95 de la
+  tarjeta, 7 viewports, 2 temas). Cualquier cambio de tamaño o de composición exige repetir esa medición.
+* **(c)** Los tamaños deben salir de la escala de `DESIGN.md`; si falta alguno, se entrega como propuesta de edición que
+  aplica el desarrollador.
+* **(d)** Ocultar la ubicación quita texto visible con señal local. Conviene que "Valdivia" quede visible en otro lugar
+  (confirmado por código: hoy aparece además en el `<title>` L4, en el cuerpo L321, L489, L527 y L809, y en el footer L906;
+  la metadescripción del Inicio aún no existe, DT-04, Iteración 05).
+
+**Estado actual del hero en código — confirmado por código** (`index.html`, sección `#titular` desde L241):
+
+| Elemento | Línea | Clases de Tailwind |
+|:---------|:------|:-------------------|
+| Tarjeta de vidrio | L257 | `hero-glass flex flex-col items-center text-center gap-space-3 p-space-4 md:p-space-8 rounded-3xl border border-white/20 bg-dark-background/45 backdrop-blur-xl backdrop-saturate-150 shadow-2xl` |
+| `h1` | L259 | `font-display-hero text-headline-xl lg:text-display-hero text-neutral-50 font-semibold lg:font-semibold max-w-4xl tracking-tight leading-none` |
+| Párrafo | L263 | `font-body-lg text-body-lg text-neutral-50 max-w-2xl font-light leading-relaxed` |
+| Fila de datos (contenedor) | L284 | `w-full pt-space-3 border-t border-white/20 flex flex-col sm:flex-row items-center justify-between gap-space-2` |
+| Ubicación (contenedor) | L285 | `flex items-center gap-space-2 text-neutral-50 font-label-sm text-label-sm tracking-widest uppercase` |
+| Ubicación: ícono SVG | L286 | `text-neutral-50 text-[18px]` (con `aria-hidden="true"`) |
+| Ubicación: texto | L290 | sin clases propias: `<span><strong>Valdivia</strong>, Región de Los Ríos, Chile</span>` |
+| Enlace "Descubrir Más" | L292 a L295 | `flex items-center gap-2 text-neutral-50 hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed font-label-sm text-label-sm uppercase tracking-widest transition-colors` |
+| Flecha del enlace | L296 | `text-[16px] animate-bounce motion-reduce:animate-none` |
+
+Observaciones: la ubicación y "Descubrir Más" comparten el mismo contenedor (L284), por lo que ocultar solo la ubicación
+exige una clase propia en su contenedor (L285). `DESIGN.md` (L50 y L52) define `display-hero-mobile` (40/48 px) y
+`headline-xl-mobile` (32/40 px), y `headline-xl` mide 48/56 px (L51); el `h1` actual usa `text-headline-xl` hasta `lg`.
+No se midió el tamaño renderizado: es 🕒 PENDIENTE para la Épica 09.
+
+**Capturas existentes — confirmado por código** (`referencia/capturas/`, fuera de Git; los nombres codifican solo el
+ancho): `index-320-claro.png`, `index-320-oscuro.png`, `index-360-claro.png`, `index-360-oscuro.png`,
+`index-412-claro.png` e `index-412-oscuro.png`. Existen además `index-740`, `index-768`, `index-1024` e `index-1280`, en claro
+y oscuro. No se abrió ni modificó ninguna.
+
+### 12.4 Observaciones de la sesión de pruebas del desarrollador
+
+No se creó ninguna deuda técnica a partir de estas observaciones.
+
+**a) Dominio efectivo.**
+* *Reportado por el desarrollador* (captura de la pestaña Red de DevTools, con la fecha del reloj del sistema):
+  `www.lajardinerafloreria.cl` responde **301** y redirige a `lajardinerafloreria.cl`, que responde **200**. El dominio
+  efectivo es el apex, sin `www`. No lo verifiqué (sin red). Es coherente con que los PDF de Lighthouse midieran el
+  dominio sin `www`, y contradice la suposición de la especificación de la Épica 07 · It. 04 (L197: el apex redirige a `www`).
+* *Confirmado por código* — apariciones de `www.lajardinerafloreria.cl` en archivos versionados (36 en total, antes de
+  este ajuste):
+  * **HTML, `src/`, `public/`, `scripts/` y configuración** (`package.json`, `tailwind.config.js`): **0**. Hoy no hay
+    `canonical`, `sitemap.xml` ni Open Graph (DT-08).
+  * Documentos protegidos: `AGENTS.md` L4; `DESIGN.md` L4; `README.md` L8, L63 y L167 (L63 y L167 nombran ambos dominios).
+  * Especificaciones: Épica 07 `definicion-epica.md` L112 y L119; `iteracion-01.md` L131; `iteracion-03.md` L143;
+    `iteracion-04.md` L39, L40, L64 a L68, L71, L91, L105, L114 a L118, L138, L196 y L197. Épica 08 `iteracion-01.md` L62 e
+    `iteracion-02.md` L73 (`site: 'https://www.lajardinerafloreria.cl'` en el ejemplo de `astro.config.mjs`).
+  * Bitácoras: Épica 07 `bitacora-cierre-epica-07.md` L94; `bitacora-iteracion-01.md` L289 y L419;
+    `bitacora-iteracion-03.md` L263. Épica 08 `bitacora-iteracion-01.md` L94, L493 y L541.
+* Para la Iteración 05 (SEO): el dominio canónico, el `site` de Astro, el `sitemap.xml` y `robots.txt` deben alinearse con
+  el dominio efectivo; `AGENTS.md`, `README.md` y `DESIGN.md` (protegidos) tendrían que corregirse mediante propuesta.
+
+**b) Scripts de Cloudflare (hipótesis, sin verificar).**
+* *Reportado por el desarrollador:* en esa captura aparecen `email-decode.min.js` (1,0 kB) y `beacon.min.js` (10,5 kB),
+  iniciados desde las líneas 977 y 978 del HTML. *Hipótesis:* los nombres corresponden típicamente a scripts que
+  Cloudflare inyecta (ofuscación de correos y analítica web).
+* *Confirmado por código:* "email-decode", "beacon", "cdn-cgi" y "cloudflareinsights" tienen **0 coincidencias** en el
+  repositorio (6 HTML, `src/`, `public/`, `scripts/`, configuración, `dist/` y `_site/` locales). El `index.html` local
+  tiene 979 líneas y su único `<script>` es el módulo de L978 (`type="module" src="./src/js/main.js"`); el HTML local
+  contiene una dirección de correo (L888 y L895). `AGENTS.md` §9 indica que Cloudflare Web Analytics se gestiona fuera del
+  código. No se comparó con el HTML publicado.
+* *Registro:* si la hipótesis se confirma, el invariante "0 `<script>` sin `src`" se verifica sobre la salida del build
+  (`_site/`) y no sobre la página publicada.
+
+**c) `servicio-novias.webp` en la carga inicial (hipótesis, sin verificar).**
+* *Reportado por el desarrollador:* en un emulador de 360 × 800, `servicio-novias.webp` (1.053 kB) figura entre las
+  solicitudes de la carga inicial del Inicio.
+* *Confirmado por código:* `index.html` L371 la declara con `loading="lazy"` (ver §9.6 de esta bitácora). No se concluye
+  causa ni efecto sobre el LCP; queda 🕒 PENDIENTE de medición para la Épica 10.
+
+### 12.5 Estado
+
+**Completada con reservas — pendiente que el desarrollador aplique las propuestas protegidas** (Escenario 2) y que
+decida dónde registrar las solicitudes de mejora (§12.3). No se marca cerrada. Verificación: solo los 5 archivos
+autorizados modificados; archivos prohibidos sin cambios; sin red, instalaciones ni Lighthouse.
+
+### 12.6 Pendientes del desarrollador
+
+1. Aplicar A.1 a A.9 de `propuestas-documentos-protegidos.md`, antes de la Iteración 02. 🕒
+2. Decidir la ubicación del registro de solicitudes de mejora (§12.3, opciones 1 a 3).
+3. Definir con el asesor los puntos pendientes de la solicitud n.º 1 (§12.3) y sumar las siguientes solicitudes.
+4. Decidir el dominio canónico para la Iteración 05, a la luz de la redirección 301 reportada.
+5. Planificar las Épicas 09 (Revisión móvil) y 10 (Rendimiento) después de cerrar la Épica 08.
+6. Revisar y hacer el commit.
+
+### 12.7 Mensaje de commit sugerido
+
+Reemplaza al de §11.7, porque los cambios de los Ajustes 3 y 4 siguen sin confirmar:
+
+```text
+Épica 08 - Iteración 01: Registra DT-22 a DT-25, reasigna las deudas de rendimiento a la Épica 10 y deja registrada la solicitud de revisión móvil del hero y las observaciones de las pruebas.
+```

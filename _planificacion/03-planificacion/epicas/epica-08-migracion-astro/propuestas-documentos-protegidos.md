@@ -1,30 +1,45 @@
 # Propuestas de Edición para Documentos Protegidos — Épica 08 (Migración a Astro)
 
 > Estos cambios **no los aplica ningún agente**: los revisa y aplica el desarrollador (`AGENTS.md` §2).
-> **Fuente única y vigente** (reescrita el 16-10-2026, Épica 08 · Iteración 01, ajuste 2). Reemplaza a la versión
-> anterior de este archivo y a las listas de la bitácora de la Iteración 01 (§5.7, §6 y §8.2).
+> **Fuente única y vigente** (reescrita el 16-10-2026, Épica 08 · Iteración 01, ajuste 2; ajustada en el ajuste 3).
+> Reemplaza a la versión anterior de este archivo y a las listas de la bitácora de la Iteración 01 (§5.7, §6 y §8.2).
 > Las rutas y comandos asumen las decisiones D1 a D9 del ADR-001 (`decisiones-tecnicas.md`).
-> Cada línea `-` de los bloques `diff` se comprobó por programa contra el texto actual del archivo (16-10-2026).
+> Cada línea `-` de los bloques `diff` se comprobó por programa contra el texto actual del archivo.
 > Algunos bloques usan cuatro acentos graves como delimitador porque contienen bloques de código anidados.
+
+## Cómo aplicarlas (instrucción para el desarrollador)
+
+1. **Este archivo es la única fuente vigente.** No uses las listas ni los textos de las bitácoras anteriores.
+2. En cada bloque `diff`: la línea que empieza con `-` se **borra** del documento, la que empieza con `+` se **agrega**,
+   y la que empieza con un espacio es contexto (se deja como está). Los prefijos `-`, `+` y el espacio no forman parte
+   del texto.
+3. **Orden sugerido** (de menor a mayor dependencia de lectura entre documentos):
+    1. `AGENTS.md`: A.1, A.2, A.3 y A.4.
+    2. `_planificacion/02-arquitectura/stack-tecnologico.md`: A.5.
+    3. `_planificacion/01-vision/`: A.6 (`proposito-y-alcance.md`) y A.8 (`objetivos-y-metricas.md`).
+    4. `_planificacion/README.md`: A.7.
+    5. `README.md`: A.9.
+4. Si un `-` no coincide con el texto actual (por ejemplo, porque editaste el documento después del 16-10-2026),
+   detente y avisa: la propuesta debe regenerarse contra el texto vigente.
+5. Cuando termines, avisa para registrar el cierre del Escenario 2 de la Iteración 01.
 
 ---
 
 ## 0. Estado de las propuestas
 
-**Ninguna aplicada todavía** (16-10-2026). Decisión del desarrollador: aplicará a mano, juntas, todas las de la
-sección A después del reporte del ajuste 2 de la Iteración 01 y **antes de la Iteración 02**. `DESIGN.md` queda para la
-Iteración 08.
+**Ninguna aplicada todavía.** Decisión del desarrollador: aplicará a mano, juntas, todas las de la sección A después
+del reporte del ajuste 3 de la Iteración 01 y **antes de la Iteración 02**. `DESIGN.md` queda para la Iteración 08.
 
 | #   | Archivo y sección | Momento | Estado |
 |:----|:------------------|:--------|:-------|
-| A.1 | `AGENTS.md` §4 Stack y comandos | Antes de la It. 02 | 🕒 Pendiente de aplicar |
+| A.1 | `AGENTS.md` §4 Stack y comandos (incluye la nota de transición) | Antes de la It. 02 | 🕒 Pendiente de aplicar |
 | A.2 | `AGENTS.md` §5 Reglas de arquitectura (incluye las correcciones A1, regla 8, y A2, regla 6) | Antes de la It. 02 | 🕒 Pendiente de aplicar |
 | A.3 | `AGENTS.md` §7 Verificación mínima (incluye la corrección A3, línea de paridad) | Antes de la It. 02 | 🕒 Pendiente de aplicar |
 | A.4 | `AGENTS.md` §9 Contexto de despliegue | Antes de la It. 02 | 🕒 Pendiente de aplicar |
 | A.5 | `_planificacion/02-arquitectura/stack-tecnologico.md` §1, §2 y §3 | Antes de la It. 02 | 🕒 Pendiente de aplicar |
 | A.6 | `_planificacion/01-vision/proposito-y-alcance.md` §3 (fuera del alcance) | Antes de la It. 02 | 🕒 Pendiente de aplicar |
 | A.7 | `_planificacion/README.md` §6 y §7 | Antes de la It. 02 | 🕒 Pendiente de aplicar |
-| A.8 | `_planificacion/01-vision/objetivos-y-metricas.md` (título y §3, punto 4) | Antes de la It. 02 | 🕒 Pendiente de aplicar |
+| A.8 | `_planificacion/01-vision/objetivos-y-metricas.md` (título, carácter de los umbrales de la introducción y §3, punto 4) | Antes de la It. 02 | 🕒 Pendiente de aplicar |
 | A.9 | `README.md`, sección B completa (nota de transición y §1, §2, §4, §5, §6, §7, §8, §10, §12 y §15) | Antes de la It. 02 | 🕒 Pendiente de aplicar |
 | —   | `README.md`: nota mínima de transición (propuesta #4 de la bitácora de la It. 01, §8.2) | — | ❌ **Descartada**: la reemplaza A.9, que ya incluye la nota |
 | B.1 | `DESIGN.md` | Iteración 08 | 🕒 Pendiente (la It. 08 entrega las líneas exactas) |
@@ -34,8 +49,10 @@ Observaciones que no cambian ninguna propuesta:
 * A.2 (regla 2: "el único `<script>` permitido…") y A.3 ("0 `<script>` sin `src`") chocarán con el JSON-LD opcional de
   la It. 05 y con el script de tema opcional de la It. 07 cuando se aprueben; se resuelve al aprobar esas excepciones.
 * `AGENTS.md` §4 y §7 describirán los comandos de Astro desde que se apliquen, aunque la rama los adopte recién en la
-  It. 02. `README.md` lleva una nota de transición (A.9); `AGENTS.md` no la lleva en estas propuestas. Decide el
-  desarrollador si agrega una nota equivalente.
+  It. 02. Por eso `AGENTS.md` (A.1) y `README.md` (A.9) llevan una nota de transición al comienzo de la sección.
+* **Umbrales de `objetivos-y-metricas.md`** (decisión del desarrollador, ajuste 3): los de la §2 son la **meta del
+  sitio**, no un requisito de cada iteración; A.8 lo precisa en la introducción sin cambiar los valores. La brecha de
+  rendimiento móvil está registrada como DT-21 a DT-25 (destino: Épica 10 — Rendimiento, por planificar).
 
 ---
 
@@ -43,7 +60,15 @@ Observaciones que no cambian ninguna propuesta:
 
 ### A.1 Propuesta de edición — `AGENTS.md`
 **Sección:** §4 Stack y comandos
-**Motivo:** el stack pasa a Astro con salida estática; React deja de estar planificado.
+**Motivo:** el stack pasa a Astro con salida estática; React deja de estar planificado. La nota de transición avisa
+que los comandos de Astro rigen solo desde la It. 02 (el primer bloque la agrega justo bajo el título de la sección).
+```diff
+ ## 4. Stack y comandos
++
++> **Transición (Épica 08):** hasta cerrar la Iteración 02, la rama todavía no tiene Astro y los comandos vigentes son
++> los previos (Tailwind por CLI con `pnpm dev` y `pnpm build`, y un servidor estático aparte para previsualizar). Desde
++> la Iteración 02 rigen los comandos de Astro descritos aquí.
+```
 ```diff
 -| Estructura      | HTML5 semántico, sitio multipágina (MPA) de 6 archivos             |
 -| Estilos         | Tailwind CSS `3.4.x` compilado por CLI a `dist/css/output.css`     |
@@ -203,12 +228,24 @@ pero el desarrollador decidió aplicarlo a mano junto con el resto.
 ```
 
 ### A.8 Propuesta de edición — `_planificacion/01-vision/objetivos-y-metricas.md`
-**Sección:** título y §3, punto 4
-**Motivo:** el punto 4 exige rutas relativas (`./`) como *Definition of Done* global y bloquearía literalmente la
-It. 02; el título tiene una errata (`6#`).
+**Sección:** título, introducción y §3, punto 4
+**Motivo:** (1) el título tiene una errata (`6#`); (2) la introducción declara las métricas de la §2 como requisito
+obligatorio de **cada** iteración, lo que una épica estructural como la 08 no puede cumplir con la línea base actual
+(Performance móvil de 68 a 83, umbral ≥ 95); se precisa que son la meta del sitio y que la brecha se registra como
+deuda, sin cambiar ningún valor; (3) el punto 4 exige rutas relativas (`./`) como *Definition of Done* global y
+bloquearía literalmente la It. 02.
 ```diff
 -6# Objetivos y Métricas de Éxito (QA & Performance)
 +# Objetivos y Métricas de Éxito (QA & Performance)
+```
+```diff
+-Este documento fija los estándares cualitativos y cuantitativos que los agentes de IA deben monitorear. Las métricas
+-no son sugerencias, son requisitos obligatorios (Definition of Done) para cada iteración.
++Este documento fija los estándares cualitativos y cuantitativos que los agentes de IA deben monitorear. Las métricas
++de la §2 son la meta de calidad del sitio. Cada iteración debe acercarse a ellas o, como mínimo, no empeorarlas; las
++épicas estructurales (como la Épica 08) aplican el criterio de no regresión de su propio Definition of Done, y la
++brecha respecto de la meta se registra como deuda técnica (§12 de `_planificacion/README.md`). Los criterios de la §3
++sí son obligatorios en cada iteración.
 ```
 ```diff
 -4. **Rutas Inquebrantables:** Las referencias a assets (imágenes, CSS, JS) funcionan universalmente usando rutas
