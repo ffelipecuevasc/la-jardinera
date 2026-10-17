@@ -834,3 +834,83 @@ cerrada. Verificación: solo archivos autorizados modificados; archivos prohibid
 ```text
 Épica 08 - Iteración 01: Agrega la §14 de solicitudes (SM-01), registra el ADR-002 de dominio canónico sin www, renombra la Épica 10, fija criterios de severidad y propone la Sección C.
 ```
+
+---
+
+## 14. Cierre de la Iteración 01
+
+**Fecha:** 17-10-2026 · **Agente:** Claude Code · **Alcance:** solo lectura sobre `AGENTS.md`, `README.md` (raíz) y
+`_planificacion/README.md`; edición de esta bitácora y de una línea de `estado-actual.md`. Sin red, sin instalaciones y
+sin Lighthouse.
+
+### 14.1 Estado
+
+**Completada con reservas.** No está 🔒 Cerrada: eso ocurre solo con la fusión a `main` (`_planificacion/README.md` §5).
+
+### 14.2 Aplicado en esta etapa
+
+* **Primera verificación** (sobre `HEAD` `7625f85`, con el texto de `7dfc315` como base de las propuestas): ❌ en A.1, A.7,
+  A.9 y C.2 (notas de transición sin `>`, línea `├── dist/` pegada, `pnpm build` residual y `---` convertido en
+  encabezado por falta de línea en blanco). El desarrollador aplicó las correcciones y las subió en `19406eb`; en
+  `4d0bc11` quedó la ampliación del criterio Media del §12, DT-20 y DT-25 a Media y la fila nueva del §13.
+* **Reverificación** (sobre `HEAD` `19406eb`, confirmada por código; se ignoran espacios dentro de tablas, espacios
+  finales y CRLF/LF):
+
+| Punto | Estado | Evidencia |
+|:------|:-------|:----------|
+| `README.md` L12 a L14: nota con `> ` en las 3 líneas y línea en blanco en L15 antes de `---` (L16) | ✅ | `cat -A` de L8 a L16 |
+| `README.md` L83: `package.json · pnpm-lock.yaml` en su propia línea, sin `├── dist/` | ✅ | `grep -n` |
+| `README.md` §7: bloques ```` ```bash ```` con 3 espacios en los pasos 1 (L120), 2 (L128) y 3 (L134) | ✅ | `cat -A` |
+| `README.md` §7 paso 3 (L135 y L136): solo `pnpm run build:cf` y `pnpm preview`, sin `pnpm build` | ✅ | `grep -n` |
+| `README.md` L9: `https://github.com/ffelipecuevasc/la-jardinera` | ✅ (aceptada por el desarrollador) | Cambio ajeno a las propuestas, aceptado |
+| `AGENTS.md` §4: nota con `> ` en las 3 líneas (L85 a L87); tabla de stack con los mismos datos; fila `build:cf` (L102) sin espacio final | ✅ | `cat -A` y comparación por programa |
+| `_planificacion/README.md` §7 (L118 y L119): nota con `> ` | ✅ | Lectura de L116 a L119 |
+| DT-15 con severidad Media y resto de la fila intacto (L235) | ✅ | Comparación contra el texto previo |
+| DT-20 y DT-25 en Media (decisión previa), DT-21 a DT-24 sin cambios y con destino "Épica 10 — Rendimiento y calidad Lighthouse (por planificar)" | ✅ | L240 a L245 |
+| Las otras 14 propuestas (A.2 a A.6, A.8, C.1 y las partes de A.1, A.7, A.9 y C.2 ya verificadas) | ✅ | Comparación por programa: `stack-tecnologico.md`, `proposito-y-alcance.md` y `objetivos-y-metricas.md` coinciden byte a byte; `DESIGN.md` sin cambios (C.3 pendiente) |
+
+* Opcional, no es defecto: los marcadores `<usuario>/<repositorio>` del `README.md` §7, paso 1 (L121 y L122).
+
+### 14.3 Reservas vigentes
+
+1. **Lighthouse con salvedades:** cada valor de la línea base es una sola corrida por página y modo; el ruido observado en
+   móvil es de unos 10 puntos de Performance (404, mismo HTML en tres URL: 75 a 85, §9.4). Los umbrales de la épica se
+   evalúan por medianas de 3 corridas (`definicion-epica.md` §8, §10.3 de esta bitácora).
+2. **Mediciones no repetidas:** ni Lighthouse ni la consola de las 7 capturas sin registro (§4) se repitieron.
+3. **Revisión visual parcial:** de las 84 capturas, solo 4 se revisaron a ojo (§4).
+
+### 14.4 Heredado a iteraciones siguientes
+
+| Ítem | Destino |
+|:-----|:--------|
+| Retirar las notas de transición de `AGENTS.md` §4, `README.md` (raíz) y `_planificacion/README.md` §7 | Iteración 02, cuando rijan los comandos de Astro |
+| Retirar las transiciones de header y footer (`AGENTS.md` §5, regla 6; `_planificacion/README.md` §6, ítem 5) | Iteración 03 (footer) e Iteración 04 (header) |
+| `robots.txt` y sitemap sin `www`; Search Console con el dominio canónico `lajardinerafloreria.cl` | Iteración 05 |
+| C.3: `DESIGN.md` L4 (dominio sin `www`) | Iteración 08 |
+| `proposito-y-alcance.md` §2 usa nombres `.html` (L22, L24, L25, L26, L28, L30 y L32; confirmado por código) | Iteración 02 |
+| Solicitud SM-01 (Épica 09 — Revisión móvil) y DT-21 a DT-25 (Épica 10 — Rendimiento y calidad Lighthouse) | Solo referencia a lo ya registrado (`_planificacion/README.md` §12 y §14); no se creó nada |
+
+### 14.5 Observaciones registradas (solo reportadas, sin corregir)
+
+* `README.md` afirma cosas que contradicen deudas abiertas: §3 L50 y L51 ("imágenes `.webp` locales con dimensiones
+  explícitas, carga diferida") y §12 L201 ("Imágenes con `width`, `height`, `alt`") frente a DT-23 (33 imágenes sin
+  `width` ni `height` en `index.html` y `galeria.html`; `lazy` sobre el pliegue); §11 L184 ("Cada página declara
+  `<title>` y `<meta name="description">`") frente a DT-04 (`index.html` sin metadescripción).
+* `.claude/settings.json` (`permissions.deny`): L5 a L7 repiten L8 a L10 (`Edit` de `AGENTS.md`, `README.md` y
+  `DESIGN.md`) y ya no hay reglas `Write`. No hay reglas que se contradigan. No se verificó en esta sesión si `Edit` cubre
+  también `Write`.
+* `_planificacion/README.md` perdió el salto de línea final del archivo (sin consecuencias de renderizado).
+
+### 14.6 Pendientes del desarrollador
+
+* Revisar `.claude/settings.json` (entradas duplicadas).
+* Opcional: confirmar de dónde vienen `email-decode.min.js` y `beacon.min.js` (¿Cloudflare?).
+* Reservas de la Épica 07 (favicon real, Firefox y Safari, móvil real, contraste forzado en Windows): ver "Seguimiento
+  posterior al cierre" de su `definicion-epica.md`.
+* Decidir si se corrigen las afirmaciones del `README.md` de §14.5 ahora o al cerrar la Épica 10.
+
+### 14.7 Mensaje de commit sugerido
+
+```text
+Épica 08 - Iteración 01: Reverifica los archivos protegidos corregidos y cierra la bitácora como Completada con reservas.
+```
