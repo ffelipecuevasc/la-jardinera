@@ -46,7 +46,5 @@ JavaScript (History API) o emulaciones de Single Page Application (SPA).**
 * **Lógica de Backend / CMS:** Cero bases de datos, cero paneles de administración dinámicos.
 * **Pasarelas de Pago:** No programes integraciones con Webpay, Stripe o carritos de compra. Todo C2A (Call to Action)
   redirige a WhatsApp.
-* **Frameworks JS:** Cero dependencias pesadas de UI (React, Vue, Alpine.js, jQuery).
-
-> **Nota:** La Épica 08 (planificada, pendiente de aprobación) propone componentes React con renderizado estático; su
-> aprobación exige actualizar este documento.
+* **Frameworks JS de interfaz:** Cero dependencias de UI en el navegador (React, Vue, Preact, Alpine.js, jQuery).
+  Astro se usa solo como generador estático en compilación y no envía JavaScript propio.
