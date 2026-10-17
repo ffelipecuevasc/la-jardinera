@@ -70,7 +70,7 @@ Scripts finales de `package.json`:
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-    site: 'https://www.lajardinerafloreria.cl',
+    site: 'https://lajardinerafloreria.cl',
     outDir: './_site',
     trailingSlash: 'never',
     build: {

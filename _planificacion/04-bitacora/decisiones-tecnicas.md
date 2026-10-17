@@ -112,3 +112,38 @@ Estructura objetivo: `src/pages/` (6 páginas), `src/layouts/BaseLayout.astro`, 
   Iteración 08, y revertir producción es un clic en el panel de Cloudflare.
 * Riesgos y mitigaciones: ver `definicion-epica.md` §7. La referencia de paridad es la instantánea de la Iteración 01
   (`referencia/`, fuera de Git).
+
+## ADR-002 — Dominio canónico sin www
+
+* **Estado:** Aprobada (16-10-2026). Decisión del desarrollador.
+
+### Contexto
+
+* **Reportado por el desarrollador** (captura de la pestaña Red de DevTools, con la fecha del reloj del sistema):
+  `www.lajardinerafloreria.cl` responde **301** y redirige a `lajardinerafloreria.cl`, que responde **200**. No se
+  verificó desde el agente (sin red).
+* **Confirmado por código:** los documentos nombran el dominio con `www` (`AGENTS.md` L4, `README.md` L8, L63 y L167,
+  `DESIGN.md` L4), y el ejemplo de `astro.config.mjs` de la Épica 08 · Iteración 02 (L73) usaba
+  `site: 'https://www.lajardinerafloreria.cl'`. La especificación de la Épica 07 · Iteración 04 suponía lo contrario
+  (el dominio sin `www` redirigiría a `www`).
+* La línea base de Lighthouse de la Épica 08 · Iteración 01 se midió sobre el dominio sin `www`.
+* Hoy no existen `canonical`, Open Graph, `sitemap.xml` ni `robots.txt` (DT-08); se crean en la Iteración 05.
+
+### Decisión
+
+* El dominio canónico es **`https://lajardinerafloreria.cl`** (sin `www`).
+* **Sin cambios** en Cloudflare ni en producción: el apex ya sirve el sitio y `www` ya redirige con 301.
+
+### Alternativas descartadas
+
+* **Canónico con `www`:** exigiría cambiar la redirección en Cloudflare y contradice lo medido y observado en producción.
+
+### Consecuencias
+
+* `site` de Astro (Iteración 02) y las URL absolutas de `canonical`, Open Graph, `sitemap.xml` y `robots.txt` de la
+  Iteración 05 usan `https://lajardinerafloreria.cl`.
+* Documentos protegidos a corregir mediante propuesta (Sección C de `propuestas-documentos-protegidos.md`): `AGENTS.md`
+  L4, `README.md` L8, L63 y L167 (antes de la Iteración 02) y `DESIGN.md` L4 (Iteración 08).
+* Las especificaciones y bitácoras de la Épica 07 y la Iteración 01 de la Épica 08 son historial y conservan `www`.
+* Las acciones del desarrollador de la Iteración 05 (Search Console, vistas previas) deben hacerse sobre el dominio sin
+  `www`; la propiedad de Search Console 🕒 PENDIENTE de revisar por el desarrollador.

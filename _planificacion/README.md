@@ -205,6 +205,12 @@ Los números siempre con dos dígitos.
 
 ## 12. Registro de deuda técnica abierta
 
+Criterios de severidad:
+
+* **Alta:** defecto visible que rompe la página (por ejemplo, DT-01).
+* **Media:** afecta SEO, contraste, accesibilidad o rendimiento medidos.
+* **Baja:** sin efecto visible o solo de mantenimiento.
+
 | ID    | Descripción                                                                                                  | Severidad | Se resuelve en      |
 |:------|:-------------------------------------------------------------------------------------------------------------|:----------|:--------------------|
 | DT-01 | ✅ **Resuelta** (Épica 07 · Iteración 03, 14-10-2026). `servicios.html`, footer columna 1: faltaba la apertura `<a` del enlace de marca y el navegador mostraba el texto `class="..." ... >La Jardinera` en pantalla. Verificada en render real (Chrome 155 headless, 360 y 1280 px, claro y oscuro): el enlace existe, apunta a `./index.html` y no aparece código como texto. | Alta | Épica 07 · It. 03 |
@@ -227,11 +233,11 @@ Los números siempre con dos dígitos.
 | DT-18 | ✅ **Resuelta** (Épica 07 · Iteración 02, 14-10-2026). Recorte de glifos de `fx-starlight`: `background-clip: text` no pinta fuera de la caja del `span` y la cursiva sobresale (la "J" de "La Jardinera" al abrir línea, ≈ 7,25 px a 48 px; la "a" final, ≈ 0,75 px). Corregida con `padding-inline: .16em; margin-inline: -.16em` en `.fx-starlight--accent`; verificada en render real (Chrome 155 headless, 7 viewports × claro y oscuro: 0 px recortados). Sin verificar en Firefox, Safari ni dispositivo real. | Media | Épica 07 · It. 02 |
 | DT-19 | ✅ **Resuelta** (Épica 07 · Iteración 02, 14-10-2026). "Florería" salía en peso 400 desde 1024 px porque `lg:text-display-hero` (token con `fontWeight: 400`) pisaba a `font-semibold`; contradicción entre `DESIGN.md` §1.2 (400) y §7.3 (600). Corregida con `lg:font-semibold` en el `<h1>` del Hero; verificada en render real (peso 600 en los 7 viewports). Queda pendiente reflejarla en `DESIGN.md` (propuesta en la bitácora de la Iteración 02). | Baja | Épica 07 · It. 02 |
 | DT-20 | Contraste del acento del titular del Hero (`#ffc2c6`) sobre la fotografía: observación sin cambio de color (14-10-2026). Con el percentil 95 del fondo da ≥ 3:1 en 5 de 7 viewports; queda bajo 3:1 en 412 × 915 (2,88:1) y 740 × 360 (2,91:1). Revisar si cambia la fotografía o el criterio de medición. | Baja | Oportunista (si cambia la fotografía o el criterio) |
-| DT-21 | Rendimiento móvil por debajo del umbral. Línea base de Lighthouse en producción (16-10-2026, bitácora de la Épica 08 · It. 01, §9): Performance móvil de 68 a 83 en las 5 páginas con contenido (mediana 74; 75 a 85 en las tres URL de la 404) y LCP móvil de 2,9 a 6,4 s; Performance de escritorio de 92 a 97 en esas 5 páginas. Umbral de `01-vision/objetivos-y-metricas.md` §2: Performance ≥ 95. Origen no confirmado: el diagnóstico solo en lectura y sus hipótesis están en la §9 de esa bitácora. | Media | Épica 10 — Rendimiento (por planificar; fuera de la Épica 08, que exige paridad) |
-| DT-22 | Logotipos PNG sobredimensionados. Confirmado por código (16-10-2026): `public/logos/la-jardinera-original.png` pesa 306.435 B (299,3 KiB) y `la-jardinera-blanco.png` 229.345 B (224,0 KiB); ambos miden 3446 × 3504 px y se muestran a 44 × 44 (`width="44" height="44"`) en el header de las 6 páginas, sin `loading` ni `fetchpriority` (`index.html` L21 y L27, `servicios.html` L23 y L29, `suscripcion-floral.html` L23 y L29, `galeria.html` L22 y L28, `contacto.html` L23 y L29, `404.html` L26 y L32). El logotipo claro también es el favicon de las 6 páginas. Hipótesis (no verificada en Lighthouse): explicaría el ahorro de 299 KiB de "Mejorar la entrega de imágenes" en Servicios móvil, Contacto y las 404 (bitácora de la Épica 08 · It. 01, §9.6 a). | Media | Épica 10 — Rendimiento (por planificar) |
-| DT-23 | Imágenes sin `width`/`height` y `lazy` sobre el pliegue. Confirmado por código (16-10-2026): 9 imágenes de `index.html` (L369 a L671) y 24 de `galeria.html` (L285 a L677) no declaran `width` ni `height`, lo que contradice `AGENTS.md` §5, regla 9 (varias pesan más de 1 MiB, como `galeria-2.webp` con 1311,4 KiB). Además, la primera tarjeta de `servicios.html` (L272) y `hero-2` a `hero-4` de `suscripcion-floral.html` (L261, L264 y L267, apiladas bajo `hero-1`) llevan `loading="lazy"` dentro del área visible; si alguna es el LCP, el atributo lo retrasa (hipótesis: el reporte no trae el elemento LCP). | Media | Épica 10 — Rendimiento (por planificar) |
-| DT-24 | Accesibilidad del Inicio (Lighthouse 91). Confirmado por código (16-10-2026): `src/js/modules/carousel.js` L28 genera `aria-label` en un `<div>` sin `role` en cada tarjeta de reseña (atributo ARIA prohibido; es la causa probable de esa auditoría, hipótesis); 4 enlaces solo de ícono sin texto ni `aria-label` en "Imágenes de nuestros ramos" (`index.html` L614, L636, L660 y L683). "Los enlaces idénticos tienen la misma finalidad" es una revisión manual de Lighthouse, no ubicada. | Media | Épica 10 — Rendimiento (por planificar) |
-| DT-25 | Orden de encabezados. Confirmado por código (16-10-2026): `index.html` salta de `<h1>` (L259) a `<h4>` (L318 y L334) y `carousel.js` L42 inyecta un `<h4>` por reseña bajo el `<h2>` "Experiencias" (L714); `servicios.html` salta de `<h1>` (L259) a `<h3>` (L288) y `404.html` de `<h1>` (L196) a `<h3>` (L239, footer). Lighthouse marca la auditoría en esas tres páginas (Accesibilidad 91, 98 y 98). | Baja | Épica 10 — Rendimiento (por planificar) |
+| DT-21 | Rendimiento móvil por debajo del umbral. Línea base de Lighthouse en producción (16-10-2026, bitácora de la Épica 08 · It. 01, §9): Performance móvil de 68 a 83 en las 5 páginas con contenido (mediana 74; 75 a 85 en las tres URL de la 404) y LCP móvil de 2,9 a 6,4 s; Performance de escritorio de 92 a 97 en esas 5 páginas. Umbral de `01-vision/objetivos-y-metricas.md` §2: Performance ≥ 95. Origen no confirmado: el diagnóstico solo en lectura y sus hipótesis están en la §9 de esa bitácora. | Media | Épica 10 — Rendimiento y calidad Lighthouse (por planificar; fuera de la Épica 08, que exige paridad) |
+| DT-22 | Logotipos PNG sobredimensionados. Confirmado por código (16-10-2026): `public/logos/la-jardinera-original.png` pesa 306.435 B (299,3 KiB) y `la-jardinera-blanco.png` 229.345 B (224,0 KiB); ambos miden 3446 × 3504 px y se muestran a 44 × 44 (`width="44" height="44"`) en el header de las 6 páginas, sin `loading` ni `fetchpriority` (`index.html` L21 y L27, `servicios.html` L23 y L29, `suscripcion-floral.html` L23 y L29, `galeria.html` L22 y L28, `contacto.html` L23 y L29, `404.html` L26 y L32). El logotipo claro también es el favicon de las 6 páginas. Hipótesis (no verificada en Lighthouse): explicaría el ahorro de 299 KiB de "Mejorar la entrega de imágenes" en Servicios móvil, Contacto y las 404 (bitácora de la Épica 08 · It. 01, §9.6 a). | Media | Épica 10 — Rendimiento y calidad Lighthouse (por planificar) |
+| DT-23 | Imágenes sin `width`/`height` y `lazy` sobre el pliegue. Confirmado por código (16-10-2026): 9 imágenes de `index.html` (L369 a L671) y 24 de `galeria.html` (L285 a L677) no declaran `width` ni `height`, lo que contradice `AGENTS.md` §5, regla 9 (varias pesan más de 1 MiB, como `galeria-2.webp` con 1311,4 KiB). Además, la primera tarjeta de `servicios.html` (L272) y `hero-2` a `hero-4` de `suscripcion-floral.html` (L261, L264 y L267, apiladas bajo `hero-1`) llevan `loading="lazy"` dentro del área visible; si alguna es el LCP, el atributo lo retrasa (hipótesis: el reporte no trae el elemento LCP). | Media | Épica 10 — Rendimiento y calidad Lighthouse (por planificar) |
+| DT-24 | Accesibilidad del Inicio (Lighthouse 91). Confirmado por código (16-10-2026): `src/js/modules/carousel.js` L28 genera `aria-label` en un `<div>` sin `role` en cada tarjeta de reseña (atributo ARIA prohibido; es la causa probable de esa auditoría, hipótesis); 4 enlaces solo de ícono sin texto ni `aria-label` en "Imágenes de nuestros ramos" (`index.html` L614, L636, L660 y L683). "Los enlaces idénticos tienen la misma finalidad" es una revisión manual de Lighthouse, no ubicada. | Media | Épica 10 — Rendimiento y calidad Lighthouse (por planificar) |
+| DT-25 | Orden de encabezados. Confirmado por código (16-10-2026): `index.html` salta de `<h1>` (L259) a `<h4>` (L318 y L334) y `carousel.js` L42 inyecta un `<h4>` por reseña bajo el `<h2>` "Experiencias" (L714); `servicios.html` salta de `<h1>` (L259) a `<h3>` (L288) y `404.html` de `<h1>` (L196) a `<h3>` (L239, footer). Lighthouse marca la auditoría en esas tres páginas (Accesibilidad 91, 98 y 98). | Baja | Épica 10 — Rendimiento y calidad Lighthouse (por planificar) |
 
 ---
 
@@ -245,3 +251,64 @@ Los números siempre con dos dígitos.
 
 Las bitácoras de las Épicas 01 a 06 conservan las rutas `_antigravity/...` que usaban al momento de escribirse: son
 registro histórico y no se editan.
+
+
+---
+
+## 14. Registro de solicitudes de mejora
+
+Una **solicitud de mejora** es un cambio de diseño o de contenido que pide el desarrollador y que no corrige un defecto.
+No es deuda técnica (§12). Cada solicitud tiene destino en una épica. Los agentes agregan filas solo cuando el
+desarrollador lo pide, y no ejecutan una solicitud mientras su épica no esté planificada.
+
+Estados: **Pendiente de definir**, **Definida**, **Planificada (Épica NN)** y **Hecha**.
+
+| ID    | Página          | Viewport | Solicitud | Destino | Estado |
+|:------|:----------------|:---------|:----------|:--------|:-------|
+| SM-01 | Inicio (`#titular`) | Móvil | Reducir el tamaño del título y del párrafo del hero; ocultar en móvil el ícono SVG y la fila "Valdivia, Región de Los Ríos, Chile"; dejar solo "Descubrir más" con su flecha. | Épica 09 — Revisión móvil (por planificar) | Pendiente de definir |
+
+### Detalle de SM-01
+
+**Estado actual, según el desarrollador:** el título (`h1`) y el párrafo descriptivo del hero se ven demasiado grandes y la
+tarjeta de vidrio ocupa casi toda la pantalla.
+
+**Pendiente de definir con el desarrollador:**
+
+* Tamaños de texto objetivo.
+* Alineación de "Descubrir más".
+* Comportamiento desde 768 px.
+* Qué anchos exactos cuentan como "móvil".
+* Qué pasa con los botones "Explorar Servicios" y "Suscripción Floral" (`index.html` L269 a L282), que la solicitud no
+  menciona.
+
+**Recomendación del asesor (no es decisión):**
+
+* No hacerlo durante la Épica 08: exige paridad visual y su línea base se tomó con el hero actual.
+* El contraste del hero se calibró en la Épica 01 · Iteración 08 (tinte mínimo /45, métrica de percentil 95 de la
+  tarjeta, 7 viewports, 2 temas). Cualquier cambio de tamaño o de composición exige repetir esa medición.
+* Los tamaños deben salir de la escala de `DESIGN.md`; si falta alguno, se entrega como propuesta de edición que aplica
+  el desarrollador.
+* Ocultar la ubicación quita texto visible con señal local. Conviene que "Valdivia" quede visible en otro lugar (hoy
+  aparece en `index.html` L4, L321, L489, L527, L809 y L906; la metadescripción del Inicio aún no existe, DT-04).
+
+**Confirmado por código** (`index.html`, sección `#titular` desde L241; verificado por programa el 16-10-2026):
+
+| Elemento | Línea | Clases de Tailwind |
+|:---------|:------|:-------------------|
+| Tarjeta de vidrio | L257 | `hero-glass flex flex-col items-center text-center gap-space-3 p-space-4 md:p-space-8 rounded-3xl border border-white/20 bg-dark-background/45 backdrop-blur-xl backdrop-saturate-150 shadow-2xl` |
+| `h1` | L259 | `font-display-hero text-headline-xl lg:text-display-hero text-neutral-50 font-semibold lg:font-semibold max-w-4xl tracking-tight leading-none` |
+| Párrafo | L263 | `font-body-lg text-body-lg text-neutral-50 max-w-2xl font-light leading-relaxed` |
+| Fila de datos (contenedor) | L284 | `w-full pt-space-3 border-t border-white/20 flex flex-col sm:flex-row items-center justify-between gap-space-2` |
+| Ubicación (contenedor) | L285 | `flex items-center gap-space-2 text-neutral-50 font-label-sm text-label-sm tracking-widest uppercase` |
+| Ubicación: ícono SVG | L286 | `text-neutral-50 text-[18px]` (con `aria-hidden="true"`) |
+| Ubicación: texto | L290 | sin clases propias: `<span><strong>Valdivia</strong>, Región de Los Ríos, Chile</span>` |
+| Enlace "Descubrir Más" | L292 a L295 | `flex items-center gap-2 text-neutral-50 hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed font-label-sm text-label-sm uppercase tracking-widest transition-colors` |
+| Flecha del enlace | L296 | `text-[16px] animate-bounce motion-reduce:animate-none` |
+
+* La ubicación y "Descubrir Más" comparten el contenedor de L284: ocultar solo la ubicación exige una clase propia en su
+  contenedor (L285).
+* `DESIGN.md` L50 define `display-hero-mobile` (40/48 px) y L52 `headline-xl-mobile` (32/40 px); L51 define `headline-xl`
+  (48/56 px), que es el que usa hoy el `h1` hasta `lg`. El tamaño renderizado no se midió (🕒 PENDIENTE para la Épica 09).
+* Capturas de referencia (`referencia/capturas/`, fuera de Git; los nombres codifican solo el ancho):
+  `index-320-claro.png`, `index-320-oscuro.png`, `index-360-claro.png`, `index-360-oscuro.png`, `index-412-claro.png`
+  e `index-412-oscuro.png`.

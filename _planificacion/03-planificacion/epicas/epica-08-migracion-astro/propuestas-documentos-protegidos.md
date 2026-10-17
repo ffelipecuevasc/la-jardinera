@@ -1,7 +1,7 @@
 # Propuestas de Edición para Documentos Protegidos — Épica 08 (Migración a Astro)
 
 > Estos cambios **no los aplica ningún agente**: los revisa y aplica el desarrollador (`AGENTS.md` §2).
-> **Fuente única y vigente** (reescrita el 16-10-2026, Épica 08 · Iteración 01, ajuste 2; ajustada en el ajuste 3).
+> **Fuente única y vigente** (reescrita el 16-10-2026, Épica 08 · Iteración 01, ajuste 2; ajustada en los ajustes 3 y 5).
 > Reemplaza a la versión anterior de este archivo y a las listas de la bitácora de la Iteración 01 (§5.7, §6 y §8.2).
 > Las rutas y comandos asumen las decisiones D1 a D9 del ADR-001 (`decisiones-tecnicas.md`).
 > Cada línea `-` de los bloques `diff` se comprobó por programa contra el texto actual del archivo.
@@ -14,11 +14,12 @@
    y la que empieza con un espacio es contexto (se deja como está). Los prefijos `-`, `+` y el espacio no forman parte
    del texto.
 3. **Orden sugerido** (de menor a mayor dependencia de lectura entre documentos):
-    1. `AGENTS.md`: A.1, A.2, A.3 y A.4.
+    1. `AGENTS.md`: A.1, A.2, A.3, A.4 y C.1 (dominio canónico).
     2. `_planificacion/02-arquitectura/stack-tecnologico.md`: A.5.
     3. `_planificacion/01-vision/`: A.6 (`proposito-y-alcance.md`) y A.8 (`objetivos-y-metricas.md`).
     4. `_planificacion/README.md`: A.7.
-    5. `README.md`: A.9.
+    5. `README.md`: A.9 y C.2 (dominio canónico).
+    6. `DESIGN.md`: C.3 no se aplica ahora; queda para la Iteración 08, junto con B.1.
 4. Si un `-` no coincide con el texto actual (por ejemplo, porque editaste el documento después del 16-10-2026),
    detente y avisa: la propuesta debe regenerarse contra el texto vigente.
 5. Cuando termines, avisa para registrar el cierre del Escenario 2 de la Iteración 01.
@@ -27,8 +28,9 @@
 
 ## 0. Estado de las propuestas
 
-**Ninguna aplicada todavía.** Decisión del desarrollador: aplicará a mano, juntas, todas las de la sección A después
-del reporte del ajuste 3 de la Iteración 01 y **antes de la Iteración 02**. `DESIGN.md` queda para la Iteración 08.
+**Ninguna aplicada todavía.** Decisión del desarrollador: aplicará a mano, juntas y en una sola tanda, todas las de la
+sección A y las de la sección C que corresponden a `AGENTS.md` y `README.md` (C.1 y C.2), después del reporte del ajuste 5
+de la Iteración 01 y **antes de la Iteración 02**. `DESIGN.md` (B.1 y C.3) queda para la Iteración 08.
 
 | #   | Archivo y sección | Momento | Estado |
 |:----|:------------------|:--------|:-------|
@@ -43,6 +45,9 @@ del reporte del ajuste 3 de la Iteración 01 y **antes de la Iteración 02**. `D
 | A.9 | `README.md`, sección B completa (nota de transición y §1, §2, §4, §5, §6, §7, §8, §10, §12 y §15) | Antes de la It. 02 | 🕒 Pendiente de aplicar |
 | —   | `README.md`: nota mínima de transición (propuesta #4 de la bitácora de la It. 01, §8.2) | — | ❌ **Descartada**: la reemplaza A.9, que ya incluye la nota |
 | B.1 | `DESIGN.md` | Iteración 08 | 🕒 Pendiente (la It. 08 entrega las líneas exactas) |
+| C.1 | `AGENTS.md` L4 (dominio canónico sin `www`, ADR-002) | Antes de la It. 02 | 🕒 Pendiente de aplicar |
+| C.2 | `README.md` L8, L63 y L167 (dominio canónico sin `www`, ADR-002) | Antes de la It. 02 | 🕒 Pendiente de aplicar |
+| C.3 | `DESIGN.md` L4 (dominio canónico sin `www`, ADR-002) | Iteración 08 | 🕒 Pendiente (para la Iteración 08) |
 
 Observaciones que no cambian ninguna propuesta:
 
@@ -52,7 +57,10 @@ Observaciones que no cambian ninguna propuesta:
   It. 02. Por eso `AGENTS.md` (A.1) y `README.md` (A.9) llevan una nota de transición al comienzo de la sección.
 * **Umbrales de `objetivos-y-metricas.md`** (decisión del desarrollador, ajuste 3): los de la §2 son la **meta del
   sitio**, no un requisito de cada iteración; A.8 lo precisa en la introducción sin cambiar los valores. La brecha de
-  rendimiento móvil está registrada como DT-21 a DT-25 (destino: Épica 10 — Rendimiento, por planificar).
+  rendimiento móvil está registrada como DT-21 a DT-25 (destino: Épica 10 — Rendimiento y calidad Lighthouse, por
+  planificar).
+* **Dominio canónico** (decisión del desarrollador, ajuste 5; ADR-002): `https://lajardinerafloreria.cl`, sin `www`. Las
+  propuestas de la sección C corrigen solo la URL; no tocan ninguna otra línea ni se superponen con A ni con B.
 
 ---
 
@@ -412,3 +420,68 @@ Pendiente de la Iteración 08. Menciones detectadas en la revisión de coherenci
 cambio de tokens ni de reglas de diseño: ubicación de archivos (líneas 43, 348, 409 y 542) y estado del footer (§5.3,
 línea 307, y §10, línea 466), que cambia con DT-06 en la Iteración 03. La Iteración 08 entrega el `diff` exacto
 contra el texto vigente en ese momento.
+
+---
+
+## C. Dominio canónico sin `www` (ADR-002)
+
+Decisión del desarrollador (16-10-2026): el dominio canónico es `https://lajardinerafloreria.cl`. Reportado por el
+desarrollador, con captura de la pestaña Red de DevTools: `www.lajardinerafloreria.cl` responde 301 y redirige a
+`lajardinerafloreria.cl`, que responde 200. Estas propuestas solo corrigen la URL; no se cambia ninguna configuración de
+Cloudflare ni de producción. `README.md` L63 y L167 no describen cómo se configura la redirección (regla de Cloudflare, de
+Pages u otra) y no puede inferirse: el texto propuesto expresa solo lo reportado.
+
+**Sin superposición:** las líneas que cambia C.1 (`AGENTS.md` L4) no aparecen en A.1 a A.4; las que cambia C.2
+(`README.md` L8, L63 y L167) no aparecen en A.9, y las de C.3 (`DESIGN.md` L4) no aparecen en B.1. A.9 modifica en esa
+tabla solo la fila "Comando de compilación" (L165), contigua a la fila de C.2 en L167 pero distinta; el orden entre A.9 y
+C.2 es indiferente.
+
+### C.1 Propuesta de edición — `AGENTS.md`
+**Sección:** encabezado (línea 4, "Producción")
+**Motivo:** el dominio canónico es el que no lleva `www` (ADR-002); la URL actual redirige con 301.
+```diff
+ > **Proyecto:** sitio web de **La Jardinera Florería** (Valdivia, Región de Los Ríos, Chile)
+-> **Producción:** https://www.lajardinerafloreria.cl
++> **Producción:** https://lajardinerafloreria.cl
+ > **Mantenedor y único editor de este archivo:** Felipe Cuevas (desarrollador del proyecto).
+```
+
+### C.2 Propuesta de edición — `README.md`
+**Sección:** encabezado (línea 8, "Producción"), §4 (línea 63, "DNS y dominio") y §12 (línea 167, "Dominio personalizado")
+**Motivo:** el dominio canónico es el que no lleva `www` (ADR-002). En L63 y L167 se expresa solo lo reportado: el dominio
+sin `www` sirve el sitio y `www` redirige con 301.
+
+**Línea 8:**
+```diff
+ 
+-🔹 **Producción:** [https://www.lajardinerafloreria.cl](https://www.lajardinerafloreria.cl)
++🔹 **Producción:** [https://lajardinerafloreria.cl](https://lajardinerafloreria.cl)
+ 🔹 **Repositorio:** `https://github.com/<usuario>/<repositorio>` *(completar)*
+```
+
+**Línea 63:**
+```diff
+ | Hosting y CDN          | Cloudflare Pages                             | Despliegue continuo desde GitHub                           |
+-| DNS y dominio          | Cloudflare                                   | `lajardinerafloreria.cl` y `www.lajardinerafloreria.cl` con HTTPS |
++| DNS y dominio          | Cloudflare                                   | `lajardinerafloreria.cl` (canónico) con HTTPS; `www.lajardinerafloreria.cl` redirige con 301 |
+ | Analítica              | Cloudflare Web Analytics                     | Métricas de tráfico sin cookies                            |
+```
+
+**Línea 167:**
+```diff
+ | Directorio de salida         | `_site`                                                                       |
+-| Dominio personalizado        | `lajardinerafloreria.cl` y `www.lajardinerafloreria.cl`                       |
++| Dominio personalizado        | `lajardinerafloreria.cl` (canónico); `www.lajardinerafloreria.cl` redirige con 301 |
+ | Certificado                  | HTTPS gestionado por Cloudflare                                               |
+```
+
+### C.3 Propuesta de edición — `DESIGN.md` (para la Iteración 08)
+**Sección:** encabezado (línea 4)
+**Motivo:** el dominio canónico es el que no lleva `www` (ADR-002). **No se aplica ahora**: queda para la Iteración 08,
+junto con B.1.
+```diff
+ > **Única fuente de la verdad** para tipografía, color, espaciado, componentes, efectos y accesibilidad visual del
+-> sitio https://www.lajardinerafloreria.cl.
++> sitio https://lajardinerafloreria.cl.
+ >
+```

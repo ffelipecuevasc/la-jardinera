@@ -598,6 +598,7 @@ bitácora (11.1, 11.2, 11.6 y 11.7).
 autorizados. Tras el cambio, "Épica 09" solo aparece como Revisión móvil (decisión 3) y en las notas de corrección de esta sección y de la 11; ninguna mención la nombra como Rendimiento salvo la columna "Destino anterior" de la tabla de arriba.
 
 ### 12.3 Solicitud de mejora del hero móvil
+> **Registro vigente (Ajuste 5):** la solicitud está en `_planificacion/README.md` §14 (SM-01); esta sección queda como historial.
 
 **Dónde se registra.** La constitución (`_planificacion/README.md`) **no define** un lugar para solicitudes de mejora, ideas
 o épicas futuras (confirmado por código: ninguna de sus 13 secciones lo contempla; el §12 es solo de deuda técnica). Por la
@@ -720,4 +721,116 @@ Reemplaza al de §11.7, porque los cambios de los Ajustes 3 y 4 siguen sin confi
 
 ```text
 Épica 08 - Iteración 01: Registra DT-22 a DT-25, reasigna las deudas de rendimiento a la Épica 10 y deja registrada la solicitud de revisión móvil del hero y las observaciones de las pruebas.
+```
+
+---
+
+## 13. Ajuste 5 (cierre documental final): registro de solicitudes (§14), Épica 10, dominio canónico y criterios de severidad
+
+**Fecha:** 16-10-2026 · **Agente:** Claude Code · **Alcance autorizado:** `_planificacion/README.md` (§12, §14 y menciones
+vigentes de las Épicas 09 y 10), `decisiones-tecnicas.md` (solo ADR nuevo), `iteracion-02.md` (solo L73),
+`iteracion-05.md` (solo si nombra `www`), `propuestas-documentos-protegidos.md`, esta bitácora y una línea en
+`estado-actual.md`. Precondiciones: rama `feat/migracion-astro`, árbol limpio (los ajustes 3 y 4 ya estaban confirmados en
+el commit `70d3443`), Node `v24.16.0`, pnpm `11.24.0`. Sin red, sin instalaciones y sin ejecutar Lighthouse.
+
+**Lectura:** se releyó `decisiones-tecnicas.md` completo (ADR-001 como modelo de formato), la estructura y la cabecera de
+`propuestas-documentos-protegidos.md`, `iteracion-02.md` (L66 a L80), `iteracion-05.md` (Tareas 3 a 5) y las líneas de
+dominio de `AGENTS.md`, `README.md` y `DESIGN.md`. Ya leídos en la sesión y sin cambios en el árbol, salvo lo que editó
+este agente: `_planificacion/README.md` (releído en el Ajuste 4) y las secciones 11 y 12 de esta bitácora. Ningún documento
+contradice a otro.
+
+### 13.1 Decisiones del desarrollador registradas
+
+1. Las solicitudes de mejora se registran de forma permanente en la §14 de `_planificacion/README.md` (opción 1 de §12.3).
+2. Épica 09 = "Revisión móvil del sitio"; Épica 10 = "Rendimiento y calidad Lighthouse" (rendimiento, accesibilidad y SEO
+   de la línea base). Ambas por planificar; no se crearon carpetas, archivos ni planificación.
+3. Dominio canónico: `lajardinerafloreria.cl` (sin `www`). *Reportado por el desarrollador* (captura de la pestaña Red de
+   DevTools): `www` responde 301 y redirige al dominio sin `www`, que responde 200. Sin cambios en Cloudflare ni en producción.
+4. Las correcciones del dominio de `AGENTS.md` y `README.md` se aplican ahora (propuestas C.1 y C.2); la de `DESIGN.md`
+   queda para la Iteración 08 (C.3).
+5. No se agregan notas de transición en `AGENTS.md` §5 ni §7; basta la de §4.
+6. Los criterios de severidad del §12 quedan escritos.
+7. El desarrollador aplicará todas las propuestas protegidas en una sola tanda, después del reporte.
+
+### 13.2 Cambios realizados
+
+| Archivo | Cambio |
+|:--------|:-------|
+| `_planificacion/README.md` §12 | Destino de DT-21 a DT-25: "Épica 10 — Rendimiento y calidad Lighthouse (por planificar)". En DT-21 se conservó la aclaración "fuera de la Épica 08, que exige paridad". Se agregaron los criterios de severidad antes de la tabla. |
+| `_planificacion/README.md` §14 | Sección nueva "Registro de solicitudes de mejora": introducción, estados, tabla con SM-01 y "Detalle de SM-01". Los datos del detalle se verificaron por programa contra `index.html`, `DESIGN.md` y `referencia/capturas/` (sin diferencias respecto del Ajuste 4). |
+| `decisiones-tecnicas.md` | ADR-002 "Dominio canónico sin www" (Aprobada, 16-10-2026). La constitución (§3) define ese archivo para "decisiones de arquitectura y excepciones aprobadas" y `AGENTS.md` §6 manda registrar ahí las decisiones técnicas relevantes; no exige un ADR por escrito, pero la decisión afecta `site`, `canonical`, Open Graph, sitemap y robots. |
+| `iteracion-02.md` L73 | `site: 'https://www.lajardinerafloreria.cl',` pasa a `site: 'https://lajardinerafloreria.cl',`. |
+| `iteracion-05.md` L69 | Nombraba "redirección sin `www`" entre las acciones del desarrollador. Se quitó esa acción y se agregó que se hacen sobre el dominio canónico sin `www` (ADR-002). |
+| `propuestas-documentos-protegidos.md` | Cabecera "Cómo aplicarlas" (orden con C.1 y C.2; C.3 queda para la Iteración 08), tabla de estado (C.1 a C.3), observación del dominio y Sección C. Nombre vigente de la Épica 10 en la observación de los umbrales. |
+| Esta bitácora | Una línea en §12.3 que remite a la §14 (sin reescribir la sección) y esta sección. |
+| `estado-actual.md` | Una línea nueva al final. |
+
+Menciones históricas de "Épica 10 — Rendimiento (por planificar)" (sin el nombre nuevo) que se dejaron intactas por ser
+registro de ajustes ya confirmados: `estado-actual.md` L51 y L52, y las secciones 11 y 12 de esta bitácora.
+
+### 13.3 Consistencia de la severidad con los criterios del §12
+
+No se cambió la severidad de ninguna fila. Según los criterios escritos (Alta: defecto visible que rompe la página;
+Media: afecta SEO, contraste, accesibilidad o rendimiento medidos; Baja: sin efecto visible o solo de mantenimiento):
+
+| Deuda | Severidad actual | Por qué no coincide con el criterio | Severidad que daría el criterio |
+|:------|:-----------------|:------------------------------------|:--------------------------------|
+| DT-02 | Media | Defecto visible de layout (solapamiento) que no rompe la página ni es SEO, contraste, accesibilidad o rendimiento. Resuelta. | Sin categoría exacta |
+| DT-03 | Media | `style=` heredados: sin efecto visible. Resuelta. | Baja |
+| DT-05 | Baja | Botones sociales invisibles en móvil: efecto visible. Resuelta. | Sin categoría exacta (visible, no rompe la página) |
+| DT-07 | Baja | Texto "Redbank" erróneo: efecto visible. Resuelta. | Sin categoría exacta (visible, no rompe la página) |
+| DT-14 | Media | La 404 se veía sin estilos en rutas anidadas: rompe la página. Resuelta. | Alta |
+| DT-15 | Baja | Destello claro en la carga: efecto visible. | Sin categoría exacta (visible, no rompe la página) |
+| DT-18 | Media | Recorte de glifos: defecto visible que no es SEO, contraste, accesibilidad ni rendimiento. Resuelta. | Sin categoría exacta |
+| DT-19 | Baja | Peso tipográfico incorrecto: efecto visible. Resuelta. | Sin categoría exacta (visible, no rompe la página) |
+| DT-20 | Baja | Contraste del acento del Hero medido bajo 3:1 en 2 de 7 viewports. | Media |
+| DT-25 | Baja | Orden de encabezados señalado por Lighthouse en Accesibilidad (registrada en el Ajuste 3). | Media |
+
+Consistentes: DT-01, DT-04, DT-06, DT-08, DT-09, DT-10, DT-11, DT-12, DT-13, DT-16, DT-17, DT-21, DT-22, DT-23 y DT-24.
+"Sin categoría exacta": el criterio de Media no incluye un defecto visible que no rompe la página, y el de Baja lo excluye.
+La decisión (reclasificar o ampliar los criterios) es del desarrollador.
+
+### 13.4 Menciones de `www` reportadas (sin editar)
+
+* Especificaciones de las Iteraciones 03 a 08 y `definicion-epica.md` de la Épica 08: ninguna. Solo `iteracion-02.md` L73
+  y `iteracion-05.md` L69, ya alineadas (§13.2).
+* `iteracion-01.md` de la Épica 08 L62 (`https://www.lajardinerafloreria.cl/a/b/inexistente`): historial, no se edita.
+* `iteracion-05.md` L46 remite al contenido de `robots.txt` de la Épica 07 · It. 04, que declara
+  `Sitemap: https://www.lajardinerafloreria.cl/sitemap.xml` (`iteracion-04.md` de la Épica 07, L105). Esa URL debe salir con
+  el dominio sin `www` (ADR-002); la iteración 05 no nombra `www` de forma explícita en esa línea, por lo que no se editó.
+* Épica 07 completa y bitácoras anteriores (`iteracion-04.md` L39, L40, L64 a L68, L71, L91, L105, L114 a L118, L138, L196,
+  L197, etc.): historial.
+
+### 13.5 Propuestas de la Sección C y verificación
+
+* C.1 (`AGENTS.md` L4), C.2 (`README.md` L8, L63 y L167) y C.3 (`DESIGN.md` L4, para la Iteración 08). Sin aplicar.
+* Sin superposición con A ni con B (comprobado por programa por número de línea): A.9 modifica en esa tabla solo la fila
+  "Comando de compilación" (L165) y C.2 la fila de L167.
+* El pedido hablaba de "B.1 de README.md"; en el archivo, `README.md` es **A.9** y B.1 es `DESIGN.md`. Se aplicó el criterio
+  de fondo: C.2 junto con A.9 y C.3 junto con B.1 en la Iteración 08.
+* En `README.md` L63 y L167 no se describe cómo se configura la redirección (regla de Cloudflare, de Pages u otra) y no
+  puede inferirse; el texto propuesto expresa solo lo reportado (el dominio sin `www` sirve el sitio y `www` redirige con 301).
+* **Verificación por programa: 83 de 83 líneas `-` coinciden** con el texto actual de su documento (antes, 78), sin
+  excepciones. Por archivo: `AGENTS.md` 23, `stack-tecnologico.md` 7, `proposito-y-alcance.md` 4, `_planificacion/README.md` 7,
+  `objetivos-y-metricas.md` 5, `README.md` 36 y `DESIGN.md` 1. Las 41 líneas de contexto y los 34 bloques también coinciden
+  como secuencia consecutiva.
+
+### 13.6 Estado
+
+**Completada con reservas — pendiente que el desarrollador aplique las propuestas protegidas** (Escenario 2). No se marca
+cerrada. Verificación: solo archivos autorizados modificados; archivos prohibidos sin cambios; sin red, instalaciones ni Lighthouse.
+
+### 13.7 Pendientes del desarrollador
+
+1. Aplicar en una sola tanda A.1 a A.9, C.1 y C.2 de `propuestas-documentos-protegidos.md` antes de la Iteración 02. C.3
+   queda para la Iteración 08. 🕒
+2. Revisar la propiedad de Search Console y las vistas previas sociales sobre el dominio sin `www`. 🕒
+3. Decidir qué hacer con las filas de §13.3 que no coinciden con los criterios de severidad.
+4. Definir los puntos pendientes de SM-01 y planificar las Épicas 09 y 10 después de cerrar la Épica 08.
+5. Revisar y hacer el commit.
+
+### 13.8 Mensaje de commit sugerido
+
+```text
+Épica 08 - Iteración 01: Agrega la §14 de solicitudes (SM-01), registra el ADR-002 de dominio canónico sin www, renombra la Épica 10, fija criterios de severidad y propone la Sección C.
 ```
