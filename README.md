@@ -5,8 +5,8 @@ Los Ríos, Chile. El proyecto presenta los servicios del taller, los planes de s
 fotográfico y los canales de contacto directo, con una estética editorial inspirada en la naturaleza húmeda del sur de
 Chile.
 
-🔹 **Producción:** [https://www.lajardinerafloreria.cl](https://www.lajardinerafloreria.cl)
-🔹 **Repositorio:** `https://github.com/<usuario>/<repositorio>` *(completar)*
+🔹 **Producción:** [https://lajardinerafloreria.cl](https://lajardinerafloreria.cl)
+🔹 **Repositorio:** `https://github.com/ffelipecuevasc/la-jardinera`
 🔹 **Desarrollo:** [Felipe Cuevas](https://felipecuevas.dev)
 
 **Transición (Épica 08):** este documento describe el proyecto migrado a Astro. Hasta cerrar la Iteración 02, los
@@ -63,7 +63,7 @@ dependencias de iconografía externa.
 | Gestor de paquetes     | pnpm `11.24.0`                               | Requiere Node.js `>= 22.13`                                |
 | Control de versiones   | Git + GitHub                                 | Rama de producción: `main`                                 |
 | Hosting y CDN          | Cloudflare Pages                             | Despliegue continuo desde GitHub                           |
-| DNS y dominio          | Cloudflare                                   | `lajardinerafloreria.cl` y `www.lajardinerafloreria.cl` con HTTPS |
+| DNS y dominio          | Cloudflare                                   | `lajardinerafloreria.cl` (canónico) con HTTPS; `www.lajardinerafloreria.cl` redirige con 301 |
 | Analítica              | Cloudflare Web Analytics                     | Métricas de tráfico sin cookies                            |
 | SEO                    | Google Search Console                        | Indexación, cobertura y rendimiento de búsqueda            |
 | Desarrollo asistido    | Claude Code y Antigravity                    | Gobernados por `AGENTS.md` y `_planificacion/`             |
@@ -171,7 +171,7 @@ El sitio se publica con **Cloudflare Pages**, conectado al repositorio de GitHub
 | Rama de producción           | `main`                                                                        |
 | Comando de compilación       | `pnpm run build:cf` (`astro build`, genera `_site/`)                          |
 | Directorio de salida         | `_site`                                                                       |
-| Dominio personalizado        | `lajardinerafloreria.cl` y `www.lajardinerafloreria.cl`                       |
+| Dominio personalizado        | `lajardinerafloreria.cl` (canónico); `www.lajardinerafloreria.cl` redirige con 301 |
 | Certificado                  | HTTPS gestionado por Cloudflare                                               |
 
 ---

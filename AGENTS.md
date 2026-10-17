@@ -1,7 +1,7 @@
 # AGENTS.md — Instrucciones para agentes de IA
 
 > **Proyecto:** sitio web de **La Jardinera Florería** (Valdivia, Región de Los Ríos, Chile)
-> **Producción:** https://www.lajardinerafloreria.cl
+> **Producción:** https://lajardinerafloreria.cl
 > **Mantenedor y único editor de este archivo:** Felipe Cuevas (desarrollador del proyecto).
 >
 > Claude Code (v2.1.277 o superior) lee este archivo automáticamente **solo si en el proyecto no existe `CLAUDE.md`,
