@@ -101,21 +101,25 @@ Una épica se cierra solo cuando todas sus iteraciones están cerradas y su DoD 
 
 El detalle vive en `AGENTS.md` §5; aquí se listan para consulta rápida:
 
-1. MPA estricta de 6 archivos HTML. Sin emulación de SPA.
-2. Cero JS y CSS en línea (`style=`, `onclick`, `<script>` con lógica).
-3. JavaScript en módulos ES6 registrados en `src/js/main.js`, con cláusulas de guarda.
+1. MPA estricta: 6 páginas en `src/pages/` que Astro compila a 6 HTML. Sin emulación de SPA ni directivas `client:*`.
+2. Cero JS y CSS en línea (`style=`, `onclick`, `<script is:inline>`, `<style>` en `.astro`).
+3. JavaScript en módulos ES6 importados de forma estática en `src/js/main.js`, con cláusulas de guarda.
 4. Solo tokens de `DESIGN.md` y `tailwind.config.js`; clases de Tailwind siempre literales.
-5. Header y footer duplicados en los 6 HTML: paridad exacta, `index.html` como fuente de la verdad.
+5. Header y footer como componentes únicos (`SiteHeader.astro`, `SiteFooter.astro`); hasta las It. 03 y 04 de la
+   Épica 08 siguen duplicados en las 6 páginas `.astro`, con paridad exacta e `index.astro` como fuente de la verdad.
 6. Una iteración, un alcance: no se tocan archivos fuera de lo especificado.
 7. Git en modo lectura para los agentes; *commits*, *push* y *merge* los hace el desarrollador.
+8. Rutas absolutas desde la raíz (`/servicios`, `/images/...`); prohibido `./public/`.
 
 ---
 
 ## 7. Estándar de verificación
 
-1. **Compilación:** `pnpm build` sin errores y clases nuevas presentes en `dist/css/output.css`.
-2. **Invariantes por búsqueda de texto:** `style=`, `onclick`, `href="#"`, IDs únicos, ausencia de `fixed` dentro del
-   `<header>`.
+**Transición:** hasta cerrar la Iteración 02 de la Épica 08 rigen los comandos previos (`pnpm build` y `dist/css/output.css`); desde la Iteración 02, los de esta lista.
+
+1. **Compilación:** `pnpm run build:cf` sin errores y clases nuevas presentes en el CSS de `_site/_astro/`.
+2. **Invariantes por búsqueda de texto** en `_site/**/*.html`: `style=`, `onclick`, `<style>`, `<script>` sin `src`,
+   `href="#"`, IDs únicos, ausencia de `fixed` dentro del `<header>`.
 3. **Render real** en 320×640, 360×740, 412×915, 768×1024, 740×360, 1024×768 y 1280×800, en modo claro y oscuro,
    cuando la iteración tiene impacto visual. La Iteración 06 de la Épica 06 demostró que inspeccionar el marcado no
    basta.
