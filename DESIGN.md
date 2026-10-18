@@ -304,9 +304,9 @@ Hallazgos abiertos. No bloquean el trabajo, pero ningún componente nuevo debe r
    Decisión pendiente: mantenerlo como rasgo de la marca o migrar a `rounded-[999px]`.
 2. **Primer plano del botón primario inconsistente.** Conviven `text-white dark:text-neutral-950` (tonos por defecto
    de Tailwind) y `text-neutral-50 dark:text-on-primary`. Estándar propuesto: `text-neutral-50 dark:text-on-primary`.
-3. **Footer con dos variantes:** `mt-space-8` (Inicio, Contacto, 404) y `border-t border-outline-variant/20` sin margen
-   (Servicios, Suscripción, Galería). Además, el enlace activo del footer pierde `font-body-sm text-body-sm` y se ve a
-   16 px en vez de 14 px.
+3. **Footer con dos variantes (resuelto en la Épica 08 · Iteración 03, 18-10-2026):** el footer es ahora un solo
+   componente (`SiteFooter.astro`) con `border-t border-outline-variant/20` y sin margen externo, en las 6 páginas. El
+   enlace activo lleva `font-body-sm text-body-sm` y se ve a 14 px, igual que los inactivos.
 4. **Clases `text-[Npx]` en SVG** heredadas de la migración de íconos: no tienen efecto porque el SVG declara
    `width`/`height`. El tamaño se controla con `w-*`/`h-*`.
 5. **Rombo ✦ en `text-secondary`** sobre fondo oscuro: bajo contraste (decorativo). Algunas instancias no llevan
@@ -453,17 +453,21 @@ fijos). Alturas acopladas a `h-20`. Estado activo único por página; `404.html`
 
 ## 10. Componente: footer
 
-Rejilla `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-6` sobre `bg-surface-container-low`:
+Componente único `src/components/SiteFooter.astro`, que recibe `paginaActiva` y genera los enlaces desde
+`src/data/navegacion.js`. Contenedor `w-full bg-surface-container-low border-t border-outline-variant/20`, **sin margen
+externo**: el espacio sobre el footer lo decide cada página. Rejilla `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4
+gap-space-6`:
 
 1. Marca (`font-headline-md italic`), frase de filosofía y crédito de desarrollo.
-2. Navegación (`<nav data-active-classes="text-primary font-semibold">`) con los 5 enlaces.
+2. Navegación (`<nav data-active-classes="text-primary font-semibold">`) con los 5 enlaces. Enlace inactivo:
+   `font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors`. Enlace activo
+   (`aria-current="page"`; la 404 no tiene ninguno): `font-body-sm text-body-sm transition-colors text-primary
+   font-semibold`.
 3. Contacto (`tel:`, `mailto:`, Google Maps) con íconos `text-primary` y botones sociales `w-8 h-8 bg-surface-container`,
    siempre visibles (sin `hidden lg:flex`). El segundo `<path>` del ícono de Facebook lleva
    `class="fill-surface-container"` y nunca un color fijo: el relleno debe coincidir con el fondo del botón en ambos
    temas (en oscuro, 6,64:1 frente al círculo).
 4. Medios de pago: Crédito/Débito, Transferencia, Efectivo.
-
-Pendiente de unificación (ver §5.3).
 
 ---
 

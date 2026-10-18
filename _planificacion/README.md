@@ -105,8 +105,9 @@ El detalle vive en `AGENTS.md` §5; aquí se listan para consulta rápida:
 2. Cero JS y CSS en línea (`style=`, `onclick`, `<script is:inline>`, `<style>` en `.astro`).
 3. JavaScript en módulos ES6 importados de forma estática en `src/js/main.js`, con cláusulas de guarda.
 4. Solo tokens de `DESIGN.md` y `tailwind.config.js`; clases de Tailwind siempre literales.
-5. Header y footer como componentes únicos (`SiteHeader.astro`, `SiteFooter.astro`); hasta las It. 03 y 04 de la
-   Épica 08 siguen duplicados en las 6 páginas `.astro`, con paridad exacta e `index.astro` como fuente de la verdad.
+5. Header y footer como componentes únicos (`SiteHeader.astro`, `SiteFooter.astro`); el footer ya lo es (It. 03 de la
+   Épica 08) y el header sigue duplicado en las 6 páginas `.astro` hasta la It. 04, con paridad exacta e `index.astro`
+   como fuente de la verdad.
 6. Una iteración, un alcance: no se tocan archivos fuera de lo especificado.
 7. Git en modo lectura para los agentes; *commits*, *push* y *merge* los hace el desarrollador.
 8. Rutas absolutas desde la raíz (`/servicios`, `/images/...`); prohibido `./public/`.
@@ -220,7 +221,7 @@ Criterios de severidad:
 | DT-03 | ✅ **Resuelta** (Épica 07 · Iteración 03, 14-10-2026; el del Hero se resolvió en la Épica 01 · Iteración 08). `style=` heredados de la textura de ruido del banner (Inicio, Servicios, Suscripción, Galería): migrados a la clase `.bg-noise`; 0 `style="` en los 6 HTML y la textura se ve idéntica (0 píxeles de diferencia frente a `HEAD` en las 16 comparaciones). | Media | Épica 07 · It. 03 |
 | DT-04 | `index.html` no declara `<meta name="description">`.                                                          | Media     | Épica 08 · It. 05 (trasladada desde Épica 07 · It. 04) |
 | DT-05 | ✅ **Resuelta** (Épica 07 · Iteración 03, 14-10-2026). `404.html`: los botones sociales del footer tenían `hidden lg:flex` y eran invisibles en móvil. Verificada en render real: a 360 px los tres miden 32 × 32 px con `display: flex`, igual que en `contacto.html`. | Baja | Épica 07 · It. 03 |
-| DT-06 | Footer con dos variantes de contenedor y enlace activo sin `font-body-sm text-body-sm`.                       | Baja      | Épica 08 · It. 03 (componente Astro) |
+| DT-06 | ✅ **Resuelta** (Épica 08 · Iteración 03, 18-10-2026). Footer con dos variantes de contenedor y enlace activo sin `font-body-sm text-body-sm`. Unificado en `src/components/SiteFooter.astro`: contenedor `border-t border-outline-variant/20` sin margen externo y enlace activo con `font-body-sm text-body-sm`, con los enlaces leídos de `src/data/navegacion.js`. Verificada: `<footer` solo en el componente; 1 footer por página y `aria-current="page"` en las 5 páginas indexables (0 en la 404); en render real (Chrome 155 headless, 7 viewports × claro y oscuro, sin fuentes ni videos externos) 0 diferencias de geometría no explicadas, 64 px menos sobre el footer en Inicio, Contacto y 404 y enlace activo a 14 px. Revisión visual humana del footer en las 6 páginas: aprobada por el desarrollador (18-10-2026). | Baja | Épica 08 · It. 03 (componente Astro) |
 | DT-07 | ✅ **Resuelta** (Épica 07 · Iteración 03, 14-10-2026). Texto "Redbank" en la franja de beneficios del Inicio corregido a **Redbanc** (`index.html`, línea 337; solo esa palabra). Verificado en render real: el texto visible es "Redbanc, efectivo y transferencias bancarias." | Baja      | Épica 07 · It. 03   |
 | DT-08 | Sin `robots.txt`, `sitemap.xml`, `canonical` ni etiquetas Open Graph.                                         | Media     | Épica 08 · It. 05 (trasladada desde Épica 07 · It. 04) |
 | DT-09 | ✅ **Resuelta** (Épica 07 · Iteración 01). `01-vision/proposito-y-alcance.md` y `02-arquitectura/stack-tecnologico.md` desactualizados (5 páginas, Netlify Forms, GitHub Actions como despliegue). | Baja | Épica 07 · It. 01 |
