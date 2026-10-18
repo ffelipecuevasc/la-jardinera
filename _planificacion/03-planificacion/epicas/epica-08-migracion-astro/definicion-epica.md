@@ -42,7 +42,7 @@ interfaz, renderizado en servidor (SSR) y reescritura de los módulos Vanilla.
 | Los footers tienen exactamente 2 variantes de contenedor (DT-06) y el enlace activo.              | `SiteFooter` unifica la variante y cierra DT-06.                                                         |
 | `data-path` en los enlaces no lo lee ningún módulo JS.                                            | El estado activo se resuelve en compilación; no hay dependencia en el navegador.                        |
 | El despliegue ya publica una carpeta generada (`_site/`) con `pnpm run build:cf` (Épica 07 · It. 01). | Astro escribe en `_site/` y Cloudflare **no cambia de configuración**.                                |
-| Node `>= 22.13` y pnpm `11.24.0` fijados.                                                         | Astro 7 exige Node `>= 22.12`: compatible sin cambios.                                                   |
+| Node `>= 22.22` y pnpm `11.24.0` fijados (corregido el 18-10-2026).                               | Astro 7.4.0 exige Node `>= 22.22.0`: el mínimo sube (corregido el 18-10-2026).                           |
 
 ### 2.2 Lo que hay que resolver
 
@@ -147,7 +147,7 @@ tailwind.config.js            # Solo cambia "content"
 | Preset de framework    | Ninguno                                   | No       |
 | Comando de compilación | `pnpm run build:cf`                        | No (cambia su contenido en `package.json`) |
 | Directorio de salida   | `_site`                                   | No       |
-| Variables de entorno   | `NODE_VERSION=22`, `PNPM_VERSION=11.24.0` | Verificar en el log que Node sea `>= 22.12` |
+| Variables de entorno   | `NODE_VERSION=22.22.2` (corregido el 18-10-2026), `PNPM_VERSION=11.24.0` | Verificar en el log que Node sea `>= 22.22` (corregido el 18-10-2026) |
 
 La rama `feat/migracion-astro` genera vistas previas en `*.pages.dev`. Revertir producción es un clic en el panel de
 Cloudflare (despliegue anterior).

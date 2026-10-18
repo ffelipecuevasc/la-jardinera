@@ -308,3 +308,66 @@ Sin render nuevo del sitio: el ajuste no cambia el sitio visible (la versión in
 ```text
 Épica 08 - Iteración 02: Fija Astro 7.4.0 exacta, sube el mínimo de Node a 22.22 y registra el ajuste de cierre con las propuestas para los documentos protegidos.
 ```
+
+---
+
+## 10. Registro de cierre con la revisión del desarrollador — 18-10-2026
+
+Registro posterior al *push* de la rama y al ajuste de la §9. No cambia el sitio visible: no se tocó `src/`, `public/` ni `astro.config.mjs`. Rótulos de evidencia de esta sección: **[código]** confirmado por código, comandos o programa en esta sesión; **[informado]** dato entregado por el desarrollador, que esta sesión no midió ni vio (no hay capturas, mediciones ni registro de Cloudflare); **🕒 PENDIENTE** no verificado.
+
+### 10.1 Revisión visual y vista previa de Cloudflare (informado por el desarrollador)
+
+| Comprobación | Resultado informado | Escenario | Rótulo |
+|:-------------|:--------------------|:----------|:-------|
+| Revisión visual humana | Las 6 páginas en modo claro y oscuro, en Chrome de escritorio, vista móvil simulada, celular real y Firefox o Safari (no precisó cuál de los dos), todo sin diferencias. | 6 (§8.2, punto 2) | [informado] |
+| Redirección de la URL antigua | En la vista previa `4ab6fb50.la-jardinera.pages.dev`, `/public/images/hero-botanical-desktop.webp` responde 301 con `Location: /images/hero-botanical-desktop.webp`. | 4 (§8.2, punto 3) | [informado] |
+| 404 en rutas anidadas | `/a/b/inexistente` y `/servicios/xyz` se ven con estilos, header y footer, y sin enlace activo. | 5 (§8.2, punto 3) | [informado] |
+
+Contexto [código]: la regla de `public/_redirects` es genérica (`/public/*  /:splat  301`), así que la URL probada es representativa; `public/images/` contiene `hero-botanical-desktop.webp` y también `hero-botanical.webp`, el nombre que cita la especificación.
+
+### 10.2 Decisiones y cambios aplicados
+
+* **Comentario de cabecera de `contact-form.js` (§9.4 c): aceptado como excepción documentada**, amparada en la Tarea 5.4 de `iteracion-02.md` (L145-146: "los comentarios explicativos de `contact-form.js` pueden mencionarlos; actualízalos si corresponde"), aunque la lista de autorización de la cabecera (L14-18) no nombra ese archivo. Se mantiene el comentario con las rutas nuevas; el código del módulo no cambió. Decisión del desarrollador.
+* **E.5 aplicada:** `package.json` declara `"engines": { "node": ">=22.22.0" }` (*commit* `4e4ea0f`). [código: `git diff 06c5def HEAD -- package.json` agrega exactamente esas 3 líneas; `pnpm-lock.yaml` sin diferencias en ese rango.]
+* **E.1 a E.3 aplicadas por el desarrollador** (*commit* `8f696c0`): `AGENTS.md` L90, `README.md` L60 y L105 y `stack-tecnologico.md` L11 dicen `22.22`. [código: búsqueda de `22.13` en esos tres archivos, 0 coincidencias.] E.4 no requería cambio.
+* **E.6 aplicada en esta sesión** (autorizada solo para esto): `definicion-epica.md` L45 ("Node `>= 22.22`", "Astro 7.4.0 exige Node `>= 22.22.0`") y L150 (`NODE_VERSION=22.22.2`, "Node sea `>= 22.22`"), cada una con la nota "(corregido el 18-10-2026)". No se tocó nada más del documento; sus menciones de Astro `7.3.8` (L67 y L109) describen la prueba de concepto y la planificación, y se conservan como historial.
+* **Reserva 1 de §8.2 (Tarea 0) cerrada** con el *commit* `b26a14c`. [código: `git ls-files` ya no lista los 6 HTML de la raíz, `dist/` ni `scripts/stage-site.mjs`; `scripts/` conserva `comparar-con-referencia.mjs`, `instantanea-referencia.mjs` y `replace-icons.js`.]
+
+### 10.3 Verificación de esta sesión [código]
+
+| Comprobación | Resultado |
+|:-------------|:----------|
+| `git status` / `git diff` | Árbol limpio al iniciar; `engines` presente en `package.json`; `pnpm-lock.yaml` sin cambios desde `06c5def`. |
+| `pnpm install --frozen-lockfile` | Código 0, "Already up to date"; el lockfile no cambió. |
+| `pnpm run build:cf` (con `_site/` borrada antes) | Código 0; "6 page(s) built"; 0 líneas con "warn"; 106 archivos en `_site/`. |
+
+Node local `v24.16.0`. El despliegue con Node 22.22.2 es el dato informado en la §9.1; esta sesión no ejecutó nada con Node 22.
+
+### 10.4 Estado de las reservas de la §8.2
+
+| # | Reserva | Estado al 18-10-2026 |
+|:--|:--------|:---------------------|
+| 1 | Tarea 0 sin ejecutar | Cerrada (`b26a14c`). |
+| 2 | Sin revisión visual humana ni con tipografías reales | Informada por el desarrollador, sin capturas; falta precisar si el cuarto navegador fue Firefox o Safari. |
+| 3 | Sin vista previa de Cloudflare | Parcial: 301 y renderizado de la 404 anidada informados; el estado HTTP 404 no está confirmado. |
+| 4 | Versión de Node y de Astro por decidir | Cerrada (§9). |
+| 5 | Una sola corrida por combinación | Ruido medido (§9.4 b); quedan 3 casos del Inicio sin atribuir. |
+
+### 10.5 Pendientes reales
+
+1. **Firefox o Safari sin precisar.** El desarrollador no indicó cuál de los dos probó; sin ese dato no se sabe qué motor de renderizado quedó cubierto.
+2. **3 píxeles del Inicio sin atribuir.** `index-768` en claro y en oscuro (3 píxeles, hasta 16 niveles de 255) e `index-1024` en claro (1 píxel) no se reprodujeron en la medición de ruido (§9.4 b). La geometría coincidió en las 84 combinaciones y su tamaño no sugiere un defecto de maquetación, pero la causa no está demostrada.
+3. **Estado HTTP 404 sin confirmar** de `/a/b/inexistente` y `/servicios/xyz` en la vista previa de Cloudflare: solo se informó que se ven con estilos, header y footer. Se confirma con la pestaña Red del navegador o con `curl -I` sobre la URL de la vista previa.
+4. **No informado: consola del navegador con las fuentes y los videos reales** (último ítem de la §8.3; el Escenario 6 pide consola sin errores). El desarrollador no la mencionó, así que se mantiene sin verificar.
+
+### 10.6 Estado de la iteración
+
+**Completada con reservas** (sin cambio). No es 🔒 Cerrada: eso ocurre solo con la fusión a `main` (`_planificacion/README.md` §5).
+
+Motivo exacto, según el §8.1 de `_planificacion/README.md` ("Completada con éxito" exige todos los criterios con evidencia verificable): los Escenarios 1 a 3 tienen evidencia por código; los Escenarios 4, 5 y 6 se apoyan en gran parte en datos informados por el desarrollador, sin capturas ni registro, y quedan abiertos el estado HTTP 404 (pendiente 3), el motor del cuarto navegador (pendiente 1) y la consola real (pendiente 4). El pendiente 2 por sí solo no impediría "Completada con éxito". Pasa a "Completada con éxito" cuando se confirmen los pendientes 1, 3 y 4 y el desarrollador acepte el 2.
+
+### 10.7 Mensaje de commit sugerido
+
+```text
+Épica 08 - Iteración 02: Registra la revisión del desarrollador, corrige el mínimo de Node en la definición de la épica y mantiene el cierre con reservas.
+```
