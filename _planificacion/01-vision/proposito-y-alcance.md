@@ -19,17 +19,17 @@ El proyecto es estrictamente una **Multi-Page Application (MPA)**. Consta de 6 a
 cinco páginas interconectadas por una barra de navegación y una página de error. **Prohibido el uso de enrutadores
 JavaScript (History API) o emulaciones de Single Page Application (SPA).**
 
-1. **Inicio (`index.html`):** Hero, propuesta de valor, resumen de servicios, modelo de suscripción y reseñas (carrusel
+1. **Inicio (`/`):** Hero, propuesta de valor, resumen de servicios, modelo de suscripción y reseñas (carrusel
    vanilla JS).
-2. **Servicios (`servicios.html`):** Catálogo de 8 servicios (`src/js/data/services.js`) con modal de detalle dinámico;
-   su llamado a la acción lleva a `contacto.html?service=...`.
-3. **Suscripción Floral (`suscripcion-floral.html`):** 3 planes de suscripción (Esencial, Premiere y Luxe) para hogar u
+2. **Servicios (`/servicios`):** Catálogo de 8 servicios (`src/js/data/services.js`) con modal de detalle dinámico;
+   su llamado a la acción lleva a `/contacto?service=...`.
+3. **Suscripción Floral (`/suscripcion-floral`):** 3 planes de suscripción (Esencial, Premiere y Luxe) para hogar u
    oficina.
-4. **Galería (`galeria.html`):** Acordeón horizontal por capítulos y visor Lightbox multimodal (imágenes y video). No
+4. **Galería (`/galeria`):** Acordeón horizontal por capítulos y visor Lightbox multimodal (imágenes y video). No
    tiene filtros.
-5. **Contacto (`contacto.html`):** Tarjetas de WhatsApp y correo, y formulario cuyo envío abre WhatsApp con el mensaje
+5. **Contacto (`/contacto`):** Tarjetas de WhatsApp y correo, y formulario cuyo envío abre WhatsApp con el mensaje
    armado (`src/js/modules/contact-form.js`). No hay mapa incrustado ni Netlify Forms.
-6. **Página no encontrada (`404.html`):** Página de error con `noindex, follow`, sin enlace activo en la navegación.
+6. **Página no encontrada (cualquier ruta inexistente; se publica como `404.html`):** Página de error con `noindex, follow`, sin enlace activo en la navegación.
 
 ## 3. Límites del Alcance (Scope Boundaries)
 

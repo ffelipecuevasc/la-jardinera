@@ -147,3 +147,23 @@ Estructura objetivo: `src/pages/` (6 páginas), `src/layouts/BaseLayout.astro`, 
 * Las especificaciones y bitácoras de la Épica 07 y la Iteración 01 de la Épica 08 son historial y conservan `www`.
 * Las acciones del desarrollador de la Iteración 05 (Search Console, vistas previas) deben hacerse sobre el dominio sin
   `www`; la propiedad de Search Console 🕒 PENDIENTE de revisar por el desarrollador.
+
+## Épica 08 · Iteración 02 — Decisiones de configuración de Astro — 17-10-2026
+
+* **`compressHTML: false` en `astro.config.mjs`.** Con la compresión por defecto, Astro elimina los espacios entre un
+  texto y la etiqueta en línea que le sigue: en Contacto, `Nombre <span>*</span>` salía como `Nombre<span>*</span>` y
+  `Teléfono <span>(opcional)</span>` como `Teléfono<span>(opcional)</span>`. Se detectó en la comparación visual (render real
+  en Chrome 155 headless, Contacto a 768 px, 550 píxeles con diferencia de más de 8 niveles) y no en la comparación de marcado,
+  que normalizaba los espacios; el comparador (`scripts/comparar-con-referencia.mjs`) ahora conserva los espacios de borde.
+  **Alternativa descartada:** dejar la compresión y reponer a mano cada espacio con `{" "}`: contradice la copia literal de
+  la iteración. **Costo:** sin compresión de HTML, `_site/index.html` mide 88.488 B (el original, 94.101 B); no se midió la salida
+  comprimida, que además se entrega con la compresión de transporte de Cloudflare.
+* **Versión de Astro:** `pnpm add -D astro@^7.3.8` resolvió **7.4.0** (el ADR-001 fija 7.3.8 "sin actualizar"; el rango `^7.3.8`
+  de la especificación lo permite). `package.json` quedó con `"astro": "^7.4.0"` y el *lockfile* fija 7.4.0. Tailwind sigue en
+  3.4.19. Queda a decisión del desarrollador si se fija 7.3.8 exacta.
+* **`BaseLayout.astro` recibe `bodyClass`, `noindex` y `description` opcional.** Las 6 páginas no comparten las clases de
+  `<body>` (Inicio y Servicios: base; Galería: base más `selection:*`; Contacto y 404: base más `flex flex-col min-h-screen`),
+  ni el `<head>` (el Inicio no tiene `<meta name="description">`, DT-04; la 404 tiene `robots`). Se pasan como propiedades en
+  vez de unificarlas (la especificación ordena detenerse y reportar antes de unificar).
+* **Hojas de estilo y scripts externos con *hash*.** Se verificó en `_site/`: 1 CSS (`_astro/BaseLayout.<hash>.css`) y 1 JS
+  (`_astro/BaseLayout.astro_astro_type_script_index_0_lang.<hash>.js`), 0 `<style>`, 0 `style=` y 0 `<script>` sin `src`.

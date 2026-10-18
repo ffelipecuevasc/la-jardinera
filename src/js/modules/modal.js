@@ -222,7 +222,7 @@ function initServiceModal() {
 
         // 3. CTA dinámico con parámetro de servicio
         if (modalCotizarBtn) {
-            modalCotizarBtn.href = `./contacto.html?service=${encodeURIComponent(service.title)}`;
+            modalCotizarBtn.href = `/contacto?service=${encodeURIComponent(service.title)}`;
         }
 
         // 4. Bloqueo de Screen Readers en fondo (WCAG 2.1)

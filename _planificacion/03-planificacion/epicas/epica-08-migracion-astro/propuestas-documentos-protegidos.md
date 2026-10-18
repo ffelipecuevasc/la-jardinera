@@ -485,3 +485,125 @@ junto con B.1.
 +> sitio https://lajardinerafloreria.cl.
  >
 ```
+
+---
+
+## D. Al cerrar la Iteración 02 (retiro de notas de transición y comandos Git)
+
+> **Estado de A, C.1 y C.2:** el desarrollador las aplicó y se reverificaron el 17-10-2026 (bitácora de la Iteración 01,
+> §14.2). Las tablas de la §0 de este archivo reflejan el estado previo a esa aplicación. La sección D parte del texto
+> **vigente** de cada documento (17-10-2026, `HEAD` `e1390c8`) y se redactó en la Iteración 02. Cada línea `-` se
+> comprobó por programa contra el archivo real (ver la bitácora de la Iteración 02, §5).
+> Aplícalas con el mismo criterio de la sección "Cómo aplicarlas" (`-` se borra, `+` se agrega, espacio es contexto).
+
+### D.1 Propuesta de edición — `AGENTS.md`
+**Sección:** §4 Stack y comandos (nota de transición)
+**Motivo:** la rama ya tiene Astro: `pnpm dev`, `pnpm preview` y `pnpm run build:cf` ejecutan `astro dev`, `astro preview`
+y `astro build` (Iteración 02). La nota deja de aplicar.
+```diff
+ ## 4. Stack y comandos
+ 
+-> **Transición (Épica 08):** hasta cerrar la Iteración 02, la rama todavía no tiene Astro y los comandos vigentes son
+-> los previos (Tailwind por CLI con `pnpm dev` y `pnpm build`, y un servidor estático aparte para previsualizar). Desde
+-> la Iteración 02 rigen los comandos de Astro descritos aquí.
+-
+ | Capa           | Tecnología                                                                |
+```
+
+### D.2 Propuesta de edición — `README.md`
+**Sección:** encabezado (nota de transición, líneas 12 a 14)
+**Motivo:** desde la Iteración 02 los comandos de la rama son los de Astro; el documento ya los describe.
+```diff
+ 🔹 **Desarrollo:** [Felipe Cuevas](https://felipecuevas.dev)
+ 
+-> **Transición (Épica 08):** este documento describe el proyecto migrado a Astro. Hasta cerrar la Iteración 02, los
+-> comandos de la rama siguen siendo los previos (Tailwind compilado por CLI y un servidor estático aparte para
+-> previsualizar); desde la Iteración 02 rigen los de Astro descritos aquí.
+-
+ ---
+```
+
+### D.3 Propuesta de edición — `_planificacion/README.md`
+**Sección:** §7 Estándar de verificación (nota de transición)
+**Motivo:** `pnpm build` ahora es `astro build` y `dist/css/output.css` ya no es la referencia: rigen los comandos de la lista.
+```diff
+ ## 7. Estándar de verificación
+ 
+-> **Transición:** hasta cerrar la Iteración 02 de la Épica 08 rigen los comandos previos (`pnpm build` y
+-> `dist/css/output.css`); desde la Iteración 02, los de esta lista.
+-
+ 1. **Compilación:** `pnpm run build:cf` sin errores y clases nuevas presentes en el CSS de `_site/_astro/`.
+```
+
+### D.4 Propuesta de edición — `AGENTS.md`
+**Sección:** §5, regla 8 (frase de transición sobre el `<base>`)
+**Motivo:** la Iteración 02 retiró el `<base href="/">` de la 404 (no queda ninguno en `_site/`); la frase "se retira en la
+It. 02" deja de ser cierta. Es la única otra referencia en los documentos protegidos que expira al cerrar esta iteración.
+```diff
+ 8. **Rutas absolutas desde la raíz:** páginas sin extensión (`/servicios`) y recursos de `public/` sin el prefijo
+-   (`/images/...`). Prohibido `./public/`. La 404 ya no necesita `<base href="/">`: con rutas absolutas se resuelve
+-   igual en rutas anidadas (`/servicios/xyz`); el `<base>` se retira en la It. 02.
++   (`/images/...`). Prohibido `./public/`. La 404 no usa `<base href="/">`: con rutas absolutas se resuelve
++   igual en rutas anidadas (`/servicios/xyz`).
+ 9. **Imágenes** en `.webp` bajo `public/images/` (servidas como `/images/...`), con `width`, `height`, `alt` descriptivo y `loading="lazy"` bajo el
+```
+
+### D.5 Propuesta de edición — `_planificacion/02-arquitectura/stack-tecnologico.md`
+**Sección:** §2 Configuración Estricta de Tailwind CSS, reglas de CSS
+**Motivo:** durante la Iteración 02 se comprobó en render real que la compresión de HTML que Astro aplica por defecto
+(`compressHTML: true`) elimina el espacio entre un texto y la etiqueta en línea que le sigue (`Nombre <span>*</span>` pasa a
+`Nombre<span>*</span>`): rompía el texto de las etiquetas del formulario de Contacto. `astro.config.mjs` fija
+`compressHTML: false`; la regla evita que alguien la retire sin saberlo.
+```diff
+ * ✅ **Obligatorio:** `build.inlineStylesheets: 'never'` y `vite.build.assetsInlineLimit: 0` en `astro.config.mjs`.
++* ✅ **Obligatorio:** `compressHTML: false` en `astro.config.mjs`: con la compresión por defecto, Astro elimina el espacio
++  entre un texto y la etiqueta en línea siguiente (`Nombre <span>*</span>` pasaría a `Nombre<span>*</span>`).
+ * ✅ **Obligatorio:** Mantener la capa `@layer base` en `src/css/input.css` para resets globales (ej. reset de
+```
+
+### D.6 Comandos Git que ejecuta el desarrollador (no son ediciones de documentos)
+La Iteración 02 creó los archivos `.astro` **copiando** los HTML (los agentes no pueden ejecutar `git mv` ni `git rm`;
+`AGENTS.md` §3 y `.claude/settings.json`). Los HTML originales, `dist/` y `scripts/stage-site.mjs` siguen en su lugar.
+Para completar la Tarea 0 de la especificación sin perder el historial, **no uses `git mv`** (el destino ya existe):
+retira los originales; Git detecta el renombrado por similitud al hacer el *commit*.
+```bash
+git rm index.html servicios.html suscripcion-floral.html galeria.html contacto.html 404.html
+git rm -r dist
+git rm scripts/stage-site.mjs
+```
+`dist/` guarda `output.css` (DT-16) y `scripts/stage-site.mjs` ya no lo usa nadie (`build:cf` ahora es `astro build`).
+Antes de ejecutarlos, si quieres repetir la comparación contra la referencia, no hace falta conservar nada:
+`scripts/comparar-con-referencia.mjs` lee `referencia/sitio/` (copia fuera de Git).
+
+### D.7 Propuesta de edición — `_planificacion/README.md`
+**Sección:** §12 Registro de deuda técnica abierta (filas DT-10, DT-14, DT-16 y DT-17)
+**Motivo:** cierran con la Iteración 02 (DT-10, DT-17 y, tras el comando de D.6, DT-16) o cambian un hecho (DT-14: el `<base>` ya
+no existe). **Severidades sin cambio.** Cada fila se reemplaza completa (una línea `-` y una línea `+`); la evidencia está
+en la bitácora de la Iteración 02. Los bloques usan cuatro acentos graves por las comillas y los acentos graves de las filas.
+
+**Fila DT-10 (L230)**
+````diff
+-| DT-10 | `src/js/main.js` importa módulos con ruta variable (`import(path)`): funciona en el navegador, pero impide el análisis de un empaquetador. | Baja (bloqueante para Épica 08) | Épica 08 · It. 02 |
++| DT-10 | ✅ **Resuelta** (Épica 08 · Iteración 02, 17-10-2026). `src/js/main.js` importaba módulos con ruta variable (`import(path)`) y no se podía empaquetar. Ahora importa los 7 módulos de forma estática; `astro build` termina sin errores y no queda ningún `import(` en `src/js`. Verificada en render real (Chrome 155 headless): theme, navigation, carousel, modal, subscription, gallery y contact-form responden como en el sitio anterior y la consola queda sin errores (bitácora de la Épica 08 · It. 02, §4). | Baja (bloqueante para Épica 08) | Épica 08 · It. 02 |
+````
+
+**Fila DT-14 (L234)**
+````diff
+-| DT-14 | ✅ **Resuelta** (corregida en Épica 07 · Iteración 03, 14-10-2026; verificada en producción el 16-10-2026, Épica 08 · Iteración 01). `404.html` usa rutas relativas (`./dist/...`, `./public/...`); servida en una ruta anidada (`/a/b/x`) se veía sin estilos. **Confirmada en producción (13-10-2026, `/servicios/xyz`).** Corregida en código con `<base href="/">`; verificada en la simulación local de Cloudflare y en render real (`/xyz`, `/a/b/xyz`, `/a/b/c/xyz` y `/servicios/xyz`: todo resuelve a la raíz con 200). **Verificada en producción el 16-10-2026** mediante Lighthouse en `/xyz`, `/servicios/xyz` y `/a/b/inexistente`: renderizado con estilos, logotipo y header, y estado HTTP 404 (bitácora de la Épica 08 · It. 01, §9). Salvedad: no se inspeccionaron la pestaña Red ni el detalle del error de consola; el reporte marca un error de consola en las 404, que se infiere asociado a la propia respuesta 404, sin verificar. | Media | Épica 07 · It. 03 |
++| DT-14 | ✅ **Resuelta** (corregida en Épica 07 · Iteración 03, 14-10-2026; verificada en producción el 16-10-2026, Épica 08 · Iteración 01). `404.html` usa rutas relativas (`./dist/...`, `./public/...`); servida en una ruta anidada (`/a/b/x`) se veía sin estilos. **Confirmada en producción (13-10-2026, `/servicios/xyz`).** Corregida en código con `<base href="/">`; verificada en la simulación local de Cloudflare y en render real (`/xyz`, `/a/b/xyz`, `/a/b/c/xyz` y `/servicios/xyz`: todo resuelve a la raíz con 200). **Verificada en producción el 16-10-2026** mediante Lighthouse en `/xyz`, `/servicios/xyz` y `/a/b/inexistente`: renderizado con estilos, logotipo y header, y estado HTTP 404 (bitácora de la Épica 08 · It. 01, §9). Salvedad: no se inspeccionaron la pestaña Red ni el detalle del error de consola; el reporte marca un error de consola en las 404, que se infiere asociado a la propia respuesta 404, sin verificar. **Actualización (Épica 08 · Iteración 02, 17-10-2026):** el `<base href="/">` se retiró; la 404 usa rutas absolutas y, en `pnpm preview` local, `/a/b/xyz` responde 404 con estilos, logotipo y header; el único mensaje de consola es la propia respuesta 404 del documento (render real en Chrome 155 headless; no es producción). | Media | Épica 07 · It. 03 |
+````
+
+**Fila DT-16 (L236) — aplicar solo después de ejecutar los comandos de D.6**
+````diff
+-| DT-16 | `dist/css/output.css` versionado en Git (archivo generado). | Baja | Épica 08 · It. 02 |
++| DT-16 | ✅ **Resuelta** (Épica 08 · Iteración 02, 17-10-2026). `dist/css/output.css` versionado en Git (archivo generado). Con Astro el CSS se genera en `_site/_astro/` y `dist/` se retira con `git rm -r dist` (comando del desarrollador). **Aplicar esta fila solo después de ejecutar ese comando.** | Baja | Épica 08 · It. 02 |
+````
+
+**Fila DT-17 (L237)**
+````diff
+-| DT-17 | `<meta charset>` no es la primera etiqueta del `<head>` en varias páginas. **`404.html` corregida** en Épica 07 · Iteración 03 (14-10-2026: `<meta charset>` y `<base>` son las dos primeras etiquetas del `<head>`, verificado en el DOM de Chrome); las otras 5 páginas, en Épica 08 · It. 02. DT-17 sigue abierta por esas 5. | Baja | Épica 08 · It. 02 (otras 5) |
++| DT-17 | ✅ **Resuelta** (Épica 08 · Iteración 02, 17-10-2026). `<meta charset>` no era la primera etiqueta del `<head>` en varias páginas. **`404.html` corregida** en Épica 07 · Iteración 03 (14-10-2026, verificado en el DOM de Chrome); las otras 5 páginas, en Épica 08 · Iteración 02: `BaseLayout.astro` lo escribe primero y en el HTML compilado de `_site/` es la primera etiqueta del `<head>` en las 6 páginas (confirmado por búsqueda de texto, no en el DOM). | Baja | Épica 08 · It. 02 (otras 5) |
+````
+
+Sin deuda técnica nueva en esta iteración (ver la bitácora, §5). `compressHTML: false` y la versión 7.4.0 de Astro son
+decisiones registradas en `decisiones-tecnicas.md`, no deuda.

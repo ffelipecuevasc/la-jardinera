@@ -12,8 +12,7 @@ function withOpacity(variableName) {
 module.exports = {
     darkMode: "class",
     content: [
-        "./src/**/*.{html,js}",
-        "./*.html"
+        "./src/**/*.{astro,html,js}"
     ],
     theme: {
         extend: {

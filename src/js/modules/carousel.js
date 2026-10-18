@@ -28,7 +28,7 @@ export function initCarousel() {
                 <div class="flex items-center text-warning gap-0.5" aria-label="Calificación de ${review.rating} de 5 estrellas">
                     ${stars}
                 </div>
-                <img src="./public/icons/google.svg" alt="Google" class="h-4 w-auto opacity-90" width="97" height="32" loading="lazy"/>
+                <img src="/icons/google.svg" alt="Google" class="h-4 w-auto opacity-90" width="97" height="32" loading="lazy"/>
             </div>
             <p class="font-headline-sm text-body-md text-on-surface italic leading-relaxed line-clamp-6">
                 ${review.text}

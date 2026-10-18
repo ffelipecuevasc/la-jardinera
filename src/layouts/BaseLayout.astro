@@ -1,0 +1,25 @@
+---
+import '../css/input.css';
+
+const { title, description, noindex = false, bodyClass } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html class="light bg-background text-on-surface" lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <title>{title}</title>
+    {description && <meta name="description" content={description}/>}
+    {noindex && <meta name="robots" content="noindex, follow"/>}
+    <link rel="icon" type="image/png" href="/logos/la-jardinera-original.png"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&amp;family=Noto+Serif:ital,wght@0,400;0,600;1,400;1,600&amp;display=swap"
+          rel="stylesheet"/>
+</head>
+<body class={bodyClass}>
+<slot />
+<script src="../js/main.js"></script>
+</body>
+</html>

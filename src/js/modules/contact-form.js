@@ -3,8 +3,8 @@
  * Arquitectura: ES6 Modular | Frontend nativo
  *
  * 1. Precarga del servicio (flujo heredado de la versión antigua):
- *    servicios.html (modal "Cotizar este servicio") y suscripcion-floral.html
- *    ("Seleccionar Plan") enlazan a contacto.html?service=<nombre>. Este módulo
+ *    /servicios (modal "Cotizar este servicio") y /suscripcion-floral
+ *    ("Seleccionar Plan") enlazan a /contacto?service=<nombre>. Este módulo
  *    lee ese parámetro y preselecciona la opción en el <select>.
  *
  * 2. Envío por WhatsApp (plan original de la web antigua):
