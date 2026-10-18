@@ -8,7 +8,7 @@ scripts en HTML o inventar configuraciones de Tailwind) será considerada una re
 
 | Capa                   | Tecnología Seleccionada          | Propósito                                                                  |
 |:-----------------------|:---------------------------------|:---------------------------------------------------------------------------|
-| **Gestor de Paquetes** | pnpm `11.24.0` (Node `>= 22.13`) | Gestión determinista de dependencias (versión fijada en `packageManager`)  |
+| **Gestor de Paquetes** | pnpm `11.24.0` (Node `>= 22.22`) | Gestión determinista de dependencias (versión fijada en `packageManager`)  |
 | **Estructura**         | Astro `7.x`, salida estática (MPA) | Seis páginas en `src/pages/`; layout y componentes compilados a HTML. Cero SPA, cero islas. |
 | **Estilos**            | Tailwind CSS `v3.4.x` vía PostCSS | Procesado por Astro; CSS con *hash* en `_site/_astro/`                    |
 | **Interactividad**     | JavaScript Vanilla (ES6+)        | Módulos estrictos. Cero jQuery, cero frameworks de interfaz (React/Vue/Preact). |

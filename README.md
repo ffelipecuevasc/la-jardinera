@@ -57,7 +57,7 @@ dependencias de iconografía externa.
 | Estilos                | Tailwind CSS `3.4.x`                         | Vía PostCSS, procesado por Astro; CSS con *hash* en `_site/_astro/` |
 | Interactividad         | JavaScript Vanilla (ES6+)                    | Módulos cargados desde un orquestador único (`main.js`)    |
 | Tipografías            | Noto Serif y Montserrat                      | Google Fonts                                               |
-| Gestor de paquetes     | pnpm `11.24.0`                               | Requiere Node.js `>= 22.13`                                |
+| Gestor de paquetes     | pnpm `11.24.0`                               | Requiere Node.js `>= 22.22`                                |
 | Control de versiones   | Git + GitHub                                 | Rama de producción: `main`                                 |
 | Hosting y CDN          | Cloudflare Pages                             | Despliegue continuo desde GitHub                           |
 | DNS y dominio          | Cloudflare                                   | `lajardinerafloreria.cl` (canónico) con HTTPS; `www.lajardinerafloreria.cl` redirige con 301 |
@@ -102,7 +102,7 @@ dependencias de iconografía externa.
 
 ## 6. Requisitos previos
 
-1. **Node.js** `22.13` o superior.
+1. **Node.js** `22.22` o superior.
 2. **pnpm** `11.24.0` (el campo `packageManager` de `package.json` fija la versión).
 3. No hace falta un servidor aparte: `pnpm dev` (Astro) sirve el sitio en local y `pnpm preview` sirve `_site/` tal
    como se publicará.

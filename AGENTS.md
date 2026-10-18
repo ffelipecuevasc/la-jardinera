@@ -87,7 +87,7 @@ El control de versiones y la publicación son responsabilidad exclusiva del desa
 | Estructura     | Astro `7.x` con salida estática: 6 páginas `.astro` en `src/pages/` (MPA) |
 | Estilos        | Tailwind CSS `3.4.x` vía PostCSS, procesado por Astro                     |
 | Interactividad | JavaScript Vanilla ES6+ en módulos (`src/js/`)                            |
-| Paquetes       | **pnpm `11.24.0`** (Node.js `>= 22.13`). Prohibido `npm` o `yarn`.        |
+| Paquetes       | **pnpm `11.24.0`** (Node.js `>= 22.22`). Prohibido `npm` o `yarn`.        |
 | Hosting        | GitHub + Cloudflare Pages, dominio `lajardinerafloreria.cl`               |
 
 | Comando       | Uso                                                                  |
