@@ -1,7 +1,8 @@
 ---
 import '../css/input.css';
+import SiteFooter from '../components/SiteFooter.astro';
 
-const { title, description, noindex = false, bodyClass } = Astro.props;
+const { title, description, noindex = false, bodyClass, paginaActiva = null } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -20,6 +21,9 @@ const { title, description, noindex = false, bodyClass } = Astro.props;
 </head>
 <body class={bodyClass}>
 <slot />
+<slot name="antes-del-footer" />
+<SiteFooter paginaActiva={paginaActiva} />
+<slot name="tras-footer" />
 <script src="../js/main.js"></script>
 </body>
 </html>

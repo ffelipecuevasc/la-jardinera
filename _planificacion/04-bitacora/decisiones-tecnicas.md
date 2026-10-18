@@ -188,3 +188,20 @@ Estructura objetivo: `src/pages/` (6 páginas), `src/layouts/BaseLayout.astro`, 
   vez de unificarlas (la especificación ordena detenerse y reportar antes de unificar).
 * **Hojas de estilo y scripts externos con *hash*.** Se verificó en `_site/`: 1 CSS (`_astro/BaseLayout.<hash>.css`) y 1 JS
   (`_astro/BaseLayout.astro_astro_type_script_index_0_lang.<hash>.js`), 0 `<style>`, 0 `style=` y 0 `<script>` sin `src`.
+
+## Épica 08 · Iteración 03 — Decisiones del footer — 18-10-2026
+
+Decididas por el desarrollador tras la Tarea 0 (inventario de las dos variantes del footer, DT-06) y aplicadas en `src/components/SiteFooter.astro`.
+
+* **Contenedor único del footer: `border-t border-outline-variant/20`, sin margen externo (sin `mt-space-8`).** Es la variante que
+  ya tenían Servicios, Suscripción y Galería. Inicio, Contacto y 404, que usaban `mt-space-8`, pierden 64 px sobre el footer y ganan
+  una línea fina de 1 px. Es el único cambio de contenedor aprobado: no se agregan clases de margen ni de padding a las páginas
+  para compensar. **Motivo:** un componente que trae su propio margen externo decide por la página; sin margen, cada página controla
+  su espacio, y la variante usa un token ya autorizado en `DESIGN.md` §2.5 (`outline-variant` con opacidad `/20`).
+  **Alternativa descartada:** `mt-space-8` para las seis (agrega 64 px y quita la línea en Servicios, Suscripción y Galería).
+* **Enlace activo del footer con `font-body-sm text-body-sm` (14 px).** Hasta ahora el enlace activo no llevaba esas clases y se
+  veía a 16 px frente a los 14 px de los inactivos. Corrección aprobada de `DESIGN.md` §5.3 (la 404 no tiene enlace activo y no
+  cambia). Las clases del enlace activo y del inactivo viven como dos cadenas literales completas dentro de `SiteFooter.astro`,
+  elegidas con un ternario (`AGENTS.md` §5, regla 5).
+* **Sin `etiquetaFooter`.** Las etiquetas de navegación del footer son idénticas a las del header y a `NAVEGACION`. El enlace de marca
+  del footer lleva `data-path="inicio"` y no sale de `NAVEGACION`: se conserva tal cual.

@@ -371,3 +371,26 @@ Motivo exacto, según el §8.1 de `_planificacion/README.md` ("Completada con é
 ```text
 Épica 08 - Iteración 02: Registra la revisión del desarrollador, corrige el mínimo de Node en la definición de la épica y mantiene el cierre con reservas.
 ```
+
+### 10.8 Nota — residuo de 3 píxeles del Inicio aceptado (18-10-2026)
+
+El desarrollador **aceptó como residuo documentado** los píxeles del Inicio que no se atribuyeron en la §9.4 b: `index-768` en claro y en oscuro (3 píxeles, hasta 16 de 255 niveles) e `index-1024` en claro (1 píxel). Decisión del desarrollador [informado]; no se midió nada nuevo. La causa sigue sin demostrarse: no se reprodujeron en la medición de ruido, la geometría coincidió en las 84 combinaciones y su tamaño no sugiere un defecto de maquetación. Con esto, el pendiente 2 de la §10.5 queda **aceptado**, no resuelto.
+
+El estado de la iteración **no cambia** (Completada con reservas): siguen abiertos los pendientes 1, 3 y 4 de la §10.5 (qué navegador fue Firefox o Safari, estado HTTP 404 de `/a/b/inexistente` y `/servicios/xyz`, y consola con red real), que debe confirmar el desarrollador.
+
+### 10.9 Nota — pendientes confirmados y cierre de las reservas (18-10-2026)
+
+Esta nota levanta la restricción de la §10.8 de no cambiar el estado. Los cuatro datos siguientes son **informados por el desarrollador**: esta sesión no vio capturas ni ejecutó estas comprobaciones.
+
+| # | Pendiente de la §10.5 | Resultado informado por el desarrollador |
+|:--|:----------------------|:-----------------------------------------|
+| 1 | Firefox o Safari sin precisar | Probó **Chrome, Firefox y Safari** (ambos motores), sin diferencias en las 6 páginas, en modo claro y oscuro. |
+| 2 | Estado HTTP 404 sin confirmar | En la vista previa de Cloudflare `4ab6fb50.la-jardinera.pages.dev`, medido con `curl.exe -I` el 18-10-2026: `/a/b/inexistente` (21:02 GMT) y `/servicios/xyz` (21:12 GMT) responden `HTTP/1.1 404 Not Found`. |
+| 3 | Consola con red real | Consola del navegador en las 6 páginas, con red real: sin mensajes en rojo. |
+| 4 | 3 píxeles del Inicio sin atribuir | Aceptados como residuo documentado (§10.8). |
+
+Con esto quedan cerrados los pendientes 1 a 4 de la §10.5 y las reservas 2, 3 y 5 de la §8.2 (la 1 y la 4 se cerraron antes). Con el estado HTTP 404 informado, las rutas anidadas cumplen lo que pedían el Escenario 5 (estilos, header y footer, informado en la §10.1) y la verificación de la 404 en Cloudflare que seguía abierta desde DT-14.
+
+**Estado de la iteración: Completada con éxito** (cambio frente a la §10.6). Motivo: todos los criterios de aceptación tienen evidencia y no queda reserva abierta. Los Escenarios 1 a 3 se confirmaron por código; el Escenario 4 (redirección 301 de `/public/*`), el 5 (404 en rutas anidadas, incluido su estado HTTP) y la parte de navegadores y consola del 6 se apoyan en datos informados por el desarrollador, sin capturas; la comparación automática (84 combinaciones, geometría y funcionalidad) es de esta sesión. No es 🔒 Cerrada: eso ocurre solo con la fusión a `main` (`_planificacion/README.md` §5).
+
+Límite que se conserva: no se sabe a qué *commit* corresponde la vista previa `4ab6fb50`. Si fuera anterior al ajuste de la It. 03, las comprobaciones de Cloudflare no cubren el footer nuevo; eso no afecta el estado de esta iteración, pero sí conviene repetirlas en la vista previa de la rama actualizada.
