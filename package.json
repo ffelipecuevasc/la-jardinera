@@ -20,6 +20,9 @@
       "onFail": "download"
     }
   },
+  "engines": {
+    "node": ">=22.22.0"
+  },
   "packageManager": "pnpm@11.24.0",
   "devDependencies": {
     "astro": "7.4.0",
