@@ -82,10 +82,6 @@ El control de versiones y la publicación son responsabilidad exclusiva del desa
 
 ## 4. Stack y comandos
 
-> **Transición (Épica 08):** hasta cerrar la Iteración 02, la rama todavía no tiene Astro y los comandos vigentes son
-> los previos (Tailwind por CLI con `pnpm dev` y `pnpm build`, y un servidor estático aparte para previsualizar). Desde
-> la Iteración 02 rigen los comandos de Astro descritos aquí.
-
 | Capa           | Tecnología                                                                |
 |:---------------|:--------------------------------------------------------------------------|
 | Estructura     | Astro `7.x` con salida estática: 6 páginas `.astro` en `src/pages/` (MPA) |
@@ -135,8 +131,8 @@ Notas:
     - La barra mide `h-20`; el panel (`top-full`, `max-h-[calc(100dvh-5rem)]`) y la capa tenue (`top-20`) dependen de
       ese valor. Si uno cambia, cambian todos.
 8. **Rutas absolutas desde la raíz:** páginas sin extensión (`/servicios`) y recursos de `public/` sin el prefijo
-   (`/images/...`). Prohibido `./public/`. La 404 ya no necesita `<base href="/">`: con rutas absolutas se resuelve
-   igual en rutas anidadas (`/servicios/xyz`); el `<base>` se retira en la It. 02.
+   (`/images/...`). Prohibido `./public/`. La 404 no usa `<base href="/">`: con rutas absolutas se resuelve
+   igual en rutas anidadas (`/servicios/xyz`).
 9. **Imágenes** en `.webp` bajo `public/images/` (servidas como `/images/...`), con `width`, `height`, `alt` descriptivo y `loading="lazy"` bajo el
    pliegue. Contenedores con `aspect-*` para CLS = 0.
 10. **Accesibilidad:** objetivos táctiles de 44 × 44 px, foco visible, `aria-*` sincronizados, trampas de foco en

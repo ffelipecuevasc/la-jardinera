@@ -31,6 +31,8 @@ reflejar el 100% de los tokens definidos en `DESIGN.md` (raíz del repositorio).
 * ❌ **Prohibido:** Enlazar Tailwind mediante CDN (`<script src="https://cdn.tailwindcss.com"></script>`).
 * ✅ **Obligatorio:** Importar `src/css/input.css` una sola vez, en el *frontmatter* de `BaseLayout.astro`.
 * ✅ **Obligatorio:** `build.inlineStylesheets: 'never'` y `vite.build.assetsInlineLimit: 0` en `astro.config.mjs`.
+* ✅ **Obligatorio:** `compressHTML: false` en `astro.config.mjs`: con la compresión por defecto, Astro elimina el espacio
+  entre un texto y la etiqueta en línea siguiente (`Nombre <span>*</span>` pasaría a `Nombre<span>*</span>`).
 * ✅ **Obligatorio:** Mantener la capa `@layer base` en `src/css/input.css` para resets globales (ej. reset de
   scrollbar).
 * ✅ **Obligatorio:** Las clases de Tailwind se escriben siempre en forma literal; Tailwind no detecta clases armadas con
