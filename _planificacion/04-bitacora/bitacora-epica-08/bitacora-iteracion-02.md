@@ -17,7 +17,7 @@ Rótulos de evidencia: **[código]** confirmado por código, comandos o programa
 * La comparación en navegador (84 combinaciones: 6 páginas × 7 viewports × 2 temas, sitio anterior frente a `_site/`) dio **0 diferencias de geometría** en 27.006 elementos comparados, el mismo largo de página, 0 errores de consola y 18 de 18 pruebas de interacción iguales. [render]
 * Esa misma comparación detectó **una regresión real** que la comparación de marcado no veía: Astro, por defecto, elimina el espacio entre un texto y la etiqueta en línea siguiente (`NOMBRE *` salía `NOMBRE*`). Se corrigió con `compressHTML: false` y se endureció el comparador. Ver §5.1.
 * **Tarea 0 (movimientos de Git) sin ejecutar**: los agentes no pueden correr `git mv` ni `git rm`. Los `.astro` se crearon **copiando**; los 6 HTML, `dist/` y `scripts/stage-site.mjs` siguen en su lugar y el desarrollador debe retirarlos (comandos en `propuestas-documentos-protegidos.md`, D.6).
-* **Conflicto de versiones para decidir:** `astro@7.4.0` declara `node >= 22.22.0` y los documentos dicen `>= 22.13` (§5.2).
+* **Conflicto de versiones para decidir:** `astro@7.4.0` declara `node >= 22.22.0` y los documentos dicen `>= 22.13` (§5.2). **Resuelto el 18-10-2026: Astro 7.4.0 exacta y Node `>= 22.22` (§9).**
 * Estado: **Completada con reservas** (§8). No está 🔒 Cerrada: eso ocurre solo con la fusión a `main`.
 
 ## 2. Línea base (estado previo)
@@ -131,7 +131,7 @@ Rótulos de evidencia: **[código]** confirmado por código, comandos o programa
 * **Alcance del riesgo:** el espacio se pierde donde un texto precede a una etiqueta en línea separada por salto de línea. No se auditó cuántos puntos más había en las 6 páginas; la comparación de geometría de 27.006 elementos no halló otros.
 * **Propuesta:** regla en `stack-tecnologico.md` §2 para que nadie retire la opción (`propuestas-documentos-protegidos.md`, D.5).
 
-### 5.2 Conflicto entre documentos: versión de Node (para decidir)
+### 5.2 Conflicto entre documentos: versión de Node (**resuelto el 18-10-2026, ver §9**; el texto de abajo es el hallazgo original)
 
 * `astro@7.4.0` (la que resolvió `^7.3.8`) declara `engines.node: ">=22.22.0"` [código: `node_modules/astro/package.json`].
 * `AGENTS.md` §4, `README.md` §6, `stack-tecnologico.md` §1 y la épica dicen `Node >= 22.13`; `definicion-epica.md` §2.1 afirma "Astro 7 exige Node >= 22.12". El registro de Cloudflare del 13-10-2026 mostró Node 22.13.0.
@@ -141,7 +141,7 @@ Rótulos de evidencia: **[código]** confirmado por código, comandos o programa
 ### 5.3 Otras desviaciones respecto de la especificación y del pedido
 
 1. **Tarea 0 sin ejecutar.** `git mv` y `git rm` están prohibidos a los agentes (`AGENTS.md` §3; `deny` en `.claude/settings.json`). En su lugar se **copiaron** los HTML a `src/pages/*.astro` y se dejaron los originales, `dist/` y `stage-site.mjs`. No uses `git mv` ahora (el destino existe): `git rm` de los originales (D.6); Git detecta el renombrado por similitud al hacer el *commit* (no verificado).
-2. **Versión de Astro 7.4.0, no 7.3.8** (el ADR-001 dice "7.3.8, sin actualizar"; el rango `^7.3.8` de la especificación lo permite). `package.json` quedó con `^7.4.0`. Queda a decisión del desarrollador si se fija 7.3.8 exacta.
+2. **Versión de Astro 7.4.0, no 7.3.8** (el ADR-001 dice "7.3.8, sin actualizar"; el rango `^7.3.8` de la especificación lo permite). `package.json` quedó con `^7.4.0`. Queda a decisión del desarrollador si se fija 7.3.8 exacta. **Decidido el 18-10-2026: `7.4.0` exacta (§9).**
 3. **`BaseLayout.astro` recibe `bodyClass`, `noindex` y `description` opcional.** Las 6 páginas **no** comparten las clases de `<body>` (Inicio y Servicios: base; Galería: base + `selection:bg-primary/20 selection:text-primary`; Contacto y 404: base + `flex flex-col min-h-screen`) ni el `<head>` (el Inicio no tiene `description`; la 404 tiene `robots`). La especificación ordena detenerse y reportar antes de unificar: no se unificó, se parametrizó.
 4. **"Mover recursos a `public/`" y reorganizar `src/js/`:** no hizo falta. `public/` ya sirve `images/`, `icons/` y `logos/` desde la raíz (D6) y `src/js/` ya tenía `main.js`, `modules/` y `data/`. Solo se agregó `public/_redirects`.
 5. **Las "6 páginas" del pedido** mencionan "nosotros/la que corresponda": no existe una página Nosotros. Las 6 son `index`, `servicios`, `suscripcion-floral`, `galeria`, `contacto` y `404`.
@@ -211,13 +211,13 @@ Longitud contada con Node: 98 caracteres.
 1. **Tarea 0 sin ejecutar:** los HTML originales, `dist/` y `stage-site.mjs` siguen en el árbol hasta que el desarrollador ejecute D.6. Hasta entonces DT-16 sigue abierta y el repositorio tiene 6 HTML duplicados.
 2. **Sin revisión visual humana ni con tipografías reales:** la comparación en navegador fue automática, con Google Fonts y videos bloqueados (§4.3). Nadie ha mirado las 84 capturas una por una.
 3. **Sin vista previa de Cloudflare:** no se verificaron el `*.pages.dev`, la versión de Node del registro, la redirección 301 de `/public/*` ni el `404.html` servido por Cloudflare en rutas anidadas.
-4. **Versión de Node de Astro 7.4.0 (§5.2)** y **versión exacta de Astro (§5.3, punto 2)** a decidir.
-5. Los números de §4.3 son de **una corrida** de cada combinación; no se repitió para medir ruido.
+4. ~~Versión de Node de Astro 7.4.0 (§5.2) y versión exacta de Astro (§5.3, punto 2) a decidir.~~ **Decididas el 18-10-2026 (§9);** queda por aplicar el mínimo de Node en los documentos protegidos (propuestas E).
+5. Los números de §4.3 son de **una corrida** de cada combinación. El ruido de render se midió el 18-10-2026 (§9.4).
 
 ### 8.3 Pendientes del desarrollador (🕒 PENDIENTE)
 
 * Ejecutar los comandos de D.6 y aplicar D.1 a D.5 y D.7 (esta última, DT-16, solo después de D.6).
-* Decidir la versión de Node de Astro (§5.2) y fijar `NODE_VERSION` en Cloudflare; decidir si se fija Astro 7.3.8.
+* ~~Decidir la versión de Node de Astro (§5.2) y fijar `NODE_VERSION` en Cloudflare; decidir si se fija Astro 7.3.8.~~ Hecho el 18-10-2026 (§9): Cloudflare usa Node 22.22.2; Astro queda en 7.4.0 exacta.
 * Hacer *push* de la rama y revisar el registro de Cloudflare (Node, `astro build`) y la vista previa `*.pages.dev`: las 6 páginas, `/public/images/hero-botanical.webp` (debe redirigir con 301) y `/a/b/inexistente`.
 * Revisión visual con red real: `pnpm dev` o `pnpm preview` en navegador, claro y oscuro, en 320, 360, 412, 768, 740 de ancho, 1024 y 1280 px; en particular las etiquetas del formulario de Contacto (`NOMBRE *`, `TELÉFONO (opcional)`), el menú móvil, el modal de Servicios, el visor y los videos de la Galería, el carrusel de reseñas y el cambio de tema. Comprobar también móvil real, Firefox y Safari.
 * Consola del navegador con las fuentes y los videos reales.
@@ -232,3 +232,79 @@ Longitud contada con Node: 98 caracteres.
 | Comentarios de nivel 1 | Astro los omite del HTML publicado: si algún componente futuro depende de un comentario como marca (no es el caso), usar otro mecanismo |
 | `README.md` §5 (estructura) y `DESIGN.md` (B.1) | Siguen adelantados o desactualizados; se ajustan en las Iteraciones 03 a 05 y 08 |
 | DT-15 (tema oscuro en `DOMContentLoaded`) | Sin cambio: `theme.js` no se tocó; opcional en la Iteración 07 |
+
+---
+
+## 9. Ajuste de cierre — 18-10-2026
+
+Ajuste posterior al *push* de la Iteración 02 (último *commit* `b26a14c`). No es una iteración nueva y no toca el sitio visible: ni `src/`, ni `public/`, ni `astro.config.mjs`. Estado de la iteración: **sin cambio, Completada con reservas** (falta la revisión visual humana).
+
+### 9.1 Decisiones del desarrollador (no se reabren)
+
+* `astro` queda en **`7.4.0` exacta** (sin `^`). La especificación pedía `^7.3.8`; el caret permitió que pnpm instalara 7.4.0.
+* `astro@7.4.0` exige **Node `>= 22.22.0`** [código: `node_modules/astro/package.json` → `engines.node`]. El mínimo declarado del proyecto sube de `>= 22.13` a **`>= 22.22`**.
+* **Evidencia del despliegue (reportada por el desarrollador; esta sesión no vio el registro):** el 18-10-2026 Cloudflare Pages compiló `b26a14c` sin errores con Node 22.22.2 y Astro 7.4.0.
+* Los archivos protegidos y `02-arquitectura/**` los aplica el desarrollador; aquí solo hay propuestas (sección E de `propuestas-documentos-protegidos.md`). D.1 a D.5 y D.7 ya estaban aplicadas (informado por el desarrollador; no se repiten).
+
+### 9.2 Cambios
+
+| Archivo | Cambio |
+|:--------|:-------|
+| `package.json` | `"astro": "^7.4.0"` → `"astro": "7.4.0"`. No se agregó `engines` (no existe; se propone en E.5). |
+| `pnpm-lock.yaml` | 1 línea: `importers › . › astro › specifier: ^7.4.0` → `7.4.0`. La versión resuelta (`7.4.0(jiti@1.21.7)(yaml@2.9.1)`) no cambió. **pnpm lo exigía:** con solo `package.json` cambiado, `pnpm install --frozen-lockfile --offline` falló con "specifiers in the lockfile don't match … astro (lockfile: ^7.4.0, manifest: 7.4.0)". |
+| `_planificacion/04-bitacora/decisiones-tecnicas.md` | ADR-001: D1 corregida a 7.4.0 exacta con Node `>= 22.22.0`; subsección "Corrección de D1" (causa, Node, evidencia, decisión). En las decisiones de la Iteración 02: viñeta de la versión de Astro alineada y viñeta nueva del mínimo de Node. El Contexto del ADR (la prueba de concepto usó 7.3.8) se conserva como ocurrió. |
+| `propuestas-documentos-protegidos.md` | Sección E nueva (E.1 a E.6). |
+| Esta bitácora | Esta sección y notas de resolución en §1, §5.2, §5.3, §8.2 y §8.3 (el texto original se conserva). |
+| `estado-actual.md` | Una línea nueva al final. |
+
+### 9.3 Ocurrencias de Node `22.13` y mínimos de Node (18-10-2026)
+
+* **Protegidos, con propuesta pendiente:** `AGENTS.md` L90; `README.md` L60 y L105; `stack-tecnologico.md` L11 (E.1 a E.3).
+* **Sin ocurrencias:** `_planificacion/README.md`, `package.json` (no declara `engines`), `.nvmrc` y `.node-version` (no existen).
+* **No protegidas, con propuesta E.6:** `definicion-epica.md` L45 y L150 (dicen `22.13` / `22.12`).
+* **Historial, sin tocar:** bitácoras de las Épicas 07 y 08, `iteracion-02.md` L180 y `estado-actual.md` L38 y L55.
+* Las líneas con `engines` de `pnpm-lock.yaml` son de paquetes de terceros, no del proyecto.
+
+### 9.4 Preguntas del ajuste
+
+**a) "246 referencias (243 rutas y 3 anclas)" frente a "7 anclas con destino"** [código, recomputado sobre `_site/` el 18-10-2026]. Son dos particiones distintas de las mismas referencias. 246 = referencias internas (`href`, `src`, `data-src` y `srcset`, sin externas): 243 empiezan con `/` y 3 con `#` (`#servicios` ×2 y `#suscripcion`, todas en el Inicio). Las 7 anclas son las referencias que llevan fragmento `#`: las 3 de la misma página más 4 de la forma `/galeria#…` (`ramos-de-novia`, `decoracion-mesas`, `suscripcion-floral`, `floristeria`), que se cuentan dentro de las 243 porque empiezan con `/`. Las 7 tienen su `id` en la página de destino (7 de 7). 0 `href="#"`. La redacción del §4.2 contrastaba un "3" y un "7" sin aclarar que no son el mismo conjunto.
+
+**b) Diferencias de hasta 16/255 por canal en 68 capturas** [render]. Se midió el ruido: el sitio de referencia (`referencia/sitio/`) contra sí mismo, con el mismo arnés de la §4.3 (Chrome 155 headless, mismo bloqueo de Google Fonts y `.mp4`, movimiento reducido), 84 combinaciones, 2 cargas independientes cada una. Resultado: 84 pares del mismo tamaño, **77 idénticos y 7 con diferencia**, máximo 13 niveles, 4 pares con píxeles de más de 8 niveles (1 a 13 píxeles).
+
+| | Sitio anterior vs `_site/` (§4.3) | Referencia vs sí misma (ruido) |
+|:--|:--|:--|
+| Pares idénticos | 16 de 84 | 77 de 84 |
+| Pares con diferencia | 68 | 7 |
+| Máximo por canal | 16 | 13 |
+| Pares con algún píxel > 8 niveles | 8 (1 a 13 px) | 4 (1 a 13 px) |
+
+Conclusión: el ruido existe y **explica las diferencias de más de 8 niveles de Galería y Servicios**, porque se reproducen con las mismas cifras: `servicios-1280-claro` (1.917 píxeles de más de 1 nivel y 13 de más de 8, igual en ambas mediciones), `galeria-768` (1.785 y 4), `galeria-1280` (722 y 1) y `galeria-412` (78 y 1). Son píxeles aislados de un solo canal sobre fotografías (por ejemplo `(147,130,13)` frente a `(147,130,0)`), compatible con ruido de decodificación de imágenes (esto último es hipótesis; no se aisló el decodificador). **No explica** (i) las diferencias de 1 nivel de unos 60 pares, que no aparecen en la referencia contra sí misma y que corresponden al redondeo de color documentado en la §4.3 (1.351 elementos-propiedad; atribución por estilo calculado, no demostrada píxel a píxel) y (ii) los píxeles de más de 8 niveles del Inicio (`index-768` claro y oscuro, 3 píxeles, hasta 16 niveles; `index-1024-claro`, 1 píxel), que **no se reprodujeron** en esta medición. Esos casos quedan como no atribuidos; su tamaño (≤ 3 píxeles) no sugiere un defecto de maquetación, y la geometría coincidió en las 84 combinaciones. Una sola repetición por combinación: no es una caracterización estadística del ruido.
+
+**c) Comentario de `contact-form.js` fuera de la lista** (decisión pendiente del desarrollador). Hecho: el *commit* `44a82dc` cambió solo 2 líneas del comentario de cabecera (`servicios.html` → `/servicios`, `suscripcion-floral.html` → `/suscripcion-floral`, `contacto.html?service=` → `/contacto?service=`); sin cambio de código. La lista de la especificación (L17) nombra `main.js`, `services.js`, `carousel.js` y `modal.js`, pero la Tarea 5.4 (L145-146) dice que los comentarios de `contact-form.js` "pueden mencionarlos; actualízalos si corresponde": la especificación es ambigua. Opciones: (A) aceptarlo como excepción documentada, citando la Tarea 5.4 (el comentario ya no miente sobre las rutas); (B) dejarlo como estaba (el comentario conserva nombres `.html` que ya no existen). Recomendación del agente: A, pero no se decide aquí.
+
+**d) 106 archivos de `_site/` frente a 105 en Cloudflare** [código]. La diferencia calza con `_redirects`: `_site/` tiene 106 archivos (62,1 MiB) y 105 sin `_redirects`; la composición es 6 HTML + 2 de `_astro/` + 98 de `public/` (incluido `_redirects`) = 106. El 105 de Cloudflare es el dato informado por el desarrollador; no se vio el registro, así que la explicación (Cloudflare lee `_redirects` como configuración y no lo cuenta como archivo publicado) es consistente con las cifras, pero **no está verificada** contra el registro. El "246" no es un conteo de archivos (son referencias) y no se compara con el 105.
+
+### 9.5 Verificación
+
+| Comprobación | Resultado |
+|:-------------|:----------|
+| `pnpm install --frozen-lockfile --offline` | Con el cambio y sin red previa: "Already up to date", pero termina con código 1 por `ERR_PNPM_NO_OFFLINE_META` (la verificación de políticas de cadena de suministro necesitaba metadatos de `h3` que la caché no tenía). Con el cambio revertido pasaba (código 0). Se ejecutó `pnpm install --frozen-lockfile` con red: "Lockfile passes supply-chain policies (330 entries)", código 0; después `--offline` pasa de nuevo (código 0, "Already up to date"). |
+| `pnpm run build:cf` (con `_site/` borrada antes) | Código 0; "6 page(s) built"; 0 líneas con "warn". |
+| `_site/` | 6 páginas; 106 archivos. |
+| `package.json` | `devDependencies.astro` = `"7.4.0"` (exacta); instalada: 7.4.0. |
+| Invariantes en `_site/*.html` | 0 `style=`, 0 `onclick`, 0 `<style`, 0 `<script>` sin `src`, 0 `href="#"`, IDs únicos (6, 17, 17, 16, 13 y 11). |
+| CSS de `_astro/` | `fx-starlight`, `bg-noise`, `bg-surface`, `.dark\:hidden:is(.dark *)` y `.hover\:grow-\[10\]:hover` presentes (inspección del texto del CSS). |
+
+Sin render nuevo del sitio: el ajuste no cambia el sitio visible (la versión instalada de Astro ya era 7.4.0). Las propuestas de la sección E: 6 de 6 líneas `-` verificadas por programa contra el texto vigente.
+
+### 9.6 Pendientes y decisiones del desarrollador
+
+* Aplicar la sección E (mínimo de Node) y decidir si se agrega `engines` (E.5).
+* Decidir 9.4 c (A o B).
+* Revisión visual humana con red real (§8.3): sigue pendiente y es lo que mantiene "Completada con reservas".
+* Vista previa de Cloudflare: la redirección 301 de `/public/*` y el `404.html` en rutas anidadas siguen sin verificar en esta sesión.
+* Mensaje de *commit* sugerido (162 caracteres, contados con Node):
+
+```text
+Épica 08 - Iteración 02: Fija Astro 7.4.0 exacta, sube el mínimo de Node a 22.22 y registra el ajuste de cierre con las propuestas para los documentos protegidos.
+```

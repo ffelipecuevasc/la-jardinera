@@ -71,7 +71,7 @@ Guardas de `stage-site.mjs` (todas se evalúan antes de borrar `_site/`; si una 
 
 | #  | Decisión |
 |:---|:---------|
-| D1 | **Astro `7.3.8`** (serie `7.x`), salida estática, **sin adaptador**. `@astrojs/cloudflare` solo hace falta para SSR. |
+| D1 | **Astro `7.4.0`** exacta (sin `^`; serie `7.x`), salida estática, **sin adaptador**. `@astrojs/cloudflare` solo hace falta para SSR. Requiere **Node `>= 22.22.0`**. *(Corregida el 18-10-2026: la versión original decía `7.3.8`, "sin actualizar"; ver "Corrección de D1" más abajo.)* |
 | D2 | **Tailwind CSS `3.4.19` vía PostCSS** (`postcss.config.cjs` con `tailwindcss` y `autoprefixer`). `tailwind.config.js` se conserva y solo cambia `content`. La integración `@astrojs/tailwind` no admite Astro 7. |
 | D3 | `build.format: 'file'` y `trailingSlash: 'never'`: genera `servicios.html`, etc., con los nombres de hoy; Cloudflare mantiene su redirección 308 a `/servicios`. |
 | D4 | `outDir: './_site'`; `build:cf` pasa a ser `astro build`. Cloudflare Pages no cambia de configuración. |
@@ -83,6 +83,22 @@ Guardas de `stage-site.mjs` (todas se evalúan antes de borrar `_site/`; si una 
 
 Estructura objetivo: `src/pages/` (6 páginas), `src/layouts/BaseLayout.astro`, `src/components/` (`SiteHeader`,
 `SiteFooter`, `SeoHead`), `src/data/navegacion.js`, `astro.config.mjs` y `postcss.config.cjs`.
+
+### Corrección de D1 — 18-10-2026 (Épica 08 · Iteración 02, ajuste de cierre)
+
+* **Qué cambia:** D1 pasa de Astro `7.3.8` a **`7.4.0` exacta (sin `^`)**, con el requisito de **Node `>= 22.22.0`**.
+* **Causa:** la especificación de la Iteración 02 pedía `astro@^7.3.8`; el caret permite versiones posteriores y `pnpm add`
+  resolvió `7.4.0`. El ADR-001 decía `7.3.8` "sin actualizar", pero nada en el repositorio lo fijaba. `7.3.8` fue la versión de
+  la prueba de concepto del 13-10-2026 (ver Contexto), que se conserva tal como ocurrió.
+* **Node:** `astro@7.4.0` declara `engines.node: ">=22.22.0"` (confirmado por código en `node_modules/astro/package.json`).
+  Los documentos decían `>= 22.13` (y la definición de la épica, "Astro 7 exige `>= 22.12`"): el mínimo declarado del
+  proyecto sube a **Node `>= 22.22`**.
+* **Evidencia del despliegue (reportada por el desarrollador, 18-10-2026):** Cloudflare Pages compiló el último *commit*
+  de la rama (`b26a14c`) sin errores con **Node 22.22.2** (`NODE_VERSION=22.22.2`) y **Astro 7.4.0**. Esta sesión no vio el
+  registro de Cloudflare; el dato es el que informó el desarrollador.
+* **Decisión del desarrollador:** fijar `7.4.0` exacta, subir el mínimo de Node a `22.22` y no reabrir la alternativa de
+  volver a `7.3.8`. `package.json` y `pnpm-lock.yaml` ya reflejan `7.4.0` exacta. Los documentos protegidos y
+  `stack-tecnologico.md` se actualizan por propuesta (`propuestas-documentos-protegidos.md`, sección E).
 
 ### Alternativas descartadas
 
@@ -158,9 +174,14 @@ Estructura objetivo: `src/pages/` (6 páginas), `src/layouts/BaseLayout.astro`, 
   **Alternativa descartada:** dejar la compresión y reponer a mano cada espacio con `{" "}`: contradice la copia literal de
   la iteración. **Costo:** sin compresión de HTML, `_site/index.html` mide 88.488 B (el original, 94.101 B); no se midió la salida
   comprimida, que además se entrega con la compresión de transporte de Cloudflare.
-* **Versión de Astro:** `pnpm add -D astro@^7.3.8` resolvió **7.4.0** (el ADR-001 fija 7.3.8 "sin actualizar"; el rango `^7.3.8`
-  de la especificación lo permite). `package.json` quedó con `"astro": "^7.4.0"` y el *lockfile* fija 7.4.0. Tailwind sigue en
-  3.4.19. Queda a decisión del desarrollador si se fija 7.3.8 exacta.
+* **Versión de Astro:** `pnpm add -D astro@^7.3.8` resolvió **7.4.0** (el ADR-001 fijaba 7.3.8 "sin actualizar"; el rango `^7.3.8`
+  de la especificación lo permitía). **Decidido por el desarrollador el 18-10-2026:** `package.json` queda con
+  `"astro": "7.4.0"` **exacta, sin `^`**, y el *lockfile* fija 7.4.0 (`specifier: 7.4.0`; pnpm exige que coincida con
+  `package.json`). Tailwind sigue en 3.4.19. El ADR-001 se corrigió (ver "Corrección de D1").
+* **Node mínimo `>= 22.22`.** `astro@7.4.0` exige Node `>= 22.22.0`; Cloudflare ya compila con `NODE_VERSION=22.22.2`
+  (build correcto del 18-10-2026, informado por el desarrollador). El mínimo declarado del proyecto sube de `>= 22.13` a
+  `>= 22.22`. `package.json` no declara `engines` (solo `devEngines.packageManager`) y no existen `.nvmrc` ni
+  `.node-version`; agregar `engines` queda como propuesta, no como cambio.
 * **`BaseLayout.astro` recibe `bodyClass`, `noindex` y `description` opcional.** Las 6 páginas no comparten las clases de
   `<body>` (Inicio y Servicios: base; Galería: base más `selection:*`; Contacto y 404: base más `flex flex-col min-h-screen`),
   ni el `<head>` (el Inicio no tiene `<meta name="description">`, DT-04; la 404 tiene `robots`). Se pasan como propiedades en

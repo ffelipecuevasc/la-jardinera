@@ -607,3 +607,81 @@ en la bitácora de la Iteración 02. Los bloques usan cuatro acentos graves por 
 
 Sin deuda técnica nueva en esta iteración (ver la bitácora, §5). `compressHTML: false` y la versión 7.4.0 de Astro son
 decisiones registradas en `decisiones-tecnicas.md`, no deuda.
+
+---
+
+## E. Mínimo de Node `>= 22.22` (ajuste de cierre de la Iteración 02, 18-10-2026)
+
+> Decisión del desarrollador (18-10-2026): `astro@7.4.0` exacta exige Node `>= 22.22.0` y Cloudflare ya compila con
+> Node 22.22.2. El mínimo declarado del proyecto sube de `>= 22.13` a `>= 22.22`. Texto vigente verificado el
+> 18-10-2026, `HEAD` `b26a14c`. Cada línea `-` se comprobó por programa contra el archivo real (ver la bitácora de la
+> Iteración 02, ajuste de cierre). Se aplican con el mismo criterio de "Cómo aplicarlas": `-` se borra, `+` se agrega.
+> Los números de línea (L) son los del 18-10-2026.
+
+### E.1 Propuesta de edición — `AGENTS.md`
+**Sección:** §4 Stack y comandos (tabla, fila "Paquetes", L90)
+**Motivo:** la nota de Node `>= 22.13` quedó por debajo de lo que exige Astro 7.4.0 (`>= 22.22.0`).
+```diff
+-| Paquetes       | **pnpm `11.24.0`** (Node.js `>= 22.13`). Prohibido `npm` o `yarn`.        |
++| Paquetes       | **pnpm `11.24.0`** (Node.js `>= 22.22`). Prohibido `npm` o `yarn`.        |
+```
+
+### E.2 Propuesta de edición — `README.md`
+**Sección:** §4 Stack tecnológico (L60) y §6 Requisitos previos (L105)
+**Motivo:** igual que E.1.
+
+**Línea 60:**
+```diff
+-| Gestor de paquetes     | pnpm `11.24.0`                               | Requiere Node.js `>= 22.13`                                |
++| Gestor de paquetes     | pnpm `11.24.0`                               | Requiere Node.js `>= 22.22`                                |
+```
+
+**Línea 105:**
+```diff
+-1. **Node.js** `22.13` o superior.
++1. **Node.js** `22.22` o superior.
+```
+
+### E.3 Propuesta de edición — `_planificacion/02-arquitectura/stack-tecnologico.md`
+**Sección:** §1 Núcleo tecnológico (fila "Gestor de Paquetes", L11)
+**Motivo:** igual que E.1. Archivo en `02-arquitectura/`: solo lo aplica el desarrollador.
+```diff
+-| **Gestor de Paquetes** | pnpm `11.24.0` (Node `>= 22.13`) | Gestión determinista de dependencias (versión fijada en `packageManager`)  |
++| **Gestor de Paquetes** | pnpm `11.24.0` (Node `>= 22.22`) | Gestión determinista de dependencias (versión fijada en `packageManager`)  |
+```
+
+### E.4 Propuesta de edición — `_planificacion/README.md`
+**No hay cambio:** el archivo no menciona una versión mínima de Node (búsqueda de "Node" y "22.13": 0 coincidencias).
+
+### E.5 Propuesta de edición — `package.json` (campo `engines`; no se agregó)
+**Motivo:** hoy `package.json` no declara `engines` (solo `devEngines.packageManager`), así que el mínimo de Node vive solo en
+la documentación. Declararlo lo deja en el manifiesto. **No verificado:** el efecto exacto de pnpm ante un Node menor y si
+el campo altera `pnpm-lock.yaml`; tras aplicarlo, comprueba con `pnpm install --frozen-lockfile`. No existen `.nvmrc` ni
+`.node-version`.
+```diff
+   "packageManager": "pnpm@11.24.0",
++  "engines": {
++    "node": ">=22.22.0"
++  },
+   "devDependencies": {
+```
+
+### E.6 Propuesta de edición — `definicion-epica.md` (no protegido por `AGENTS.md` §2; fuera del alcance de este ajuste)
+**Sección:** §2.1 (L45) y tabla de Cloudflare (L150)
+**Motivo:** la fila afirma "Astro 7 exige Node `>= 22.12`: compatible sin cambios", y es falso para 7.4.0. Es un documento de
+planificación de la épica; se propone, no se edita, porque no está en el alcance autorizado de este ajuste.
+
+**Línea 45:**
+```diff
+-| Node `>= 22.13` y pnpm `11.24.0` fijados.                                                         | Astro 7 exige Node `>= 22.12`: compatible sin cambios.                                                   |
++| Node `>= 22.22` y pnpm `11.24.0` fijados.                                                         | Astro 7.4.0 exige Node `>= 22.22.0`: el mínimo sube.                                                                |
+```
+
+**Línea 150:**
+```diff
+-| Variables de entorno   | `NODE_VERSION=22`, `PNPM_VERSION=11.24.0` | Verificar en el log que Node sea `>= 22.12` |
++| Variables de entorno   | `NODE_VERSION=22.22.2`, `PNPM_VERSION=11.24.0` | Verificar en el log que Node sea `>= 22.22` |
+```
+
+Quedan **sin cambio**, por ser historial: `iteracion-02.md` L180 y las bitácoras de las Épicas 07 y 08, y las líneas 38 y 55 de
+`estado-actual.md` (mencionan el Node 22.13.0 que usó Cloudflare el 13-10-2026).
