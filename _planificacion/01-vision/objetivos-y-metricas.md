@@ -36,7 +36,7 @@ sí son obligatorios en cada iteración.
 
 Para dar por terminada cualquier iteración o componente, el agente de IA debe asegurar:
 
-1. **Cero JS en línea:** El HTML no contiene scripts en línea ni eventos en atributos (`onclick`).
+1. **Cero JS en línea:** El HTML no contiene scripts en línea (salvo el script de arranque del tema, ADR-003) ni eventos en atributos (`onclick`).
 2. **Compilación Exitosa:** El CSS generado incluye las clases esperadas tras ejecutar el build.
 3. **Responsividad Comprobada:** Los componentes escalan y reaccionan de manera predecible en pantallas móviles (menú
    hamburguesa) y desktop (navegación extendida).

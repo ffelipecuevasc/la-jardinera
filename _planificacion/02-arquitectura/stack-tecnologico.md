@@ -45,7 +45,8 @@ reflejar el 100% de los tokens definidos en `DESIGN.md` (raíz del repositorio).
 El código JavaScript debe tratarse como software de nivel producción. Se aplican las siguientes reglas obligatorias:
 
 1. **Cero JS en línea:** Prohibido el uso de atributos como `onclick`, `onchange` o bloques `<script>` con lógica
-   incrustada en el HTML.
+   incrustada en el HTML, salvo el script de arranque del tema del `<head>` de `BaseLayout.astro` (ADR-003 de
+   `decisiones-tecnicas.md`): uno por página, idéntico en las 6, sin escritura en `localStorage`.
 2. **Módulos ES6:** Toda la lógica debe residir en `src/js/modules/*.js` e importarse de forma **estática** desde
    `src/js/main.js`, que `BaseLayout.astro` carga al final del `<body>` con un `<script>` procesado por Astro.
 3. **Encapsulamiento y Scope:** Prohibido contaminar el objeto global `window`. Las variables deben estar encapsuladas

@@ -1,12 +1,12 @@
 # Bitácora de Ejecución - Épica 08 - Iteración 07
 
-**Fecha de ejecución:** 19-10-2026
+**Fecha de ejecución:** 19-10-2026 · **Cierre con las confirmaciones del desarrollador:** 19-10-2026
 **Agente:** Claude Code
 **Objetivo:** Que la primera imagen de cada página ya tenga el tema correcto (DT-15 / A-05), sin cambiar cómo se elige ni cómo se alterna el tema. Iteración opcional que requirió una excepción a la regla «cero JS en línea».
 
 Especificación: [`iteracion-07.md`](../../03-planificacion/epicas/epica-08-migracion-astro/iteracion-07.md) · Iteración anterior: [`bitacora-iteracion-06.md`](bitacora-iteracion-06.md)
 
-Rótulos de evidencia: **[código]** confirmado por código, comandos o programa; **[render]** medido en Chrome headless (`155.0.8059.84`, leído con `Browser.getVersion`); **[informado]** dato entregado por el desarrollador; **🕒 PENDIENTE** no verificado. Las cifras de tiempo son de esta máquina y de este arnés; no son métricas de producción.
+Rótulos de evidencia: **[código]** confirmado por código, comandos o programa; **[render]** medido en Chrome headless (`155.0.8059.84`, leído con `Browser.getVersion`); **[informado]** dato entregado por el desarrollador, sin capturas; **[asesor]** auditoría independiente hecha por el asesor, no por el desarrollador ni por el agente; **🕒 PENDIENTE** no verificado. Las cifras de tiempo son de esta máquina y de este arnés; no son métricas de producción.
 
 ---
 
@@ -18,8 +18,9 @@ Rótulos de evidencia: **[código]** confirmado por código, comandos o programa
 * Alternar el tema, recargar y navegar con clics reales entre las 6 páginas conserva la elección: 24 de 24 comprobaciones (sistema oscuro y claro), con consola sin mensajes. [render]
 * **Desviación autorizada en `theme.js`:** con `localStorage` bloqueado, `setInitialTheme()` lanzaba `SecurityError` y el botón de tema quedaba inerte (12 de 12 casos). Se corrigió con `try/catch` mínimo (`readTheme` y `saveTheme`); con almacenamiento disponible el comportamiento es idéntico (§6.3 y §7).
 * `pnpm run build:cf`: código 0, "6 page(s) built", 0 advertencias, 109 archivos. El CSS es idéntico byte a byte a la base de la It. 06; el `<body>` de las 6 páginas es idéntico, y lo único nuevo del `<head>` es el script. [código]
-* La excepción quedó registrada como **ADR-003** en `decisiones-tecnicas.md`. Las propuestas para los archivos protegidos y de la épica están en §8 (12 propuestas, ninguna aplicada).
-* Estado: **Completada con reservas** (§10): sin revisión en la vista previa de Cloudflare y con render solo en 2 de los 7 viewports y solo en Chrome headless. No está 🔒 Cerrada: eso ocurre solo con la fusión a `main`.
+* La excepción quedó registrada como **ADR-003** en `decisiones-tecnicas.md`. Las propuestas para los archivos protegidos y de la épica están en §8 (12 propuestas: A a I aplicadas por el desarrollador y J a L aplicadas en el cierre).
+* **Cierre (19-10-2026):** el desarrollador revisó la rama en la vista previa de Cloudflare y no vio destello (§6.8 [informado]); el asesor auditó de forma independiente las compilaciones de `main` y de la rama (§6.9 [asesor]). DT-15 queda resuelta.
+* Estado: **Completada con reservas** (§10): render real automático solo en 2 de los 7 viewports y solo en Chrome headless, y Firefox, Safari y dispositivo real sin probar. La reserva «sin revisión en la vista previa de Cloudflare» quedó resuelta. No está 🔒 Cerrada: eso ocurre solo con la fusión a `main`.
 
 ## 2. Línea base (estado previo)
 
@@ -98,7 +99,7 @@ Posición en el texto (`indexOf`): `<meta charset` en 88, `<script>` en 115 y la
 ## 5. Tarea 2: excepción documentada
 
 * `decisiones-tecnicas.md`: se agregó **ADR-003 — Excepción a la regla de JS en línea: script de arranque del tema** (formato de ADR-001 y ADR-002, numeración correlativa), con contexto, el contenido exacto permitido (copia del script final, comprobada por programa contra `BaseLayout.astro`), la prohibición de cualquier otro script en línea, el criterio de verificación, las alternativas descartadas y las consecuencias. +64 líneas; CRLF y BOM conservados. [código]
-* Las propuestas para los archivos protegidos y de la épica están en §8. **Ninguna está aplicada.**
+* Las propuestas para los archivos protegidos y de la épica están en §8. Al cierre, A a I las aplicó el desarrollador y J a L se aplicaron en el cierre.
 
 ## 6. Tarea 3: verificación
 
@@ -167,6 +168,27 @@ Bloqueo simulado con `Page.addScriptToEvaluateOnNewDocument`: `localStorage` lan
 
 `git status --short`: solo `src/js/modules/theme.js`, `src/layouts/BaseLayout.astro`, `_planificacion/04-bitacora/decisiones-tecnicas.md` y `_planificacion/04-bitacora/estado-actual.md` modificados, y la bitácora nueva sin seguimiento. Ningún archivo protegido modificado. Ningún comando de Git que escriba.
 
+### 6.8 Revisión del desarrollador en la vista previa de Cloudflare [informado]
+
+Datos entregados por el desarrollador, **sin capturas**; el navegador exacto no se precisó (navegador con DevTools). Resuelve la reserva «sin revisión en la vista previa de Cloudflare».
+
+* **Condiciones:** vista previa de Cloudflare de la rama `feat/migracion-astro`; sistema oscuro emulado en *Rendering*; datos del sitio borrados en *Application*; *Network* con «Disable cache» y «Fast 3G».
+* **Destello:** al recargar Inicio y Galería, no vio ningún destello.
+* **Botón de tema:** lo alternó varias veces, recargó y navegó entre las páginas; la elección se mantuvo.
+* **Código fuente:** en el HTML publicado está el `<script>` con el comentario «Excepción documentada».
+* **Consola:** solo muestra el 404 de `rum` (`beacon.min.js`), inyectado por Cloudflare y ya anotado en `iteracion-08.md`, Tarea 3.
+
+### 6.9 Auditoría independiente del asesor [asesor]
+
+Hecha por el asesor, **no** por el desarrollador ni por el agente; el agente la recibe como dato, sin reproducirla.
+
+* Compilaciones limpias de `main` y de la rama: 109 archivos y 0 advertencias en ambas.
+* CSS idéntico (`BaseLayout.744HEtGc.css`, 45.970 B).
+* JS con otro *hash* solo por `theme.js` (27.074 → 27.059 B).
+* HTML de las 6 páginas idéntico a `main` salvo el script nuevo y el *hash* del JS.
+* Exactamente un `<script>` sin `src` por página, idéntico en las 6 y antes de cualquier hoja de estilo.
+* Las líneas `-` de las propuestas para archivos protegidos coinciden con el repo.
+
 ## 7. Cambios por archivo
 
 | Archivo | Cambio |
@@ -174,19 +196,21 @@ Bloqueo simulado con `Page.addScriptToEvaluateOnNewDocument`: `localStorage` lan
 | `src/layouts/BaseLayout.astro` (CRLF) | +12 líneas: el `<script is:inline>` de arranque del tema (§4.1), entre `<meta charset>` y `<title>`. |
 | `src/js/modules/theme.js` (BOM, LF, sin salto final; **desviación autorizada**) | +22 −5 líneas. Se agregaron `readTheme()` y `saveTheme(value)` (ambas con `try/catch`) y los 5 accesos a `localStorage` pasaron a usarlas. `setInitialTheme()`, `switchTheme()`, el botón y la View Transitions API no cambian. **Motivo:** con `localStorage` bloqueado `setInitialTheme()` lanzaba `SecurityError` antes de registrar el evento del botón (§6.3). Con almacenamiento disponible el comportamiento es idéntico (§6.4 y §6.2). BOM, LF y falta de salto final conservados. |
 | `_planificacion/04-bitacora/decisiones-tecnicas.md` (BOM, CRLF) | +64 líneas: ADR-003 (§5). |
-| `_planificacion/04-bitacora/estado-actual.md` (BOM, CRLF, sin salto final) | Una línea agregada al final; la última línea anterior pasa a terminar en `\r\n` (1 línea modificada en el diff, más la nueva). |
-| `_planificacion/04-bitacora/bitacora-epica-08/bitacora-iteracion-07.md` (nuevo, CRLF) | Esta bitácora. |
+| `_planificacion/04-bitacora/estado-actual.md` (BOM, CRLF, sin salto final) | Una línea agregada al final en la ejecución y otra en el cierre; cada vez, la última línea anterior pasa a terminar en `\r\n` (1 línea modificada en el diff, más la nueva). |
+| `_planificacion/04-bitacora/bitacora-epica-08/bitacora-iteracion-07.md` (nuevo, CRLF) | Esta bitácora; en el cierre se actualizaron el encabezado, el resumen, §6.8, §6.9 y de §8 a §12. |
+| `_planificacion/03-planificacion/epicas/epica-08-migracion-astro/definicion-epica.md` (CRLF, sin BOM; **en el cierre**) | 3 ediciones: fila A-05 del §2.2, fila «Astro incrusta scripts/estilos pequeños» del §7 y casilla de invariantes del §8 (propuestas J, K y L). |
 
-Sin cambios en `package.json`, `pnpm-lock.yaml`, `tailwind.config.js`, `input.css`, `main.js`, los demás módulos ni los archivos protegidos.
+Sin cambios en `package.json`, `pnpm-lock.yaml`, `tailwind.config.js`, `input.css`, `main.js`, los demás módulos, `iteracion-07.md` ni los archivos protegidos.
 
 ## 8. Propuestas de edición para archivos protegidos y de la épica
 
-Ninguna se aplicó (`AGENTS.md` §2). Las líneas `-` se tomaron textualmente de los archivos por programa (12 de 12 bloques con sus líneas actuales). Las propuestas A a I tocan archivos protegidos o sujetos a autorización del desarrollador; J a L son de la definición de la épica 08.
+**Estado al cierre (19-10-2026):** las propuestas A a I, que tocan archivos protegidos o sujetos a autorización, **las aplicó el desarrollador a mano [informado]**; J a L, de la definición de la épica 08, **se aplicaron en el cierre** (3 ediciones en `definicion-epica.md`). Las líneas `-` se tomaron textualmente de los archivos por programa (12 de 12 bloques con sus líneas actuales) y el asesor comprobó que coinciden con el repo [asesor]. Los bloques de abajo conservan el texto original de cada propuesta.
 
 ### Propuesta de edición — `AGENTS.md`
 **Sección:** §5 Reglas de arquitectura, regla 2
 **Líneas:** 115 a 116
 **Motivo:** La regla prohíbe `<script is:inline>` sin excepciones; la Iteración 07 incorpora el script de arranque del tema aprobado por el desarrollador.
+**Estado:** ✅ aplicada por el desarrollador [informado].
 ```diff
 - 2. **Cero JS y CSS en línea.** Prohibidos `style="..."`, `onclick`, `<script is:inline>` y `<style>` en archivos
 -    `.astro`. El único `<script>` permitido es el del layout que carga `src/js/main.js`.
@@ -200,6 +224,7 @@ Ninguna se aplicó (`AGENTS.md` §2). Las líneas `-` se tomaron textualmente de
 **Sección:** §7 Verificación mínima, segunda viñeta
 **Líneas:** 160 a 161
 **Motivo:** El invariante «0 `<script>` sin `src`» ya no se cumple: queda exactamente uno por página.
+**Estado:** ✅ aplicada por el desarrollador [informado].
 ```diff
 - - Búsquedas de invariantes en `_site/**/*.html`: 0 `style="`, 0 `onclick`, 0 `<style>`, 0 `<script>` sin `src`,
 -   0 `href="#"` en navegación y footer, IDs únicos.
@@ -211,6 +236,7 @@ Ninguna se aplicó (`AGENTS.md` §2). Las líneas `-` se tomaron textualmente de
 **Sección:** §6 Reglas de acero, punto 2
 **Líneas:** 105
 **Motivo:** Resumen de `AGENTS.md` §5; debe reflejar la excepción.
+**Estado:** ✅ aplicada por el desarrollador [informado].
 ```diff
 - 2. Cero JS y CSS en línea (`style=`, `onclick`, `<script is:inline>`, `<style>` en `.astro`).
 + 2. Cero JS y CSS en línea (`style=`, `onclick`, `<script is:inline>`, `<style>` en `.astro`), salvo el script de arranque del tema (ADR-003).
@@ -220,6 +246,7 @@ Ninguna se aplicó (`AGENTS.md` §2). Las líneas `-` se tomaron textualmente de
 **Sección:** §7 Estándar de verificación, punto 2
 **Líneas:** 119 a 120
 **Motivo:** Mismo invariante que `AGENTS.md` §7.
+**Estado:** ✅ aplicada por el desarrollador [informado].
 ```diff
 - 2. **Invariantes por búsqueda de texto** en `_site/**/*.html`: `style=`, `onclick`, `<style>`, `<script>` sin `src`,
 -    `href="#"`, IDs únicos, ausencia de `fixed` dentro del `<header>`.
@@ -231,6 +258,7 @@ Ninguna se aplicó (`AGENTS.md` §2). Las líneas `-` se tomaron textualmente de
 **Sección:** §12 Registro de deuda técnica, fila DT-15
 **Líneas:** 232
 **Motivo:** La deuda se resuelve en la Iteración 07 (verificada en Chrome headless; la vista previa de Cloudflare queda 🕒 PENDIENTE).
+**Estado:** ✅ aplicada por el desarrollador [informado].
 ```diff
 - | DT-15 | El tema oscuro se aplica en `DOMContentLoaded`: destello claro en la carga para quien prefiere modo oscuro. | Media | Épica 08 · It. 07 (opcional, requiere excepción) |
 + | DT-15 | ✅ **Resuelta** (Épica 08 · Iteración 07, 19-10-2026). El tema oscuro se aplicaba en `DOMContentLoaded` y quien prefiere modo oscuro veía un destello claro en la carga. Un único `<script is:inline>` en el `<head>` de `BaseLayout.astro` (excepción aprobada, ADR-003 de `decisiones-tecnicas.md`) fija `dark` o `light` antes del primer pintado. Medido en Chrome 155 headless (sistema oscuro, sin tema guardado, red 3G rápida emulada, Inicio y Galería a 360 × 740 y 1280 × 800): antes, 20 de 20 corridas con un fotograma claro previo al oscuro; después, 0 de 20. Además `theme.js` ya no falla con `localStorage` bloqueado (`readTheme` y `saveTheme`). 🕒 PENDIENTE: vista previa de Cloudflare, Firefox, Safari y dispositivo real. | Media | Épica 08 · It. 07 |
@@ -240,6 +268,7 @@ Ninguna se aplicó (`AGENTS.md` §2). Las líneas `-` se tomaron textualmente de
 **Sección:** §5 Deuda de diseño conocida, nota 7
 **Líneas:** 317 a 318
 **Motivo:** La nota describe como pendiente el destello que la Iteración 07 resuelve.
+**Estado:** ✅ aplicada por el desarrollador [informado].
 ```diff
 - 7. **FOUC del tema:** `theme.js` aplica `.dark` después del primer pintado. Resolverlo exige un script bloqueante en
 -    `<head>`, que choca con la regla "cero JS en línea"; requiere una excepción documentada.
@@ -252,6 +281,7 @@ Ninguna se aplicó (`AGENTS.md` §2). Las líneas `-` se tomaron textualmente de
 **Sección:** Reglas de código (línea «Cero JavaScript y CSS en línea»)
 **Líneas:** 196
 **Motivo:** La línea afirma cero JavaScript en línea sin excepción.
+**Estado:** ✅ aplicada por el desarrollador [informado].
 ```diff
 - ✅ Cero JavaScript y CSS en línea.
 + ✅ Cero JavaScript y CSS en línea, salvo el script de arranque del tema del `<head>` (ADR-003 de `_planificacion/04-bitacora/decisiones-tecnicas.md`).
@@ -261,6 +291,7 @@ Ninguna se aplicó (`AGENTS.md` §2). Las líneas `-` se tomaron textualmente de
 **Sección:** Reglas de JavaScript, punto 1 (requiere autorización del desarrollador)
 **Líneas:** 47 a 48
 **Motivo:** Prohíbe `<script>` con lógica incrustada sin excepción.
+**Estado:** ✅ aplicada por el desarrollador [informado].
 ```diff
 - 1. **Cero JS en línea:** Prohibido el uso de atributos como `onclick`, `onchange` o bloques `<script>` con lógica
 -    incrustada en el HTML.
@@ -273,6 +304,7 @@ Ninguna se aplicó (`AGENTS.md` §2). Las líneas `-` se tomaron textualmente de
 **Sección:** Definition of Done, punto 1 (requiere autorización del desarrollador)
 **Líneas:** 39
 **Motivo:** Afirma que el HTML no contiene scripts en línea.
+**Estado:** ✅ aplicada por el desarrollador [informado].
 ```diff
 - 1. **Cero JS en línea:** El HTML no contiene scripts en línea ni eventos en atributos (`onclick`).
 + 1. **Cero JS en línea:** El HTML no contiene scripts en línea (salvo el script de arranque del tema, ADR-003) ni eventos en atributos (`onclick`).
@@ -282,6 +314,7 @@ Ninguna se aplicó (`AGENTS.md` §2). Las líneas `-` se tomaron textualmente de
 **Sección:** §2.2, fila A-05
 **Líneas:** 56
 **Motivo:** La fila remite a la Iteración 07 «si requiere excepción»; ahora está resuelta.
+**Estado:** ✅ aplicada en el cierre (19-10-2026), con el texto indicado.
 ```diff
 - | A-05   | El tema oscuro se aplica en `DOMContentLoaded` (`theme.js`): quien prefiere modo oscuro ve un destello claro al cargar.                                                  | It. 07 (opcional; requiere excepción a la regla de JS en línea) |
 + | A-05   | El tema oscuro se aplica en `DOMContentLoaded` (`theme.js`): quien prefiere modo oscuro ve un destello claro al cargar.                                                  | It. 07 ✅ resuelta (excepción aprobada, ADR-003) |
@@ -291,6 +324,7 @@ Ninguna se aplicó (`AGENTS.md` §2). Las líneas `-` se tomaron textualmente de
 **Sección:** §7 Riesgos, fila «Astro incrusta scripts/estilos pequeños»
 **Líneas:** 179
 **Motivo:** La búsqueda de `<script>` sin `src` debe tolerar el script del tema.
+**Estado:** ✅ aplicada en el cierre (19-10-2026), con el texto indicado.
 ```diff
 - | Astro incrusta scripts/estilos pequeños                         | D5 + búsqueda en `_site/` de `<script>` sin `src` y de `<style>`.                                 |
 + | Astro incrusta scripts/estilos pequeños                         | D5 + búsqueda en `_site/` de `<script>` sin `src` (solo el del tema) y de `<style>`.                                 |
@@ -300,6 +334,7 @@ Ninguna se aplicó (`AGENTS.md` §2). Las líneas `-` se tomaron textualmente de
 **Sección:** §8 Definition of Done, casilla de invariantes
 **Líneas:** 195 a 196
 **Motivo:** La casilla exige 0 `<script>` ejecutables sin `src` «salvo la excepción de la It. 07 si se aprueba»; se aprobó. El JSON-LD no se implementó (decisión de la It. 05).
+**Estado:** ✅ aplicada en el cierre (19-10-2026), con el texto indicado por el desarrollador (en una sola línea; sin mención al JSON-LD, que no existe en `src/` ni en `_site/`).
 ```diff
 - * [ ] 0 `style=`, 0 `onclick`, 0 `<script>` ejecutables sin `src` (salvo la excepción de la It. 07 si se aprueba; el
 -   JSON-LD opcional de la It. 05 es un bloque de datos) y 0 `<style>` en `_site/**/*.html`.
@@ -315,11 +350,11 @@ No se corrigió nada de lo que está fuera del alcance.
 
 1. **Desviación autorizada en `theme.js`** (§6.3 y §7): `try/catch` mínimo en el acceso a `localStorage`; el criterio de verificación 3 de la especificación («sin errores en consola con `localStorage` bloqueado») no se cumplía con el script de arranque solo.
 2. **Mecanismo del destello sin determinar** (§3.2): el primer fotograma claro aparece 57 a 162 ms después de que `theme.js` dejó `dark` en el DOM. Hipótesis sin verificar (CSS ya aplicado en claro y `transition-colors`). El resultado medido no depende de ella.
-3. **`setInitialTheme()` guarda la preferencia del sistema como si fuera una elección** [código y render]: en la primera visita escribe `theme` en `localStorage` aunque la persona no haya tocado el botón (`localStorage=dark` tras la primera carga, §6.2). Si luego cambia el modo del sistema, el sitio sigue con el de la primera visita. Es comportamiento previo, no se modificó ni se registró como deuda: decisión del desarrollador.
-4. **Peso del script:** +722 caracteres por página (en el HTML sin comprimir). Las dos líneas de comentario suman 208 caracteres; sin ellas y sin el comentario del `catch` el bloque mediría 465. Se dejaron para que quien lea el código fuente publicado encuentre la excepción. Lighthouse no se midió en esta iteración.
+3. **`setInitialTheme()` guarda la preferencia del sistema como si fuera una elección** [código y render]: en la primera visita escribe `theme` en `localStorage` aunque la persona no haya tocado el botón (`localStorage=dark` tras la primera carga, §6.2). Si luego cambia el modo del sistema, el sitio sigue con el de la primera visita. Es comportamiento previo y no se modificó. **Al cierre, el desarrollador lo registró como SM-03 para la Épica 09 o 10, sin cambiar el comportamiento.**
+4. **Peso del script:** +722 caracteres por página (en el HTML sin comprimir). Las dos líneas de comentario suman 208 caracteres; sin ellas y sin el comentario del `catch` el bloque mediría 465. Se dejaron para que quien lea el código fuente publicado encuentre la excepción. **Al cierre, el desarrollador decidió conservar los comentarios.** Lighthouse no se midió en esta iteración.
 5. **Verificación acotada:** render real solo en 360 × 740 y 1280 × 800 (la especificación de render del `AGENTS.md` §7 pide 7 viewports, pero la iteración cambia el tema en el arranque y no el aspecto estático), solo en Chrome headless, y la comparación de fotogramas solo con el sistema en modo oscuro y sin tema guardado.
-6. **Documentos de la épica no editados:** `definicion-epica.md` (A-05, §7 y DoD) y `iteracion-07.md` quedan sin cambios; las propuestas J, K y L del §8 los cubren.
-7. **Sin deuda técnica nueva** en el §12 de `_planificacion/README.md`.
+6. **Documentos de la épica:** `iteracion-07.md` queda sin cambios. `definicion-epica.md` (A-05, §7 y casilla de invariantes del §8) se editó en el cierre con las propuestas J, K y L del §8 (3 ediciones).
+7. **Sin deuda técnica nueva** en el §12 de `_planificacion/README.md`. El hallazgo del punto 3 es la solicitud SM-03, no una deuda.
 
 ## 10. Estado, reservas y pendientes
 
@@ -327,22 +362,28 @@ No se corrigió nada de lo que está fuera del alcance.
 
 **Completada con reservas.** No está 🔒 Cerrada (fusión a `main`, `_planificacion/README.md` §5).
 
-### 10.2 Reservas
+### 10.2 Reservas vigentes
 
-1. **Sin revisión en la vista previa de Cloudflare** con el sistema en modo oscuro y red limitada (el agente no tiene acceso).
-2. **Render real solo en 2 de los 7 viewports** y **solo en Chrome headless**: sin Firefox, Safari ni dispositivo móvil real (§9, punto 5).
+1. **Render real automático solo en 2 de los 7 viewports** (360 × 740 y 1280 × 800) y **solo en Chrome headless** (§9, punto 5). La revisión del desarrollador en la vista previa (§6.8) es manual, informada y sin capturas.
+2. **Firefox, Safari y dispositivo móvil real sin probar** (la revisión del desarrollador no precisó navegador ni dispositivo).
 
-### 10.3 Pendientes del desarrollador (🕒 PENDIENTE)
+**Resuelta al cierre:** «sin revisión en la vista previa de Cloudflare» (§6.8 [informado]).
 
-* **Revisión en la vista previa de Cloudflare** de la rama, con el sistema operativo en modo oscuro, sin `theme` en el almacenamiento del sitio (ventana privada o «Borrar datos del sitio») y red limitada desde DevTools (por ejemplo, «Fast 3G»): al cargar Inicio y Galería no debe verse un fondo claro antes del oscuro. Confirmar que la consola no muestra mensajes nuevos.
-* **Comprobar el botón de tema** en esa vista previa: alternar, recargar y navegar entre páginas conserva la elección.
-* **Aplicar las propuestas de §8** a `AGENTS.md`, `README.md`, `DESIGN.md`, `_planificacion/README.md`, `stack-tecnologico.md`, `objetivos-y-metricas.md` y `definicion-epica.md`.
-* **Firefox, Safari y un celular real:** mirar la carga con el sistema en modo oscuro.
-* Decidir sobre los comentarios del script (§9, punto 4) y sobre el comportamiento de la primera visita (§9, punto 3), si se desea cambiarlos.
+### 10.3 Pendientes (🕒 PENDIENTE)
+
+* **Firefox, Safari y un celular real:** mirar la carga con el sistema en modo oscuro (desarrollador).
+* **SM-03** (`setInitialTheme()` guarda la preferencia del sistema como si fuera una elección): atenderla en la Épica 09 o 10 (§9, punto 3).
+* **Paso a producción** en la Iteración 08 (fusión a `main`).
 
 ## 11. Decisión del desarrollador [informado]
 
 El desarrollador **aprobó la excepción** a la regla «cero JS en línea» para **un único** script de arranque del tema en el `<head>`, acotada a eso: cualquier otro script en línea sigue prohibido. Autorizó solo: el `<script is:inline>` en `BaseLayout.astro`; cambios mínimos en `theme.js` (para evitar trabajo duplicado o para que no falle con `localStorage` bloqueado, reportados como desviación); el registro en `decisiones-tecnicas.md`, la bitácora y `estado-actual.md`. Los demás archivos protegidos no se tocan.
+
+**Decisiones al cierre (19-10-2026) [informado]:**
+
+* Los comentarios del script se conservan (§9, punto 4).
+* El hallazgo de la primera visita se registra como **SM-03** para la Épica 09 o 10, sin cambiar el comportamiento (§9, punto 3).
+* Las propuestas A a I para archivos protegidos las aplicó el desarrollador a mano (§8).
 
 ## 12. Mensaje de commit sugerido
 
@@ -350,4 +391,12 @@ El desarrollador **aprobó la excepción** a la regla «cero JS en línea» para
 Épica 08 - Iteración 07: Aplica el tema antes del primer pintado con un script de arranque en el head y tolera localStorage bloqueado en theme.js.
 ```
 
-Longitud contada con Node: 146 caracteres.
+Longitud contada con Node: 146 caracteres. (Commit `ca37863`, ya en GitHub.)
+
+Mensaje sugerido para el cierre documental:
+
+```text
+Épica 08 - Iteración 07: Cierra la iteración con la revisión de la vista previa de Cloudflare, la auditoría del asesor y las reservas abiertas.
+```
+
+Longitud contada con Node: 143 caracteres.

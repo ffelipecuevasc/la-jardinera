@@ -53,7 +53,7 @@ interfaz, renderizado en servidor (SSR) y reescritura de los módulos Vanilla.
 | A-02   | `404.html` usa rutas relativas (`./dist/css/output.css`). Cloudflare la sirve en cualquier profundidad (`/a/b/x`), donde esas rutas se rompen y la 404 se vería sin estilos. Hallazgo por análisis de código: confirmarlo en producción en la It. 01. | It. 02 (rutas absolutas y recursos con hash) |
 | A-03   | Astro **incrusta en línea** los scripts y hojas de estilo pequeños por defecto, lo que violaría la regla "cero JS y CSS en línea".                                       | It. 02 (`inlineStylesheets: 'never'` y `assetsInlineLimit: 0`, verificado en prueba) |
 | A-04   | `@astrojs/tailwind` (integración oficial para Tailwind 3) declara compatibilidad solo hasta Astro 5; no sirve con Astro 7.                                             | It. 02 (Tailwind 3 vía PostCSS, verificado en prueba) |
-| A-05   | El tema oscuro se aplica en `DOMContentLoaded` (`theme.js`): quien prefiere modo oscuro ve un destello claro al cargar.                                                  | It. 07 (opcional; requiere excepción a la regla de JS en línea) |
+| A-05   | El tema oscuro se aplica en `DOMContentLoaded` (`theme.js`): quien prefiere modo oscuro ve un destello claro al cargar.                                                  | It. 07 ✅ resuelta (excepción aprobada, ADR-003) |
 | A-06   | `dist/css/output.css` está versionado en Git; con Astro el CSS se genera en `_site/_astro/` y `dist/` sobra.                                                            | It. 02            |
 | A-07   | `<meta charset>` no es la primera etiqueta del `<head>` en varias páginas (debe ir dentro de los primeros 1024 bytes).                                                   | It. 02 (el layout lo pone primero) |
 | DT-04, DT-08 | Falta `meta description` en el Inicio; sin `canonical`, Open Graph, `robots.txt` ni `sitemap.xml`.                                                               | It. 05            |
@@ -176,7 +176,7 @@ Cloudflare (despliegue anterior).
 | Diferencias invisibles en el marcado al copiar a `.astro`       | Comparación automatizada del DOM contra la instantánea de la It. 01 (texto, clases, atributos).   |
 | Rutas de imágenes rotas (HTML y datos JS)                       | Inventario por búsqueda de `./public/` antes y después: debe quedar en 0. Rastreo de enlaces en `_site/`. |
 | Clases de Tailwind no detectadas en `.astro`                    | `content` incluye `./src/**/*.{astro,html,js}`; comparar selectores del CSS nuevo contra `dist/css/output.css`. |
-| Astro incrusta scripts/estilos pequeños                         | D5 + búsqueda en `_site/` de `<script>` sin `src` y de `<style>`.                                 |
+| Astro incrusta scripts/estilos pequeños                         | D5 + búsqueda en `_site/` de `<script>` sin `src` (solo el del tema) y de `<style>`.                                 |
 | Orden de carga del CSS distinto (cascada)                       | Un solo CSS global importado en el layout; comparar capturas.                                    |
 | Videos de la galería cerca del límite de 25 MiB                 | Sin cambios de archivos; la verificación de tamaños de la Épica 07 se repite sobre `_site/`.      |
 | Versiones de Node/pnpm distintas en Cloudflare                  | Variables de entorno y revisión del log de la primera vista previa.                              |
@@ -192,8 +192,7 @@ Cloudflare (despliegue anterior).
   JavaScript.
 * [ ] Paridad visual y funcional con la línea base en 320×640, 360×740, 412×915, 768×1024, 740×360, 1024×768 y
   1280×800, en modo claro y oscuro.
-* [ ] 0 `style=`, 0 `onclick`, 0 `<script>` ejecutables sin `src` (salvo la excepción de la It. 07 si se aprueba; el
-  JSON-LD opcional de la It. 05 es un bloque de datos) y 0 `<style>` en `_site/**/*.html`.
+* [ ] 0 `style=`, 0 `onclick` y 0 `<style>` en `_site/**/*.html`, y exactamente 1 `<script>` ejecutable sin `src` por página: el de arranque del tema (excepción aprobada de la It. 07, ADR-003), idéntico en las 6 páginas.
 * [ ] 0 referencias a `./public/` en el código fuente; las URLs antiguas `/public/...` redirigen con 301.
 * [ ] Lighthouse de las 6 páginas, en móvil y escritorio: el sitio actual (producción) y el nuevo (vista previa de la
   rama) se miden en la misma sesión, 3 corridas por página y modo, y se comparan las medianas. Aceptación: Performance

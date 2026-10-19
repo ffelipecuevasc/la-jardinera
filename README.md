@@ -193,7 +193,7 @@ sin cookies ni rastreo entre sitios, por lo que no requiere banner de consentimi
 
 Reglas de código que sostienen estas métricas:
 
-✅ Cero JavaScript y CSS en línea.
+✅ Cero JavaScript y CSS en línea, salvo el script de arranque del tema del `<head>` (ADR-003 de `_planificacion/04-bitacora/decisiones-tecnicas.md`).
 ✅ Imágenes con `width`, `height`, `alt` y contenedor con relación de aspecto.
 ✅ Rutas absolutas desde la raíz (`/servicios`, `/images/...`), válidas en cualquier profundidad de URL.
 ✅ Verificación en navegador real, en modo claro y oscuro, en siete tamaños de pantalla.

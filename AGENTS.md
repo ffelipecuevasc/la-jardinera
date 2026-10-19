@@ -113,7 +113,9 @@ Notas:
    y `404`) que Astro compila a seis archivos HTML. Prohibido emular una SPA (sin `ClientRouter` ni transiciones de
    página de Astro) y prohibidas las directivas `client:*`.
 2. **Cero JS y CSS en línea.** Prohibidos `style="..."`, `onclick`, `<script is:inline>` y `<style>` en archivos
-   `.astro`. El único `<script>` permitido es el del layout que carga `src/js/main.js`.
+   `.astro`, con una única excepción: el script de arranque del tema del `<head>` de `BaseLayout.astro` (ADR-003 de
+   `decisiones-tecnicas.md`), idéntico en las 6 páginas. Fuera de él, el único `<script>` permitido es el del layout
+   que carga `src/js/main.js`.
 3. **Módulos ES6.** Toda la lógica vive en `src/js/modules/*.js`, se importa de forma estática en `src/js/main.js` y exporta una
    función `initX()` con cláusula de guarda (`if (!elemento) return;`). Selectores en caché, delegación de eventos,
    nada en `window`, módulos desacoplados.
@@ -157,8 +159,8 @@ Notas:
 ## 7. Verificación mínima (Definition of Done global)
 
 - `pnpm run build:cf` termina sin errores y el CSS de `_site/_astro/` contiene las clases nuevas (búscalas por texto).
-- Búsquedas de invariantes en `_site/**/*.html`: 0 `style="`, 0 `onclick`, 0 `<style>`, 0 `<script>` sin `src`,
-  0 `href="#"` en navegación y footer, IDs únicos.
+- Búsquedas de invariantes en `_site/**/*.html`: 0 `style="`, 0 `onclick`, 0 `<style>`, exactamente 1 `<script>` sin `src`
+  (el de arranque del tema, idéntico en las 6 páginas), 0 `href="#"` en navegación y footer, IDs únicos.
 - Render real en 320×640, 360×740, 412×915, 768×1024, 740×360, 1024×768 y 1280×800, en modo claro y oscuro,
   cuando hay cambios visuales. Si no dispones de un navegador automatizable, **no lo inventes**: deja el ítem como
   `🕒 PENDIENTE` con la lista de comprobaciones manuales.

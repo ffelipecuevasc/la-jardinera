@@ -314,8 +314,9 @@ Hallazgos abiertos. No bloquean el trabajo, pero ningún componente nuevo debe r
 6. **Tokens duplicados o sin uso:** `dark-neutral-50` = `dark-on-surface-variant`; `dark-neutral-300` =
    `dark-surface-variant`; `primary-fixed-dim` = `inverse-primary`; familia `tertiary`, `secondary-light` y
    `secondary-hover` sin uso.
-7. **FOUC del tema:** `theme.js` aplica `.dark` después del primer pintado. Resolverlo exige un script bloqueante en
-   `<head>`, que choca con la regla "cero JS en línea"; requiere una excepción documentada.
+7. **FOUC del tema (resuelto en la Épica 08 · Iteración 07, 19-10-2026):** un único `<script is:inline>` en el `<head>` de
+   `BaseLayout.astro` deja `dark` o `light` en `<html>` antes del primer pintado (excepción documentada en el ADR-003 de
+   `decisiones-tecnicas.md`). `theme.js` conserva el botón de alternancia y la View Transitions API.
 8. **Favicon** de trazo negro poco legible en pestañas oscuras: se puede añadir un segundo `<link rel="icon"
    media="(prefers-color-scheme: dark)">` (aquí la media query sí es correcta).
 9. **Estilos en línea heredados (resuelto):** la textura de ruido del banner (4 páginas) vive en la clase `.bg-noise`
