@@ -20,6 +20,18 @@ if (indexable && !entrada) {
 <html class="light bg-background text-on-surface" lang="es">
 <head>
     <meta charset="utf-8"/>
+    <script is:inline>
+        // Excepción documentada (decisiones-tecnicas.md, ADR-003): fija el tema antes del primer pintado.
+        // Misma regla que setInitialTheme() de src/js/modules/theme.js; no escribe en localStorage.
+        (function () {
+            let guardado = null;
+            try { guardado = localStorage.getItem('theme'); } catch (e) { /* almacenamiento bloqueado: manda el sistema */ }
+            const oscuro = guardado === 'dark' || (!guardado && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            const clases = document.documentElement.classList;
+            clases.remove(oscuro ? 'light' : 'dark');
+            clases.add(oscuro ? 'dark' : 'light');
+        })();
+    </script>
     <title>{title}</title>
     <SeoHead
         title={title}

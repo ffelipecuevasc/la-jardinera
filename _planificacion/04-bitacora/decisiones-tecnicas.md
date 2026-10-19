@@ -231,3 +231,67 @@ Aplicadas en `src/components/SeoHead.astro`, `src/layouts/BaseLayout.astro`, `sr
 * **`og:title` = `<title>` de cada página.** No se usa el título «El Arte de lo Efímero» de `contenido-index.md` §1, que contradice la regla de coincidencia carácter por carácter. `twitter:card` es `summary_large_image`; no se agregan `twitter:title`, `twitter:description` ni `twitter:image` porque las plataformas usan `og:*` como respaldo.
 * **Datos estructurados (JSON-LD) no implementados**, por decisión del desarrollador (Tarea 3b). 0 `<script type="application/ld+json">`; no hay excepción que documentar.
 * **`robots.txt` no bloquea la 404:** si se bloquea el rastreo, Google nunca ve su `noindex`. Observado el 18-10-2026: producción ya sirve un `/robots.txt` con un bloque de *content signals* de Cloudflare que el repositorio no contiene; el archivo del sitio se verifica tras el paso a producción (It. 08).
+
+## ADR-003 — Excepción a la regla de JS en línea: script de arranque del tema
+
+* **Estado:** Aprobada (19-10-2026). Decisión del desarrollador (Épica 08 · Iteración 07, opcional).
+
+### Contexto
+
+* **DT-15 / A-05.** `theme.js` se carga como módulo diferido al final del `<body>` y aplica `.dark` en `DOMContentLoaded`. Hasta
+  entonces `<html>` trae `class="light ..."` y el CSS ya está aplicado en claro.
+* **Medición previa [render]** (Chrome `155.0.8059.84` headless, sistema en modo oscuro, sin `theme` en `localStorage`, red «3G rápida» emulada
+  de DevTools, `pnpm preview`, Inicio y Galería a 360 × 740 y 1280 × 800, 5 corridas cada una, fuentes y videos externos bloqueados): en las
+  **20 de 20 corridas** el primer fotograma de la página fue **claro** y el oscuro llegó después (mediana 47 ms, entre 13 y 165 ms).
+* `AGENTS.md` §5, regla 2, prohíbe `<script is:inline>`. Decidir el tema antes del primer pintado exige un script bloqueante en el
+  `<head>`: no hay otra forma de que corra antes del primer pintado.
+
+### Decisión
+
+* Se permite **un único** `<script is:inline>` en el `<head>` de `src/layouts/BaseLayout.astro`, **inmediatamente después de
+  `<meta charset>` y antes de cualquier hoja de estilo, enlace de fuentes o `<title>`**.
+* **Contenido exacto permitido** (tal como está en `BaseLayout.astro`; Astro emite el mismo texto con `<script>` sin el atributo):
+
+```html
+    <script is:inline>
+        // Excepción documentada (decisiones-tecnicas.md, ADR-003): fija el tema antes del primer pintado.
+        // Misma regla que setInitialTheme() de src/js/modules/theme.js; no escribe en localStorage.
+        (function () {
+            let guardado = null;
+            try { guardado = localStorage.getItem('theme'); } catch (e) { /* almacenamiento bloqueado: manda el sistema */ }
+            const oscuro = guardado === 'dark' || (!guardado && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            const clases = document.documentElement.classList;
+            clases.remove(oscuro ? 'light' : 'dark');
+            clases.add(oscuro ? 'dark' : 'light');
+        })();
+    </script>
+```
+
+* **Qué hace:** deja `dark` en `<html>` si el tema guardado es `'dark'` o, sin tema guardado, si el sistema prefiere oscuro; en cualquier otro
+  caso deja `light`. Quita solo la clase contraria y no toca las demás. Es la misma regla que `setInitialTheme()` de `theme.js`.
+* **Qué no hace:** no escribe en `localStorage`, no crea variables globales (función autoejecutable) y no falla si el almacenamiento está
+  bloqueado (lectura dentro de `try/catch`).
+* **Prohibido** agregar cualquier otro script en línea. Cambiar el contenido de este script exige una nueva decisión que enmiende este ADR.
+* **Criterio de verificación** (por búsqueda de texto en `_site/**/*.html`): exactamente **un** `<script>` sin `src` por página, dentro
+  del `<head>`, antes de la primera hoja de estilo, **idéntico carácter a carácter en las 6 páginas**; 0 `style=`, 0 `onclick` y 0 `<style>`.
+
+### Alternativas descartadas
+
+* **Aceptar DT-15 sin cambios:** es lo que prescribía la especificación si no se aprobaba la excepción; se descartó por decisión del desarrollador.
+* **`<script>` común de Astro en el layout:** Astro lo empaqueta y lo emite como `<script type="module" src="...">`, diferido y externo; no corre
+  antes del primer pintado (así sale hoy `main.js`).
+* **Resolverlo solo con CSS (`prefers-color-scheme`):** el proyecto usa `darkMode: "class"` (`tailwind.config.js`) y la elección guardada con el
+  botón no se puede expresar en CSS.
+
+### Consecuencias
+
+* **`setInitialTheme()` se conserva en `theme.js`:** repite la misma regla y es idempotente; quitarlo no es necesario y mantiene sin cambios
+  el comportamiento (incluida la escritura del tema en `localStorage` en la primera visita).
+* **Cambio mínimo en `theme.js` (autorizado en la iteración, solo para `localStorage` bloqueado):** `readTheme()` y `saveTheme()` envuelven el
+  acceso a `localStorage` en `try/catch`. **Motivo [render]:** con `localStorage` bloqueado, `setInitialTheme()` lanzaba `SecurityError` antes de
+  registrar el evento del botón: `console.error` («Falló "initTheme"») y botón de tema inerte en 12 de 12 casos (2 temas de sistema × 6 páginas).
+  Con el cambio: 0 mensajes y el botón alterna en 12 de 12. Con almacenamiento disponible el comportamiento es el mismo.
+* **Documentos por actualizar mediante propuesta** (los edita el desarrollador): `AGENTS.md` §5 regla 2 y §7, `_planificacion/README.md` §6, §7
+  y DT-15 de §12, `README.md` (regla de código), `DESIGN.md` §5 nota 7, `stack-tecnologico.md`, `objetivos-y-metricas.md` y
+  `definicion-epica.md` (DoD y A-05). Texto exacto en la bitácora de la Iteración 07.
+* **Límite:** la verificación se hizo en Chrome headless; la vista previa de Cloudflare, Firefox, Safari y un dispositivo real siguen 🕒 PENDIENTE.

@@ -8,21 +8,38 @@ export const initTheme = () => {
     const themeToggleBtn = document.getElementById('theme-toggle-btn');
     const htmlElement = document.documentElement;
 
+    // El almacenamiento puede estar bloqueado (modo privado, política del navegador): se ignora el error y manda el sistema
+    const readTheme = () => {
+        try {
+            return localStorage.getItem('theme');
+        } catch (err) {
+            return null;
+        }
+    };
+
+    const saveTheme = (value) => {
+        try {
+            localStorage.setItem('theme', value);
+        } catch (err) {
+            // Sin almacenamiento, la elección vale solo para esta página
+        }
+    };
+
     // Función pura para alterar las clases y guardar en LocalStorage
     const switchTheme = () => {
         if (htmlElement.classList.contains('dark')) {
             htmlElement.classList.replace('dark', 'light');
-            localStorage.setItem('theme', 'light');
+            saveTheme('light');
         } else {
             htmlElement.classList.remove('light');
             htmlElement.classList.add('dark');
-            localStorage.setItem('theme', 'dark');
+            saveTheme('dark');
         }
     };
 
     // Función de evaluación de sistema/estado
     const setInitialTheme = () => {
-        const storedTheme = localStorage.getItem('theme');
+        const storedTheme = readTheme();
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
         // Limpieza precautoria
@@ -30,10 +47,10 @@ export const initTheme = () => {
 
         if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
             htmlElement.classList.add('dark');
-            localStorage.setItem('theme', 'dark');
+            saveTheme('dark');
         } else {
             htmlElement.classList.add('light');
-            localStorage.setItem('theme', 'light');
+            saveTheme('light');
         }
     };
 
