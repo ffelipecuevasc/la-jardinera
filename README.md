@@ -87,7 +87,7 @@ dependencias de iconografía externa.
 ├── src/
 │   ├── pages/                 # index, servicios, suscripcion-floral, galeria, contacto y 404 (.astro) y sitemap.xml.js (endpoint)
 │   ├── layouts/               # BaseLayout.astro: <head>, header, footer y script
-│   ├── components/            # SiteHeader, SiteFooter y SeoHead
+│   ├── components/            # SiteHeader, SiteFooter y SeoHead; secciones/ con FranjaBeneficios
 │   ├── data/navegacion.js     # Fuente única de rutas, etiquetas y descripciones (navegación, SEO y sitemap)
 │   ├── css/input.css          # Capa base, variables de tema y componentes CSS
 │   └── js/

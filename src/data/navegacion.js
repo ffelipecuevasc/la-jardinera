@@ -1,5 +1,6 @@
-// Fuente única de la navegación del sitio (Épica 08 · Iteración 03). La usa SiteFooter.astro y la usará SiteHeader.astro
-// (Iteración 04). Las etiquetas están copiadas textualmente del marcado; header y footer las tienen idénticas.
+// Fuente única de rutas, etiquetas y descripciones del sitio (Épica 08 · Iteración 03). La usan SiteHeader.astro, SiteFooter.astro,
+// BaseLayout.astro/SeoHead.astro (descripciones) y sitemap.xml.js. Las etiquetas están copiadas textualmente del marcado;
+// header y footer las tienen idénticas.
 export const NAVEGACION = [
     { clave: 'inicio',             etiqueta: 'Inicio',             ruta: '/',
       descripcion: 'Diseño floral artesanal y curaduría de eventos para celebrar la belleza efímera de la naturaleza en Valdivia, Chile.' },
