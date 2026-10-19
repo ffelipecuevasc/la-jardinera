@@ -1,7 +1,7 @@
 # DESIGN.md — Sistema de Diseño de La Jardinera Florería
 
 > **Única fuente de la verdad** para tipografía, color, espaciado, componentes, efectos y accesibilidad visual del
-> sitio https://www.lajardinerafloreria.cl.
+> sitio https://lajardinerafloreria.cl.
 >
 > **Gobernanza:** solo el desarrollador edita este archivo. Los agentes de IA lo leen de forma obligatoria antes de
 > cualquier cambio visual y proponen modificaciones mediante el protocolo de `AGENTS.md` §2.

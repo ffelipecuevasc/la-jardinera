@@ -85,10 +85,10 @@ dependencias de iconografía externa.
 │   ├── logos/                 # Logotipo de La Jardinera (variante clara y blanca)
 │   └── images/                # Fotografías .webp y videos .mp4 por sección
 ├── src/
-│   ├── pages/                 # index, servicios, suscripcion-floral, galeria, contacto y 404 (.astro)
+│   ├── pages/                 # index, servicios, suscripcion-floral, galeria, contacto y 404 (.astro) y sitemap.xml.js (endpoint)
 │   ├── layouts/               # BaseLayout.astro: <head>, header, footer y script
 │   ├── components/            # SiteHeader, SiteFooter y SeoHead
-│   ├── data/navegacion.js     # Fuente única de rutas y etiquetas de navegación
+│   ├── data/navegacion.js     # Fuente única de rutas, etiquetas y descripciones (navegación, SEO y sitemap)
 │   ├── css/input.css          # Capa base, variables de tema y componentes CSS
 │   └── js/
 │       ├── main.js            # Orquestador de módulos (importaciones estáticas)
@@ -177,7 +177,7 @@ El sitio se publica con **Cloudflare Pages**, conectado al repositorio de GitHub
 🔹 **Cloudflare Web Analytics** mide visitas, páginas vistas, referentes y métricas de experiencia (Core Web Vitals)
 sin cookies ni rastreo entre sitios, por lo que no requiere banner de consentimiento.
 🔹 **Google Search Console** monitorea la indexación, la cobertura y el rendimiento en la búsqueda de Google.
-🔹 Cada página declara `<title>` y `<meta name="description">` propios; la página 404 declara `noindex, follow`.
+🔹 Cada página declara `<title>`, `<meta name="description">`, `canonical` y Open Graph propios; la página 404 declara `noindex, follow`. El sitio publica `robots.txt` y `sitemap.xml`.
 
 ---
 
