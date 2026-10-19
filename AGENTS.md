@@ -123,9 +123,8 @@ Notas:
    Si una clase se construye dinámicamente, debe existir escrita en forma literal en algún archivo del `content`.
 6. **Header y footer son componentes únicos** (`src/components/SiteHeader.astro` y `SiteFooter.astro`) y sus enlaces
    salen de `src/data/navegacion.js`. Las clases activa e inactiva se escriben como cadenas literales completas. La
-   404 usa `paginaActiva = null`. **Transición:** `SiteFooter.astro` y `src/data/navegacion.js` ya existen (It. 03 de
-   la Épica 08); hasta que la It. 04 extraiga el header, este sigue duplicado en las 6 páginas `.astro`, con paridad
-   exacta e `index.astro` como fuente de la verdad; solo difiere el enlace activo y la 404 no tiene ninguno.
+   404 usa `paginaActiva = null`. `SiteHeader.astro` devuelve el `<header>` y `#mobile-menu-scrim` como nodos
+   hermanos.
 7. **Invariantes del header** (causa raíz de defectos anteriores):
     - Ningún descendiente de `<header>` lleva la clase `fixed`.
     - `#mobile-menu-scrim` es el nodo hermano inmediatamente posterior a `</header>`.
@@ -160,7 +159,6 @@ Notas:
 - `pnpm run build:cf` termina sin errores y el CSS de `_site/_astro/` contiene las clases nuevas (búscalas por texto).
 - Búsquedas de invariantes en `_site/**/*.html`: 0 `style="`, 0 `onclick`, 0 `<style>`, 0 `<script>` sin `src`,
   0 `href="#"` en navegación y footer, IDs únicos.
-- Paridad entre las 6 páginas cuando se toca el header, mientras siga duplicado (hasta la It. 04 de la Épica 08).
 - Render real en 320×640, 360×740, 412×915, 768×1024, 740×360, 1024×768 y 1280×800, en modo claro y oscuro,
   cuando hay cambios visuales. Si no dispones de un navegador automatizable, **no lo inventes**: deja el ítem como
   `🕒 PENDIENTE` con la lista de comprobaciones manuales.

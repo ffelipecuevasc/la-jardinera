@@ -105,9 +105,8 @@ El detalle vive en `AGENTS.md` §5; aquí se listan para consulta rápida:
 2. Cero JS y CSS en línea (`style=`, `onclick`, `<script is:inline>`, `<style>` en `.astro`).
 3. JavaScript en módulos ES6 importados de forma estática en `src/js/main.js`, con cláusulas de guarda.
 4. Solo tokens de `DESIGN.md` y `tailwind.config.js`; clases de Tailwind siempre literales.
-5. Header y footer como componentes únicos (`SiteHeader.astro`, `SiteFooter.astro`); el footer ya lo es (It. 03 de la
-   Épica 08) y el header sigue duplicado en las 6 páginas `.astro` hasta la It. 04, con paridad exacta e `index.astro`
-   como fuente de la verdad.
+5. Header y footer como componentes únicos (`SiteHeader.astro`, `SiteFooter.astro`); sus enlaces salen de
+   `src/data/navegacion.js` y la capa tenue del menú móvil es hermana del header.
 6. Una iteración, un alcance: no se tocan archivos fuera de lo especificado.
 7. Git en modo lectura para los agentes; *commits*, *push* y *merge* los hace el desarrollador.
 8. Rutas absolutas desde la raíz (`/servicios`, `/images/...`); prohibido `./public/`.
@@ -270,6 +269,7 @@ Estados: **Pendiente de definir**, **Definida**, **Planificada (Épica NN)** y *
 | ID    | Página          | Viewport | Solicitud | Destino | Estado |
 |:------|:----------------|:---------|:----------|:--------|:-------|
 | SM-01 | Inicio (`#titular`) | Móvil | Reducir el tamaño del título y del párrafo del hero; ocultar en móvil el ícono SVG y la fila "Valdivia, Región de Los Ríos, Chile"; dejar solo "Descubrir más" con su flecha. | Épica 09 — Revisión móvil (por planificar) | Pendiente de definir |
+| SM-02 | Todas (header) | Móvil (menos de 1024 px) | Panel móvil: trampa de foco con Tab y Shift+Tab. Hoy el foco sale del panel hacia el contenido y solo Escape lo devuelve a la hamburguesa (`navigation.js`); el comportamiento es idéntico al de la referencia, no es una regresión de la Épica 08. | Épica 09 — Revisión móvil (por planificar) | Pendiente de definir |
 
 ### Detalle de SM-01
 

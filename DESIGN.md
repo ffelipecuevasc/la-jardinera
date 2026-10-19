@@ -412,6 +412,9 @@ La galería del modal ajusta columnas con `sm:grid-cols-2|3|4`; esas tres clases
 
 ## 9. Componente: header y menú móvil
 
+Componente único `src/components/SiteHeader.astro`, que recibe `paginaActiva` y genera los enlaces de la barra y del
+panel desde `src/data/navegacion.js`. Devuelve el `<header>` y `#mobile-menu-scrim` como nodos hermanos.
+
 ### 9.1 Barra (todas las páginas)
 
 `<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(53,54,58,0.06)]">`
@@ -448,6 +451,7 @@ aria-hidden="true">`, **hermana** del header, nunca dentro de él.
 
 Ningún descendiente del header con `fixed` (un `backdrop-filter` convierte al header en bloque contenedor de sus hijos
 fijos). Alturas acopladas a `h-20`. Estado activo único por página; `404.html` en estado neutro.
+El componente devuelve la capa tenue como hermana inmediata del header; nunca se renderiza dentro de él.
 
 ---
 
@@ -629,3 +633,6 @@ Todo efecto continuo o de desplazamiento declara su alternativa en `@media (pref
   (`<picture>`), sin scrims y con el logotipo retirado (ya está en la barra de navegación). Contenido en una tarjeta de
   vidrio (§11.7). Nuevos: §2.10, §11.7, restricción de `dark-neutral-100` en §3, `rounded-3xl` y `shadow-2xl` como
   excepciones (§4.3, §4.4), `<picture>` y las imágenes del Hero en §13, y la regla de medición en §14.
+- **Épica 08 · Iteraciones 03 y 04:** footer y header pasan a componentes únicos de Astro (`SiteFooter.astro`,
+  `SiteHeader.astro`), con los enlaces leídos de `src/data/navegacion.js`. El header no cambia de aspecto; el footer
+  unifica su contenedor y el enlace activo (§5.3, §10).
