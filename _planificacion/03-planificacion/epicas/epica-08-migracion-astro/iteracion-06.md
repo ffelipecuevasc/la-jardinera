@@ -21,10 +21,15 @@ Detecta bloques repetidos comparando secciones con espacios normalizados. Candid
 | Bloque                                                   | Páginas                                     |
 |:---------------------------------------------------------|:--------------------------------------------|
 | Banner con textura de ruido fractal (`.bg-noise`, DT-03) | Inicio, Servicios, Suscripción, Galería     |
-| Franja de beneficios operativos                          | Galería, Suscripción (y la del Inicio, por confirmar si es igual) |
+| Franja de beneficios operativos                          | Servicios, Suscripción Floral y Galería (el Inicio no la tiene: su banner «¿Planeando un evento especial?» es otro bloque) |
 
 Entrega la tabla con el grado de similitud y las diferencias reales (textos, íconos, clases). **Espera la aprobación**
 de qué bloques extraer.
+
+> **Resultado real de la Tarea 0 (19-10-2026):** la franja de beneficios es idéntica en Servicios, Suscripción Floral y
+> Galería y se extrajo a `FranjaBeneficios.astro`, sin propiedades. El rombo ✦ (4 variantes de clases y `aria-hidden`) y el
+> banner con textura (el del Inicio difiere en estructura) se evaluaron y se descartaron. Detalle en
+> [bitacora-iteracion-06.md](../../../04-bitacora/bitacora-epica-08/bitacora-iteracion-06.md) §3 y §5.
 
 ### Tarea 1: Componentes aprobados
 

@@ -6,7 +6,7 @@
 
 Especificación: [`iteracion-06.md`](../../03-planificacion/epicas/epica-08-migracion-astro/iteracion-06.md) · Iteración anterior: [`bitacora-iteracion-05.md`](bitacora-iteracion-05.md)
 
-Rótulos de evidencia: **[código]** confirmado por código, comandos o programa; **[informado]** dato entregado por el desarrollador; **🕒 PENDIENTE** no verificado. No hubo render real en navegador en esta iteración (§4.6): la prohibición de ejecutar navegadores se mantuvo.
+Rótulos de evidencia: **[código]** confirmado por código, comandos o programa; **[informado]** dato entregado por el desarrollador; **🕒 PENDIENTE** no verificado. El agente no ejecutó ningún navegador (§4.6); la revisión visual de la vista previa de Cloudflare es **[informado]** por el desarrollador (§9).
 
 ---
 
@@ -20,6 +20,7 @@ Rótulos de evidencia: **[código]** confirmado por código, comandos o programa
 * Corrección de la Tarea 0: la franja **no está en el Inicio** (el Inicio tiene el banner «¿Planeando un evento especial?», que es otro bloque) y **sí está en Servicios**, que la especificación no listaba (§3).
 * Tarea 1b: comentario de cabecera de `src/data/navegacion.js` actualizado; los datos no se tocaron. [código]
 * Tarea 3 (carga diferida de los videos de la Galería): **pendiente de decisión del desarrollador**; no se implementó.
+* Cierre (19-10-2026, §9): commit `57e3152` en GitHub; el desarrollador revisó la franja en la vista previa de Cloudflare de la rama (3 páginas, claro y oscuro) y una auditoría independiente confirmó la salida; ambos datos son **[informado]**. Quedan Safari y dispositivo real sin probar.
 * Estado: **Completada con reservas** (§8). No está 🔒 Cerrada: eso ocurre solo con la fusión a `main`.
 
 ## 2. Línea base (estado previo)
@@ -92,7 +93,9 @@ En las 6 páginas: 0 `style="`, 0 `onclick`, 0 `<style`, 0 `<script>` sin `src`,
 
 ### 4.6 Render real y consola
 
-**🕒 PENDIENTE. No se ejecutó ningún navegador** (regla de esta iteración). Lo verificado es por código: tokens y CSS idénticos y `<body>` idéntico, salvo los espacios de Servicios. Lista de comprobaciones manuales en §8.4.
+**Por el agente: no se ejecutó ningún navegador** (regla de esta iteración). Lo verificado por código: tokens y CSS idénticos y `<body>` idéntico, salvo los espacios de Servicios.
+
+**[informado] Revisión del desarrollador (19-10-2026), sin capturas:** en la vista previa de Cloudflare de la rama, la franja de beneficios de Servicios, Suscripción Floral y Galería, en claro y oscuro, se ve bien. La consola solo muestra el 404 de `rum` (`beacon.min.js`, inyectado por Cloudflare, ya anotado en `iteracion-08.md`, Tarea 3). La revisión no precisó navegador, dispositivo ni anchos. Detalle en §9.
 
 ### 4.7 Escenarios de aceptación
 
@@ -140,8 +143,9 @@ No se corrigió nada de lo siguiente.
 
 ### 8.2 Reservas
 
-1. **Sin render real ni consola** en navegador (§4.6): la iteración se verificó sin navegador, por instrucción.
-2. **Sin vista previa de Cloudflare** de la rama con este cambio.
+1. **Safari y dispositivo móvil real sin probar.** La revisión del desarrollador en la vista previa de Cloudflare (§9) no precisó navegador ni dispositivo, y el agente no ejecutó ninguno.
+
+**Resueltas con el cierre (§9):** la reserva «sin render real ni consola» y la reserva «sin vista previa de Cloudflare» quedaron resueltas con la revisión del desarrollador **[informado]**, sin capturas.
 
 Servicios difiere en espacios del HTML de la base (§4.3): es una diferencia de formato sin efecto visual por código, que el desarrollador ya aceptó (§8.3); no es una reserva.
 
@@ -154,6 +158,29 @@ Servicios difiere en espacios del HTML de la base (§4.3): es una diferencia de 
 
 ### 8.4 Pendientes del desarrollador (🕒 PENDIENTE)
 
-* **Render real y consola:** en `pnpm dev` o en la vista previa de la rama, abrir Servicios, Suscripción Floral y Galería, en claro y oscuro, a 360 y 1280 px como mínimo, y confirmar que la franja de beneficios (banner con degradado y textura, 2 beneficios, divisor vertical desde 768 px) se ve igual que antes y que la consola no muestra errores propios del cambio (puede seguir el 404 de `rum` de `beacon.min.js`, ver `estado-actual.md`).
-* Decidir sobre la Tarea 3 (§8.3).
-* Aplicar o descartar la propuesta para `README.md` (reporte de la sesión).
+* **Decisión sobre la Tarea 3** (carga diferida de los videos de la Galería): pendiente de decisión del desarrollador; no se implementó (§8.3).
+* **Safari y dispositivo móvil real:** mirar la franja en Servicios, Suscripción Floral y Galería, en claro y oscuro (§8.2).
+* **Paso a producción (It. 08):** ver la franja en `lajardinerafloreria.cl` tras la fusión a `main`. El 404 de `rum` de `beacon.min.js` queda en la Iteración 08, Tarea 3.
+
+---
+
+## 9. Cierre con las confirmaciones del desarrollador (19-10-2026)
+
+Rótulo: **[informado]** = dato entregado por el desarrollador, sin capturas. El agente no abrió ningún navegador.
+
+| Dato | Valor | Origen |
+|:-----|:------|:-------|
+| Commit en GitHub | `57e3152` «Épica 08 - Iteración 06: Extrae la franja de beneficios operativos repetida a un componente Astro.» (`HEAD` de `feat/migracion-astro`, árbol limpio al iniciar el cierre) | `git log`, `git status --short` |
+| Revisión visual | Vista previa de Cloudflare de la rama: la franja de beneficios en Servicios, Suscripción Floral y Galería, en claro y oscuro, se ve bien | **[informado]** |
+| Consola | Solo el 404 de `rum` (`beacon.min.js`, inyectado por Cloudflare; anotado en `iteracion-08.md`, Tarea 3) | **[informado]** |
+| Auditoría independiente | Compilaciones limpias de `main` y de la rama; 109 archivos y 0 advertencias en ambas; CSS y JS idénticos byte a byte; HTML idéntico en 5 de 6 páginas y con diferencias solo de espacios en Servicios | **[informado]** (coincide con §4.2 y §4.3, medidos por el agente) |
+| Especificación | `iteracion-06.md`, Tarea 0: tabla corregida (la franja está en Servicios, Suscripción Floral y Galería; el Inicio tiene otro bloque, «¿Planeando un evento especial?») y nota con el resultado real de la Tarea 0. No se cambió nada más | [código] `git diff` |
+| Propuesta para `README.md` §5 (L90) | Ya aplicada por el desarrollador: la línea nombra `secciones/ con FranjaBeneficios` | [código] `sed -n 90p README.md` |
+
+**Reservas del primer cierre:** «sin render real ni consola» y «sin vista previa de Cloudflare» quedan **resueltas** con la revisión del desarrollador. **Reserva vigente:** Safari y dispositivo móvil real sin probar (§8.2). Por eso el estado sigue siendo **Completada con reservas**, igual que en la It. 04 y la It. 05. La Tarea 3 sigue **pendiente de decisión del desarrollador**.
+
+Mensaje de commit sugerido para este cierre (118 caracteres, contados con Node):
+
+```text
+Épica 08 - Iteración 06: Cierra la iteración con la revisión de la vista previa de Cloudflare y las reservas abiertas.
+```
