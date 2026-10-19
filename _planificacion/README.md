@@ -271,6 +271,7 @@ Estados: **Pendiente de definir**, **Definida**, **Planificada (Épica NN)** y *
 |:------|:----------------|:---------|:----------|:--------|:-------|
 | SM-01 | Inicio (`#titular`) | Móvil | Reducir el tamaño del título y del párrafo del hero; ocultar en móvil el ícono SVG y la fila "Valdivia, Región de Los Ríos, Chile"; dejar solo "Descubrir más" con su flecha. | Épica 09 — Revisión móvil (por planificar) | Pendiente de definir |
 | SM-02 | Todas (header) | Móvil (menos de 1024 px) | Panel móvil: trampa de foco con Tab y Shift+Tab. Hoy el foco sale del panel hacia el contenido y solo Escape lo devuelve a la hamburguesa (`navigation.js`); el comportamiento es idéntico al de la referencia, no es una regresión de la Épica 08. | Épica 09 — Revisión móvil (por planificar) | Pendiente de definir |
+| SM-03 | Todas (tema) | Todos | Primera visita: `setInitialTheme()` guarda en `localStorage` la preferencia del sistema como si fuera una elección del usuario. Si luego cambia el modo del sistema operativo, el sitio sigue con el de la primera visita. Evaluar no guardar hasta que se alterne con el botón. Comportamiento previo a la Épica 08, no es una regresión (hallazgo de la Épica 08 · It. 07). | Por planificar (Épica 09 o 10) | Pendiente de definir |
 
 ### Detalle de SM-01
 
