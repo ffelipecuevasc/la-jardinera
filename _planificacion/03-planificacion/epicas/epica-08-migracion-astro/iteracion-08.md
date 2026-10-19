@@ -40,6 +40,18 @@ la rama) en la misma sesión, 3 corridas por página y modo. Criterio: el de Lig
 SEO no menores que la referencia; CLS mediano ≤ 0,1 y no mayor que el de referencia más 0,01; LCP sin umbral; 404 en
 `/a/b/inexistente`). La línea base del 16-10-2026 (bitácora de la It. 01, §9) es histórica y no es la referencia.
 
+**Observación heredada de la It. 04 (404 de `rum`).** En la consola de la vista previa de Cloudflare de la rama aparece
+un mensaje en rojo repetido en las 6 páginas: 4 peticiones `rum` con estado 404 (2 XHR y 2 ping) iniciadas por
+`beacon.min.js`, el script de Real User Measurement y Web Analytics que inyecta Cloudflare (el repositorio no lo
+contiene). Antes de la fusión a `main`, el desarrollador:
+
+1. Revisa si el mismo mensaje aparece en la consola de producción (`lajardinerafloreria.cl`) y anota el resultado.
+2. Registra la URL completa de la petición `rum` (pestaña Red) y compara el Best Practices de producción y de la vista
+   previa en las corridas de esta tarea.
+3. Si el mensaje existe solo en la vista previa o baja el Best Practices frente a la referencia, se registra como
+   deuda técnica con destino en la Épica 10 y se informa en la bitácora; si aparece también en producción, se anota
+   como comportamiento externo al código y no cuenta como incumplimiento del DoD.
+
 ### Tarea 4: Documentación
 
 1. Verifica que el desarrollador aplicó las propuestas de `propuestas-documentos-protegidos.md` (`AGENTS.md`,
