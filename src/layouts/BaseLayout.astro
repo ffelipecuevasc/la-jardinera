@@ -2,8 +2,18 @@
 import '../css/input.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import SeoHead from '../components/SeoHead.astro';
+import { NAVEGACION } from '../data/navegacion.js';
 
 const { title, description, noindex = false, bodyClass, paginaActiva = null } = Astro.props;
+
+// Las páginas indexables toman descripción y ruta canónica de NAVEGACION (fuente única); `description` solo lo pasa la
+// página no indexable (404), que no figura en NAVEGACION.
+const indexable = !noindex;
+const entrada = NAVEGACION.find((e) => e.clave === paginaActiva);
+if (indexable && !entrada) {
+    throw new Error(`BaseLayout: la página indexable «${title}» no figura en NAVEGACION (paginaActiva = ${paginaActiva}).`);
+}
 ---
 
 <!DOCTYPE html>
@@ -11,8 +21,12 @@ const { title, description, noindex = false, bodyClass, paginaActiva = null } = 
 <head>
     <meta charset="utf-8"/>
     <title>{title}</title>
-    {description && <meta name="description" content={description}/>}
-    {noindex && <meta name="robots" content="noindex, follow"/>}
+    <SeoHead
+        title={title}
+        description={indexable ? entrada.descripcion : description}
+        rutaCanonica={entrada?.ruta}
+        indexable={indexable}
+    />
     <link rel="icon" type="image/png" href="/logos/la-jardinera-original.png"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <link href="https://fonts.googleapis.com" rel="preconnect"/>

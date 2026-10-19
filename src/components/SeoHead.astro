@@ -1,0 +1,34 @@
+---
+// Metadatos SEO del <head> (Épica 08 · Iteración 05). Los renderiza BaseLayout; las páginas no lo usan directamente.
+// La URL canónica se construye con `Astro.site` y no con `Astro.url.pathname`: con `build.format: 'file'` el pathname
+// puede traer `.html`, y Cloudflare Pages redirige (308) esas URLs a la forma sin extensión.
+const { title, description, rutaCanonica, indexable = true } = Astro.props;
+
+const NOMBRE_SITIO = 'La Jardinera Florería';
+const RUTA_IMAGEN = '/images/og/og-default.jpg';
+const ALT_IMAGEN =
+    'Portada de La Jardinera Florería: barra de navegación y tarjeta con el titular «Florería La Jardinera» sobre un primer plano de rosas y otras flores.';
+
+const urlCanonica = indexable ? new URL(rutaCanonica, Astro.site).href : undefined;
+const urlImagen = indexable ? new URL(RUTA_IMAGEN, Astro.site).href : undefined;
+---
+
+<meta name="description" content={description}/>
+{indexable ? (
+    <>
+        <link rel="canonical" href={urlCanonica}/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:site_name" content={NOMBRE_SITIO}/>
+        <meta property="og:locale" content="es_CL"/>
+        <meta property="og:title" content={title}/>
+        <meta property="og:description" content={description}/>
+        <meta property="og:url" content={urlCanonica}/>
+        <meta property="og:image" content={urlImagen}/>
+        <meta property="og:image:width" content="1200"/>
+        <meta property="og:image:height" content="630"/>
+        <meta property="og:image:alt" content={ALT_IMAGEN}/>
+        <meta name="twitter:card" content="summary_large_image"/>
+    </>
+) : (
+    <meta name="robots" content="noindex, follow"/>
+)}
