@@ -205,3 +205,16 @@ Decididas por el desarrollador tras la Tarea 0 (inventario de las dos variantes 
   elegidas con un ternario (`AGENTS.md` §5, regla 5).
 * **Sin `etiquetaFooter`.** Las etiquetas de navegación del footer son idénticas a las del header y a `NAVEGACION`. El enlace de marca
   del footer lleva `data-path="inicio"` y no sale de `NAVEGACION`: se conserva tal cual.
+
+## Épica 08 · Iteración 04 — Decisiones del header — 18-10-2026
+
+Decisiones del agente dentro del alcance de la iteración (extracción literal, sin mejoras), aplicadas en `src/components/SiteHeader.astro`. El desarrollador puede revertirlas; ninguna cambia el aspecto ni el comportamiento medidos.
+
+* **El componente devuelve dos nodos hermanos:** `<header>` y, justo después, el comentario de la capa tenue y `<div id="mobile-menu-scrim">`. `BaseLayout.astro` lo renderiza como primer hijo de `<body>`, antes de `<slot />`, con `paginaActiva`. **Motivo:** mantiene el invariante de `AGENTS.md` §5, regla 7 (la capa tenue es hermana del header, nunca descendiente) y el orden del DOM de la referencia en las 6 páginas. Efecto lateral: el comentario de la capa tenue vuelve al HTML publicado (en la It. 02 Astro lo omitía al ser hijo directo del contenido del layout), igual que en la referencia.
+* **Comentarios unificados sobre los de Inicio** (fuente de la verdad). La 404 pierde 4 comentarios de "estado neutro" (el estado neutro sigue expresado por `paginaActiva = null`). **Alternativa descartada:** parametrizar los comentarios por página, que agrega una propiedad solo para comentarios.
+* **Solo los 5 enlaces de la barra (con su subrayado) y los 5 del panel móvil salen de `NAVEGACION`.** El enlace de marca (`data-path="inicio" href="/"`), Instagram, WhatsApp, el botón de tema y la hamburguesa son estáticos. `data-path` y `data-active-classes` se conservan aunque ningún módulo JS ni CSS los lea (0 coincidencias en `src/js`, `src/css` y `tailwind.config.js`).
+* **Clases activa e inactiva como cadenas literales completas** en ternarios (`AGENTS.md` §5, regla 5), también las del subrayado de escritorio. `aria-current` solo en el enlace activo (`undefined` en los demás). Las clases de los enlaces de escritorio pasan de varias líneas a una (los navegadores las tratan igual).
+* **Los espacios entre los enlaces de los dos `<nav>` desaparecen** al generarlos con `NAVEGACION.map(...)` (12 nodos `#ws` por página). Ambos `<nav>` son contenedores flex y no los pintan (0 px de diferencia en 8.352 mediciones). Mismo mecanismo que la categoría D de la It. 03; para el header, **pendiente de aceptación del desarrollador**. **Alternativa descartada:** reponerlos con `{"
+"}` entre enlaces, que ensucia el componente sin efecto visible.
+* **Sin `etiquetaHeader`:** las etiquetas del header (barra y panel) son idénticas a las de `NAVEGACION` en las 6 páginas de la referencia y de `_site/`.
+* **No se tocó `navigation.js` ni `theme.js`.** `navigation.js` no implementa trampa de foco en el panel móvil (Escape devuelve el foco a la hamburguesa); es un comportamiento previo, idéntico en la referencia (ver la bitácora de la It. 04, §4.5 y §5.2).

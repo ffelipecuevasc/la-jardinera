@@ -1,5 +1,6 @@
 ---
 import '../css/input.css';
+import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 
 const { title, description, noindex = false, bodyClass, paginaActiva = null } = Astro.props;
@@ -20,6 +21,7 @@ const { title, description, noindex = false, bodyClass, paginaActiva = null } = 
           rel="stylesheet"/>
 </head>
 <body class={bodyClass}>
+<SiteHeader paginaActiva={paginaActiva} />
 <slot />
 <slot name="antes-del-footer" />
 <SiteFooter paginaActiva={paginaActiva} />
