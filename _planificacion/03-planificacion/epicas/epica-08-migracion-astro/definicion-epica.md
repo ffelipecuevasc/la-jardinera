@@ -1,12 +1,13 @@
 # Épica 08: Migración Estructural a Astro (Paridad Visual y de Contenido)
 
-> **Estado:** ⏳ planificada, pendiente de aprobación del desarrollador.
+> **Estado: Completada con reservas (19-10-2026).** 🔒 Cerrada solo al fusionar a `main`. Registro del cierre:
+> [bitacora-iteracion-08.md](../../../04-bitacora/bitacora-epica-08/bitacora-iteracion-08.md) §14.
 > **Reemplaza a:** la Épica 08 anterior, "Componentes React con Renderizado Estático" (carpeta
 > `epica-08-componentes-react/`), que nunca pasó de planificación conceptual y no tiene bitácoras. Ver §3.
 > **Prerrequisitos:** Épica 07 · Iteraciones 02 y 03 cerradas (titular Starlight certificado y deuda de marcado
 > saldada). La Iteración 04 de la Épica 07 (SEO técnico) se **traslada** a esta épica como Iteración 05.
-> **Rama de trabajo sugerida:** `feat/migracion-astro` (la crea el desarrollador). `main` no se toca hasta la
-> Iteración 08.
+> **Rama de trabajo sugerida:** `feat/migracion-astro` (la crea el desarrollador). `main` se fue fusionando iteración
+> por iteración y producción (`https://lajardinerafloreria.cl`) ya corre Astro (bitácora de la It. 08, §3).
 
 ---
 
@@ -187,19 +188,22 @@ Cloudflare (despliegue anterior).
 
 ## 8. Definition of Done de la Épica
 
-* [ ] Header, panel móvil, footer y `<head>` existen **una sola vez** en el código fuente.
-* [ ] `_site/` contiene las 6 páginas con los mismos nombres de archivo que hoy, y header y footer completos sin
-  JavaScript.
-* [ ] Paridad visual y funcional con la línea base en 320×640, 360×740, 412×915, 768×1024, 740×360, 1024×768 y
-  1280×800, en modo claro y oscuro.
-* [ ] 0 `style=`, 0 `onclick` y 0 `<style>` en `_site/**/*.html`, y exactamente 1 `<script>` ejecutable sin `src` por página: el de arranque del tema (excepción aprobada de la It. 07, ADR-003), idéntico en las 6 páginas.
-* [ ] 0 referencias a `./public/` en el código fuente; las URLs antiguas `/public/...` redirigen con 301.
-* [ ] Lighthouse de las 6 páginas, en móvil y escritorio: el sitio actual (producción) y el nuevo (vista previa de la
-  rama) se miden en la misma sesión, 3 corridas por página y modo, y se comparan las medianas. Aceptación: Performance
+* [x] Header, panel móvil, footer y `<head>` existen **una sola vez** en el código fuente. Fuente: bitácora de la It. 08, §4.2 [código], 19-10-2026.
+* [x] `_site/` contiene las 6 páginas con los mismos nombres de archivo que hoy, y header y footer completos sin
+  JavaScript. Fuente: bitácora de la It. 08, §4.1, §4.2 y §4.4 [código], 19-10-2026.
+* [x] Paridad visual y funcional con la línea base en 320×640, 360×740, 412×915, 768×1024, 740×360, 1024×768 y
+  1280×800, en modo claro y oscuro. (Reserva: Safari sin probar; render automático solo en Chrome headless.) Fuente: bitácora de la It. 08, §5 [render], 19-10-2026; Firefox y celular real sin diferencias [informado por el desarrollador], §14.1.
+* [x] 0 `style=`, 0 `onclick` y 0 `<style>` en `_site/**/*.html`, y exactamente 1 `<script>` ejecutable sin `src` por página: el de arranque del tema (excepción aprobada de la It. 07, ADR-003), idéntico en las 6 páginas. Fuente: bitácora de la It. 08, §4.2 [código], 19-10-2026.
+* [x] 0 referencias a `./public/` en el código fuente; las URLs antiguas `/public/...` redirigen con 301. Fuente: bitácora de la It. 08, §4.2 [código] y §13.5, ítem c (301 en producción) [medido], 19-10-2026.
+* [ ] Lighthouse de las 6 páginas, en móvil y escritorio: el último despliegue de `main` anterior a Astro (referencia,
+  URL del panel de Cloudflare Pages) y producción se miden en la misma sesión, 3 corridas por página y modo, y se
+  comparan las medianas (decisión del desarrollador, It. 08). Aceptación: Performance
   no más de 10 puntos por debajo (móvil) ni de 3 (escritorio) de la mediana de referencia; Accesibilidad, Best
   Practices y SEO no menores que la referencia; CLS mediano ≤ 0,1 y no mayor que el de referencia más 0,01. El LCP se
   registra sin umbral. La 404 se mide en una ruta anidada (/a/b/inexistente). La línea base del 16-10-2026 (bitácora de
-  la It. 01, §9) es histórica y no es la referencia de comparación.
-* [ ] Cloudflare Pages publica desde `_site/` sin cambios de configuración y sin exponer `_planificacion/`,
-  `AGENTS.md`, `README.md`, `DESIGN.md` ni `package.json`.
-* [ ] `AGENTS.md`, `README.md`, `stack-tecnologico.md` y `proposito-y-alcance.md` actualizados por el desarrollador.
+  la It. 01, §9) es histórica y no es la referencia de comparación. No cumplida: 58 de 60 casillas; fallan Performance de
+  escritorio y CLS móvil de Suscripción Floral; aceptada como reserva, DT-27, Épica 10. Fuente: bitácora de la It. 08,
+  §13.3 [medido] y §14.3, 19-10-2026.
+* [x] Cloudflare Pages publica desde `_site/` sin cambios de configuración y sin exponer `_planificacion/`,
+  `AGENTS.md`, `README.md`, `DESIGN.md` ni `package.json`. Fuente: bitácora de la It. 08, §14.1 (log y configuración del panel, [informado por el desarrollador]) y §13.5, ítem g (7 archivos internos con 404) [medido], 19-10-2026.
+* [ ] `AGENTS.md`, `README.md`, `stack-tecnologico.md` y `proposito-y-alcance.md` actualizados por el desarrollador. Abierta: la verificación de la bitácora de la It. 08, §14.2, dio 1 FALLA (la fila DT-26 de `_planificacion/README.md` quedó truncada); se marca cuando el desarrollador la restituya.

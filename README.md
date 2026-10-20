@@ -177,7 +177,7 @@ El sitio se publica con **Cloudflare Pages**, conectado al repositorio de GitHub
 🔹 **Cloudflare Web Analytics** mide visitas, páginas vistas, referentes y métricas de experiencia (Core Web Vitals)
 sin cookies ni rastreo entre sitios, por lo que no requiere banner de consentimiento.
 🔹 **Google Search Console** monitorea la indexación, la cobertura y el rendimiento en la búsqueda de Google.
-🔹 Cada página declara `<title>`, `<meta name="description">`, `canonical` y Open Graph propios; la página 404 declara `noindex, follow`. El sitio publica `robots.txt` y `sitemap.xml`.
+🔹 Cada página indexable declara `<title>`, `<meta name="description">`, `canonical` y Open Graph propios; la página 404 declara `noindex, follow`, sin `canonical` ni Open Graph. El sitio publica `robots.txt` y `sitemap.xml`.
 
 ---
 
@@ -227,8 +227,10 @@ El proyecto se desarrolla con apoyo de agentes de IA bajo reglas estrictas:
 
 1. **Épica 07 — Gobernanza multiagente y pulido del Hero** (completada con reservas, 14-10-2026): reorganización de
    la planificación, documentación para Claude Code, nuevo efecto del titular principal y saneamiento de deuda técnica.
-2. **Épica 08 — Migración estructural a Astro** (en curso): layout, header, footer y SEO como componentes únicos,
+2. **Épica 08 — Migración estructural a Astro** (completada con reservas, 19-10-2026): layout, header, footer y SEO como componentes únicos,
    generados como HTML estático en compilación, con el mismo contenido, diseño y despliegue en Cloudflare Pages.
+3. **Épica 09 — Revisión móvil** (por planificar): ajustes de interfaz y comportamiento en móvil (hero del Inicio, panel móvil y tema).
+4. **Épica 10 — Rendimiento y calidad Lighthouse** (por planificar): imágenes, videos y encabezados señalados por Lighthouse.
 
 ---
 

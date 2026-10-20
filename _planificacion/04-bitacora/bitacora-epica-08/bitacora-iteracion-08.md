@@ -527,3 +527,277 @@ Sin cambios en `src/`, `public/`, `scripts/`, `astro.config.mjs`, `package.json`
 ```
 
 Longitud contada con Node: 168 caracteres.
+
+## 13. Mediciones delegadas (A, B y C)
+
+**Fecha:** 19-10-2026 · **Agente:** Claude Code · **Encargo:** el desarrollador delegó las secciones A (Lighthouse, Tarea 3), B (404 de `rum`) y C (verificación en producción, Tarea 5) de la guía de la §8. D (Search Console, WhatsApp y Facebook) y E (Firefox, Safari, celular real y contraste forzado) siguen siendo suyas y no se ejecutaron. La sección se numera 13 porque la bitácora ya tiene las §10 a §12 (decisión del desarrollador en el chat).
+
+Rótulos: **[medido]** medido por el agente en esta sesión; **[informado]** dato entregado antes por el desarrollador; **🕒 PENDIENTE** queda para el desarrollador.
+
+### 13.1 Sitios, herramientas y carpeta de resultados
+
+| Dato | Valor |
+|:-----|:------|
+| R (referencia) | `https://f6f82bf4.la-jardinera.pages.dev`: vista previa del *commit* `e1390c8`, el último anterior a Astro (indicado por el desarrollador) |
+| P (producción) | `https://lajardinerafloreria.cl` (Astro) |
+| Rama / `HEAD` | `feat/migracion-astro` / `318621a` |
+| Lighthouse | `13.5.0`, consultado una vez con `pnpm view lighthouse version` y ejecutado siempre con `pnpm dlx lighthouse@13.5.0`, sin agregarlo a `package.json` |
+| Chrome | `155.0.8059.84` (nombre de la carpeta de la única instalación, en `C:\Program Files\Google\Chrome\Application\`; Lighthouse informa `HeadlessChrome/155.0.0.0`). Solo lo arrancó Lighthouse (chrome-launcher), en *headless* |
+| Opciones de Lighthouse | `--only-categories=performance,accessibility,best-practices,seo`, `--output=json --output=html`, `--ignore-status-code`, `--chrome-flags="--headless=new --user-data-dir=<carpeta nueva por corrida> --no-first-run --no-default-browser-check"`; escritorio con `--preset=desktop`. Limitación simulada (la predeterminada) |
+| Node / pnpm | `v24.16.0` / `11.24.0` |
+| Carpeta de resultados (fuera del repositorio) | `C:\Users\ffeli\AppData\Local\Temp\lj-it08-mediciones\` (297 archivos, 101 MB; se conserva como línea base para la Épica 10) |
+
+* **`--ignore-status-code`:** una prueba previa, fuera de las 72, sobre la 404 de P sin esa opción terminó con `ERRORED_DOCUMENT_REQUEST (Status code: 404)` y las 4 categorías en `null` (carpeta `prueba/`). La opción hace lo mismo que DevTools: mide la página y deja un aviso. Se aplicó por igual a las 72 corridas; en las páginas con 200 no cambia nada. [medido]
+* **Perfiles:** cada corrida recibió una carpeta de perfil nueva bajo `perfiles/`. Al terminar, `perfiles/` está vacía: no se puede saber si Chrome usó esa carpeta y chrome-launcher la borró al cerrar, o si usó la carpeta temporal propia de chrome-launcher. En los dos casos fue un perfil nuevo y desechable; nunca el perfil ni la sesión del desarrollador. [medido]
+
+### 13.2 T0: comprobación previa (`curl -sI` y `curl -sL`, con `Cache-Control: no-cache`) [medido]
+
+| Sitio | URL | Código final | Redirecciones | `Content-Type` | `X-Robots-Tag` | `Cache-Control` | `Server` |
+|:-:|:----|:-:|:-:|:--|:--|:--|:--|
+| R | `/` | 200 | 0 | `text/html; charset=utf-8` | `noindex` | `public, max-age=0, must-revalidate` | `cloudflare` |
+| R | `/servicios` | 200 | 0 | `text/html; charset=utf-8` | `noindex` | `public, max-age=0, must-revalidate` | `cloudflare` |
+| R | `/suscripcion-floral` | 200 | 0 | `text/html; charset=utf-8` | `noindex` | `public, max-age=0, must-revalidate` | `cloudflare` |
+| R | `/galeria` | 200 | 0 | `text/html; charset=utf-8` | `noindex` | `public, max-age=0, must-revalidate` | `cloudflare` |
+| R | `/contacto` | 200 | 0 | `text/html; charset=utf-8` | `noindex` | `public, max-age=0, must-revalidate` | `cloudflare` |
+| R | `/a/b/inexistente` | 404 | 0 | `text/html; charset=utf-8` | — | `no-store` | `cloudflare` |
+| P | `/` | 200 | 0 | `text/html; charset=utf-8` | — | `public, max-age=0, must-revalidate` | `cloudflare` |
+| P | `/servicios` | 200 | 0 | `text/html; charset=utf-8` | — | `public, max-age=0, must-revalidate` | `cloudflare` |
+| P | `/suscripcion-floral` | 200 | 0 | `text/html; charset=utf-8` | — | `public, max-age=0, must-revalidate` | `cloudflare` |
+| P | `/galeria` | 200 | 0 | `text/html; charset=utf-8` | — | `public, max-age=0, must-revalidate` | `cloudflare` |
+| P | `/contacto` | 200 | 0 | `text/html; charset=utf-8` | — | `public, max-age=0, must-revalidate` | `cloudflare` |
+| P | `/a/b/inexistente` | 404 | 0 | `text/html; charset=utf-8` | — | `no-store` | `cloudflare` |
+
+* **R es el sitio original:** sus 6 HTML referencian `./dist/css/output.css` (1 vez cada uno) y ninguno contiene `/_astro/`; su 404 lleva `<base href="/">`. Los 6 HTML de P referencian `/_astro/BaseLayout.744HEtGc.css`. Ninguna URL redirige: se midieron tal cual.
+
+### 13.3 T1: Lighthouse (sección A) [medido]
+
+**Ejecución:** 72 corridas (6 URL × móvil y escritorio × 3 × R y P), de una en una, en orden R1, P1, R2, P2, R3, P3 por página y dispositivo, entre las 18:31:54 y las 18:51:58. **72 de 72 sin error de ejecución, 0 reintentos y 0 fallidas.** Archivos: `lighthouse/<sitio>-<página>-<movil|escritorio>-<n>.report.json` y `.report.html` (72 + 72), registro en `lighthouse/corridas.log` y cálculo en `analisis-lighthouse.txt` y `resumen-lighthouse.json`.
+
+**Medianas** (R / P y diferencia P − R). Cada columna es la mediana de sus 3 corridas, calculada por separado (la mediana del LCP puede venir de otra corrida que la de Performance). Tiempos en segundos, salvo el TBT (ms).
+
+| Página | Modo | Perf | Acc | BP | SEO | FCP | LCP | TBT | CLS | SI | ¿Cumple? |
+|:-------|:-----|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| `/` | Móvil | 68 / 69 (+1) | 91 / 91 (0) | 96 / 100 (+4) | 58 / 100 (nc) | 3,76 / 3,80 | 5,32 / 6,02 | 0 / 16 | 0,029 / 0,029 | 4,86 / 4,19 | Sí |
+| `/servicios` | Móvil | 84 / 83 (−1) | 98 / 98 (0) | 96 / 100 (+4) | 66 / 100 (nc) | 3,07 / 3,24 | 3,61 / 3,74 | 0 / 0 | 0,003 / 0,003 | 3,21 / 3,24 | Sí |
+| `/suscripcion-floral` | Móvil | 78 / 69 (−9) | 100 / 100 (0) | 96 / 100 (+4) | 66 / 100 (nc) | 3,10 / 3,18 | 4,43 / 8,45 | 0 / 0 | **0,000 / 0,015** | 3,55 / 3,37 | **No (CLS)** |
+| `/galeria` | Móvil | 73 / 79 (+6) | 100 / 100 (0) | 96 / 100 (+4) | 66 / 100 (nc) | 3,31 / 3,40 | 5,38 / 3,83 | 0 / 0 | 0,003 / 0,003 | 4,42 / 3,90 | Sí |
+| `/contacto` | Móvil | 80 / 74 (−6) | 100 / 100 (0) | 96 / 100 (+4) | 66 / 100 (nc) | 3,25 / 3,28 | 3,82 / 4,54 | 0 / 85 | 0,048 / 0,000 | 3,80 / 5,28 | Sí |
+| `/a/b/inexistente` | Móvil | 83 / 83 (0) | 98 / 98 (0) | 96 / 96 (0) | 58 / 58 (0) | 3,19 / 3,12 | 3,69 / 3,70 | 0 / 0 | 0,013 / 0,013 | 3,21 / 3,29 | Sí |
+| `/` | Escritorio | 93 / 91 (−2) | 91 / 91 (0) | 96 / 100 (+4) | 58 / 100 (nc) | 1,16 / 1,30 | 1,25 / 1,35 | 0 / 0 | 0,003 / 0,003 | 1,53 / 1,57 | Sí |
+| `/servicios` | Escritorio | 96 / 96 (0) | 98 / 98 (0) | 96 / 100 (+4) | 66 / 100 (nc) | 0,99 / 1,08 | 1,10 / 1,12 | 0 / 0 | 0,002 / 0,002 | 1,05 / 1,30 | Sí |
+| `/suscripcion-floral` | Escritorio | **93 / 89 (−4)** | 100 / 100 (0) | 96 / 100 (+4) | 66 / 100 (nc) | 0,98 / 1,06 | 1,34 / 1,89 | 0 / 0 | 0,004 / 0,004 | 1,37 / 1,38 | **No (Perf)** |
+| `/galeria` | Escritorio | 91 / 92 (+1) | 100 / 100 (0) | 96 / 100 (+4) | 66 / 100 (nc) | 1,24 / 1,24 | 1,27 / 1,36 | 0 / 0 | 0,003 / 0,003 | 1,63 / 1,48 | Sí |
+| `/contacto` | Escritorio | 96 / 95 (−1) | 100 / 100 (0) | 96 / 100 (+4) | 66 / 100 (nc) | 0,95 / 1,04 | 1,01 / 1,12 | 0 / 0 | 0,003 / 0,003 | 1,34 / 1,35 | Sí |
+| `/a/b/inexistente` | Escritorio | 96 / 97 (+1) | 98 / 98 (0) | 96 / 96 (0) | 58 / 58 (0) | 0,97 / 0,96 | 1,01 / 1,01 | 0 / 0 | 0,007 / 0,007 | 1,31 / 1,23 | Sí |
+
+(nc) = no comparable (ver más abajo). Las 3 corridas de cada celda están en `analisis-lighthouse.txt`.
+
+**Criterio del DoD aplicado textualmente** (`definicion-epica.md` §8, L197 a L202):
+
+> «Aceptación: Performance no más de 10 puntos por debajo (móvil) ni de 3 (escritorio) de la mediana de referencia; Accesibilidad, Best Practices y SEO no menores que la referencia; CLS mediano ≤ 0,1 y no mayor que el de referencia más 0,01. El LCP se registra sin umbral. La 404 se mide en una ruta anidada (/a/b/inexistente).»
+
+La línea nombra como referencia «el sitio actual (producción)» y como sitio nuevo «la vista previa de la rama». Aquí se aplica con la referencia que decidió el desarrollador (§3): R es el último despliegue anterior a Astro y P es producción.
+
+| Casilla | Casos | Cumplen | No cumplen |
+|:--------|:-:|:-:|:--|
+| Performance (móvil ≥ R − 10; escritorio ≥ R − 3) | 12 | 11 | Suscripción Floral, escritorio: 89 < 93 − 3 = 90 |
+| Accesibilidad ≥ R | 12 | 12 | — |
+| Best Practices ≥ R | 12 | 12 | — (ver la salvedad sobre R) |
+| SEO ≥ R | 12 | 12 (10 no comparables) | — |
+| CLS ≤ 0,1 y ≤ R + 0,01 | 12 | 11 | Suscripción Floral, móvil: 0,015 > 0,000 + 0,01 = 0,010 (sí cumple ≤ 0,1) |
+| LCP | 12 | sin umbral | Registrado. Mayor en P en 10 de 12 casos; el mayor salto, Suscripción móvil: 4,43 → 8,45 s |
+
+**Resultado: 58 de 60 casillas cumplen y 2 no cumplen. El criterio de Lighthouse del DoD NO se cumple.**
+
+* **SEO no comparable (10 de 12 filas):** R trae `X-Robots-Tag: noindex` en sus 5 páginas (por ser `*.pages.dev`) y P no la trae. En las 30 corridas de esas páginas, R falla `is-crawlable` y P la pasa. Además, R falla `meta-description` en el Inicio (DT-04, resuelta en P). Fuera de esas dos auditorías, ninguna corrida de R ni de P falla otra auditoría de SEO. Las diferencias de +34 y +42 vienen de esas auditorías: no cuentan como mejora ni como regresión. En la 404, ambos sitios fallan `is-crawlable` (`noindex, follow`, por diseño) y `http-status-code` (404), y empatan en 58.
+* **Best Practices de R (96):** en las 30 corridas de las 5 páginas, R falla solo `errors-in-console`, y el error es la petición `rum` del *beacon* bloqueada por CORS en `*.pages.dev` (§13.4). En P, 0 auditorías fallidas (100). El +4 viene del entorno de `pages.dev`, no del código. En la 404, ambos fallan `errors-in-console` por el 404 del propio documento (96 = 96).
+* **Diagnóstico de las 2 casillas (hipótesis, no demostrada):** el elemento LCP es el mismo en R y P (`hero-1.webp`, con `fetchpriority="high"`, sin `loading="lazy"` y descubrible en el HTML). En la simulación de Lighthouse entran al LCP las imágenes que Chrome marca como prioridad *High* antes del LCP observado:
+    * Suscripción, móvil: en las 3 corridas de P aparecen con prioridad *High* `la-jardinera-original.png`, `hero-1`, `hero-2`, `hero-3` y `hero-4` (1.125 KiB), con LCP simulado de 8,41 a 8,54 s. En R, solo `hero-1` o `hero-1` y `hero-3` (148 a 296 KiB), con LCP de 4,42 a 4,44 s.
+    * Suscripción, escritorio: las 2 corridas de P con el logotipo y `hero-2` a `hero-4` en *High* (1.264 KiB) dan 89 y LCP de 1,89 a 1,90 s. La corrida sin el logotipo en *High* (587 KiB) da 93, igual que la mediana de R.
+    * Por qué Chrome les da prioridad *High* en P y no en R no está determinado: el marcado de esas imágenes es el mismo según la paridad de la §5, y el momento en que termina la hoja de estilos no lo explica (en R, la corrida 2 móvil la terminó a los 268 ms y aun así dejó esas imágenes en *Low*). El patrón es coherente con DT-22 (logotipo PNG de 300 KiB mostrado a 44 px) y DT-23 (`hero-2` a `hero-4` con `lazy` apiladas dentro del área visible), ya destinadas a la Épica 10. No se comprobó repitiendo mediciones.
+    * **CLS móvil:** el desplazamiento es el mismo en ambos sitios (0,015, en `main > section.h-[80vh] > div.relative`). Aparece en 3 de 3 corridas de P y en 1 de 3 de R (en R, la mediana es 0). Mismo elemento y mismo valor: depende de los tiempos de carga, no de un cambio de marcado. Hipótesis: el cambio de fuente de Google (`display=swap`), sin verificar.
+
+### 13.4 T2: 404 de `rum` (sección B)
+
+**En los JSON de Lighthouse** (`network-requests` y `errors-in-console`) [medido]:
+
+| Sitio | Páginas | `email-decode.min.js` | `beacon.min.js` | Petición `rum` | Consola |
+|:-:|:--|:--|:--|:--|:--|
+| P | 5 con contenido (30 corridas) | 200 (`/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js`) | 200 (`static.cloudflareinsights.com/beacon.min.js`) | XHR `https://cloudflareinsights.com/cdn-cgi/rum` → **204**; *preflight* 200 | 0 errores |
+| P | 404 (6 corridas) | 200 | 200 (`…/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092`) | XHR `https://lajardinerafloreria.cl/cdn-cgi/rum?` → **204** | Solo el 404 del propio documento |
+| R | 5 con contenido (30 corridas) | no se carga | 200 | XHR `https://cloudflareinsights.com/cdn-cgi/rum` → **falla** (estado −1, `net::ERR_FAILED`); *preflight* 200 | 2 errores por corrida: «Access to XMLHttpRequest at 'https://cloudflareinsights.com/cdn-cgi/rum' from origin 'https://f6f82bf4.la-jardinera.pages.dev' has been blocked by CORS policy» y «Failed to load resource: net::ERR_FAILED» |
+| R | 404 (6 corridas) | no | no | ninguna | Solo el 404 del propio documento |
+
+* En P no hay ningún 404 de `rum` ni error de consola asociado. En R (otra vista previa `*.pages.dev`) la petición `rum` falla por CORS, no con 404, al menos en Chrome *headless*.
+* `email-decode.min.js` aparece solo en P: es la ofuscación de correos del dominio, que no se aplica en `*.pages.dev`.
+* En el HTML que devuelve `curl`, la 404 de P no trae el `<script>` del *beacon*, pero en Lighthouse sí se carga otro *beacon* (con la ruta `/vce…`). Se informa sin explicación verificada.
+
+**Con `curl -sI`** (solo HEAD) [medido]:
+
+| URL | Resultado |
+|:----|:----------|
+| `https://ec366712.la-jardinera.pages.dev/cdn-cgi/rum` (vista previa actual de la rama) | `HTTP/1.1 404 Not Found`, `text/html`, `cloudflare` |
+| `https://f6f82bf4.la-jardinera.pages.dev/cdn-cgi/rum` (R) | `HTTP/1.1 404 Not Found` |
+| `https://lajardinerafloreria.cl/cdn-cgi/rum` (P) | `HTTP/1.1 404 Not Found` |
+
+* HEAD responde 404 también en producción, donde las peticiones del navegador reciben 204: esta medición **no distingue** los sitios. Con la regla 6 (solo GET o HEAD), no se envió el POST que hace el navegador.
+* La vista previa de la rama (`ec366712`) inyecta el mismo *beacon* que R (`static.cloudflareinsights.com/beacon.min.js`, mismo *token*). Sobre esa URL no se corrió Lighthouse.
+
+**Decisión según la regla:**
+
+1. Best Practices de P frente a R: **no baja** en ninguna fila (100 contra 96 en las páginas; 96 = 96 en la 404).
+2. ¿El error existe solo en la vista previa? **Sí:** en producción no hay error de `rum` [medido]; en `*.pages.dev` hay error, por CORS en R [medido] y con 404 en la vista previa de la rama [informado en las It. 04 a 07].
+3. Se cumple la segunda condición de la regla: **se propone una deuda técnica con destino Épica 10** (§13.8, DT-28). No afecta a producción ni al DoD.
+
+### 13.5 T3: verificación de producción (sección C) [medido]
+
+| Ítem | Comprobación | Resultado | Estado |
+|:-:|:--|:--|:-:|
+| a | 5 páginas con 200 | `/`, `/servicios`, `/suscripcion-floral`, `/galeria` y `/contacto`: 200, `text/html`, sin redirecciones | OK |
+| a | 404 anidadas | `/a/b/inexistente` y `/servicios/xyz`: 404, `text/html`. Ambas referencian `/_astro/BaseLayout.744HEtGc.css`, que responde 200 `text/css` | OK |
+| b | `https://www.lajardinerafloreria.cl/` | 301 → `https://lajardinerafloreria.cl/` (200, 1 salto). `https://www.…/servicios` → 301 → `https://lajardinerafloreria.cl/servicios` (conserva la ruta) | OK (ADR-002) |
+| b | `http://lajardinerafloreria.cl/` | 301 → `https://lajardinerafloreria.cl/` (200, 1 salto) | OK |
+| b | `http://www.lajardinerafloreria.cl/` (extra) | 301 → `https://www.lajardinerafloreria.cl/` → 301 → `https://lajardinerafloreria.cl/` (2 saltos) | Observación: llega al canónico, con un salto más |
+| c | `/public/images/hero-botanical-desktop.webp` | 301, `Location: /images/hero-botanical-desktop.webp` (coincide con `public/_redirects`: `/public/*  /:splat  301`); destino 200 `image/webp` | OK: **cierra la Reserva 3** |
+| d | `/robots.txt` | 200 `text/plain`. Contenido completo: `User-agent: *` / `Allow: /` / (línea vacía) / `Sitemap: https://lajardinerafloreria.cl/sitemap.xml`. Es idéntico al `public/robots.txt` del repositorio (LF en Git). **Cloudflare no le agrega nada hoy:** el bloque de *content signals* visto en la It. 05 ya no aparece | OK |
+| e | `/sitemap.xml` | 200 `application/xml`; exactamente 5 `<loc>`, 0 con `www` (la única «www» del archivo es el `xmlns` de `sitemaps.org`); las 5 URL responden 200 | OK |
+| f | `canonical`, `og:url` y `og:image` | En las 5 páginas, `canonical` = `og:url` = URL sin `www` ni extensión (`https://lajardinerafloreria.cl/`, `/servicios`, `/suscripcion-floral`, `/galeria` y `/contacto`); `og:image` = `https://lajardinerafloreria.cl/images/og/og-default.jpg`. La 404 no lleva `canonical` ni `og:*` y declara `noindex, follow` | OK |
+| f | `og-default.jpg` | 200, `image/jpeg`, 88.503 B, JPEG válido de **1200 × 630 px** (leído del marcador SOF). Copia en `t3/descargas/og-default.jpg` | OK |
+| g | Archivos internos | `/AGENTS.md`, `/README.md`, `/DESIGN.md`, `/package.json`, `/astro.config.mjs`, `/_planificacion/README.md` y `/src/layouts/BaseLayout.astro`: 404 los 7 | OK |
+| h | Paridad de despliegue | Ver abajo | OK |
+
+**h) Paridad de despliegue:**
+
+* **Compilación local:** `pnpm install --frozen-lockfile` (código 0) y `pnpm run build:cf` (código 0, «6 page(s) built in 2.33s», 0 líneas con «warn» o «error», 109 archivos en `_site/`). El árbol de Git siguió limpio. Registro en `t3/build.log`.
+* **Normalización** (`scripts/normalizar-html.mjs`): se quitaron el `<script>` de `beacon.min.js` (5 páginas; la 404 no lo trae) y el de `email-decode.min.js` (6). Se decodificaron los `data-cfemail` y los `href="/cdn-cgi/l/email-protection#…"` a su texto y su `mailto:` (1 por página y 2 en Contacto). Se colapsaron los espacios, con una etiqueta o un texto por línea. Después de normalizar no quedó ningún resto de `cdn-cgi`, `cloudflareinsights` ni `__cf_email__`.
+* **Diferencias restantes, P frente a `_site/`:** Inicio, Servicios, Suscripción Floral, Galería y Contacto, **2 líneas cada una**: los dos comentarios `<!-- Cloudflare Pages Analytics -->` que Cloudflare pone alrededor del *beacon* (también inyectados). 404 (`/a/b/inexistente` frente a `404.html`): **0**. Los correos decodificados coinciden con los de `_site/`. **Diferencias no explicadas: 0.**
+
+**i) 🕒 PENDIENTE (desarrollador):** el registro de compilación del despliegue de producción (Node `22.22.2`, pnpm `11.24.0`, «6 page(s) built», publicación correcta; guía C, paso 8), la configuración del panel (`pnpm run build:cf`, `_site`, `main`, `NODE_VERSION` y `PNPM_VERSION`; paso 9, Escenario 3) y el procedimiento de reversión (paso 10; solo si algo falla).
+
+### 13.6 Reservas
+
+* **Se cierra:** la Reserva 3 (`/public/*` → 301 solo por código; punto 4 de la §11.3): medida en producción, ítem c.
+* **Siguen abiertas:** la Reserva 1 (render real solo en Chrome *headless*; Lighthouse cargó las fuentes reales, pero sigue siendo *headless*) y la Reserva 2 (ruido de píxeles de Servicios atribuido por analogía).
+* **Nueva:** el criterio de Lighthouse del DoD no se cumple en 2 de 60 casillas (Suscripción Floral, §13.3), con una hipótesis de causa sin comprobar.
+
+### 13.7 Pendientes del desarrollador (🕒)
+
+* **D:** Search Console (propiedad de dominio, alta de `sitemap.xml` e inspección de `/servicios`) y las vistas previas en WhatsApp y Facebook.
+* **E:** Firefox, Safari, celular real, fuentes reales, reproducción de videos y contraste forzado.
+* **Panel de Cloudflare:** log de compilación, configuración y reversión (§13.5, i).
+* **Decisión sobre el criterio de Lighthouse:** aceptar las 2 casillas como reserva con destino Épica 10, o abrir una iteración de corrección como prevé `iteracion-08.md` («si bloquea, se abre una iteración de corrección numerada a continuación»).
+
+### 13.8 Propuestas (sin aplicar)
+
+Se entregan en el chat en formato `-`/`+` para `_planificacion/README.md` §12: **DT-27** (Lighthouse de Suscripción Floral frente a la referencia anterior a Astro) y **DT-28** (`rum` con error en las vistas previas `*.pages.dev`). La fila DT-08 queda lista para el prompt de cierre: `/robots.txt`, `/sitemap.xml` y `og:image` están verificados en producción (§13.5, d a f).
+
+### 13.9 Cierre de recursos y archivos
+
+* 0 procesos de Chrome, Node o Lighthouse lanzados por el agente siguen vivos, y 0 puertos a la escucha en 4321, 4400, 9222 y 9333. [medido]
+* **Carpeta de resultados:** `C:\Users\ffeli\AppData\Local\Temp\lj-it08-mediciones\`, con 297 archivos:
+    * `lighthouse/`: 72 JSON, 72 HTML, 72 salidas de consola y `corridas.log`.
+    * `t0/`: 12 cabeceras, 12 HTML y 12 resúmenes.
+    * `t2/`: HTML de la vista previa de la rama.
+    * `t3/`: `verificacion-produccion.txt`, `build.log`, `descargas/` (6 HTML, 404 de `/servicios/xyz`, `robots.txt`, `sitemap.xml`, `og-default.jpg` y cabeceras) y `paridad/` (12 normalizados y 6 diferencias).
+    * `prueba/` (la corrida de arranque fuera de las 72), `scripts/` (5), `analisis-lighthouse.txt`, `resumen-lighthouse.json` y `seccion-13.md` (borrador de esta sección).
+* **Repositorio:** solo cambia esta bitácora (se agrega la §13). `_site/` se regeneró (ignorada por Git). Ningún comando de Git que escriba.
+
+## 14. Cierre con las confirmaciones del desarrollador
+
+Ejecución del 19-10-2026 sobre `feat/migracion-astro` (`HEAD` `318621a`), con las ediciones a mano del desarrollador ya aplicadas en los archivos protegidos. No se hicieron mediciones nuevas: esta sección cierra la It. 08 y la Épica 08 con los datos de la §13 y las confirmaciones del desarrollador. Rótulos: [informado] (el desarrollador), [asesor] (comprobado por el asesor con Git), [código] y [medido] (Claude Code), 🕒 PENDIENTE.
+
+### 14.1 Confirmaciones del desarrollador [informado]
+
+| Tema | Lo que informó |
+|:-----|:---------------|
+| Search Console | Propiedad de dominio `lajardinerafloreria.cl`: sitemap `https://lajardinerafloreria.cl/sitemap.xml` enviado el 19-10-2026, estado «Correcto», 5 páginas descubiertas, 0 videos. Antes de este cierre quitó el sitemap antiguo `https://www.lajardinerafloreria.cl/sitemap.xml` (sitio anterior, 2022). |
+| Depurador de Facebook | `https://lajardinerafloreria.cl`, 19-10-2026, 19:11: código 200; URL canónica `https://lajardinerafloreria.cl/`; imagen `og-default.jpg`, título, descripción y texto alternativo correctos. Única advertencia: falta `fb:app_id`; no afecta la vista previa y decidió ignorarla (observación, sin deuda técnica). |
+| WhatsApp | 19-10-2026, 19:11: la tarjeta muestra imagen de portada, título «La Jardinera Florería - Valdivia, Chile», descripción y dominio. |
+| Pruebas manuales (guía E, §8.5) | Firefox, celular real y contraste forzado: sin diferencias. **Safari no se probó.** No informó el detalle por ítem de la guía; se registra solo lo informado. |
+| Cloudflare Pages (panel) | Log de compilación del commit `b813c3a` exitoso: Node 22.22.2, pnpm 11.24.0, Astro 7.4.0, 6 páginas, 1 regla de redirección válida y 108 de 108 recursos subidos (los 109 archivos de `_site/` incluyen `_redirects`, que Cloudflare procesa como regla). Configuración: comando `pnpm run build:cf`, salida `_site`, sin directorio raíz, rama de producción `main` con despliegue automático, sin *deploy hooks*, variables `NODE_VERSION=22.22.2` y `PNPM_VERSION=11.24.0`. Reversión: la opción «Rollback to this deployment» aparece en la lista de despliegues; no se ejecutó. |
+| Destino de reversión | `e1390c8`, último *commit* de `main` anterior a `44a82dc` (la primera migración a Astro). Identificado por el asesor con Git. [asesor] |
+
+### 14.2 Verificación de los archivos protegidos (T1) [código]
+
+Lectura y búsqueda de texto sobre el árbol de trabajo; no se corrigió nada.
+
+| Archivo | Comprobación | Línea | Estado |
+|:--------|:-------------|:------|:------:|
+| `DESIGN.md` | (a) §1.1: `<link>` de Google Fonts del `<head>` de `src/layouts/BaseLayout.astro` | L43 | OK |
+| `DESIGN.md` | (b) §7.1: Hero del Inicio (`src/pages/index.astro`) | L349 | OK |
+| `DESIGN.md` | (c) §8.2: `src/pages/servicios.astro` (contenedor `#modal-gallery-container`) | L410 | OK |
+| `DESIGN.md` | (d) §9.4: la 404 en estado neutro (`paginaActiva = null`) | L454 | OK |
+| `DESIGN.md` | (e) §11.7: CSS compilado (`_site/_astro/`) | L551 | OK |
+| `DESIGN.md` | §15 «Épica 08 · Iteraciones 07 y 08», con «ADR-003 (§5)» (0 ocurrencias de «§5.7») | L640 | OK |
+| `_planificacion/01-vision/proposito-y-alcance.md` | §2: 6 páginas `src/pages/*.astro` compiladas a 6 HTML | L18 | OK |
+| `_planificacion/01-vision/proposito-y-alcance.md` | §3: Tailwind compilado vía PostCSS en la compilación de Astro | L39 | OK |
+| `_planificacion/README.md` | Nota después de «Baja» (ubicaciones de DT-22 a DT-25 y SM-01) | L216 | OK |
+| `_planificacion/README.md` | DT-08 «Resuelta», con la verificación en producción | L229 | OK |
+| `_planificacion/README.md` | DT-11 con la lista corregida (`scripts/replace-icons.js`, «Los 11 `.astro` no llevan BOM») | L232 | OK |
+| `_planificacion/README.md` | Filas DT-27, DT-28, DT-29 y DT-30 después de DT-26 | L248 a L251 | OK |
+| `_planificacion/README.md` | SM-03 con destino «Épica 09 — Revisión móvil (por planificar)» | L283 | OK |
+| `_planificacion/README.md` | Fila nueva del §13 con fecha 19-10-2026 | L263 | OK |
+| `_planificacion/README.md` | **Fila DT-26 truncada:** hoy dice «Carga inicial de la Galería con 10 `<video>` ...» y perdió el resto del texto (el `HEAD` lo trae completo: 48,7 MB, `nmg2.mp4`, `ddm2.mp4`, candidata a carga diferida, origen en la Épica 07 y traslado desde la It. 06). Queda con «Media» y «Épica 10 (rendimiento)». No se corrigió (archivo protegido) | L247 | **FALLA** |
+| `README.md` | §11: «Cada página indexable…», la 404 sin `canonical` ni Open Graph | L180 | OK |
+| `README.md` | Hoja de ruta: Épica 08 «completada con reservas, 19-10-2026» y líneas de las Épicas 09 y 10 | L230, L232, L233 | OK |
+| BOM de DT-11 | `src/css/input.css`, `src/js/main.js`, `src/js/data/reviews.js`, `carousel.js`, `modal.js`, `navigation.js`, `theme.js`, `tailwind.config.js` y `scripts/replace-icons.js`: los 9 existen y tienen BOM | — | OK |
+| BOM de DT-11 | 11 archivos `.astro` en `src/`, 0 con BOM. Ningún otro archivo de `src/`, `scripts/` o la raíz tiene BOM fuera de esa lista | — | OK |
+
+Resultado: 18 de 19 comprobaciones en OK; 1 FALLA (fila DT-26). Por esa falla, la casilla del DoD sobre documentos actualizados queda abierta (§14.5).
+
+### 14.3 Decisiones del desarrollador (cerradas) [informado]
+
+1. **Lighthouse:** el criterio del DoD §8 no se cumple (58 de 60 casillas; fallan 2 en Suscripción Floral, §13.3). La Épica 08 se cierra con reserva y la corrección va a la Épica 10 (DT-27). No se abre una iteración de corrección ni se remide.
+2. **Reserva 2** (ruido de píxeles de Servicios): sigue como reserva, redactada «atribuido por analogía, no demostrado». La línea que `estado-actual.md` traía para la It. 08 lo presentaba como comprobado («ruido de píxeles en fotografías también presente al comparar cada sitio consigo mismo»); se corrige agregando la corrección en una línea nueva, porque ese archivo solo se agrega.
+3. **Deuda técnica nueva**, registrada por el desarrollador en `_planificacion/README.md`: DT-27 (Suscripción Floral en Lighthouse), DT-28 (`rum` en vistas previas), DT-29 (código muerto `#show-plans-btn` y `#hide-plans-btn` en `subscription.js`) y DT-30 (fin de soporte de Node 22, hacia abril de 2027). SM-03 pasa a la Épica 09.
+4. **`fb:app_id`:** observación, sin deuda técnica ni código.
+5. **Safari:** reserva abierta; se retoma en la Épica 09 si el desarrollador consigue un dispositivo Apple.
+
+### 14.4 Estado final de las reservas
+
+| Reserva | Estado | Detalle |
+|:--------|:------:|:--------|
+| 1. Render automático solo en Chrome *headless* | Abierta | Firefox y celular real probados a mano por el desarrollador [informado]; **Safari sin probar**. |
+| 2. Ruido de píxeles de Servicios | Abierta | **Atribuido por analogía, no demostrado:** no se reprodujo al comparar cada sitio consigo mismo (§5.4, §11.3). [render] |
+| 3. `/public/*` → 301 solo por código | **CERRADA** | Medida en producción: 301 a `/images/hero-botanical-desktop.webp`, que responde 200 `image/webp` (§13.5, ítem c). [medido] |
+| Nueva: Lighthouse | Abierta | 2 de 60 casillas no cumplen el criterio del DoD (Performance de escritorio y CLS móvil de Suscripción Floral); DT-27, Épica 10 (§13.3). [medido] |
+
+Nota: el punto 3 de la §11.3 (la comparación contra `referencia/capturas/` no es concluyente por las fuentes) no figura entre las reservas de las líneas de `estado-actual.md` ni entre las decisiones de esta ejecución. Se deja tal como está en la §11.3.
+
+### 14.5 Estado del DoD de la Épica 08 (`definicion-epica.md` §8)
+
+6 casillas verificadas (una de ellas con reserva) y 2 abiertas.
+
+| # | Casilla | Estado | Fuente |
+|:-:|:--------|:------:|:-------|
+| 1 | Header, panel móvil, footer y `<head>` una sola vez | [x] | §4.2: 1 `<header>` y 1 `<footer>` por página; `<head>` único en `BaseLayout.astro`. [código] |
+| 2 | `_site/` con las 6 páginas, mismos nombres y header y footer completos sin JavaScript | [x] | §4.1, §4.2 y §4.4: 6 HTML con los nombres de la referencia, 1 `<header>` y 1 `<footer>` en el HTML compilado. [código] |
+| 3 | Paridad visual y funcional en 7 viewports, claro y oscuro | [x] con reserva | §5: 84 combinaciones por sitio sin diferencias no explicadas. Reserva: Safari sin probar; render automático solo en Chrome *headless* (§14.4). Firefox y celular real sin diferencias [informado]. |
+| 4 | 0 `style=`, 0 `onclick`, 0 `<style>` y 1 `<script>` sin `src` por página | [x] | §4.2: idéntico en las 6 (SHA-256 `5b490c26…`). [código] |
+| 5 | 0 `./public/` en el código fuente; `/public/...` con 301 | [x] | §4.2 (0 `./public/`) [código] y §13.5, ítem c (301 en producción) [medido]. |
+| 6 | Lighthouse (criterio de medianas) | [ ] | No cumplida: 58 de 60 casillas (§13.3); fallan Performance de escritorio y CLS móvil de Suscripción Floral. Aceptada como reserva, DT-27, Épica 10. |
+| 7 | Cloudflare Pages publica desde `_site/` sin cambios de configuración y sin exponer archivos internos | [x] | Log y configuración del panel [informado] (§14.1); 7 archivos internos con 404 en producción (§13.5, ítem g) [medido]. |
+| 8 | `AGENTS.md`, `README.md`, `stack-tecnologico.md` y `proposito-y-alcance.md` actualizados por el desarrollador | [ ] | La T1 (§14.2) dio 1 FALLA: la fila DT-26 de `_planificacion/README.md` quedó truncada. La casilla no nombra ese archivo, pero la regla de este cierre exige que la T1 dé OK en todo. Se marca cuando el desarrollador restituya la fila. |
+
+### 14.6 Observaciones
+
+* **`fb:app_id`:** el depurador de Facebook advierte que falta. No afecta la vista previa; el desarrollador decidió ignorarla. Sin deuda técnica ni código. [informado]
+* **Node 22 (DT-30):** el log de Cloudflare confirma Node 22.22.2 [informado]. Según el calendario de Node.js, la versión dejaría de recibir soporte hacia abril de 2027; la deuda quedó registrada como DT-30 (mantenimiento, antes de esa fecha).
+
+### 14.7 Pendientes que no bloquean el cierre
+
+* **Safari y dispositivo Apple:** se retoman en la Épica 09 si el desarrollador consigue un dispositivo Apple. 🕒 PENDIENTE
+* **Fila DT-26 de `_planificacion/README.md`:** restituir el texto completo (§14.2). 🕒 PENDIENTE (desarrollador)
+
+### 14.8 Verificación final de esta ejecución [código]
+
+* `pnpm install --frozen-lockfile` (código 0, «Already up to date») y `pnpm run build:cf` (código 0, «6 page(s) built in 2.10s», 0 líneas con «warn» o «error», 109 archivos en `_site/` y 6 HTML). Sin cambios de código.
+* Archivos modificados por esta ejecución: esta bitácora (se agrega la §14), `estado-actual.md` (2 líneas), `definicion-epica.md` de la Épica 08, `decisiones-tecnicas.md` y el archivo nuevo `epica-09-revision-movil/definicion-epica.md`. Los archivos protegidos figuran modificados por el desarrollador; no se tocaron. Ningún comando de Git que escriba.
+
+### 14.9 Mensaje de commit sugerido
+
+```text
+Épica 08 - Iteración 08: Cierra la Épica 08 con reservas: Lighthouse 58 de 60 casillas (DT-27), producción y Search Console verificados, DT-27 a DT-30 y la Épica 09 definida.
+```
+
+Longitud contada con Node: 174 caracteres.

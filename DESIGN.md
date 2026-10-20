@@ -40,7 +40,7 @@ orgánico, cálido y editorial, con fotografía botánica protagonista y una int
 
 **Restricción de pesos:** usar un peso no cargado (por ejemplo, `font-bold` en Noto Serif o `font-light italic` en
 Montserrat) obliga al navegador a sintetizar el trazo, con resultado degradado. Antes de usar otro peso, se amplía el
-`<link>` de Google Fonts en los 6 HTML.
+`<link>` de Google Fonts del `<head>` de `src/layouts/BaseLayout.astro`, único para las 6 páginas.
 
 ### 1.2 Escala (tokens `fontSize`)
 
@@ -346,7 +346,7 @@ Hallazgos abiertos. No bloquean el trabajo, pero ningún componente nuevo debe r
 
 Efecto de **constelación**: tres campos de destellos puntuales titilan sobre el relleno de las letras mientras un
 brillo lineal recorre el titular. Reemplaza al antiguo resaltador `fx-marker`. Se aplica **exclusivamente** al `<h1>`
-del Hero de `index.html`.
+del Hero del Inicio (`src/pages/index.astro`).
 
 ```html
 <h1 class="font-display-hero text-headline-xl lg:text-display-hero text-neutral-50 font-semibold max-w-4xl tracking-tight leading-none">
@@ -407,7 +407,7 @@ El campo `description` de `src/js/data/services.js` contiene **HTML semántico s
 guion corto, `<strong>` con trazo de resaltador estático). Las enumeraciones siempre en `<ul>`, nunca con `<br>` ni "•".
 
 La galería del modal ajusta columnas con `sm:grid-cols-2|3|4`; esas tres clases están escritas en forma literal en
-`servicios.html` para que Tailwind las compile.
+`src/pages/servicios.astro` (contenedor `#modal-gallery-container`) para que Tailwind las compile.
 
 ---
 
@@ -451,7 +451,7 @@ aria-hidden="true">`, **hermana** del header, nunca dentro de él.
 ### 9.4 Invariantes
 
 Ningún descendiente del header con `fixed` (un `backdrop-filter` convierte al header en bloque contenedor de sus hijos
-fijos). Alturas acopladas a `h-20`. Estado activo único por página; `404.html` en estado neutro.
+fijos). Alturas acopladas a `h-20`. Estado activo único por página; la 404 en estado neutro (`paginaActiva = null`).
 El componente devuelve la capa tenue como hermana inmediata del header; nunca se renderiza dentro de él.
 
 ---
@@ -548,7 +548,7 @@ primer plano, idéntico en ambos temas.
    fotografía y no alcanza, subir a `/55` y luego a `/65`; si `/65` tampoco basta, el problema es la fotografía (demasiado
    clara bajo la tarjeta): se cambia la imagen, no se agregan scrims.
 2. **Respaldo sin `backdrop-filter`:** en `input.css`, un bloque `@supports not (...)` **fuera de `@layer`**, después de
-   Starlight, sube el fondo de `.hero-glass` al 85 %. Debe quedar después de las utilidades en `output.css`; dentro de
+   Starlight, sube el fondo de `.hero-glass` al 85 %. Debe quedar después de las utilidades en el CSS compilado (`_site/_astro/`); dentro de
    `@layer components` las utilidades le ganarían y nunca se aplicaría.
 3. **Texto:** `text-neutral-50` para el párrafo y la fila meta; el titular mantiene su jerarquía (§7.3). Prohibido
    `text-dark-neutral-100` sobre la tarjeta (§3).
@@ -637,3 +637,5 @@ Todo efecto continuo o de desplazamiento declara su alternativa en `@media (pref
 - **Épica 08 · Iteraciones 03 y 04:** footer y header pasan a componentes únicos de Astro (`SiteFooter.astro`,
   `SiteHeader.astro`), con los enlaces leídos de `src/data/navegacion.js`. El header no cambia de aspecto; el footer
   unifica su contenedor y el enlace activo (§5.3, §10).
+- **Épica 08 · Iteraciones 07 y 08:** tema aplicado antes del primer pintado con el script de arranque del ADR-003 (§5) y
+  rutas de archivo del documento actualizadas a la estructura de Astro (§1.1, §7.1, §8.2, §9.4 y §11.7).

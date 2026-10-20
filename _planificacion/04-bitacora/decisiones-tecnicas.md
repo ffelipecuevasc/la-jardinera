@@ -48,7 +48,7 @@ Guardas de `stage-site.mjs` (todas se evalúan antes de borrar `_site/`; si una 
 
 ## ADR-001 — Migración estructural a Astro (Épica 08)
 
-* **Estado:** Aprobada (14-10-2026). El desarrollador revisó y aceptó las decisiones D1 a D9.
+* **Estado:** Implementada (19-10-2026; aprobada el 14-10-2026). El desarrollador revisó y aceptó las decisiones D1 a D9.
 
 ### Contexto
 
@@ -295,3 +295,23 @@ Aplicadas en `src/components/SeoHead.astro`, `src/layouts/BaseLayout.astro`, `sr
   y DT-15 de §12, `README.md` (regla de código), `DESIGN.md` §5 nota 7, `stack-tecnologico.md`, `objetivos-y-metricas.md` y
   `definicion-epica.md` (DoD y A-05). Texto exacto en la bitácora de la Iteración 07.
 * **Límite:** la verificación se hizo en Chrome headless; la vista previa de Cloudflare, Firefox, Safari y un dispositivo real siguen 🕒 PENDIENTE.
+
+## Cierre de la Épica 08 con reservas — 19-10-2026
+
+* **Decisión del desarrollador:** la Épica 08 se cierra "Completada con reservas". El criterio de Lighthouse del DoD no se
+  cumple (58 de 60 casillas; fallan Performance de escritorio y CLS móvil de Suscripción Floral) y se acepta como reserva:
+  la corrección va a la Épica 10 (DT-27). No se abre una iteración de corrección ni se remide.
+* **Criterio:** igual que en la Épica 07, una casilla del DoD se marca `[x]` solo con evidencia citada en una bitácora.
+  Resultado: 6 casillas verificadas (una con reserva) y 2 abiertas: la de Lighthouse y la de documentos actualizados
+  (la fila DT-26 de `_planificacion/README.md` quedó truncada; bitácora de la It. 08, §14.2).
+* **Reservas:** (1) Safari sin probar y render automático solo en Chrome headless (Firefox y celular real, probados a mano
+  por el desarrollador, sin diferencias); (2) ruido de píxeles de Servicios, "atribuido por analogía, no demostrado". La
+  reserva de `/public/*` → 301 se cerró con la medición en producción. Detalle en la bitácora de la It. 08, §14.4.
+* **Deuda técnica nueva:** DT-27 (Suscripción Floral en Lighthouse, Épica 10), DT-28 (`rum` en las vistas previas
+  `*.pages.dev`, Épica 10), DT-29 (código muerto `#show-plans-btn` y `#hide-plans-btn` en `subscription.js`, Épica 10) y
+  DT-30 (fin de soporte de Node 22, hacia abril de 2027, mantenimiento).
+* **Decisiones de esta ejecución:** Lighthouse queda como reserva (no se remide); `fb:app_id` es una observación, sin deuda
+  técnica ni código; SM-03 pasa a la Épica 09; Safari se retoma en la Épica 09 si el desarrollador consigue un dispositivo
+  Apple.
+* **ADR:** el ADR-001 pasa a "Implementada" (19-10-2026). El ADR-002 y el ADR-003 no cambian.
+* **Épica 09:** definida en `epica-09-revision-movil/definicion-epica.md`, pendiente de aprobación del desarrollador.

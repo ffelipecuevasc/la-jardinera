@@ -15,7 +15,7 @@ implementar características que caigan en la sección "Fuera de Alcance".
 
 ## 2. Arquitectura de Navegación (Restricción MPA)
 
-El proyecto es estrictamente una **Multi-Page Application (MPA)**. Consta de 6 archivos HTML físicos independientes:
+El proyecto es estrictamente una **Multi-Page Application (MPA)**. Consta de 6 páginas (`src/pages/*.astro`) que Astro compila a 6 archivos HTML independientes:
 cinco páginas interconectadas por una barra de navegación y una página de error. **Prohibido el uso de enrutadores
 JavaScript (History API) o emulaciones de Single Page Application (SPA).**
 
@@ -36,7 +36,7 @@ JavaScript (History API) o emulaciones de Single Page Application (SPA).**
 ### ✅ Dentro del Alcance (Tu Jurisdicción)
 
 * **Maquetación Semántica:** HTML5 estructurado (SEO y Accesibilidad nativa).
-* **Estilizado Restringido:** Tailwind CSS v3 compilado localmente, mapeado 1:1 con los tokens oficiales.
+* **Estilizado Restringido:** Tailwind CSS v3 compilado vía PostCSS en la compilación de Astro, mapeado 1:1 con los tokens oficiales.
 * **Interactividad Ligera:** JavaScript Vanilla (ES6+) para menús móviles, modales, carruseles básicos y toggles de Dark
   Mode.
 * **Optimización de Assets:** Rutas locales a imágenes `.webp` con prevención de CLS (ancho/alto explícito).
