@@ -176,6 +176,6 @@ Destino asignado por el desarrollador el 21-10-2026 [informado].
 ## 9. Siguiente paso
 
 * **Épica 09 — Revisión móvil:** definida en `epica-09-revision-movil/definicion-epica.md`, pendiente de aprobación del
-  desarrollador. Hereda SM-01 a SM-03 y la reserva de Safari.
+  desarrollador. Hereda SM-01 a SM-03, la reserva de Safari y la de ruido de píxeles de Servicios.
 * **Épica 10 — Rendimiento y calidad Lighthouse:** por planificar. Hereda DT-21 a DT-29, con DT-27 como reserva de esta
   épica.
