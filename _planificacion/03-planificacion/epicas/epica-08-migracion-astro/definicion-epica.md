@@ -206,4 +206,4 @@ Cloudflare (despliegue anterior).
   §13.3 [medido] y §14.3, 19-10-2026.
 * [x] Cloudflare Pages publica desde `_site/` sin cambios de configuración y sin exponer `_planificacion/`,
   `AGENTS.md`, `README.md`, `DESIGN.md` ni `package.json`. Fuente: bitácora de la It. 08, §14.1 (log y configuración del panel, [informado por el desarrollador]) y §13.5, ítem g (7 archivos internos con 404) [medido], 19-10-2026.
-* [ ] `AGENTS.md`, `README.md`, `stack-tecnologico.md` y `proposito-y-alcance.md` actualizados por el desarrollador. Abierta: la verificación de la bitácora de la It. 08, §14.2, dio 1 FALLA (la fila DT-26 de `_planificacion/README.md` quedó truncada); se marca cuando el desarrollador la restituya.
+* [x] `AGENTS.md`, `README.md`, `stack-tecnologico.md` y `proposito-y-alcance.md` actualizados por el desarrollador. La casilla nombra esos cuatro archivos: `AGENTS.md` y `stack-tecnologico.md` sin divergencias, `README.md` y `proposito-y-alcance.md` actualizados; la fila DT-26 era de `_planificacion/README.md` y ya está restituida. Fuente: bitácora de la It. 08, §14.2 (T1 original) y §15 (T1 del ajuste de cierre) [código], 20-10-2026.

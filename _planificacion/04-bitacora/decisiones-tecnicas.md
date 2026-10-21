@@ -315,3 +315,12 @@ Aplicadas en `src/components/SeoHead.astro`, `src/layouts/BaseLayout.astro`, `sr
   Apple.
 * **ADR:** el ADR-001 pasa a "Implementada" (19-10-2026). El ADR-002 y el ADR-003 no cambian.
 * **Épica 09:** definida en `epica-09-revision-movil/definicion-epica.md`, pendiente de aprobación del desarrollador.
+
+## Ajuste de cierre de la Épica 08 — 20-10-2026
+
+* **Casilla de documentos cumplida:** el desarrollador restituyó la fila DT-26 de `_planificacion/README.md` y la
+  verificación por lectura la dio idéntica a la de `b813c3a` (bitácora de la It. 08, §15.2). El DoD queda con 7 casillas
+  verificadas (una con reserva) y 1 abierta (Lighthouse, DT-27).
+* **Causa de la fila truncada:** la propuesta del asesor mostraba la fila abreviada con «...» como línea de contexto y se
+  pegó literal.
+* **Cierre:** la Épica 08 sigue "Completada con reservas"; las reservas y el ADR-001 no cambian.

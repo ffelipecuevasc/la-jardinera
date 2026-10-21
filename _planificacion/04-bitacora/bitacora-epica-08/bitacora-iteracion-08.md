@@ -801,3 +801,56 @@ Nota: el punto 3 de la §11.3 (la comparación contra `referencia/capturas/` no 
 ```
 
 Longitud contada con Node: 174 caracteres.
+
+## 15. Ajuste de cierre (20-10-2026)
+
+Ejecución corta: sin mediciones, compilaciones ni cambios de código. Esta sección reemplaza las afirmaciones de la §14.2, la §14.5 y la §14.7 sobre la «fila DT-26 truncada» y las «2 casillas abiertas»; esas secciones no se reescriben.
+
+### 15.1 Causa y restitución de la fila DT-26
+
+* **Causa [asesor]:** la propuesta del asesor mostraba la fila DT-26 abreviada con «...» como línea de contexto y el desarrollador la pegó literal. No fue un error del agente.
+* **Restitución [informado]:** el desarrollador restituyó la fila a mano en `_planificacion/README.md` (archivo protegido; el agente no lo tocó).
+
+### 15.2 Verificación de la fila DT-26 (T1) [código]
+
+| Comprobación | Línea | Estado |
+|:-------------|:------|:------:|
+| La fila DT-26 del árbol de trabajo es idéntica carácter por carácter a la de `git show b813c3a:_planificacion/README.md` (L243), sin «...» (comparada con `diff`) | L247 | OK |
+| La fila DT-26 termina en «| Media | Épica 10 (rendimiento) |» y DT-27 sigue justo debajo, sin cambios respecto de `HEAD` | L247 y L248 | OK |
+| `git diff HEAD`: el único cambio de `_planificacion/README.md` es la fila DT-26 (1 inserción y 1 eliminación); `AGENTS.md`, `README.md`, `DESIGN.md`, `01-vision/**` y `02-arquitectura/**` sin cambios | — | OK |
+
+Resultado: T1 en OK.
+
+### 15.3 DoD de la Épica 08
+
+La casilla 8 (documentos actualizados) queda `[x]` en `definicion-epica.md` §8. El DoD queda con **7 casillas verificadas (una con reserva) y 1 abierta** (Lighthouse, DT-27).
+
+### 15.4 Confirmaciones del desarrollador [informado]
+
+* En las pruebas E vio las fuentes reales (Google Fonts) y los videos de la Galería funcionando, sin diferencias.
+* Quitó de Search Console el sitemap antiguo `https://www.lajardinerafloreria.cl/sitemap.xml` (sitio anterior, 2022). El sitemap `https://lajardinerafloreria.cl/sitemap.xml` sigue en «Correcto» con 5 páginas.
+
+La observación de la §11.3 sobre la comparación contra `referencia/capturas/` (no concluyente por las fuentes de Google) se da por cubierta (decisión 2 del desarrollador): la paridad se certificó con el A/B en las mismas condiciones (§5) y el desarrollador vio fuentes reales y videos sin diferencias.
+
+### 15.5 Reservas finales
+
+| Reserva | Estado |
+|:--------|:------:|
+| 1. Render automático solo en Chrome *headless*; Safari sin probar | Abierta |
+| 2. Ruido de píxeles de Servicios, «atribuido por analogía, no demostrado» | Abierta |
+| 3. `/public/*` → 301 | CERRADA |
+| Lighthouse: 2 de 60 casillas (DT-27, Épica 10) | Abierta |
+
+Pendiente del desarrollador que no bloquea: Safari y dispositivo Apple (Épica 09). 🕒 PENDIENTE
+
+### 15.6 Verificación final de esta ejecución [código]
+
+* Archivos modificados por esta ejecución: esta bitácora (se agrega la §15), `estado-actual.md` (1 línea), `definicion-epica.md` de la Épica 08 (casilla 8 del §8) y `decisiones-tecnicas.md` (sección nueva al final). Ningún comando de Git que escriba; sin compilaciones, procesos ni puertos abiertos.
+
+### 15.7 Mensaje de commit sugerido
+
+```text
+Épica 08 - Iteración 08: Ajuste de cierre: fila DT-26 restituida y verificada, casilla de documentos cumplida y DoD de la Épica 08 en 7 verificadas y 1 abierta (DT-27).
+```
+
+Longitud contada con Node: 168 caracteres.
