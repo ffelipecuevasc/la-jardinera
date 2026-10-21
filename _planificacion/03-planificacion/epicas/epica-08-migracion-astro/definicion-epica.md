@@ -1,7 +1,7 @@
 # Épica 08: Migración Estructural a Astro (Paridad Visual y de Contenido)
 
-> **Estado: Completada con reservas (19-10-2026).** 🔒 Cerrada solo al fusionar a `main`. Registro del cierre:
-> [bitacora-iteracion-08.md](../../../04-bitacora/bitacora-epica-08/bitacora-iteracion-08.md) §14.
+> **Estado: Completada con reservas; 🔒 Cerrada (fusión a `main` el 21-10-2026).** Registro del cierre:
+> [bitacora-iteracion-08.md](../../../04-bitacora/bitacora-epica-08/bitacora-iteracion-08.md) §14 y [bitacora-cierre-epica-08.md](../../../04-bitacora/bitacora-epica-08/bitacora-cierre-epica-08.md).
 > **Reemplaza a:** la Épica 08 anterior, "Componentes React con Renderizado Estático" (carpeta
 > `epica-08-componentes-react/`), que nunca pasó de planificación conceptual y no tiene bitácoras. Ver §3.
 > **Prerrequisitos:** Épica 07 · Iteraciones 02 y 03 cerradas (titular Starlight certificado y deuda de marcado

@@ -3,7 +3,7 @@
 > **Estado:** ⏳ planificada, pendiente de aprobación del desarrollador.
 > **Origen:** solicitudes de mejora SM-01, SM-02 y SM-03 de `_planificacion/README.md` §14, trasladadas al cerrar la
 > Épica 08 (19-10-2026).
-> **Prerrequisitos:** Épica 08 fusionada a `main`.
+> **Prerrequisitos:** Épica 08 fusionada a `main` (cumplido, 21-10-2026).
 > **Rama de trabajo:** Pendiente de definir.
 >
 > Todo lo marcado «a confirmar por el desarrollador» o «Pendiente de definir» es una propuesta o un vacío, no una
