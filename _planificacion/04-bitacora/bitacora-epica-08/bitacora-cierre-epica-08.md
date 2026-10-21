@@ -113,6 +113,9 @@ del repositorio; `sitemap.xml` con 5 `<loc>` sin `www`; `canonical`, `og:url` y 
 
 | Deuda | Tema | Destino |
 |:--|:--|:--|
+| DT-11 (abierta, no ligada a una épica) | Archivos guardados con BOM UTF-8 | Oportunista |
+| DT-12 (abierta, no ligada a una épica) | Deuda de diseño listada en `DESIGN.md` §5 | Según iteración |
+| DT-20 (abierta, no ligada a una épica) | Contraste del acento del titular del Hero sobre la fotografía | Oportunista (si cambia la fotografía o el criterio) |
 | DT-21 | Rendimiento móvil por debajo del umbral | Épica 10 |
 | DT-22 | Logotipos PNG sobredimensionados | Épica 10 |
 | DT-23 | Imágenes sin `width`/`height` y `lazy` sobre el pliegue | Épica 10 |
@@ -142,9 +145,11 @@ del repositorio; `sitemap.xml` con 5 `<loc>` sin `www`; `canonical`, `og:url` y 
 | Reserva | Estado | Destino |
 |:--|:-:|:--|
 | Render automático solo en Chrome *headless*; Safari sin probar | Abierta | Épica 09 |
-| Ruido de píxeles de Servicios, «atribuido por analogía, no demostrado» | Abierta | Sin destino asignado |
+| Ruido de píxeles de Servicios, «atribuido por analogía, no demostrado» | Abierta | Épica 09 (junto con la prueba en Safari; se cierra si no se ve diferencia en las fotos de Servicios) |
 | Lighthouse: 2 de 60 casillas | Abierta | Épica 10 (DT-27) |
 | Reserva 3: `/public/*` → 301 | **Cerrada** | Medida en producción (It. 08, §13.5, ítem c) |
+
+Destino asignado por el desarrollador el 21-10-2026 [informado].
 
 ## 7. Desviaciones del plan y observaciones de proceso
 

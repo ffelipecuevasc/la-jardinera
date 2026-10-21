@@ -61,6 +61,7 @@ Tres solicitudes de mejora, tal como están en `_planificacion/README.md` §14 (
 |:-----|:-------|
 | Safari y dispositivo Apple | Sin probar. Se retoma en esta épica si el desarrollador consigue un dispositivo Apple (decisión del desarrollador, 19-10-2026). |
 | Render real solo en Chrome *headless* | Reserva abierta de la Épica 08. Firefox y celular real fueron probados a mano por el desarrollador, sin diferencias. |
+| Ruido de píxeles de Servicios | Reserva abierta de la Épica 08 («atribuido por analogía, no demostrado»): 3.576 píxeles fuera de zonas planificadas (0,0015 %), diferencia máxima de 29 niveles [medido, bitácora de la It. 08, §5]. Se revisa al probar en un dispositivo Apple: si no se ve diferencia en las fotos de Servicios, se cierra (decisión del desarrollador, 21-10-2026). |
 
 ---
 
@@ -99,7 +100,7 @@ desarrollador.
   oscuro, fuera de lo que cada solicitud cambia.
 * [ ] Invariantes de `AGENTS.md` §5 intactos (en particular los del header, regla 7).
 * [ ] Documentos afectados actualizados por el desarrollador (los protegidos, mediante propuesta).
-* [ ] Safari y dispositivo Apple: probados si el desarrollador consigue el dispositivo; si no, la reserva se mantiene.
+* [ ] Safari y dispositivo Apple: probados si el desarrollador consigue el dispositivo; si no, la reserva se mantiene. En ese caso, revisar también las fotos de Servicios (reserva de ruido de píxeles de la Épica 08).
 
 ---
 
