@@ -16,13 +16,14 @@ export const servicesData = {
     'suscripcion': {
         title: 'Suscripción floral',
         mainImage: '/images/servicios/suscripcion.webp',
-        description: `<p>Las Flores en tu casa o tu lugar de trabajo tienen un poder silencioso, tienen un efecto de felicidad inmediata, transforman cualquier espacio y nuestro estado de ánimo.</p>
-<h4>Así funciona:</h4>
+        description: `<p>Las flores tienen un poder silencioso, tienen un efecto de felicidad inmediato, transforman cualquier espacio y nuestro estado de ánimo.</p>
+<p><strong><em>Tener flores en tu casa o tu lugar de trabajo.</em></strong></p>
+<h4>¿Cómo funciona?</h4>
 <ul>
-    <li>Escoge el plan que te hará feliz.</li>
+    <li>Escoge el plan que te hará feliz</li>
     <li>Cada miércoles o miércoles por medio te llegará un ramo a la puerta de tu casa o trabajo.</li>
-    <li>Cada semana, el ramo varía y es una selección de Flores de estación.</li>
-    <li>Si no estarás, ponle pausa, avísanos con 48 horas de anticipación.</li>
+    <li>Cada semana, el ramo varía y es una selección de flores de estación.</li>
+    <li>Ponle pausa cuando quieras (avisar con 48 horas de anticipación).</li>
 </ul>`,
         gallery: [
             '/images/servicios/galeria/suscripcion-1.webp',
@@ -34,13 +35,12 @@ export const servicesData = {
     'gift-cards': {
         title: 'Gift Cards',
         mainImage: '/images/servicios/gift-cards.webp',
-        description: `<p>Nuestras Gift Cards nacen de una invitación a descubrir el universo de nuestro taller floral y a elegir el momento perfecto para vivirlo. Quien la recibe decide cuándo activarla y cómo disfrutarla.</p>
-<h4>Qué puedes regalar</h4>
-<ul>
-    <li>Ramos de flores de autor, diseñados especialmente para quien los recibe.</li>
-    <li>Talleres creativos, una experiencia para aprender y crear con las manos.</li>
-    <li>Suscripciones florales, la opción más apreciada: una experiencia que se renueva semana tras semana.</li>
-</ul>
+        description: `<p><strong><em>Hay regalos que se disfrutan en un instante. Otros que se disfrutan mucho después de recibirlos.</em></strong></p>
+<p>Nuestras Gift Cards nacen de una invitación a descubrir el universo de nuestro taller floral y a elegir el momento perfecto para vivirlo.</p>
+<h4>¿Qué puedes regalar?</h4>
+<p>Una Gift Card puede consistir en cualquiera de nuestras experiencias, un ramo de flores de autor, talleres creativos o suscripciones florales. Quien la recibe decide cuándo activarla y cómo disfrutarla, en el momento que más le inspire.</p>
+<p>Las más apreciadas son nuestras suscripciones florales. Regalar uno, dos o varios meses de flores es regalar una experiencia que se renueva semana tras semana.</p>
+<p>Los talleres también son una linda alternativa, son encuentros donde las flores se descubren desde otra mirada: una experiencia para aprender, crear con las manos y conectar con otras como tú.</p>
 <h4>Para cada ocasión</h4>
 <p>Una Gift Card es el regalo perfecto para un cumpleaños, una celebración, un agradecimiento o la Navidad.</p>`,
         gallery: [
@@ -53,7 +53,9 @@ export const servicesData = {
         mainImage: '/images/servicios/novias.webp',
         description: `<h4>Ramos de Novia</h4>
 <p>Cada novia es una mujer única, por eso, nuestro proceso comienza con una conversación, conocer a la mujer, descubrir su personalidad, su forma de entender la belleza y la atmósfera con la que sueña para ese día.</p>
-<p>El Ramo es una creación floral profundamente personal que no busca seguir tendencias, sino emocionar. Que acompaña con naturalidad a una mujer que, al llevarlo entre las manos, se siente como si siempre hubiera estado destinado a ella.</p>
+<p><strong><em>No diseñamos un ramo para un matrimonio; creamos un ramo para una mujer.</em></strong></p>
+<p>El ramo es una creación floral profundamente personal que no busca seguir tendencias, sino emocionar. Que acompaña con naturalidad a una mujer que, al llevarlo entre las manos, se siente como si siempre hubiera estado destinado a ella.</p>
+<p><strong><em>Nuestros ramos no son el ramo perfecto, es el ramo que habla de ti.</em></strong></p>
 <h4>Boutonnière</h4>
 <p>Tradicionalmente llevado por el novio y quienes ocupan un lugar especial en la ceremonia, ésta pequeña creación floral complementa el diseño del ramo de la novia.</p>
 <p>Cada boutonnière se confecciona de manera artesanal, buscando que refleje el estilo del novio.</p>`,
@@ -67,11 +69,11 @@ export const servicesData = {
     'ramos-de-autor': {
         title: 'Ramos de Autor',
         mainImage: '/images/servicios/ramos-de-autor.webp',
-        description: `<p>En nuestro taller, cada ramo comienza con una inspiración distinta, no a partir de modelos prehechos: cada composición es única, diseñada para la persona que la recibirá.</p>
+        description: `<p>En nuestro taller, cada ramo comienza con una inspiración distinta y no a partir de modelos prehechos, cada composición es una única, diseñada para la persona que la recibirá.</p>
 <h4>Nuestro proceso</h4>
-<p>Combinamos flores frescas de temporada sobre una paleta de colores elegida por el cliente, así convertimos cada ramo en una pieza floral con equilibrio e identidad.</p>
+<p>Combinamos flores frescas de temporada sobre una paleta de colores elegida por el cliente, así convertimos cada ramo en una pieza floral con identidad propia y equilibrio.</p>
 <h4>Una pieza viva</h4>
-<p>Las flores son vivas y continúan transformándose cada día. Los botones se abren lentamente, nuevas formas aparecen, los colores evolucionan y el ramo regala cada día una nueva sorpresa.</p>`,
+<p>Las flores son vivas, continúan transformándose cada día. Los botones se abren lentamente, nuevas formas aparecen, los colores evolucionan y los ramos regalan cada día una nueva experiencia.</p>`,
         gallery: [
             '/images/servicios/galeria/ramos-de-autor-1.webp',
             '/images/servicios/galeria/ramos-de-autor-2.webp',
@@ -118,11 +120,14 @@ export const servicesData = {
     'eventos': {
         title: 'Eventos y Celebraciones',
         mainImage: '/images/servicios/eventos.webp',
-        description: `<p>Las flores deben ser parte de la esencia de una celebración. Definen la atmósfera, aportan sensibilidad y transforman un espacio en un lugar inolvidable: para una cena íntima, un cumpleaños, un aniversario, una comida familiar o un cóctel.</p>
+        description: `<h4>Las flores tienen la capacidad de hacer los momentos inolvidables</h4>
+<p>Las flores deben ser parte de la esencia de una celebración. Definen la atmósfera, aportan sensibilidad y transforman un espacio en un lugar inolvidable.</p>
 <h4>Cómo trabajamos</h4>
-<p>Nuestros proyectos nacen de una conversación, porque cada encuentro tiene un carácter distinto y merece una propuesta floral pensada exclusivamente para ti. Nos inspira el espacio, la luz, la estación del año, la mesa, la arquitectura y las personas que la compartirán.</p>
+<p>Para una cena íntima, cumpleaños, aniversario, comida familiar, un cóctel u otra celebración. Nuestros proyectos nacen de una conversación, porque cada encuentro tiene un carácter distinto y merece una propuesta floral pensada exclusivamente para ti.</p>
+<p>Nos inspira el espacio, la luz, la estación del año, la mesa, la arquitectura y las personas que la compartirán, así creamos arreglos florales de autor.</p>
 <h4>Nos ocupamos de todo</h4>
-<p>Diseñamos y elaboramos cada composición en nuestro taller, realizamos el montaje y proporcionamos todos los soportes y elementos necesarios para un resultado fabuloso.</p>`,
+<p>Diseñamos y elaboramos cada composición en nuestro taller, realizamos el montaje y proporcionamos todos los soportes y elementos necesarios para un resultado fabuloso.</p>
+<p><strong><em>Nuestro propósito es que tú solo tengas que vivir el momento.</em></strong></p>`,
         gallery: [
             '/images/servicios/galeria/eventos-1.webp',
             '/images/servicios/galeria/eventos-2.webp'
@@ -131,14 +136,18 @@ export const servicesData = {
     'condolencias': {
         title: 'Condolencias',
         mainImage: '/images/servicios/condolencias.webp',
-        description: `<p>En los momentos de despedida, cuando las emociones son profundas y las palabras pueden quedarse pequeñas, las flores se convierten en un gesto de amor, respeto y acompañamiento. Diseñamos homenajes florales que honran la historia y acompañan a quienes quedan.</p>
+        description: `<p><strong><em>Las flores tienen el delicado lenguaje de decir aquello que las palabras no alcanzan a expresar.</em></strong></p>
+<p>En los momentos de despedida, cuando las emociones son profundas y las palabras pueden quedarse pequeñas, las flores se convierten en un gesto de amor, respeto y acompañamiento.</p>
+<p>Diseñamos homenajes florales que honran la historia y acompañan a quienes quedan.</p>
 <h4>Nuestros homenajes</h4>
 <ul>
-    <li>Coronas florales.</li>
-    <li>Ramos y centros florales.</li>
+    <li>Coronas.</li>
+    <li>Ramos.</li>
+    <li>Centros florales.</li>
     <li>Cubre urnas.</li>
-    <li>Composiciones especiales, elaboradas en nuestro taller con flores frescas.</li>
-</ul>`,
+    <li>Composiciones especiales.</li>
+</ul>
+<p>Todos son elaborados en nuestro taller con flores frescas.</p>`,
         gallery: [
             '/images/servicios/galeria/condolencias-1.webp',
             '/images/servicios/galeria/condolencias-2.webp'
