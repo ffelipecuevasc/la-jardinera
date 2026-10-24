@@ -389,7 +389,7 @@ html.dark::view-transition-new(root) {
 /* del texto.                                                */
 /*                                                           */
 /* Va FUERA de @layer components a propósito: la utilidad    */
-/* bg-dark-background/45 del marcado pertenece a la capa de  */
+/* bg-dark-background/60 del marcado pertenece a la capa de  */
 /* utilidades, que se emite después de los componentes y     */
 /* anularía este respaldo. Fuera de la capa, el bloque se    */
 /* emite después de las utilidades y gana en cascada.        */

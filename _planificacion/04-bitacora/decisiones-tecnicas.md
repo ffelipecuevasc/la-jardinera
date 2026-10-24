@@ -327,7 +327,8 @@ Aplicadas en `src/components/SeoHead.astro`, `src/layouts/BaseLayout.astro`, `sr
 
 ## ADR-004 — Carrusel automático del hero del Inicio
 
-* **Estado:** Aprobada (24-10-2026). Decisiones D-01 a D-10 del desarrollador (Épica 09 · Iteración 02).
+* **Estado:** Aprobada (24-10-2026). Decisiones D-01 a D-10 del desarrollador (Épica 09 · Iteración 02) y decisiones de
+  cierre del 24-10-2026 (tinte `/60`, «Descubrir más» de 44 px, intervalo entre inicios de transición).
 
 ### Contexto
 
@@ -380,8 +381,12 @@ Aplicadas en `src/components/SeoHead.astro`, `src/layouts/BaseLayout.astro`, `sr
   `alt` (D-08).
 * **Movimiento reducido (D-05):** con `prefers-reduced-motion: reduce` se ve solo la foto 1, sin rotación, sin botón y
   sin descargar las fotos 2 a 4. El módulo escucha el cambio de la preferencia en caliente.
-* **Contraste:** se midió por foto (bitácora de la Épica 09 · It. 02, §4). Con `/45` hay incumplimientos (sobre todo la
-  foto 4); la decisión sobre el tinte o la foto queda en manos del desarrollador.
+* **Contraste:** se midió por foto (bitácora de la Épica 09 · It. 02, §4.2 y §8). Con `/45` solo la foto 1 cumplía (11
+  incumplimientos, 9 de la foto 4). **Decisión de cierre:** la tarjeta `hero-glass` sube a `bg-dark-background/60`, el
+  mínimo de la escala `/55`, `/60`, `/65` con 0 fallas en las 4 fotos × 7 viewports × 2 temas (`/55` deja 4,46:1 en
+  «Descubrir más» con la foto 2 a 768×1024). El botón de pausa conserva `/45` (ícono ≥ 3,28:1). La foto 4 se mantiene
+  aunque la tarjeta le tape el rostro a la florista.
+* **Objetivo táctil:** «Descubrir más» lleva `min-h-11` (44 px de alto).
 
 ### Carga
 
@@ -394,6 +399,7 @@ Aplicadas en `src/components/SeoHead.astro`, `src/layouts/BaseLayout.astro`, `sr
 
 * Página de Inicio: +3 imágenes tras `load` (≈ 731 KB en escritorio y ≈ 353 KB en móvil).
 * Las 3 fotos de origen y los 2 archivos antiguos del hero salen de `public/images/` (D-07).
-* **Documentos por actualizar mediante propuesta:** `DESIGN.md` §5 nota 10, §7.1, §7.4 y §11.7 (clases del titular y del
-  párrafo tras SM-01), §12.2 y §13. Texto exacto en la bitácora de la It. 02.
+* **Documentos por actualizar mediante propuesta:** `DESIGN.md` §1.3, §2.10, §5 nota 10, §7.1, §7.4, §11.7 (bloque de código
+  y regla 1, tinte `/60`), §12.2 y §13, y la fila DT-20 de `_planificacion/README.md` §12. Texto exacto en el reporte de
+  cierre de la It. 02.
 * **Límite:** verificado en Chrome *headless*; celular real, Safari y Firefox siguen 🕒 PENDIENTE.
