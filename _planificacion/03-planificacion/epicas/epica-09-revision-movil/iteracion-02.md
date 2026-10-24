@@ -29,19 +29,29 @@ lectura.
 
 ### 1.1 Fotografías
 
-| Origen (en `public/images/` al iniciar) | Uso | Notas |
-|:-----------------------------------------|:----|:------|
-| `hero-botanical-desktop.webp` (2752×1536) y `hero-botanical-mobile.webp` (1536×2752) | Foto actual del hero | Se mueven a `public/images/inicio/` sin recomprimir (paridad del LCP). |
-| `hero-botanical.webp` (5504×3072, 454 KB) | Foto anterior del hero | Original: se generan las versiones de escritorio y móvil. |
-| `hero-botanical-1 (1).webp` (≈ 713 KB) | Foto nueva | Original entregado por el desarrollador: medir dimensiones; generar versiones. |
-| `hero-botanical-1 (2).webp` (≈ 400 KB) | Foto nueva | Ídem. |
+Orden de rotación (D-06) y archivos de origen, medidos el 24-10-2026:
 
-**Especificación de salida por foto** (`DESIGN.md` §13): escritorio 2752×1536 WebP **≤ 300 KB** (objetivo 150–220 KB);
-móvil 1536×2752 WebP **≤ 200 KB**, recortada desde el centro salvo que el encuadre exija otro punto (reportar). Si un
-original mide menos de 2752×1536, no se escala hacia arriba: se reporta y se espera la decisión. La composición ideal
-deja el centro con luminosidad media o baja (`DESIGN.md` §13); la medición de contraste dirá si alguna foto no sirve.
+| N.º | Foto | Origen (en `public/images/` al iniciar) | Dimensiones | Peso | Luminosidad del centro (0 a 255) |
+|:---:|:-----|:-----------------------------------------|:------------|:-----|:-------------------------------:|
+| 1 | Actual: manos envolviendo el ramo | `hero-botanical-desktop.webp` y `hero-botanical-mobile.webp` | 2752×1536 y 1536×2752 | 159 y 191 KB | 126 |
+| 2 | Salón de eventos con lámparas y faroles | `hero-botanical-1 (1).webp` | 2752×1536 | 730 KB | 81 |
+| 3 | Mesa de madera blanca con arreglos de colores (foto anterior del hero) | `hero-botanical.webp` | 5504×3072 | 454 KB | 111 |
+| 4 | Florista sonriente en su taller | `hero-botanical-1 (2).webp` | 2752×1536 | 410 KB | 110 |
+
+**Especificación de salida** (`DESIGN.md` §13): escritorio 2752×1536 WebP **≤ 300 KB** (objetivo 150 a 250 KB; la foto 2
+debe recomprimirse); móvil WebP **≤ 200 KB**.
+
+* **Foto 1:** se mueve sin recomprimir (paridad del LCP).
+* **Foto 3** (5504×3072): la versión de escritorio se reduce a 2752×1536; la móvil se recorta desde el centro a
+  1728×3072 y se reduce a **1536×2752**.
+* **Fotos 2 y 4** (2752×1536, sin más resolución): su versión móvil es el **recorte nativo desde el centro a 864×1536**,
+  **sin agrandar** (D-09). Se declaran sus medidas reales en `width`/`height`. Peso esperado 60 a 100 KB.
+* La foto 4 tiene a la florista en el centro, bajo la tarjeta de vidrio; por eso va al final. Si la medición de
+  contraste lo exige, se reporta.
 
 **Ningún archivo con espacios ni paréntesis queda en `public/`**: todo lo que está en `public/` se despliega.
+
+---
 
 ### 1.2 Decisiones del desarrollador
 
@@ -52,9 +62,11 @@ deja el centro con luminosidad media o baja (`DESIGN.md` §13); la medición de 
 | D-03 | Botón pausa/reproducir obligatorio (WCAG 2.2.2), de al menos 44×44 px, en la **esquina inferior derecha del hero**, fuera de la tarjeta de vidrio y sin taparla en ningún viewport. `aria-label` alterna entre «Pausar presentación de imágenes» y «Reanudar presentación de imágenes». Si el usuario pausa, queda pausado hasta que reanude. | Resuelta (24-10-2026) |
 | D-04 | Pausas automáticas: **solo** con la pestaña en segundo plano o con el hero fuera de pantalla. No hay pausa por foco de teclado ni por mouse encima (desviación consciente del patrón de carrusel del W3C; queda en el ADR-004). | Resuelta (24-10-2026) |
 | D-05 | Movimiento reducido (`prefers-reduced-motion: reduce`): foto fija (la primera), sin rotación y sin botón de pausa. | Resuelta (24-10-2026) |
-| D-06 | Orden de las fotografías. La primera es la que lleva `fetchpriority="high"`. Recomendación: la foto actual primero (LCP y contraste ya conocidos). | Pendiente de definir |
-| D-07 | Nombres de archivo en `public/images/inicio/` (propuesta: `hero-01-desktop.webp`, `hero-01-mobile.webp` … `hero-04-*`) y destino de los originales (`hero-botanical.webp` y las 2 fotos nuevas): fuera de `public/` o eliminados del árbol (quedan en el historial de Git). | Pendiente de definir |
-| D-08 | Texto `alt` de cada foto nueva: Claude Code lo propone mirando la imagen; el desarrollador lo aprueba. | Pendiente de definir |
+| D-06 | Orden de rotación: 1 Actual → 2 Salón → 3 Mesa → 4 Florista (§1.1). La primera lleva `fetchpriority="high"`. | Resuelta (24-10-2026) |
+| D-07 | Nombres en `public/images/inicio/`: `hero-01-desktop.webp`, `hero-01-mobile.webp` … `hero-04-desktop.webp`, `hero-04-mobile.webp`. Los 3 originales (`hero-botanical.webp`, `hero-botanical-1 (1).webp`, `hero-botanical-1 (2).webp`) salen del árbol de Git (quedan en el historial; el desarrollador guarda copia en su disco). Claude Code **no borra nada antes de generar y verificar las 8 versiones**. | Resuelta (24-10-2026) |
+| D-08 | `alt` aprobados por el desarrollador: foto 1 sin cambios («Manos de florista envolviendo en papel kraft un ramo de rosas fucsia, gerberas, claveles y alstroemerias»); foto 2 «Salón de eventos ambientado con faroles, lámparas de mimbre colgantes y arreglos de paniculata y follaje sobre una mesa de madera»; foto 3 «Mesa de madera blanca con arreglos de gerberas, rosas, alstroemerias y claveles de colores vivos en un salón con luces cálidas»; foto 4 «Florista sonriente armando un ramo en su taller, rodeada de flores frescas». Claude Code comprueba que cada uno describe su foto y reporta cualquier desajuste, sin cambiarlo. | Resuelta (24-10-2026) |
+| D-09 | Versiones móviles de las fotos 2 y 4: recorte nativo 864×1536 sin agrandar (§1.1). Propuesta -/+ para `DESIGN.md` §13 en el registro. | Resuelta (24-10-2026) |
+| D-10 | Cursivas de Montserrat 600 y 700 (+20 KB en Inicio): se dejan; se vuelve a medir el peso del Inicio en esta iteración, con las fotos. | Resuelta (24-10-2026) |
 | SM-01 D-01 | `h1` en móvil `text-headline-xl-mobile` (32/40); párrafo `text-body-md` (16/24). Desde `md`, como hoy. | Resuelta (21-10-2026) |
 | SM-01 D-02 | «Descubrir más» centrado en móvil; se mantiene el `border-t` de la fila de datos. | Resuelta (21-10-2026) |
 | SM-01 D-03/D-04 | «Móvil» = menos de 768 px (`md`); desde 768 px, el hero queda idéntico al actual. 740×360 pasa a la vista móvil: es esperado. | Resuelta (21-10-2026) |
@@ -94,11 +106,11 @@ cambio **automático por tiempo**. Solo se reutiliza la idea del desplazamiento 
 
 ### Tarea 1: Fotografías
 
-1. Según D-06 y D-07, genera en `public/images/inicio/` las versiones de escritorio y móvil de las 3 fotos que no las
-   tienen (herramienta disponible en el entorno; no agregues dependencias al `package.json`). Mueve las 2 actuales sin
-   recomprimir.
+1. Según §1.1, D-07 y D-09, genera en `public/images/inicio/` las versiones de escritorio y móvil de las fotos 2, 3 y 4
+   (herramienta disponible en el entorno; no agregues dependencias al `package.json`). Mueve la foto 1 sin recomprimir
+   y renómbrala. Primero genera y verifica las 8 versiones y solo después retira los 3 originales del árbol.
 2. Verifica dimensiones y pesos contra §1.1. Si algo excede el tope, reporta y propone calidad o recorte.
-3. Retira de `public/` todo archivo con espacios, paréntesis u original sin uso, según D-07.
+3. Retira de `public/` los 3 originales y todo archivo con espacios o paréntesis (D-07). `find public -name '* *' -o -name '*(*'` debe quedar vacío.
 
 ### Tarea 2: Marcado del hero (`index.astro`)
 

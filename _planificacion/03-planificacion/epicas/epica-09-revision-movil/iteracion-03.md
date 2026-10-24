@@ -8,7 +8,8 @@ Iteraciones 01 y 02 integradas y sin cambios pendientes. No inventes decisiones.
 
 **Autorización explícita de esta iteración:** puedes editar `src/js/modules/navigation.js`, `src/js/modules/modal.js`,
 la bitácora de la iteración y agregar una línea al final de `estado-actual.md`. `src/pages/servicios.astro` solo para
-llevar el botón de cierre de la modal a 44×44 px (§1, punto 3). `SiteHeader.astro` **no** se toca (la trampa es solo
+llevar el botón de cierre de la modal a 44×44 px (§1, punto 3) y para hacer alcanzable el contenido de la modal
+(Tarea 2, punto 0). `SiteHeader.astro` **no** se toca (la trampa es solo
 JS). No edites archivos protegidos. Git es de solo lectura.
 
 ---
@@ -20,7 +21,13 @@ JS). No edites archivos protegidos. Git es de solo lectura.
 2. **Desplazamiento de las modales de Servicios (pedido de la clienta):** al abrir una modal se ve el final del
    contenido. Hipótesis del asesor [código, sin reproducir]: `modal.js` reutiliza un único `#service-modal` y no
    reinicia el `scrollTop` de `.modal-scroll`, así que conserva el desplazamiento de la apertura anterior. Se reproduce
-   antes de corregir; si la causa es otra, se reporta.
+   antes de corregir; si la causa es otra, se reporta. La It. 01 lo reprodujo [medido, Chrome *headless*]: si una modal
+   se cierra desplazada, la siguiente abre igual (89 y 389 px).
+   **Segundo defecto, más grave (hallazgo H-03 de la It. 01):** en 360×740, el contenido de una modal que pasa de unos
+   680 px de alto **no se puede alcanzar** (ni con gesto táctil ni con la rueda). Con los textos nuevos de la clienta,
+   las modales son más largas. Hipótesis del asesor [código, sin reproducir]: la columna derecha de `#service-modal`
+   (`flex flex-col flex-1 min-w-0`) no lleva `min-h-0`, así que no se encoge dentro del panel de `h-[92vh]`;
+   `.modal-scroll` nunca desborda y el panel recorta el contenido. Si se confirma, el arreglo es una sola clase.
 3. **Hallazgo del asesor:** el botón de cierre de la modal de servicio es `w-10 h-10` (40 px), bajo los 44×44 px de
    `AGENTS.md` §5 regla 10 y `DESIGN.md` §14. Se lleva a 44 px (`w-11 h-11`) salvo que `DESIGN.md` §8 diga otra cosa: en
    ese caso se reporta con propuesta -/+.
@@ -45,6 +52,13 @@ JS). No edites archivos protegidos. Git es de solo lectura.
 3. Modales de Servicios en 360×740 y 1280×800: abre cada modal en un orden fijo (primera apertura en página recién
    cargada y aperturas sucesivas) y registra el `scrollTop` de `.modal-scroll` y qué parte del contenido se ve. Esto
    confirma o descarta la hipótesis del §1.
+4. **Prueba del `min-h-0` (solo lectura, sin editar archivos):** en el navegador *headless*, inyecta `min-h-0` en la
+   columna derecha de `#service-modal` (clase añadida por script en la página renderizada) y mide, en 320×640,
+   360×740, 412×915 y 740×360, para las 8 modales: alto de `.modal-scroll`, su `scrollHeight` y `clientHeight`, y si el
+   último párrafo y la galería se pueden alcanzar. Repite sin la clase como control. Reporta si `min-h-0` basta, si
+   hace falta algo más (p. ej. `min-h-0` también en el panel o en `.modal-scroll`) o si la causa es otra.
+   Si el panel de la modal no se encoge por otro motivo (altura del `<figure>` de `h-52`, CTA fijo), mide cada
+   componente.
 
 ### Tarea 1: `navigation.js` (SM-02)
 
@@ -55,7 +69,12 @@ JS). No edites archivos protegidos. Git es de solo lectura.
    («Abrir menú»/«Cerrar menú»), Escape con `menuBtn.focus()`, el cierre por *scrim*, por enlace y por cruzar
    `(min-width: 1024px)`.
 
-### Tarea 2: `modal.js` (desplazamiento inicial)
+### Tarea 2: Contenido inalcanzable en la modal (`servicios.astro`) y `modal.js` (desplazamiento inicial)
+
+0. Con el resultado de la Tarea 0.4, aplica el cambio **mínimo** en `src/pages/servicios.astro` que haga alcanzable todo
+   el contenido en todos los anchos (hipótesis: agregar la clase literal `min-h-0` a la columna derecha). Solo clases
+   Tailwind literales y existentes; no cambies alturas, el CTA fijo ni la galería. Si hace falta más de una clase o
+   una clase fuera de la escala de `DESIGN.md`, entrégalo como propuesta y espera la decisión.
 
 1. Corrige la causa confirmada en la Tarea 0.3 con el cambio mínimo (p. ej. reiniciar el `scrollTop` de
    `.modal-scroll` al abrir, antes de mostrar el contenido).
@@ -76,7 +95,8 @@ JS). No edites archivos protegidos. Git es de solo lectura.
 3. Cruce de *breakpoint* con el panel abierto: a 1024 px o más, se cierra y la página queda interactiva.
 4. 1024×768 y 1280×800: sin cambios de comportamiento ni de aspecto en el header.
 5. Modales: todas abren mostrando el inicio del contenido, en primera apertura y en aperturas sucesivas, en 360×740 y
-   1280×800; botón de cierre de 44×44 px con foco visible.
+   1280×800; el **último párrafo y la galería se pueden alcanzar** en las 8 modales y en 320×640, 360×740, 412×915 y
+   740×360 (con la rueda y con gesto táctil emulado); botón de cierre de 44×44 px con foco visible.
 6. `aria-expanded` y `aria-label` sincronizados en cada transición del panel (regla 10).
 7. Pide al desarrollador una prueba con teclado real y en un celular real (marcada como [informado]).
 
@@ -115,6 +135,10 @@ JS). No edites archivos protegidos. Git es de solo lectura.
     * **Dado** cualquier modal de Servicios,
     * **Cuando** se abre, sea la primera o una sucesiva,
     * **Entonces** se ve el inicio de su contenido sin desplazar a mano.
+* **Escenario 3b: Contenido alcanzable**
+    * **Dado** cualquier modal de Servicios, en cualquier ancho probado,
+    * **Cuando** se desplaza hasta el final,
+    * **Entonces** se alcanzan el último párrafo y la galería, y el CTA fijo sigue visible.
 * **Escenario 4: Botón de cierre**
     * **Entonces** mide al menos 44×44 px y tiene foco visible.
 * **Escenario 5: Invariantes**
