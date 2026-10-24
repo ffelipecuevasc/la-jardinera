@@ -20,7 +20,7 @@ export const servicesData = {
 <p><strong><em>Tener flores en tu casa o tu lugar de trabajo.</em></strong></p>
 <h4>¿Cómo funciona?</h4>
 <ul>
-    <li>Escoge el plan que te hará feliz</li>
+    <li>Escoge el plan que te hará feliz.</li>
     <li>Cada miércoles o miércoles por medio te llegará un ramo a la puerta de tu casa o trabajo.</li>
     <li>Cada semana, el ramo varía y es una selección de flores de estación.</li>
     <li>Ponle pausa cuando quieras (avisar con 48 horas de anticipación).</li>
@@ -69,7 +69,7 @@ export const servicesData = {
     'ramos-de-autor': {
         title: 'Ramos de Autor',
         mainImage: '/images/servicios/ramos-de-autor.webp',
-        description: `<p>En nuestro taller, cada ramo comienza con una inspiración distinta y no a partir de modelos prehechos, cada composición es una única, diseñada para la persona que la recibirá.</p>
+        description: `<p>En nuestro taller, cada ramo comienza con una inspiración distinta y no a partir de modelos prehechos, cada composición es única, diseñada para la persona que la recibirá.</p>
 <h4>Nuestro proceso</h4>
 <p>Combinamos flores frescas de temporada sobre una paleta de colores elegida por el cliente, así convertimos cada ramo en una pieza floral con identidad propia y equilibrio.</p>
 <h4>Una pieza viva</h4>

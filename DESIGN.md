@@ -36,7 +36,7 @@ orgánico, cálido y editorial, con fotografía botánica protagonista y una int
 | Rol                     | Familia        | Pesos cargados (Google Fonts)                         |
 |:------------------------|:---------------|:------------------------------------------------------|
 | Display y titulares     | **Noto Serif** | 400, 600 · itálica 400, 600                           |
-| Cuerpo e interfaz       | **Montserrat** | 300, 400, 500, 600, 700 · itálica 400                 |
+| Cuerpo e interfaz       | **Montserrat** | 300, 400, 500, 600, 700 · itálica 400, 600, 700       |
 
 **Restricción de pesos:** usar un peso no cargado (por ejemplo, `font-bold` en Noto Serif o `font-light italic` en
 Montserrat) obliga al navegador a sintetizar el trazo, con resultado degradado. Antes de usar otro peso, se amplía el
@@ -405,6 +405,7 @@ botón, capa y `Escape`; trampa de foco; fondo con `inert` y `aria-hidden` hasta
 El campo `description` de `src/js/data/services.js` contiene **HTML semántico sin clases**: `<p>`, `<h4>`, `<ul>`,
 `<li>`, `<strong>`, `<em>`. Su tipografía la gobierna `.modal-prose` en `input.css` (subtítulos con rombo, viñetas en
 guion corto, `<strong>` con trazo de resaltador estático). Las enumeraciones siempre en `<ul>`, nunca con `<br>` ni "•".
+Los párrafos destacados (frase clave de un texto) van en un `<p>` propio con `<strong><em>…</em></strong>`, sin clases.
 
 La galería del modal ajusta columnas con `sm:grid-cols-2|3|4`; esas tres clases están escritas en forma literal en
 `src/pages/servicios.astro` (contenedor `#modal-gallery-container`) para que Tailwind las compile.
