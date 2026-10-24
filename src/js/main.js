@@ -5,6 +5,7 @@ import { initModal } from './modules/modal.js';
 import { initSubscription } from './modules/subscription.js';
 import { initGallery } from './modules/gallery.js';
 import { initContactForm } from './modules/contact-form.js';
+import { initHeroCarousel } from './modules/hero-carousel.js';
 
 // El nombre se escribe a mano: el empaquetador puede renombrar las funciones y `init.name` dejaría de ser legible.
 const modules = [
@@ -15,6 +16,7 @@ const modules = [
     { fn: 'initSubscription', init: initSubscription },
     { fn: 'initGallery',      init: initGallery      },
     { fn: 'initContactForm',  init: initContactForm  },
+    { fn: 'initHeroCarousel', init: initHeroCarousel },
 ];
 
 document.addEventListener('DOMContentLoaded', () => {

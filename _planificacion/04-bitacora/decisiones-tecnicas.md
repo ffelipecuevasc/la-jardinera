@@ -324,3 +324,76 @@ Aplicadas en `src/components/SeoHead.astro`, `src/layouts/BaseLayout.astro`, `sr
 * **Causa de la fila truncada:** la propuesta del asesor mostraba la fila abreviada con «...» como línea de contexto y se
   pegó literal.
 * **Cierre:** la Épica 08 sigue "Completada con reservas"; las reservas y el ADR-001 no cambian.
+
+## ADR-004 — Carrusel automático del hero del Inicio
+
+* **Estado:** Aprobada (24-10-2026). Decisiones D-01 a D-10 del desarrollador (Épica 09 · Iteración 02).
+
+### Contexto
+
+* La clienta pidió que el hero del Inicio muestre varias fotografías y no una sola. El desarrollador entregó como
+  referencia un CodePen de animaciones guiadas por *scroll* (`animation-timeline`, `scroll-snap`), pero el pedido es un
+  cambio **automático por tiempo** (§1.3 de `iteracion-02.md`).
+* El hero es un bloque de contraste fijo (`DESIGN.md` §3) con una tarjeta de vidrio (`bg-dark-background/45`, §11.7) y
+  la foto 1 es el LCP del Inicio en escritorio.
+* `AGENTS.md` §5 exige MPA estricta, cero JS y CSS en línea, módulos con `initX()` y sin `position: fixed` dentro del
+  hero.
+
+### Decisión
+
+* **Carrusel por tiempo con módulo propio** (`src/js/modules/hero-carousel.js`, `initHeroCarousel()`), registrado en
+  `main.js`. Cuatro `<picture>` apilados `absolute inset-0` dentro de `#titular`, en el orden de D-06, cada uno con su
+  `<source media="(orientation: portrait)">` y `width`/`height` reales. Imágenes en `public/images/inicio/`
+  (`hero-01` a `hero-04`, `-desktop` y `-mobile`).
+* **Movimiento:** intervalo de 7 s entre el inicio de dos transiciones; transición de `transform` de 1000 ms con
+  `--expo-out` (`DESIGN.md` §12.3), la entrante desde la derecha y la saliente por la izquierda. Clases `.hero-slide`,
+  `.is-active`, `.is-leaving` e `.is-instant` en `@layer components` de `input.css`. Nunca dos transiciones a la vez.
+* **Sin opacidad:** solo `transform`; la foto se ve siempre a pleno color (§11.7, sin scrims).
+* **Botón de pausa/reanudación** (`#hero-carousel-toggle`, 44 × 44 px, esquina inferior derecha del hero, fuera de la
+  tarjeta) con `aria-label` alternante («Pausar…» / «Reanudar presentación de imágenes») e ícono alternante. No usa
+  `aria-pressed`: con un nombre que cambia, el estado ya está en el nombre y se anunciaría dos veces.
+
+### Alternativas descartadas
+
+* **El CodePen tal cual:** secuestra el *scroll* del sitio (`scroll-snap-type` y `timeline-scope` en `html`), declara
+  `@layer` propias que chocan con las de Tailwind 3, duplica el `h1` y el header, y trae colores ajenos a `DESIGN.md`.
+  Además cambia las secciones al desplazarse, no por tiempo. Solo se reutilizó la idea del desplazamiento horizontal
+  (`translate3d(100%)` → `none` → `translate3d(-100%)`).
+* **Animación solo con CSS (`@keyframes` en bucle):** no permite pausar por pestaña oculta ni por hero fuera de pantalla
+  sin JS, ni un botón de pausa con estado; tampoco permite diferir la descarga de las fotos 2 a 4.
+* **Fundido (`opacity`) como el hero de Suscripción Floral:** descartado por D-02 (desplazamiento horizontal).
+* **Diferir con solo `loading="lazy"`:** las capas apiladas quedan dentro del margen de carga diferida del navegador y
+  se pedirían junto con la foto 1. Se combinó con el atributo `hidden` (ver Carga).
+
+### Accesibilidad
+
+* **WCAG 2.2.2 (Pausar, detener, ocultar):** el movimiento dura más de 5 s y empieza solo, por eso hay botón de pausa
+  operable con clic, Enter y Espacio, con foco visible (`focus-visible:ring-2 focus-visible:ring-primary-fixed`). La
+  pausa del usuario prevalece: volver a la pestaña o al hero no la reanuda.
+* **Desviación consciente del patrón de carrusel del W3C (D-04):** el patrón APG pausa la rotación cuando el foco de
+  teclado o el puntero entran al carrusel y pone el control de rotación primero en el orden de foco. Aquí las pausas
+  automáticas son **solo** por pestaña en segundo plano o hero fuera de pantalla, y el botón va después de los enlaces
+  de la tarjeta (orden de Tab: «Explorar Servicios», «Suscripción Floral», «Descubrir más», pausa). Se acepta porque las
+  fotos son decorativas respecto del contenido (el texto no rota) y el botón cumple 2.2.2.
+* **Lectores de pantalla:** las fotos 2 a 4 parten con `hidden` y, ya habilitadas, las no visibles llevan
+  `aria-hidden="true"`; no hay `aria-live` ni `aria-roledescription`, para no anunciar cada cambio. Cada foto tiene su
+  `alt` (D-08).
+* **Movimiento reducido (D-05):** con `prefers-reduced-motion: reduce` se ve solo la foto 1, sin rotación, sin botón y
+  sin descargar las fotos 2 a 4. El módulo escucha el cambio de la preferencia en caliente.
+* **Contraste:** se midió por foto (bitácora de la Épica 09 · It. 02, §4). Con `/45` hay incumplimientos (sobre todo la
+  foto 4); la decisión sobre el tinte o la foto queda en manos del desarrollador.
+
+### Carga
+
+* Solo el `<img>` de la foto 1 lleva `fetchpriority="high"`. Las fotos 2 a 4 llevan `loading="lazy"` y su `<picture>`
+  parte con `hidden` (sin caja, el navegador no las pide). El módulo quita `hidden` después del evento `load`.
+* **Medido [render]:** las fotos 2 a 4 se piden después de `load` en móvil y escritorio; la foto 1 sigue siendo la
+  única con prioridad alta. Con movimiento reducido no se descargan [medido]; sin JS tampoco, por código (quedan con `hidden`).
+
+### Consecuencias
+
+* Página de Inicio: +3 imágenes tras `load` (≈ 731 KB en escritorio y ≈ 353 KB en móvil).
+* Las 3 fotos de origen y los 2 archivos antiguos del hero salen de `public/images/` (D-07).
+* **Documentos por actualizar mediante propuesta:** `DESIGN.md` §5 nota 10, §7.1, §7.4 y §11.7 (clases del titular y del
+  párrafo tras SM-01), §12.2 y §13. Texto exacto en la bitácora de la It. 02.
+* **Límite:** verificado en Chrome *headless*; celular real, Safari y Firefox siguen 🕒 PENDIENTE.

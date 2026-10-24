@@ -342,6 +342,45 @@ html.dark::view-transition-new(root) {
 }
 
 /* ========================================================= */
+/* CARRUSEL DEL HERO DEL INICIO                              */
+/* Ver ADR-004 (decisiones-tecnicas.md)                      */
+/*                                                           */
+/* Cuatro <picture> apilados (absolute inset-0). La foto     */
+/* visible lleva .is-active; la que entra llega desde la     */
+/* derecha y la que sale se va por la izquierda. Las clases  */
+/* las pone hero-carousel.js. Duración y curva de §12.3:     */
+/* 1000 ms con --expo-out. Solo transform: sin opacidad,     */
+/* la foto se ve siempre a pleno color (§11.7).              */
+/* ========================================================= */
+
+@layer components {
+    .hero-slide {
+        transform: translate3d(100%, 0, 0);
+        transition: transform 1000ms var(--expo-out);
+    }
+
+    .hero-slide.is-active {
+        transform: none;
+    }
+
+    .hero-slide.is-leaving {
+        transform: translate3d(-100%, 0, 0);
+    }
+
+    /* Devuelve sin animación a la derecha la foto que ya salió. */
+    .hero-slide.is-instant {
+        transition: none;
+    }
+}
+
+/* Movimiento reducido: sin transición (el módulo además deja fija la foto 1). */
+@media (prefers-reduced-motion: reduce) {
+    .hero-slide {
+        transition: none;
+    }
+}
+
+/* ========================================================= */
 /* TARJETA DE VIDRIO DEL HERO — RESPALDO SIN BACKDROP-FILTER */
 /* Ver DESIGN.md §3 y §11                                    */
 /*                                                           */

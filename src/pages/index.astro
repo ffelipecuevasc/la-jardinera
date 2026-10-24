@@ -12,27 +12,59 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <!-- 1. HERO SECTION -->
         <section id="titular"
                  class="relative w-full -mt-20 overflow-hidden bg-dark-background text-dark-on-background min-h-[92vh] flex items-center justify-center">
-            <!-- Fotografía a pleno color: sin scrims, sin opacidad, sin escala -->
-            <picture>
+            <!-- Carrusel de fotografías a pleno color (ADR-004): sin scrims, sin opacidad, sin escala.
+                 Las fotos 2 a 4 parten con «hidden» y loading="lazy": no se descargan hasta que
+                 hero-carousel.js las muestra después del evento load (nunca con movimiento reducido). -->
+            <picture class="hero-slide is-active absolute inset-0">
                 <source media="(orientation: portrait)"
-                        srcset="/images/hero-botanical-mobile.webp"
+                        srcset="/images/inicio/hero-01-mobile.webp"
                         type="image/webp" width="1536" height="2752">
-                <img src="/images/hero-botanical-desktop.webp"
+                <img src="/images/inicio/hero-01-desktop.webp"
                      alt="Manos de florista envolviendo en papel kraft un ramo de rosas fucsia, gerberas, claveles y alstroemerias"
                      width="2752" height="1536"
                      fetchpriority="high" decoding="async"
-                     class="absolute inset-0 w-full h-full object-cover">
+                     class="w-full h-full object-cover">
+            </picture>
+            <picture class="hero-slide absolute inset-0" hidden>
+                <source media="(orientation: portrait)"
+                        srcset="/images/inicio/hero-02-mobile.webp"
+                        type="image/webp" width="864" height="1536">
+                <img src="/images/inicio/hero-02-desktop.webp"
+                     alt="Salón de eventos ambientado con faroles, lámparas de mimbre colgantes y arreglos de paniculata y follaje sobre una mesa de madera"
+                     width="2752" height="1536"
+                     loading="lazy" decoding="async"
+                     class="w-full h-full object-cover">
+            </picture>
+            <picture class="hero-slide absolute inset-0" hidden>
+                <source media="(orientation: portrait)"
+                        srcset="/images/inicio/hero-03-mobile.webp"
+                        type="image/webp" width="1536" height="2752">
+                <img src="/images/inicio/hero-03-desktop.webp"
+                     alt="Mesa de madera blanca con arreglos de gerberas, rosas, alstroemerias y claveles de colores vivos en un salón con luces cálidas"
+                     width="2752" height="1536"
+                     loading="lazy" decoding="async"
+                     class="w-full h-full object-cover">
+            </picture>
+            <picture class="hero-slide absolute inset-0" hidden>
+                <source media="(orientation: portrait)"
+                        srcset="/images/inicio/hero-04-mobile.webp"
+                        type="image/webp" width="864" height="1536">
+                <img src="/images/inicio/hero-04-desktop.webp"
+                     alt="Florista sonriente armando un ramo en su taller, rodeada de flores frescas"
+                     width="2752" height="1536"
+                     loading="lazy" decoding="async"
+                     class="w-full h-full object-cover">
             </picture>
             <!-- Contenedor de la tarjeta (libera el header fijo con pt-24) -->
             <div class="relative z-10 w-full max-w-4xl mx-auto px-margin-mobile lg:px-margin-desktop pt-24 pb-space-8">
                 <!-- Tarjeta de vidrio -->
                 <div class="hero-glass flex flex-col items-center text-center gap-space-3 p-space-4 md:p-space-8 rounded-3xl border border-white/20 bg-dark-background/45 backdrop-blur-xl backdrop-saturate-150 shadow-2xl">
                     <!-- Headline -->
-                    <h1 class="font-display-hero text-headline-xl lg:text-display-hero text-neutral-50 font-semibold lg:font-semibold max-w-4xl tracking-tight leading-none">
+                    <h1 class="font-display-hero text-headline-xl-mobile md:text-headline-xl md:leading-none lg:text-display-hero text-neutral-50 font-semibold md:font-semibold lg:font-semibold max-w-4xl tracking-tight">
                         <span class="fx-starlight">Florería <span class="fx-starlight fx-starlight--accent italic font-normal">La Jardinera</span></span>
                     </h1>
                     <!-- Editorial Paragraph -->
-                    <p class="font-body-lg text-body-lg text-neutral-50 max-w-2xl font-light leading-relaxed">
+                    <p class="font-body-md text-body-md md:font-body-lg md:text-body-lg md:leading-relaxed text-neutral-50 max-w-2xl font-light md:font-light">
                         <em>Amamos las flores, trabajar y convivir con ellas. Es increíble el efecto que generan cuando las
                             ves,
                             cuando las arreglas, cuando las recibes, cuando las regalas, cuando las dedicas.</em>
@@ -53,8 +85,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                         </a>
                     </div>
                     <!-- Fila de datos: ubicación y desplazamiento -->
-                    <div class="w-full pt-space-3 border-t border-white/20 flex flex-col sm:flex-row items-center justify-between gap-space-2">
-                        <div class="flex items-center gap-space-2 text-neutral-50 font-label-sm text-label-sm tracking-widest uppercase">
+                    <div class="w-full pt-space-3 border-t border-white/20 flex flex-col md:flex-row items-center justify-between gap-space-2">
+                        <div class="hidden md:flex items-center gap-space-2 text-neutral-50 font-label-sm text-label-sm tracking-widest uppercase">
                             <svg class="text-neutral-50 text-[18px]" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
                                  width="24" height="24" viewBox="0 0 24 24">
                                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5.5-2.5 7.51-3.49L17.5 6.5 9.99 9.99 6.5 17.5zm5.5-6.6c.61 0 1.1.49 1.1 1.1s-.49 1.1-1.1 1.1-1.1-.49-1.1-1.1.49-1.1 1.1-1.1z"/>
@@ -73,6 +105,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                     </div>
                 </div>
             </div>
+            <!-- Pausa/reanudación del carrusel (WCAG 2.2.2, D-03). Oculto hasta que hero-carousel.js
+                 confirma que hay rotación: sin JS o con movimiento reducido no se muestra (D-05). -->
+            <button id="hero-carousel-toggle" type="button"
+                    aria-label="Pausar presentación de imágenes"
+                    class="hidden absolute bottom-space-2 right-space-2 z-10 inline-flex items-center justify-center w-11 h-11 rounded-full border border-white/20 bg-dark-background/45 text-neutral-50 hover:bg-dark-background/65 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed transition-colors">
+                <svg class="hero-carousel-icon-pause w-6 h-6" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                     width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                </svg>
+                <svg class="hero-carousel-icon-play w-6 h-6 hidden" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                     width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"/>
+                </svg>
+            </button>
         </section>
         <!-- OPERATIONAL BENEFITS BAR (Upper Glance) -->
         <section class="w-full bg-surface-container-low shadow-sm">
