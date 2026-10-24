@@ -68,7 +68,7 @@ peso**. Siempre se usan en pareja: `font-headline-md text-headline-md`.
 
 | Elemento                         | Clases                                                                                   |
 |:---------------------------------|:-----------------------------------------------------------------------------------------|
-| H1 del Hero (Inicio)             | `font-display-hero text-headline-xl lg:text-display-hero font-semibold tracking-tight leading-none` + §7 |
+| H1 del Hero (Inicio)             | `font-display-hero text-headline-xl-mobile md:text-headline-xl md:leading-none lg:text-display-hero font-semibold md:font-semibold lg:font-semibold tracking-tight` + §7 |
 | H1 de página interior            | `font-headline-xl text-headline-lg lg:text-headline-xl`                                  |
 | H2 de sección                    | `font-headline-xl text-headline-lg lg:text-headline-xl` o `font-headline-lg text-headline-md lg:text-headline-lg` |
 | H3 de tarjeta                    | `font-headline-md text-headline-md` (o `text-headline-sm lg:text-headline-md`)           |
@@ -194,19 +194,24 @@ Ambas etiquetas `<img>` llevan el mismo `alt` y los mismos `width`/`height`. Pro
 | Oscuro | Enlaces neutros          | 7,64:1  | AAA   |
 | Oscuro | Botón Instagram          | 6,64:1  | AA    |
 
-### 2.10 Contrastes medidos en render real (Hero, Épica 01 · Iteración 08)
+### 2.10 Contrastes medidos en render real (Hero, Épica 09 · Iteración 02)
 
-Medidos con píxeles reales en 7 viewports. Resultados idénticos en ambos temas (el Hero es un bloque de contraste fijo,
-§3). El fondo se toma en el percentil 95 más claro del área de la tarjeta, y cada línea de texto se mide por separado.
+Medidos con píxeles reales en las 4 fotos del carrusel, 7 viewports y ambos temas, con la tarjeta en `/60`. Resultados
+idénticos en ambos temas (el Hero es un bloque de contraste fijo, §3). El fondo se toma en el percentil 95 más claro del
+rectángulo de cada línea de texto, separando las líneas del titular por color.
 
 | Elemento                                   | Peor caso medido | Mínimo | Nivel |
 |:-------------------------------------------|:-----------------|:-------|:------|
-| Párrafo (768×1024)                         | 4,57:1           | 4,5    | AA    |
-| "La Jardinera", segunda línea del titular (768×1024) | 3,22:1 | 3      | AA (texto grande) |
-| "Florería", primera línea del titular      | 4,12:1           | 3      | AA (texto grande) |
+| Párrafo (foto 3, 740×360)                  | 5,46:1           | 4,5    | AA    |
+| "La Jardinera" (foto 4, 320×640)           | 3,71:1           | 3      | AA (texto grande) |
+| "Florería" (foto 4, 320×640)               | 5,67:1           | 3      | AA (texto grande) |
+| "Descubrir más" (foto 2, 768×1024)         | 5,05:1           | 4,5    | AA    |
+| Ícono del botón de pausa, tinte `/45` (foto 3, 1024×768) | 3,28:1 | 3   | AA (no textual) |
 | Enlace activo del header sobre la foto, claro / oscuro | 4,82:1 / 5,86:1 | 4,5 | AA |
 
-El margen del párrafo es estrecho: **si cambia la fotografía del Hero, se vuelve a medir** (ver §11.7, regla 1).
+Con `/45` solo cumplía la foto 1 (11 incumplimientos, 9 de ellos con la foto 4) y con `/55` quedaba "Descubrir más" en
+4,46:1 (foto 2, 768×1024); `/60` es el mínimo con 0 fallas. **Si cambia o se agrega una fotografía, se vuelve a medir**
+(ver §11.7, regla 1).
 
 ---
 
@@ -322,9 +327,8 @@ Hallazgos abiertos. No bloquean el trabajo, pero ningún componente nuevo debe r
 9. **Estilos en línea heredados (resuelto):** la textura de ruido del banner (4 páginas) vive en la clase `.bg-noise`
    de `input.css` (`@layer components`); el HTML solo agrega `bg-noise` al `<div>` del banner. El del Hero del Inicio
    se resolvió en la Épica 01 · Iteración 08: ahora es un `<picture>`.
-10. **Imágenes del Hero fuera de la convención de carpetas:** `hero-botanical-desktop.webp` y
-    `hero-botanical-mobile.webp` viven en `public/images/` y no en `public/images/<sección>/` (§13). Mover cuando se
-    toque de nuevo el Hero.
+10. **Imágenes del Hero fuera de la convención de carpetas (resuelto en la Épica 09 · Iteración 02, 24-10-2026):** las
+    8 imágenes del carrusel del Hero viven en `public/images/inicio/` (§13).
 
 ---
 
@@ -349,7 +353,7 @@ brillo lineal recorre el titular. Reemplaza al antiguo resaltador `fx-marker`. S
 del Hero del Inicio (`src/pages/index.astro`).
 
 ```html
-<h1 class="font-display-hero text-headline-xl lg:text-display-hero text-neutral-50 font-semibold max-w-4xl tracking-tight leading-none">
+<h1 class="font-display-hero text-headline-xl-mobile md:text-headline-xl md:leading-none lg:text-display-hero text-neutral-50 font-semibold md:font-semibold lg:font-semibold max-w-4xl tracking-tight">
     <span class="fx-starlight">Florería <span class="fx-starlight fx-starlight--accent italic font-normal">La Jardinera</span></span>
 </h1>
 ```
@@ -380,7 +384,7 @@ El efecto conserva la tipografía del sistema: **no** cambia familia, tracking n
 
 ### 7.4 Reglas técnicas
 
-1. Tamaños de destellos y desplazamientos en `em`: el efecto escala con el titular (48 px en móvil, 64 px desde `lg`).
+1. Tamaños de destellos y desplazamientos en `em`: el efecto escala con el titular (32 px bajo `md`, 48 px desde `md`, 64 px desde `lg`).
 2. El ciclo desplaza cada capa exactamente un mosaico: el bucle no tiene salto visible.
 3. **Respaldo:** sin soporte de `background-clip: text`, el texto se pinta sólido con `--ink`.
 4. **Movimiento reducido:** se detiene la animación y el brillo se iguala al color base (`--ink-3: var(--ink)`).
@@ -540,14 +544,14 @@ legibilidad la da esta tarjeta. Es un bloque de contraste fijo (§3) y Patrón B
 primer plano, idéntico en ambos temas.
 
 ```html
-<div class="hero-glass flex flex-col items-center text-center gap-space-3 p-space-4 md:p-space-8 rounded-3xl border border-white/20 bg-dark-background/45 backdrop-blur-xl backdrop-saturate-150 shadow-2xl">
+<div class="hero-glass flex flex-col items-center text-center gap-space-3 p-space-4 md:p-space-8 rounded-3xl border border-white/20 bg-dark-background/60 backdrop-blur-xl backdrop-saturate-150 shadow-2xl">
     <!-- h1 (§7), párrafo, botones y fila meta -->
 </div>
 ```
 
-1. **Tinte:** `bg-dark-background/45` es el mínimo medido que cumple AA con la fotografía actual (§2.10). Si cambia la
-   fotografía y no alcanza, subir a `/55` y luego a `/65`; si `/65` tampoco basta, el problema es la fotografía (demasiado
-   clara bajo la tarjeta): se cambia la imagen, no se agregan scrims.
+1. **Tinte:** `bg-dark-background/60` es el mínimo medido que cumple AA con las 4 fotografías del carrusel (§2.10). Si
+   cambia o se agrega una fotografía y no alcanza, subir a `/65`; si `/65` tampoco basta, el problema es la fotografía
+   (demasiado clara bajo la tarjeta): se cambia la imagen, no se agregan scrims.
 2. **Respaldo sin `backdrop-filter`:** en `input.css`, un bloque `@supports not (...)` **fuera de `@layer`**, después de
    Starlight, sube el fondo de `.hero-glass` al 85 %. Debe quedar después de las utilidades en el CSS compilado (`_site/_astro/`); dentro de
    `@layer components` las utilidades le ganarían y nunca se aplicaría.
@@ -577,6 +581,7 @@ Haz radial que barre el texto (`background-clip: text`) durante 3,6 s en vaivén
 | Cambio de tema            | View Transitions API con recorte diagonal (`reveal-light` / `reveal-dark`, 0,7 s, `--expo-out`) |
 | Acordeón                  | `.accordion-grid` (`grid-template-rows: 0fr → 1fr`, 700 ms)             |
 | Cross-fade del Hero de Suscripción | `opacity` con `duration-1000`, ciclo de 4 s pausado fuera de pantalla |
+| Carrusel del Hero del Inicio | `.hero-slide` con `transform` horizontal, 1000 ms `--expo-out`, 7 s entre el inicio de dos transiciones, botón de pausa, pausado con la pestaña oculta o fuera de pantalla; con movimiento reducido, foto 1 fija y sin botón (ADR-004) |
 | Elevación de tarjetas     | `hover:-translate-y-1` + sombra, 300 ms                                |
 | Zoom de imagen            | `group-hover:scale-105`, 700 ms `ease-out`                             |
 
@@ -601,10 +606,12 @@ Todo efecto continuo o de desplazamiento declara su alternativa en `@media (pref
   Contenedor con `aspect-*` y `object-cover` para CLS = 0.
 - **`<picture>`:** se usa **solo** para dirección de arte por orientación (`media="(orientation: portrait)"`), nunca para
   el tema claro/oscuro (§2.8). El `width` y `height` declarados son siempre los reales del archivo.
-- **Hero del Inicio:** dos archivos, `hero-botanical-desktop.webp` (2752×1536, ≈ 16:9, ≤ 300 KB) y
-  `hero-botanical-mobile.webp` (1536×2752, ≈ 9:16, ≤ 200 KB). El `<img>` del escritorio lleva `fetchpriority="high"` y
-  es la única imagen del Hero con ese atributo. La composición deja el centro (que cubre la tarjeta, §11.7) con
-  luminosidad media o baja y el interés visual en los bordes.
+  **Hero del Inicio (carrusel, ADR-004):** 8 archivos en `public/images/inicio/`, `hero-01` a `hero-04` con sufijo
+  `-desktop` (2752×1536, ≈ 16:9, ≤ 300 KB) y `-mobile` (1536×2752, ≈ 9:16, ≤ 200 KB). Excepción (D-09): `hero-02-mobile`
+  y `hero-04-mobile` miden 864×1536, porque sus originales solo existen en 2752×1536 y su versión vertical es el recorte
+  central nativo, sin agrandar. Solo el `<img>` de `hero-01` lleva `fetchpriority="high"`; las fotos 2 a 4 llevan
+  `loading="lazy"` y parten con `hidden` hasta después del evento `load`. La composición deja el centro (que cubre la
+  tarjeta, §11.7) con luminosidad media o baja y el interés visual en los bordes.
 
 ---
 
