@@ -253,7 +253,7 @@ Criterios de severidad:
 | DT-32 | Al cruzar a ≥ 1024 px con el foco en un enlace del panel móvil, el enlace se oculta y el foco queda en `body` (H-13, Épica 09 · It. 03; ya ocurría antes). | Baja | Por decidir |
 | DT-33 | Anillo de foco del botón de cierre de la modal de Servicios: `outline: auto` del navegador, visible en ambos temas, contraste no medido de forma concluyente (H-14, Épica 09 · It. 04). | Baja | Por decidir |
 | DT-34 | Limitación aceptada (24-10-2026): con el panel abierto, tras un clic de ratón en el botón de tema, Shift+Tab va al logotipo; se mantiene SM-02 D-01 (H-15, Épica 09 · It. 03). | Baja | Limitación aceptada |
-| DT-35 | Lighthouse de la Épica 09 (24-10-2026, [informado]): CLS móvil de 0,074 en 2 de 3 corridas, causa no determinada; +367 KiB en móvil y +736 KiB en escritorio por las fotos 2 a 4 del carrusel; LCP de escritorio de 1,8 s en la rama frente a 1,1 s en producción. | Media | Épica 10 — Rendimiento y calidad Lighthouse (por planificar) |
+| DT-35 | Lighthouse de la Épica 09 (24-10-2026, [informado]): CLS móvil de 0,074 en 2 de 3 corridas, causa no determinada; +367 KiB en móvil y +736 KiB en escritorio por las fotos 2 a 4 del carrusel. El LCP de escritorio se midió de nuevo el 25-10-2026 (3 corridas: 1,0 s en la rama y 1,2 s en producción) y no es un problema. | Media | Épica 10 — Rendimiento y calidad Lighthouse (por planificar) |
 
 ---
 

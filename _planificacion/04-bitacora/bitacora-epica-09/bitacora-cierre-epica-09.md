@@ -24,58 +24,51 @@ Hashes tomados de `git log main..HEAD` en solo lectura [código].
 
 ## 2. Resultado final del DoD (`definicion-epica.md` §6)
 
-**9 casillas cumplidas (2 con reserva) y 2 abiertas** (documentos protegidos, que aplica el desarrollador, y Safari).
+**10 casillas cumplidas (1 con reserva) y 1 abierta** (Safari y dispositivo Apple).
 
 | # | Casilla | Estado | Fuente |
 |:-:|:--|:-:|:--|
 | 1 | Textos de la clienta con erratas aprobadas | [x] | It. 01, §1 y §4.3 [render] [informado] |
-| 2 | Carrusel: 4 fotos, 7 s, pausa ≥ 44 px, pausas automáticas, movimiento reducido, ADR-004 | [x] con reserva | It. 02, §8.7 [render]; pestaña oculta y pantalla bloqueada en celular real 🕒 PENDIENTE |
+| 2 | Carrusel: 4 fotos, 7 s, pausa ≥ 44 px, pausas automáticas, movimiento reducido, ADR-004 | [x] | It. 02, §8.7 [render]; pestaña oculta y pantalla bloqueada en celular real [informado] (§8) |
 | 3 | SM-01 con medición del `h1` | [x] | It. 02, §4.1 y §8.7 [render] |
 | 4 | Contraste del hero, 4 fotos × 7 viewports × 2 temas, incluida DT-20 | [x] | It. 02, §8.6 [render]: 0 fallas con `/60` |
-| 5 | SM-02: Tab y Shift+Tab en el ciclo; Escape devuelve el foco | [x] | It. 03, §4.2 [render]; It. 04, §4.4 [render]. Teclado real 🕒 PENDIENTE |
-| 6 | Modales abren mostrando el inicio | [x] | It. 03, §4.3 [render] (168 de 168) |
-| 7 | SM-03 sin cambiar el script de arranque (ADR-003) | [x] | It. 04, §4.1 y §4.2 [render] [medido] |
-| 8 | Sin regresiones en 7 viewports × 2 temas | [x] con reserva | It. 04, §4.4 [render] (84 de 84 frente al build de `3dbc5cf`) y regresiones de cada iteración. Reserva: render automático solo en Chrome *headless* |
+| 5 | SM-02: Tab y Shift+Tab en el ciclo; Escape devuelve el foco | [x] | It. 03, §4.2 [render]; It. 04, §4.4 [render]; teclado real [informado] (§8) |
+| 6 | Modales abren mostrando el inicio | [x] | It. 03, §4.3 [render] (168 de 168); celular real [informado] (§8) |
+| 7 | SM-03 sin cambiar el script de arranque (ADR-003) | [x] | It. 04, §4.1 y §4.2 [render] [medido]; perfil limpio en navegador real [informado] (§8) |
+| 8 | Sin regresiones en 7 viewports × 2 temas | [x] con reserva | It. 04, §4.4 [render] (84 de 84 frente al build de `3dbc5cf`), celular real, teclado real y Firefox [informado] (§8). Reserva: Safari/iOS sin probar |
 | 9 | Invariantes de `AGENTS.md` §5 (regla 7) | [x] | It. 04, §4.1 [medido] |
-| 10 | Documentos protegidos actualizados mediante propuestas -/+ | [ ] | `DESIGN.md` §5, §12 y §13 ya aplicados (`d0e9ad9`); quedan P-6 a P-10 (§10), las aplica el desarrollador |
+| 10 | Documentos protegidos actualizados mediante propuestas -/+ | [x] | `DESIGN.md` §5, §12 y §13 (`d0e9ad9`); P-5 a P-10 aplicadas por el desarrollador (25-10-2026) |
 | 11 | Safari y dispositivo Apple | [ ] | No probados [informado]: la reserva sigue abierta, junto con la del ruido de píxeles de Servicios |
 
 El DoD no tiene casilla de rendimiento: Lighthouse queda fuera de alcance (§4 de la definición). Las cifras del §3.3 son
 informativas.
 
-## 3. Cifras finales
-
-### 3.1 Compilación [medido]
-
-`pnpm run build:cf` con código 0, 6 páginas, 0 advertencias y **114 archivos** en `_site/`. CSS `BaseLayout.CkTHFWtT.css`
-(46.947 B).
-
-### 3.2 Auditoría estática [medido]
-
-0 `style="`, 0 `onclick`, 0 `<style>`, 1 `<script>` sin `src` por página (717 caracteres, SHA-256 `5b490c26…`, igual que
-en la Épica 08), IDs únicos, 0 `href="#"` en header y footer, 0 `./public/`, invariantes del header intactos.
-
 ### 3.3 Lighthouse [informado]
 
-24-10-2026, PageSpeed Insights, Lighthouse 13.5.0, mismo método que la Épica 08, sobre la vista previa `pages.dev` de la
-rama y sobre producción (`main`).
+PageSpeed Insights, Lighthouse 13.5.0, mismo método que la Épica 08, sobre la vista previa `pages.dev` de la rama y
+sobre producción (`main`). Móvil medido el 24-10-2026; escritorio, el 25-10-2026 (3 corridas por cada entorno).
 
-| Medida | Rama, móvil (3 corridas) | Rama, escritorio (1 corrida) | Producción, móvil (1) | Producción, escritorio (1) |
+| Medida | Rama, móvil (3) | Rama, escritorio (3) | Producción, móvil (1) | Producción, escritorio (3) |
 |:--|:--|:--|:--|:--|
-| Performance | 72 / 71 / 70 (mediana 71) | 92 | 71 | 97 |
-| FCP | 3,6 / 3,2 / 3,2 s | 0,9 s | 3,5 s | — |
-| LCP | 4,8 / 5,9 / 6,3 s | 1,8 s | 5,7 s | 1,1 s |
-| TBT | 0 ms | 0 ms | — | — |
-| CLS | 0 / 0,074 / 0,074 | 0,003 | 0,029 | — |
-| Speed Index | 4,8 / 3,2 / 3,2 s | — | — | — |
+| Performance | 72 / 71 / 70 (mediana 71) | 98 / 96 / 98 (mediana 98) | 71 | 97 / 97 / 96 (mediana 97) |
+| FCP | 3,6 / 3,2 / 3,2 s | 0,9 s en las 3 | 3,5 s | 0,9 s en las 3 |
+| LCP | 4,8 / 5,9 / 6,3 s | 1,0 / 1,3 / 1,0 s | 5,7 s | 1,2 / 1,1 / 1,2 s |
+| TBT | 0 ms | 0 ms | 0 ms | 0 ms |
+| CLS | 0 / 0,074 / 0,074 | 0,003 | 0,029 | 0,003 |
+| Speed Index | 4,8 / 3,2 / 3,2 s | 1,0 / 0,9 / 0,9 s | 3,9 s | 1,0 / 0,9 / 1,1 s |
 | Peso | 3.625 KiB | 5.823 KiB | 3.258 KiB | 5.087 KiB |
-| Accesibilidad | 91 | 91 | — | — |
-| SEO / Recomendaciones | 69 / 96 (indexación bloqueada por `pages.dev` y un aviso de errores en consola) | 69 / 96 | 100 / 100 | 100 / 100 |
+| Accesibilidad | 91 | 91 | 91 | 91 |
+| SEO / Recomendaciones | 69 / 96 | 69 / 96 | 100 / 100 | 100 / 100 |
 
-**Observaciones abiertas para la Épica 10 (sin diagnóstico):** CLS de 0,074 en 2 de 3 corridas móviles, causa no
-determinada; aumento de peso por las fotos 2 a 4 del carrusel (+367 KiB en móvil, +736 KiB en escritorio); LCP de
-escritorio (1,8 s en la rama frente a 1,1 s en producción). El escritorio de la rama tiene 1 sola corrida: queda por
-confirmar (§8).
+SEO 69 y Recomendaciones 96 en la rama se deben a que las vistas previas `pages.dev` bloquean la indexación y a un aviso
+de errores en consola coherente con DT-28 (*beacon* de Web Analytics); producción da 100 y 100.
+
+**Conclusión:** sin regresión de rendimiento. Móvil: 71 en la rama frente a 71 en producción. Escritorio: mediana 98 en la
+rama frente a 97 en producción (la corrida de 92 del 24-10-2026 fue ruido).
+
+**Observaciones abiertas para la Épica 10 (sin diagnóstico):** CLS móvil de 0,074 en 2 de 3 corridas, causa no
+determinada (producción: 0,029), y aumento de peso por las fotos 2 a 4 del carrusel (+367 KiB en móvil, +736 KiB en
+escritorio), que no afecta a FCP ni a LCP.
 
 ## 4. Deuda técnica (verificada contra `_planificacion/README.md` §12)
 
@@ -98,7 +91,7 @@ confirmar (§8).
 | DT-32 (nueva, propuesta P-7) | H-13: al cruzar a ≥ 1024 px con el foco en el panel, el foco queda en `body` | Por decidir |
 | DT-33 (nueva, propuesta P-7) | H-14: contraste del anillo de foco del botón de cierre de la modal no medido de forma concluyente | Por decidir |
 | DT-34 (nueva, propuesta P-7) | H-15: con el panel abierto, tras un clic de ratón en el botón de tema, Shift+Tab va al logotipo. Aceptada como limitación conocida (SM-02 D-01) | Limitación aceptada |
-| DT-35 (nueva, propuesta P-7) | Observaciones de Lighthouse de la Épica 09 (§3.3) | Épica 10 |
+| DT-35 (nueva, P-7 aplicada) | Observaciones de Lighthouse de la Épica 09 (§3.3): CLS móvil de 0,074 y peso de las fotos 2 a 4 del carrusel. El LCP de escritorio se midió de nuevo y no es un problema | Épica 10 |
 
 ## 5. Decisiones
 
@@ -113,8 +106,8 @@ confirmar (§8).
 |:--|:-:|:--|
 | Safari y dispositivo Apple sin probar | Abierta | Siguiente épica en que haya dispositivo Apple |
 | Ruido de píxeles de Servicios («atribuido por analogía, no demostrado») | Abierta | Se cierra al probar en Apple sin diferencia visible |
-| Render automático solo en Chrome *headless* | Abierta | Pruebas manuales del §8 |
-| Lighthouse de escritorio de la rama con 1 corrida | Abierta | §8 |
+| Render automático solo en Chrome *headless* | Cerrada (25-10-2026) | Probado en celular real, teclado real y Firefox (§8) |
+| Lighthouse de escritorio de la rama con 1 corrida | Cerrada (25-10-2026) | 3 corridas en la rama y 3 en producción: sin regresión (§3.3) |
 
 ## 7. Desviaciones del plan y observaciones de proceso
 
@@ -126,19 +119,29 @@ confirmar (§8).
 
 ## 8. Pruebas manuales del desarrollador (lista de comprobación)
 
-* [ ] 🕒 Celular real: pestaña oculta y pantalla bloqueada; el carrusel no avanza y retoma al volver.
-* [ ] 🕒 Celular real: con el dedo, las 8 modales en vertical y en horizontal hasta el último párrafo, la galería y el
+Resultados [informado] por el desarrollador el 25-10-2026, sobre la vista previa de la rama. Sin hallazgos en ninguna
+prueba; lo que requiere un dispositivo Apple queda pendiente. Dispositivo utilizado Samsung Galaxy A55+, con Android 16 y
+Google Chrome más Mozilla Firefox.
+
+* [x] Celular real: pestaña oculta y pantalla bloqueada; el carrusel no avanza y retoma al volver. [informado] Sin hallazgos.
+* [x] Celular real: con el dedo, las 8 modales en vertical y en horizontal hasta el último párrafo, la galería y el
   botón «Cotizar este servicio» completo; abrir dos modales seguidas y comprobar que la segunda parte en el inicio.
-* [ ] 🕒 Celular real: rotación fluida, botón de pausa alcanzable con el pulgar y SM-01 legible a pleno sol.
-* [ ] 🕒 Teclado real en un navegador de escritorio angosto (< 1024 px): ciclo de Tab, Escape y capa tenue del panel.
-* [ ] 🕒 Tema en un navegador real con perfil limpio: primera visita sin `theme` en `localStorage` (DevTools →
-  Application); alternar, recargar y navegar mantienen la elección.
+  [informado] Sin hallazgos.
+* [x] Celular real: rotación fluida, botón de pausa alcanzable con el pulgar y SM-01 legible a pleno sol. [informado]
+  Sin hallazgos.
+* [x] Teclado real en un navegador de escritorio angosto (< 1024 px): ciclo de Tab, Escape y capa tenue del panel.
+  [informado] Sin hallazgos.
+* [x] Tema en un navegador real con perfil limpio: primera visita sin `theme` en `localStorage` (DevTools →
+  Application); alternar, recargar y navegar mantienen la elección. [informado] Sin hallazgos.
 * [ ] 🕒 Safari/iOS (dispositivo Apple): `<picture>` por orientación, transición, `backdrop-filter`, modales en horizontal y
-  fotos de Servicios (reserva de ruido de píxeles).
-* [ ] 🕒 Firefox: carrusel, panel, modales y tema.
-* [ ] 🕒 Lector de pantalla (NVDA o VoiceOver): solo se lee la foto visible y el botón de pausa anuncia su nombre.
+  fotos de Servicios (reserva de ruido de píxeles). No probado: el desarrollador no tiene dispositivo Apple.
+* [x] Firefox: carrusel, panel, modales y tema. [informado] Sin hallazgos.
+* [x] Lector de pantalla (NVDA o VoiceOver): solo se lee la foto visible y el botón de pausa anuncia su nombre.
+  [informado] Sin hallazgos.
 * [x] PageSpeed Insights en la vista previa y en producción, móvil [informado] (§3.3).
-* [ ] 🕒 PageSpeed Insights de escritorio: 3 corridas en la vista previa de la rama y 3 en producción.
+* [x] PageSpeed Insights de escritorio: 3 corridas en la vista previa de la rama y 3 en producción (25-10-2026)
+  [informado]. Rama: Performance 98 / 96 / 98 (mediana 98), LCP 1,0 / 1,3 / 1,0 s, CLS 0,003. Producción: Performance
+  97 / 97 / 96 (mediana 97), LCP 1,2 / 1,1 / 1,2 s, CLS 0,003. Sin regresión; la corrida de 92 del 24-10-2026 fue ruido.
 
 ## 9. Verificación posterior a la fusión (🕒 PENDIENTE, desarrollador)
 
@@ -163,5 +166,5 @@ repositorio). Resumen:
 ## 11. Siguiente paso
 
 * **Fusión de `feat/revision-movil` a `main`** (desarrollador) y verificación del §9.
-* **Épica 10 — Rendimiento y calidad Lighthouse:** por planificar. Hereda DT-21 a DT-29 y DT-35 (CLS 0,074, peso del
-  carrusel, LCP de escritorio).
+* **Épica 10 — Rendimiento y calidad Lighthouse:** por planificar. Hereda DT-21 a DT-29 y DT-35 (CLS móvil de 0,074 y
+  peso del carrusel).
