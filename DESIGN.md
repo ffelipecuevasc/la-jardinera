@@ -403,6 +403,9 @@ El efecto conserva la tipografía del sistema: **no** cambia familia, tracking n
 `bg-dark-background/70 backdrop-blur-sm`, panel `bg-surface rounded-t-2xl md:rounded-xl` que sube desde abajo en
 móvil (`translate-y-full` → 0, 300 ms) y columna de imagen con rótulo sobre degradado de contraste fijo. Cierre por
 botón, capa y `Escape`; trampa de foco; fondo con `inert` y `aria-hidden` hasta terminar la animación de salida.
+Botón de cierre `w-11 h-11` (44 × 44 px). Columna derecha `flex flex-col flex-1 min-w-0 min-h-0`: sin `min-h-0` no se
+encoge dentro del panel bajo 768 px y el contenido queda inalcanzable. `.modal-scroll` vuelve al inicio en cada
+apertura, porque la modal es una sola para los 8 servicios.
 
 ### 8.2 Contrato de datos
 
@@ -447,6 +450,9 @@ shadow-[0_8px_24px_rgba(53,54,58,0.12)]`. Fondo sólido, sin desenfoque ni trans
   `aria-current="page"` (activo). Foco: `focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary`.
 - Fila social: WhatsApp primero (tonal `bg-primary/10 text-primary`), luego Instagram (`bg-surface-container
   text-on-surface-variant`), ambos `min-h-[3rem] rounded-xl`.
+- Foco (SM-02, `navigation.js`): al abrir, el foco pasa al primer enlace. Con el panel abierto, Tab y Shift+Tab ciclan
+  entre la hamburguesa y los enlaces del panel (el botón de tema queda fuera). Escape y la capa tenue cierran y devuelven
+  el foco a la hamburguesa; un enlace cierra y navega.
 
 ### 9.3 Capa tenue
 
@@ -647,3 +653,5 @@ Todo efecto continuo o de desplazamiento declara su alternativa en `@media (pref
   unifica su contenedor y el enlace activo (§5.3, §10).
 - **Épica 08 · Iteraciones 07 y 08:** tema aplicado antes del primer pintado con el script de arranque del ADR-003 (§5) y
   rutas de archivo del documento actualizadas a la estructura de Astro (§1.1, §7.1, §8.2, §9.4 y §11.7).
+- **Épica 09 · Iteración 03:** trampa de foco del panel móvil (§9.2, SM-02) y modal de servicio con columna `min-h-0`,
+  botón de cierre de 44 px y desplazamiento reiniciado al abrir (§8.1).
