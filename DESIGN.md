@@ -406,6 +406,8 @@ botón, capa y `Escape`; trampa de foco; fondo con `inert` y `aria-hidden` hasta
 Botón de cierre `w-11 h-11` (44 × 44 px). Columna derecha `flex flex-col flex-1 min-w-0 min-h-0`: sin `min-h-0` no se
 encoge dentro del panel bajo 768 px y el contenido queda inalcanzable. `.modal-scroll` vuelve al inicio en cada
 apertura, porque la modal es una sola para los 8 servicios.
+En horizontal bajo 768 px (`landscape:flex-row`, figura `landscape:h-auto landscape:w-2/5`) la modal usa las dos columnas
+de `md`: en 740×360 deja 168 px de lectura y el botón «Cotizar este servicio» entero.
 
 ### 8.2 Contrato de datos
 
@@ -655,3 +657,4 @@ Todo efecto continuo o de desplazamiento declara su alternativa en `@media (pref
   rutas de archivo del documento actualizadas a la estructura de Astro (§1.1, §7.1, §8.2, §9.4 y §11.7).
 - **Épica 09 · Iteración 03:** trampa de foco del panel móvil (§9.2, SM-02) y modal de servicio con columna `min-h-0`,
   botón de cierre de 44 px y desplazamiento reiniciado al abrir (§8.1).
+- **Épica 09 · Iteración 04:** modal de servicio en dos columnas en horizontal bajo 768 px (§8.1).

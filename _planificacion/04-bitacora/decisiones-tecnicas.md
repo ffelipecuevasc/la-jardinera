@@ -285,8 +285,8 @@ Aplicadas en `src/components/SeoHead.astro`, `src/layouts/BaseLayout.astro`, `sr
 
 ### Consecuencias
 
-* **`setInitialTheme()` se conserva en `theme.js`:** repite la misma regla y es idempotente; quitarlo no es necesario y mantiene sin cambios
-  el comportamiento (incluida la escritura del tema en `localStorage` en la primera visita).
+* **`setInitialTheme()` se conserva en `theme.js`:** repite la misma regla y es idempotente; quitarlo no es necesario. Desde la Épica 09 ·
+  Iteración 04 (SM-03) no escribe en `localStorage`: el tema se guarda solo al alternarlo con el botón.
 * **Cambio mínimo en `theme.js` (autorizado en la iteración, solo para `localStorage` bloqueado):** `readTheme()` y `saveTheme()` envuelven el
   acceso a `localStorage` en `try/catch`. **Motivo [render]:** con `localStorage` bloqueado, `setInitialTheme()` lanzaba `SecurityError` antes de
   registrar el evento del botón: `console.error` («Falló "initTheme"») y botón de tema inerte en 12 de 12 casos (2 temas de sistema × 6 páginas).

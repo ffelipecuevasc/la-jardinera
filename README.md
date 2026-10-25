@@ -229,7 +229,7 @@ El proyecto se desarrolla con apoyo de agentes de IA bajo reglas estrictas:
    la planificación, documentación para Claude Code, nuevo efecto del titular principal y saneamiento de deuda técnica.
 2. **Épica 08 — Migración estructural a Astro** (completada con reservas, 21-10-2026): layout, header, footer y SEO como componentes únicos,
    generados como HTML estático en compilación, con el mismo contenido, diseño y despliegue en Cloudflare Pages.
-3. **Épica 09 — Revisión móvil** (por planificar): ajustes de interfaz y comportamiento en móvil (hero del Inicio, panel móvil y tema).
+3. **Épica 09 — Revisión móvil** (completada con reservas, 25-10-2026): textos de la clienta, carrusel del hero, hero móvil, trampa de foco del panel, modales de Servicios y tema en la primera visita.
 4. **Épica 10 — Rendimiento y calidad Lighthouse** (por planificar): imágenes, videos y encabezados señalados por Lighthouse.
 
 ---
