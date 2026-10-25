@@ -2,7 +2,7 @@
 
 **Fecha de cierre:** 25-10-2026
 **Agente:** Claude Code
-**Estado:** Completada con reservas; pendiente de fusión a `main` (la hace el desarrollador).
+**Estado:** Completada con reservas; fusionada a `main` el 25-10-2026. Reservas abiertas: Safari y dispositivo Apple.
 
 > Rótulos: [código] (lectura del repositorio), [medido] y [render] (Claude Code, en las bitácoras citadas o en la It. 04),
 > [informado] (el desarrollador), 🕒 PENDIENTE. Esta bitácora resume las bitácoras de las Iteraciones 01 a 04 y los datos
@@ -92,6 +92,7 @@ escritorio), que no afecta a FCP ni a LCP.
 | DT-33 (nueva, propuesta P-7) | H-14: contraste del anillo de foco del botón de cierre de la modal no medido de forma concluyente | Por decidir |
 | DT-34 (nueva, propuesta P-7) | H-15: con el panel abierto, tras un clic de ratón en el botón de tema, Shift+Tab va al logotipo. Aceptada como limitación conocida (SM-02 D-01) | Limitación aceptada |
 | DT-35 (nueva, P-7 aplicada) | Observaciones de Lighthouse de la Épica 09 (§3.3): CLS móvil de 0,074 y peso de las fotos 2 a 4 del carrusel. El LCP de escritorio se midió de nuevo y no es un problema | Épica 10 |
+| DT-36 (nueva, detectada en el cierre) | Hero de Suscripción Floral sin botón de pausa (WCAG 2.2.2) ni movimiento reducido; anterior a la épica y fuera de su alcance | Épica 10 |
 
 ## 5. Decisiones
 
@@ -143,11 +144,14 @@ Google Chrome más Mozilla Firefox.
   [informado]. Rama: Performance 98 / 96 / 98 (mediana 98), LCP 1,0 / 1,3 / 1,0 s, CLS 0,003. Producción: Performance
   97 / 97 / 96 (mediana 97), LCP 1,2 / 1,1 / 1,2 s, CLS 0,003. Sin regresión; la corrida de 92 del 24-10-2026 fue ruido.
 
-## 9. Verificación posterior a la fusión (🕒 PENDIENTE, desarrollador)
+## 9. Verificación posterior a la fusión (25-10-2026) [informado]
 
-* Despliegue de producción de `main` correcto en Cloudflare Pages.
-* PageSpeed Insights de producción con **SEO 100 y Recomendaciones 100** (en la vista previa dan 69 y 96 por `pages.dev`).
-* `https://lajardinerafloreria.cl`: carrusel, modales en horizontal y primera visita sin tema guardado.
+* [x] Despliegue de producción de `main` correcto en Cloudflare Pages.
+* [x] PageSpeed Insights de producción con **SEO 100 y Recomendaciones 100**, en móvil y en escritorio (en la vista previa
+  daban 69 y 96 por `pages.dev`). Móvil: Performance 73 y Accesibilidad 91. Escritorio, 3 corridas: 92 / 97 / 97
+  (mediana 97); la de 92 fue ruido. Sin regresión de rendimiento.
+* [x] `https://lajardinerafloreria.cl`: carrusel, modales en horizontal y primera visita sin tema guardado, revisados a
+  ojo sin hallazgos.
 
 ## 10. Bytes de los documentos y propuestas para archivos protegidos
 
@@ -166,5 +170,5 @@ repositorio). Resumen:
 ## 11. Siguiente paso
 
 * **Fusión de `feat/revision-movil` a `main`** (desarrollador) y verificación del §9.
-* **Épica 10 — Rendimiento y calidad Lighthouse:** por planificar. Hereda DT-21 a DT-29 y DT-35 (CLS móvil de 0,074 y
+* **Épica 10 — Rendimiento y calidad Lighthouse:** por planificar. Hereda DT-21 a DT-29, DT-35 y DT-36 (CLS móvil de 0,074 y
   peso del carrusel).
