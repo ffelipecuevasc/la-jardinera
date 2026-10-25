@@ -1,6 +1,6 @@
 # Épica 09: Revisión Móvil y Contenidos de la Clienta
 
-> **Estado:** 🚧 en curso. Definición aprobada por el desarrollador el 21-10-2026 y ampliada el 24-10-2026 con los
+> **Estado:** ✅ Completada con reservas (25-10-2026; ver `bitacora-cierre-epica-09.md`). Definición aprobada por el desarrollador el 21-10-2026 y ampliada el 24-10-2026 con los
 > pedidos de la clienta (textos, carrusel del hero y desplazamiento de las modales de Servicios).
 > **Origen:** solicitudes de mejora SM-01, SM-02 y SM-03 de `_planificacion/README.md` §14, trasladadas al cerrar la
 > Épica 08 (19-10-2026), y pedidos de la clienta recibidos el 24-10-2026 (documento «MODIFICACIONES OCTUBRE 2026 -
@@ -98,20 +98,20 @@ carrusel y SM-01 para medir el contraste una sola vez.
 
 ## 6. Definition of Done
 
-* [ ] Textos de la clienta aplicados según `iteracion-01.md`, con la lista de erratas corregidas aprobada por el
+* [x] Textos de la clienta aplicados según `iteracion-01.md`, con la lista de erratas corregidas aprobada por el
   desarrollador.
-* [ ] Carrusel del hero con 4 fotografías, intervalo de 7 s, botón de pausa/reproducir de al menos 44×44 px, pausa
+* [x] Carrusel del hero con 4 fotografías, intervalo de 7 s, botón de pausa/reproducir de al menos 44×44 px, pausa
   automática con la pestaña oculta o el hero fuera de pantalla, y foto fija con movimiento reducido; ADR-004 registrado.
-* [ ] SM-01 hecha según las decisiones del 21-10-2026, con la medición del tamaño renderizado del `h1`.
-* [ ] Contraste del hero medido para las 4 fotografías en los 7 viewports y los 2 temas: cumple AA o la desviación queda
+* [x] SM-01 hecha según las decisiones del 21-10-2026, con la medición del tamaño renderizado del `h1`.
+* [x] Contraste del hero medido para las 4 fotografías en los 7 viewports y los 2 temas: cumple AA o la desviación queda
   registrada con números y una decisión del desarrollador (incluida DT-20).
-* [ ] SM-02 hecha: Tab y Shift+Tab se mantienen en el ciclo «enlaces del panel + hamburguesa»; Escape cierra y devuelve
+* [x] SM-02 hecha: Tab y Shift+Tab se mantienen en el ciclo «enlaces del panel + hamburguesa»; Escape cierra y devuelve
   el foco a la hamburguesa.
-* [ ] Las modales de Servicios abren mostrando el inicio de su contenido, en cualquier orden de apertura.
-* [ ] SM-03 hecha sin cambiar el script de arranque del tema (ADR-003).
-* [ ] Sin regresiones de paridad en 320×640, 360×740, 412×915, 768×1024, 740×360, 1024×768 y 1280×800, en modo claro y
+* [x] Las modales de Servicios abren mostrando el inicio de su contenido, en cualquier orden de apertura.
+* [x] SM-03 hecha sin cambiar el script de arranque del tema (ADR-003).
+* [x] Sin regresiones de paridad en 320×640, 360×740, 412×915, 768×1024, 740×360, 1024×768 y 1280×800, en modo claro y
   oscuro, fuera de lo que cada pedido cambia.
-* [ ] Invariantes de `AGENTS.md` §5 intactos (en particular los del header, regla 7).
+* [x] Invariantes de `AGENTS.md` §5 intactos (en particular los del header, regla 7).
 * [ ] Documentos protegidos actualizados por el desarrollador mediante propuestas -/+ (`DESIGN.md` §5, §12 y §13;
   `_planificacion/README.md` §14; `README.md`).
 * [ ] Safari y dispositivo Apple: probados si el desarrollador consigue el dispositivo; si no, la reserva se mantiene. En

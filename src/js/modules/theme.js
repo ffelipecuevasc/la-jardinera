@@ -45,12 +45,11 @@ export const initTheme = () => {
         // Limpieza precautoria
         htmlElement.classList.remove('light', 'dark');
 
+        // Solo aplica la clase: nada se guarda hasta que el usuario alterne el tema (SM-03)
         if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
             htmlElement.classList.add('dark');
-            saveTheme('dark');
         } else {
             htmlElement.classList.add('light');
-            saveTheme('light');
         }
     };
 
