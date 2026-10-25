@@ -146,6 +146,7 @@ function initServiceModal() {
     const closeBtn = serviceModal.querySelector('.close-modal-btn');
     const overlay = serviceModal.querySelector('.modal-overlay');
     const panel = serviceModal.querySelector('.modal-panel');
+    const modalScroll = serviceModal.querySelector('.modal-scroll');
 
     const modalTitle = document.getElementById('modal-title');
     const modalMainImage = document.getElementById('modal-main-image');
@@ -230,6 +231,12 @@ function initServiceModal() {
 
         // 5. Mostrar modal con animación de entrada
         serviceModal.classList.remove('hidden');
+
+        // La modal es única y conservaba el desplazamiento de la apertura anterior.
+        // Se reinicia aquí, ya sin `hidden` (con display: none el navegador ignora
+        // scrollTop) y antes de quitar opacity-0, para que abra mostrando el inicio.
+        if (modalScroll) modalScroll.scrollTop = 0;
+
         serviceModal.setAttribute('aria-hidden', 'false');
         document.body.classList.add('overflow-hidden');
 

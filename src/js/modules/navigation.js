@@ -2,7 +2,7 @@
  * src/js/modules/navigation.js
  * Arquitectura: ES6 Modular | Frontend nativo
  * Descripción: Menú móvil (panel anclado bajo el header) con cierre por teclado,
- *              capa tenue, cambio de ícono y semántica ARIA dinámica.
+ *              trampa de foco, capa tenue, cambio de ícono y semántica ARIA dinámica.
  */
 
 const LABEL_OPEN = 'Abrir menú';
@@ -21,6 +21,13 @@ export function initNavigation() {
     const iconClose = document.getElementById('mobile-menu-icon-close');
     const desktopMedia = window.matchMedia(DESKTOP_QUERY);
 
+    // Ciclo de foco del panel abierto (SM-02): la hamburguesa y los enlaces y botones del panel.
+    // En el DOM la hamburguesa va antes del panel, así que es el primer elemento del ciclo y el
+    // último enfocable del panel (Instagram) es el último. El botón de tema queda fuera.
+    const panelFocusables = menu.querySelectorAll('a[href], button:not([disabled])');
+    const firstPanelItem = panelFocusables[0];
+    const lastInCycle = panelFocusables[panelFocusables.length - 1];
+
     const isOpen = () => !menu.classList.contains('hidden');
 
     const setOpen = (open) => {
@@ -33,16 +40,23 @@ export function initNavigation() {
         menuBtn.setAttribute('aria-label', open ? LABEL_CLOSE : LABEL_OPEN);
     };
 
-    // 1. Botón de menú: alterna el estado
-    menuBtn.addEventListener('click', () => setOpen(!isOpen()));
+    // 1. Botón de menú: alterna el estado. Al abrir, el foco pasa al primer enlace del panel
+    menuBtn.addEventListener('click', () => {
+        const open = !isOpen();
+        setOpen(open);
+        if (open) firstPanelItem?.focus();
+    });
 
     // 2. Delegación de eventos: cualquier enlace dentro del panel cierra el menú
     menu.addEventListener('click', (event) => {
         if (event.target.closest('a')) setOpen(false);
     });
 
-    // 3. Capa tenue: tocar fuera del panel cierra el menú
-    scrim?.addEventListener('click', () => setOpen(false));
+    // 3. Capa tenue: tocar fuera del panel cierra el menú y devuelve el foco al botón
+    scrim?.addEventListener('click', () => {
+        setOpen(false);
+        menuBtn.focus();
+    });
 
     // 4. Teclado: Escape cierra el menú y devuelve el foco al botón
     document.addEventListener('keydown', (event) => {
@@ -52,7 +66,21 @@ export function initNavigation() {
         }
     });
 
-    // 5. Al alcanzar el breakpoint de escritorio, el menú móvil se cierra solo
+    // 5. Trampa de foco (SM-02): con el panel abierto, Tab desde el último elemento vuelve a la
+    //    hamburguesa y Shift+Tab desde la hamburguesa va al último. Con el panel cerrado no actúa.
+    document.addEventListener('keydown', (event) => {
+        if (event.key !== 'Tab' || !isOpen() || !lastInCycle) return;
+
+        if (event.shiftKey && document.activeElement === menuBtn) {
+            event.preventDefault();
+            lastInCycle.focus();
+        } else if (!event.shiftKey && document.activeElement === lastInCycle) {
+            event.preventDefault();
+            menuBtn.focus();
+        }
+    });
+
+    // 6. Al alcanzar el breakpoint de escritorio, el menú móvil se cierra solo
     desktopMedia.addEventListener('change', (event) => {
         if (event.matches && isOpen()) setOpen(false);
     });

@@ -364,7 +364,7 @@ import FranjaBeneficios from '../components/secciones/FranjaBeneficios.astro';
         </figure>
 
         <!-- Columna derecha: contenido desplazable + CTA fijo -->
-        <div class="flex flex-col flex-1 min-w-0 bg-surface">
+        <div class="flex flex-col flex-1 min-w-0 min-h-0 bg-surface">
 
             <div class="modal-scroll flex-1 overflow-y-auto px-space-4 py-space-4 md:px-space-5 md:py-space-5">
                 <div id="modal-description" class="modal-prose font-body-md"></div>
@@ -392,7 +392,7 @@ import FranjaBeneficios from '../components/secciones/FranjaBeneficios.astro';
 
         <!-- Botón de Cerrar Modal (Accesible WCAG 2.1) -->
         <button type="button"
-                class="close-modal-btn absolute top-space-2 right-space-2 z-20 w-10 h-10 rounded-[999px] bg-surface/90 hover:bg-surface-container-high backdrop-blur-md border border-outline-variant/30 shadow-sm flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors cursor-pointer"
+                class="close-modal-btn absolute top-space-2 right-space-2 z-20 w-11 h-11 rounded-[999px] bg-surface/90 hover:bg-surface-container-high backdrop-blur-md border border-outline-variant/30 shadow-sm flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors cursor-pointer"
                 aria-label="Cerrar ventana de detalles del servicio">
             <svg class="w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                  aria-hidden="true">
