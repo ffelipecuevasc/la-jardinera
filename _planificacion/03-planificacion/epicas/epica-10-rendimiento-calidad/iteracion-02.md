@@ -14,7 +14,9 @@ es de solo lectura.
 
 ## 1. Objetivo de la Iteración
 
-1. **DT-22:** logotipos del header y favicon con un tamaño acorde a como se muestran (hoy 3446×3504 px para 44×44 px).
+1. **DT-22:** logotipos del header y favicon con un tamaño acorde a como se muestran (hoy 3446×3504 px para 44×44 px),
+   y que cada página descargue solo la variante que muestra si la Iteración 01 confirma la doble descarga (definición,
+   §2.2).
 2. **DT-23:** `width` y `height` reales en las 9 imágenes del Inicio y las 24 de la Galería que no los declaran, con
    contenedores que eviten desplazamientos (regla 9).
 3. **Recompresión** de las imágenes que la Iteración 01 marque con más ahorro, empezando por `galeria-2.webp`
@@ -40,8 +42,12 @@ es de solo lectura.
 ### Tarea 0: Línea base de la iteración (solo lectura)
 
 1. `git status`, `git log -1 --oneline`, `pnpm run build:cf`.
-2. Bytes de imagen descargados en la carga inicial de cada página de D-04, en 360×740 y 1280×800 [medido].
-3. Capturas de referencia de cada imagen afectada en los 7 viewports y ambos temas.
+2. PageSpeed Insights (D-03 de la épica, §6.1 de la definición) en la vista previa de la rama con la Iteración 01
+   integrada, en las páginas que tocará esta iteración (según D-01 a D-06): es el «antes» de esta iteración [medido]. La
+   URL de la vista previa la entrega el desarrollador.
+3. Bytes de imagen descargados en la carga inicial de cada página de D-04, en 360×740 y 1280×800 (Chrome *headless*,
+   solo red) [medido].
+4. Capturas de referencia de cada imagen afectada en los 7 viewports y ambos temas.
 
 ### Tarea 1: Logotipos y favicon (DT-22)
 
@@ -71,7 +77,8 @@ automáticas y el movimiento reducido (ADR-004). Ninguna transición puede mostr
 1. `pnpm run build:cf` sin errores ni advertencias nuevas.
 2. Bytes de imagen en la carga inicial, antes y después, por página y viewport.
 3. Render en los 7 viewports × 2 temas: sin diferencias visibles fuera de lo decidido.
-4. Lighthouse (diagnóstico, mismo método de la It. 01) en las páginas tocadas: CLS, LCP y ahorro de imágenes.
+4. Sin puntajes locales (D-03 de la épica): el «después» de PageSpeed se mide en la vista previa al inicio de la
+   Iteración 03 (Tarea 0). Aquí se verifican bytes y render.
 5. Invariantes de `AGENTS.md` §5 y SHA-256 del script del tema.
 
 ### Tarea 6: Registro

@@ -33,9 +33,13 @@ propuesta (regla 2 de `AGENTS.md`). Git es de solo lectura.
 
 ### Tarea 0: Línea base (solo lectura)
 
-1. Familias, pesos y estilos realmente usados en el CSS compilado y en el HTML de `_site/`.
-2. Archivos de fuente que descarga cada página y su orden respecto del FCP y el LCP [medido].
-3. Capturas de texto de referencia (títulos, cuerpo, cursivas destacadas de la Épica 09) en 360×740 y 1280×800, ambos
+1. PageSpeed Insights (D-03 de la épica, §6.1 de la definición) en la vista previa de la rama con la Iteración 02
+   integrada, en las páginas que tocó la It. 02: es el «después» de la It. 02 [medido]. Y en las 5 páginas como «antes»
+   de esta iteración, que toca el layout común.
+2. Familias, pesos y estilos realmente usados en el CSS compilado y en el HTML de `_site/`.
+3. Archivos de fuente que descarga cada página y su orden respecto del FCP y el LCP (lista de peticiones de PageSpeed)
+   [medido].
+4. Capturas de texto de referencia (títulos, cuerpo, cursivas destacadas de la Épica 09) en 360×740 y 1280×800, ambos
    temas.
 
 ### Tarea 1: Fuentes
@@ -51,8 +55,9 @@ la regla 2 (por ejemplo, revisar el `content` de Tailwind o dividir hojas). No l
 ### Tarea 3: Verificación
 
 1. `pnpm run build:cf` sin errores ni advertencias nuevas.
-2. Render del texto idéntico a la Tarea 0.3 en los 7 viewports × 2 temas (diferencias de antialiasing documentadas).
-3. Lighthouse (diagnóstico, mismo método de la It. 01): bloqueo del renderizado, FCP, LCP y CLS antes y después.
+2. Render del texto idéntico a la Tarea 0.4 en los 7 viewports × 2 temas (diferencias de antialiasing documentadas).
+3. Sin puntajes locales (D-03 de la épica): bloqueo del renderizado, FCP, LCP y CLS se miden en la vista previa al
+   inicio de la Iteración 04 (Tarea 0).
 4. Consola limpia y 0 peticiones a `fonts.googleapis.com` / `fonts.gstatic.com` si D-01 es a).
 5. SHA-256 del script del tema sin cambios.
 

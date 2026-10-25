@@ -16,11 +16,12 @@ cambios van como propuestas -/+ con líneas completas verificadas contra el repo
 
 1. **DT-24:** quitar el `aria-label` en `<div>` sin `role` de cada reseña (`carousel.js`) y dar nombre accesible a los 4
    enlaces solo de ícono de «Imágenes de nuestros ramos» (Inicio).
-2. **DT-25:** orden de encabezados sin saltos en Inicio (`<h1>` → `<h4>`; `<h4>` por reseña), Servicios (`<h1>` → `<h3>`)
-   y 404 (`<h1>` → `<h3>` del footer), **sin cambiar el aspecto** (las clases tipográficas se conservan).
+2. **DT-25:** orden de encabezados sin saltos en Inicio (`<h1>` → `<h4>`; `<h4>` por reseña), Servicios (`<h1>` →
+   `<h3>`) y 404 (`<h1>` → `<h3>` del footer), **sin cambiar el aspecto** (las clases tipográficas se conservan).
 3. **Decisiones pendientes:** DT-28 (*beacon* en vistas previas) y DT-31 a DT-33 (D-06 de la épica). DT-33 incluye medir
    el contraste del anillo de foco del botón de cierre de la modal de Servicios.
-4. **Cierre formal de la épica:** medición final con el método de D-03, DoD, bitácora de cierre y propuestas -/+.
+4. **Cierre formal de la épica:** medición final con el método de D-03 de la épica, DoD, bitácora de cierre y
+   propuestas -/+.
 
 ### 1.1 Decisiones del desarrollador
 
@@ -36,7 +37,9 @@ cambios van como propuestas -/+ con líneas completas verificadas contra el repo
 
 ### Tarea 0: Línea base (solo lectura)
 
-1. Auditorías fallidas de Accesibilidad por página (de la It. 01 y repetidas ahora).
+1. PageSpeed Insights (D-03 de la épica, §6.1 de la definición) en la vista previa de la rama con la Iteración 05
+   integrada, en las 5 páginas: «después» de la It. 05 y auditorías fallidas de Accesibilidad por página, frente a la
+   It. 01 [medido].
 2. Árbol de encabezados de cada página, incluidas las reseñas inyectadas por `carousel.js`.
 3. Contraste del anillo de foco del botón de cierre de la modal (DT-33) en ambos temas.
 
@@ -56,20 +59,22 @@ Según D-03.
 
 1. `pnpm run build:cf` sin errores.
 2. Render idéntico en los 7 viewports × 2 temas.
-3. Lighthouse (diagnóstico): Accesibilidad por página.
+3. Sin puntajes locales (D-03 de la épica): la Accesibilidad de esta iteración se mide en la Tarea 5.2.
 
 ### Tarea 5: Cierre formal de la Épica 10
 
-1. Verificación final: `pnpm run build:cf`; 7 viewports × 2 temas; invariantes de `AGENTS.md` §5 y SHA-256 del script del
-   tema; todo funcionando junto (carruseles, videos, modales, panel móvil, tema).
-2. Medición final con el método de D-03 (Lighthouse de diagnóstico de Claude Code y tabla para las cifras de PageSpeed
-   que entrega el desarrollador) frente a la línea base de la It. 01.
+1. Verificación final: `pnpm run build:cf`; 7 viewports × 2 temas; invariantes de `AGENTS.md` §5 y SHA-256 del script
+   del tema; todo funcionando junto (carruseles, videos, modales, panel móvil, tema).
+2. Medición final con el método de D-03 de la épica (§6.1 de la definición): PageSpeed Insights en la vista previa de la
+   rama tras el push de esta iteración, en las 5 páginas, frente a la línea base de la It. 01; y en producción tras la
+   fusión, contra las metas de D-01 de la épica (esa corrida la pide el desarrollador al verificar producción).
 3. DoD de la épica, casilla por casilla, con evidencia; actualiza su estado.
 4. `bitacora-epica-10/bitacora-cierre-epica-10.md` con la estructura de `bitacora-cierre-epica-09.md`, incluidas las
    pruebas manuales del desarrollador como lista de comprobación.
 5. Propuestas -/+ con líneas completas verificadas: `_planificacion/README.md` §12 (estado de cada DT), `README.md` §15
-   (hoja de ruta), `01-vision/objetivos-y-metricas.md` (si D-01 de la épica cambió las metas), `DESIGN.md` y `AGENTS.md`
-   si alguna iteración lo dejó pendiente.
+   (hoja de ruta), `01-vision/objetivos-y-metricas.md` §2 (D-01 de la épica cambió las metas: umbrales por dispositivo,
+   CLS ≤ 0,1, FCP sin umbral y PageSpeed Insights como herramienta), `DESIGN.md` y `AGENTS.md` si alguna iteración lo
+   dejó pendiente.
 6. Línea final en `estado-actual.md` y mensaje de commit:
    `Épica 10 - Iteración 06: accesibilidad, calidad y cierre de la épica.`
 

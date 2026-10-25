@@ -20,8 +20,9 @@ nuevas, la bitácora y `estado-actual.md`). Git es de solo lectura.
 2. **DT-27:** recuperar el rendimiento de la página respecto de la referencia anterior a Astro (escritorio 93 → 89, LCP
    móvil 4,43 → 8,45 s con `hero-1.webp`), con la causa confirmada en la Iteración 01.
 3. **Imágenes del hero (hallazgo del asesor, 25-10-2026):** las 4 fotos miden 2752×1536 px (horizontales) pero el
-   marcado declara `width="720" height="1280"` (vertical) y no hay variante móvil, así que un celular descarga la foto de
-   escritorio completa.
+   marcado declara proporciones verticales que no coinciden (`width="720" height="1280"` en `hero-1` a `hero-3` y
+   `width="1440" height="1621"` en `hero-4`) y no hay variante móvil, así que un celular descarga la foto de escritorio
+   completa.
 4. **DT-29:** retirar de `subscription.js` el manejo de `#show-plans-btn` y `#hide-plans-btn`, que no existen, sin
    cambiar el comportamiento visible del acordeón de planes.
 
@@ -46,10 +47,13 @@ nuevas, la bitácora y `estado-actual.md`). Git es de solo lectura.
 
 ### Tarea 0: Línea base (solo lectura)
 
-1. Comportamiento actual del hero en los 7 viewports: intervalo, pausas, lectura con lector de pantalla (árbol de
+1. PageSpeed Insights (D-03 de la épica, §6.1 de la definición) en la vista previa de la rama con la Iteración 04
+   integrada: Galería («después» de la It. 04) y Suscripción Floral («antes» de esta iteración) [medido].
+2. Comportamiento actual del hero en los 7 viewports: intervalo, pausas, lectura con lector de pantalla (árbol de
    accesibilidad), movimiento reducido.
-2. Carga del hero (orden, prioridad, bytes) y elemento LCP en 360×740 y 1280×800 [medido].
-3. Contraste actual del texto del hero sobre las 4 fotos (método del percentil 95 de la Épica 09 · It. 02).
+3. Carga del hero (orden, prioridad, bytes) y elemento LCP en móvil y escritorio, según el JSON de PageSpeed de la
+   Tarea 0.1 [medido].
+4. Contraste actual del texto del hero sobre las 4 fotos (método del percentil 95 de la Épica 09 · It. 02).
 
 ### Tarea 1: Hero (DT-36 y D-01 a D-06)
 
@@ -70,7 +74,8 @@ Retira solo el manejo de `#show-plans-btn` y `#hide-plans-btn`. El acordeón de 
 1. `pnpm run build:cf` sin errores.
 2. Hero: intervalo de 5 s, pausa del usuario, pausas automáticas, movimiento reducido y lector de pantalla.
 3. Contraste del hero en las 4 fotos, 7 viewports y 2 temas.
-4. Lighthouse (diagnóstico) de Suscripción Floral: Performance, LCP y CLS antes y después.
+4. Sin puntajes locales (D-03 de la épica): Performance, LCP y CLS de Suscripción Floral se miden en la vista previa al
+   inicio de la Iteración 06 (Tarea 0).
 5. Render de la página en los 7 viewports × 2 temas.
 
 ### Tarea 5: Registro

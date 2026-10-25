@@ -36,9 +36,13 @@ borran del disco. Git es de solo lectura.
 
 ### Tarea 0: Línea base (solo lectura)
 
-1. Por video: bytes, resolución, duración, códec y tasa de bits; tamaño en que se muestra en 360×740 y 1280×800.
-2. Bytes descargados por la Galería en los primeros 10 s de carga, en 360×740 y 1280×800 [medido].
-3. Comportamiento actual de la ampliación (`gallery.js`) con videos e imágenes.
+1. PageSpeed Insights (D-03 de la épica, §6.1 de la definición) en la vista previa de la rama con la Iteración 03
+   integrada, en las 5 páginas (la It. 03 tocó el layout común): «después» de la It. 03 y «antes» de esta iteración en
+   la Galería [medido].
+2. Por video: bytes, resolución, duración, códec y tasa de bits; tamaño en que se muestra en 360×740 y 1280×800.
+3. Bytes descargados por la Galería en los primeros 10 s de carga, en 360×740 y 1280×800 (Chrome *headless*, solo red)
+   [medido].
+4. Comportamiento actual de la ampliación (`gallery.js`) con videos e imágenes.
 
 ### Tarea 1: Pósteres y carga
 
@@ -59,7 +63,8 @@ Solo si D-05 es a). Por video: bytes antes y después y captura de un fotograma.
 2. Bytes de los primeros 10 s antes y después.
 3. Reproducción al entrar y pausa al salir; botón de pausa; movimiento reducido; ampliación de cada video e imagen.
 4. Render de la Galería en los 7 viewports × 2 temas.
-5. Lighthouse (diagnóstico) de la Galería.
+5. Sin puntajes locales (D-03 de la épica): la Galería se mide en la vista previa al inicio de la Iteración 05
+   (Tarea 0).
 
 ### Tarea 5: Registro
 
